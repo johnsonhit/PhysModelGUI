@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:PhysModelGUI"
         mc:Ignorable="d"
        
-        Title="Neonatal physiological model" Height="1080" Width="1920" Background="Black" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Neonatal physiological model" Height="720" Width="1280" Background="Black" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -29,7 +30,7 @@
         </StatusBar>
         <StackPanel Grid.Column="0" Margin="10,35,0,0">
             <TextBlock Text=" INTERVENTIONS" TextAlignment="Center" Foreground="White" FontSize="20" Margin="0,0,0,10"></TextBlock>
-            <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateBlue" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+            <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                 <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                     <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
@@ -52,7 +53,7 @@
                 </StackPanel>
             </Expander>
 
-            <Expander IsExpanded="False" Header="GLOBAL MODEL SETTINGS" Background="DarkSlateBlue" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
+            <Expander IsExpanded="False" Header="GLOBAL MODEL SETTINGS" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
                 <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                     <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                         
@@ -66,7 +67,7 @@
            
                 </StackPanel>
             </Expander>
-            <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateBlue" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+            <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                 <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                     <Expander Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
@@ -105,12 +106,6 @@
                     <Expander Header=" ventilator model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
                     </Expander>
-
-
-
-
-
-
                 </StackPanel>
             </Expander>
 
@@ -180,6 +175,9 @@
             </Expander>
 
         </StackPanel>
+        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="20,75,20,150" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
+        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="20,75,20,150" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
+        
         
     </Grid>
 </Window>
