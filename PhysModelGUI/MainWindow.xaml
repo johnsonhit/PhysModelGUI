@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PhysModelGUI"
         mc:Ignorable="d"
        
-        Title="Neonatal physiological model" Height="720" Width="1280" Background="Black" WindowStartupLocation="CenterScreen">
+        Title="Neonatal physiological model" Height="720" Width="1280" Background="White" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -28,156 +28,164 @@
                 <TextBlock Text="Simulation time : "></TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <StackPanel Grid.Column="0" Margin="10,35,0,0">
-            <TextBlock Text=" INTERVENTIONS" TextAlignment="Center" Foreground="White" FontSize="20" Margin="0,0,0,10"></TextBlock>
-            <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                    <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+        <TextBlock Margin="0,25,0,0" Text="PARAMETERS" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" ></TextBlock>
+        <ScrollViewer Grid.Column="0"  Margin="0,55,0,25" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,5,0">
+                   <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
+                        </Expander>
+                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-
-
-
+                        </Expander>
 
 
-                </StackPanel>
-            </Expander>
-
-            <Expander IsExpanded="False" Header="GLOBAL MODEL SETTINGS" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                    <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-                        
-                    </Expander>
-                    <Expander Header=" lung and chestwall" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-           
-                </StackPanel>
-            </Expander>
-            <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                    <Expander Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" connectors" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" containers" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" acidbase model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" autonomic nervous system model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" atrioventricular interaction model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" breathing model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                    </Expander>
-                    <Expander Header=" ecg model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
 
-                    </Expander>
-                    <Expander Header=" heart model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" oxygenation model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" ventilator model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                    </StackPanel>
+                </Expander>
 
-                    </Expander>
-                </StackPanel>
-            </Expander>
+                <Expander IsExpanded="False" Header="GLOBAL MODEL SETTINGS" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-        </StackPanel>
-        <StackPanel Grid.Column="1" Margin="0,35,20,0">
-            <TextBlock Text=" MODEL GRAPHICS" TextAlignment="Center" Foreground="White" FontSize="20" Margin="0,0,0,10"></TextBlock>
-        </StackPanel>
-        <StackPanel Grid.Column="2" Margin="0,35,20,0">
-            <TextBlock Text=" MONITORING" TextAlignment="Center" Foreground="White" FontSize="20" Margin="0,0,0,10"></TextBlock>
-            <Expander IsExpanded="False" Header="PATIENT MONITOR" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-  
-                </StackPanel>
-            </Expander>
-            <Expander IsExpanded="False" Header="VITAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-           
-                </StackPanel>
-            </Expander>
-            <Expander IsExpanded="False" Header="ADDITIONAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                    <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" lung and chestwall" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
 
-                    </Expander>
-                    <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                    </StackPanel>
+                </Expander>
+                <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                        <Expander Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                </StackPanel>
-            </Expander>
-            <Expander IsExpanded="False" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                    <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" connectors" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" containers" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" acidbase model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                </StackPanel>
-            </Expander>
-            <Expander IsExpanded="False" Header="MANIKIN" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                    <Expander Header=" airway and breathing" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" autonomic nervous system model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" atrioventricular interaction model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" breathing model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                    <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        </Expander>
+                        <Expander Header=" ecg model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
-                    </Expander>
-                </StackPanel>
-            </Expander>
 
-        </StackPanel>
+                        </Expander>
+                        <Expander Header=" heart model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" oxygenation model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" ventilator model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+        <TextBlock Text="MODEL" Grid.Column="1" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
+
+
+        <TextBlock Text="MONITORING" Grid.Column="2" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
+        <ScrollViewer Grid.Column="2"  Margin="0,55,5,25" VerticalScrollBarVisibility="Auto">
+            <StackPanel Grid.Column="2" Margin="0,0,5,0">
+                <Expander IsExpanded="False" Header="PATIENT MONITOR" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+
+                </Expander>
+                <Expander IsExpanded="False" Header="VITAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+
+                    </StackPanel>
+                </Expander>
+                <Expander IsExpanded="False" Header="ADDITIONAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                    </StackPanel>
+                </Expander>
+                <Expander IsExpanded="False" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                        <Expander Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <local:ParameterGraph x:Name="graphPressures" Height="150"></local:ParameterGraph>
+                        </Expander>
+                        <Expander Header=" flows" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                    </StackPanel>
+                </Expander>
+                <Expander IsExpanded="False" Header="MANIKIN" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                        <Expander Header=" airway and breathing" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                    </StackPanel>
+                </Expander>
+
+            </StackPanel>
+        </ScrollViewer>
+       
         <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="20,75,20,150" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
         <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="20,75,20,150" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
         
+        
+       
         
     </Grid>
 </Window>
