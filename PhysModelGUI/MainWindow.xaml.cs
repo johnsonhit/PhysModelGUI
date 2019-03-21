@@ -2,7 +2,9 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,23 +23,40 @@ namespace PhysModelGUI
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
         public static List<AnimatedBloodCompartment> animatedBloodCompartments = new List<AnimatedBloodCompartment>();
         public static AnimatedBloodCompartment leftAtrium;
         public static AnimatedBloodCompartment leftVentricle;
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer(DispatcherPriority.Render);
 
-        double rad = 0;
+        bool _graphPressuresEnabled = false;
+        public bool GraphPressureEnabled { get { return _graphPressuresEnabled; } set { _graphPressuresEnabled = value; OnPropertyChanged(); } }
+
+        bool _graphFlowsEnabled = false;
+        public bool GraphFlowsEnabled { get { return _graphFlowsEnabled; } set { _graphFlowsEnabled = value; OnPropertyChanged(); } }
+
+        bool _graphPVLoopsEnabled = false;
+        public bool GraphPVLoopsEnabled { get { return _graphPVLoopsEnabled; } set { _graphPVLoopsEnabled = value; OnPropertyChanged(); } }
+
+        string _modelName = "";
+        public string ModelName { get { return _modelName; } set { _modelName = value; OnPropertyChanged(); } }
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
 
             PhysModelMain.Initialize();
             PhysModelMain.Start();
 
-            GUI.BuildDiagram();
+            ModelGraphic.BuildDiagram();
 
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 15);
@@ -54,17 +73,20 @@ namespace PhysModelGUI
             graphPressures.GraphicsClearanceRate = 15;
             
             graphPressures.RedrawGrid();
+
+            ModelName = PhysModelMain.currentModel.Name;
            
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            // do some work not connected with UI
-            rad += 0.1;
-            if (rad > Math.PI * 2) rad = 0;
+            // update the graphs
+            if (GraphPressureEnabled)
+                graphPressures.UpdateGraphData(0, PhysModelMain.modelInterface.ABPSignal);
 
-            graphPressures.UpdateGraphData(0, PhysModelMain.modelInterface.ABPSignal);
+            if (GraphFlowsEnabled) { }
 
+            if (GraphPVLoopsEnabled) { }
 
             canvasDiagram.InvalidateVisual();
         }
@@ -74,7 +96,7 @@ namespace PhysModelGUI
             SKSurface surface = e.Surface;
             SKCanvas canvas = surface.Canvas;
 
-            GUI.DrawMainDiagram(canvas, e.Info.Width, e.Info.Height);
+            ModelGraphic.DrawMainDiagram(canvas, e.Info.Width, e.Info.Height);
         }
 
         void CanvasDiagramSkeleton_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
@@ -82,7 +104,7 @@ namespace PhysModelGUI
             SKSurface surface = e.Surface;
             SKCanvas canvas = surface.Canvas;
 
-            GUI.DrawDiagramSkeleton(canvas, e.Info.Width, e.Info.Height);
+            ModelGraphic.DrawDiagramSkeleton(canvas, e.Info.Width, e.Info.Height);
         }
 
     

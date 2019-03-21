@@ -7,7 +7,7 @@ using PhysModelLibrary;
 
 namespace PhysModelGUI
 {
-    public static class GUI
+    public static class ModelGraphic
     {
         static readonly SKPaint paint = new SKPaint()
         {
