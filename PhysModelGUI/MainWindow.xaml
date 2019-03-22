@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:PhysModelGUI"
+        xmlns:ex="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
        
         Title="Neonatal physiological model" Height="720" Width="1280" Background="White" WindowStartupLocation="CenterScreen">
@@ -72,13 +73,13 @@
             <StatusBarItem>
                 <TextBlock Text="{Binding ModelName, Mode=OneWay}" FontWeight="DemiBold"/>
             </StatusBarItem>
-            
+
         </StatusBar>
 
         <TextBlock Margin="0,25,0,0" Text="PARAMETERS" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" ></TextBlock>
         <ScrollViewer Grid.Column="0"  Margin="0,55,0,25" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,5,0">
-                   <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
@@ -115,10 +116,41 @@
 
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="True" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander IsExpanded="True" Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Grid Margin="28,0,10,0" Background="DarkSlateGray">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="18"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5,0,0,0" Text="select compartment " FontSize="10" TextAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+                                <ComboBox x:Name="cmbSelectCompartmentSettings" Margin="0,0,5,0" FontSize="10" Height="20" Grid.ColumnSpan="2" Grid.Column="2" ></ComboBox>
 
+                                <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10"  Margin="5,0,0,0" Text="volumes " FontWeight="DemiBold" TextAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10"  Margin="5,0,0,0" Text="current" TextAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" FontSize="10"  Margin="5,0,0,0" Text="unstressed" TextAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" FontSize="10"  Margin="5,0,0,0" Text="in ml" TextAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+                                <ex:DoubleUpDown Grid.Column="2" Value="100" FontSize="10" Grid.Row="2" Height="20"></ex:DoubleUpDown>
+                                <ex:DoubleUpDown Grid.Column="1" Value="100" FontSize="10" Grid.Row="2" Height="20"></ex:DoubleUpDown>
+
+                                <local:ParameterGraph x:Name="graphElastance" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Grid.RowSpan="6"></local:ParameterGraph>
+
+                            </Grid>
                         </Expander>
                         <Expander Header=" connectors" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
@@ -157,11 +189,20 @@
                     </StackPanel>
                 </Expander>
 
+                <Expander IsExpanded="False" Header="MODEL LOG" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <StackPanel Margin="10,0,10,10">
+                        <ScrollViewer  >
+                            <ListBox Height="100" Background="Black" Foreground="White" ></ListBox>
+                        </ScrollViewer>
+                        <Button Content="CLEAR" FontSize="10" Background="SlateGray" Foreground="White" Margin="50,5,50,0"></Button>
+                    </StackPanel>
+                </Expander>
+
             </StackPanel>
 
         </ScrollViewer>
 
-        <TextBlock Text="{Binding title, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Grid.Column="1" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
+        <TextBlock Text="MODEL" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
 
 
         <TextBlock Text="MONITORING" Grid.Column="2" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
@@ -195,7 +236,7 @@
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander x:Name="expGraphPressures" IsExpanded="{Binding GraphPressureEnabled, Mode=TwoWay}"  Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <StackPanel>
-                                
+
                                 <local:ParameterGraph x:Name="graphPressures" Height="150"></local:ParameterGraph>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -219,9 +260,9 @@
                                     <Button Content="3" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="3" Foreground="White" FontSize="10"></Button>
                                     <Button Content="4" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="4" Foreground="White" FontSize="10"></Button>
                                 </Grid>
-                                    
 
-                                
+
+
 
                             </StackPanel>
                         </Expander>
@@ -301,12 +342,14 @@
 
             </StackPanel>
         </ScrollViewer>
-       
-        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="20,75,20,150" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
-        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="20,75,20,150" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
-        
-        
-       
-        
+
+        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="20,60,20,150" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
+        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="20,60,20,150" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
+        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="52.889,646,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+
+
+
+
+
     </Grid>
 </Window>

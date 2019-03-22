@@ -72,10 +72,19 @@ namespace PhysModelGUI
             graphPressures.IsSideScrolling = true;
             graphPressures.GraphicsClearanceRate = 15;
             
-            graphPressures.RedrawGrid();
+            //graphPressures.RedrawGrid();
 
             ModelName = PhysModelMain.currentModel.Name;
+
            
+            graphElastance.DataRefreshRate = 15;
+            graphElastance.PixelPerDataPoint = 1;
+            graphElastance.Graph1Enabled = true;
+            graphElastance.IsSideScrolling = false;
+            graphElastance.GraphicsClearanceRate = 15;
+            graphElastance.RealTimeDrawing = false;
+
+
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
@@ -87,6 +96,8 @@ namespace PhysModelGUI
             if (GraphFlowsEnabled) { }
 
             if (GraphPVLoopsEnabled) { }
+
+   
 
             canvasDiagram.InvalidateVisual();
         }
@@ -107,7 +118,49 @@ namespace PhysModelGUI
             ModelGraphic.DrawDiagramSkeleton(canvas, e.Info.Width, e.Info.Height);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            PhysModelLibrary.Compartments.BloodCompartment testComp = new PhysModelLibrary.Compartments.BloodCompartment();
+
+            testComp.VolU = PhysModelLibrary.PhysModelMain.currentModel.AA.VolU;
+            testComp.elastanceModel.ElBaseline = PhysModelLibrary.PhysModelMain.currentModel.AA.elastanceModel.ElBaseline;
+            testComp.elastanceModel.ElK1 = PhysModelLibrary.PhysModelMain.currentModel.AA.elastanceModel.ElK1;
+            testComp.elastanceModel.ElK2 = PhysModelLibrary.PhysModelMain.currentModel.AA.elastanceModel.ElK2;
+            testComp.elastanceModel.ElKMaxVolume = PhysModelLibrary.PhysModelMain.currentModel.AA.elastanceModel.ElKMaxVolume;
+            testComp.elastanceModel.ElKMinVolume = PhysModelLibrary.PhysModelMain.currentModel.AA.elastanceModel.ElKMinVolume;
     
-    
+            testComp.elastanceModel.ElK1 = 0.1;
+            testComp.elastanceModel.ElK2 = 0.003;
+            testComp.elastanceModel.ElKMaxVolume = 15;
+            testComp.elastanceModel.ElKMinVolume = 8.5;
+
+            // y = pressure
+            graphElastance.GraphMinY = -75;
+            graphElastance.GraphMaxY = 200;
+            graphElastance.GridYAxisStep = 50;
+
+            // x = volume
+            graphElastance.GraphMinX = 0;
+            graphElastance.GraphMaxX = 20;
+            graphElastance.GridXAxisStep = 5;
+
+            graphElastance.RedrawGrid();
+
+            // do loop for grid
+
+            graphElastance.ClearRawData();
+
+            for (double i = 0; i <= 20; i += 0.1)
+            {
+                testComp.VolCurrent = i;
+                testComp.UpdateCompartment();
+                graphElastance.UpdateRawData(i, testComp.PresCurrent);
+
+            }
+
+            
+            graphElastance.DrawRawData();
+        }
+
     }
 }

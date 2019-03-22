@@ -95,6 +95,7 @@ namespace PhysModelGUI
         public float GridYAxisStep { get; set; } = 10;
         public float GridXAxisStep { get; set; } = 10;
 
+        public bool HideLegends { get; set; } = true;
         public bool HideXAxisLabels { get; set; } = false;
         public bool HideYAxisLabels { get; set; } = false;
 
@@ -110,12 +111,15 @@ namespace PhysModelGUI
         public int PixelPerDataPoint { get; set; } = 2;                  // number of pixels between per datapoints
         public bool IsSideScrolling { get; set; } = false;
         public int ScrollDirection { get; set; } = 1;
-
+        public bool RealTimeDrawing { get; set; } = true;
         public int DataRefreshRate { get; set; } = 15;          // in ms so every 15 ms a datapoint is added to the arrays
         public int GraphicsUpdateRate { get; set; } = 15;       // in ms so every 15 ms the graph is data-arrays are drawn
         public int GraphicsClearanceRate { get; set; } = 0;     // in ms so every 0 seconds the complete canvas is rebuild, set 0 for side scrolling graphs
         public float GraphicsFrameDuration { get; set; } = 0;     // in ms so the duration of one complete graphics frame in ms.
         int refreshCounter = 0;
+
+        List<double> rawDataPointX = new List<double>();
+        List<double> rawDataPointY = new List<double>();
 
         private readonly DispatcherTimer updateTimer = new DispatcherTimer();
 
@@ -245,9 +249,13 @@ namespace PhysModelGUI
             updateTimer.Tick += UpdateTimer_Tick; ;
             //updateTimer.Start();
 
-            // find the size
+            // find the siz
+
             h_data = (float)myGraphCanvas.CanvasSize.Height;
             w_data = (float)myGraphCanvas.CanvasSize.Width;
+
+            h_grid = (float)myGraphCanvasGrid.CanvasSize.Height;
+            w_grid = (float)myGraphCanvasGrid.CanvasSize.Width;
 
             // draw the grid
             myGraphCanvasGrid.InvalidateVisual();
@@ -257,6 +265,57 @@ namespace PhysModelGUI
         {
             myGraphCanvas.InvalidateVisual();
         }
+        public void ClearRawData()
+        {
+            rawDataPointX.Clear();
+            rawDataPointY.Clear();
+        }
+        public void UpdateRawData(double _x1, double _y1, double _x2 = 0, double _y2 = 0, double _x3 = 0, double _y3 = 0, double _x4 = 0, double _y4 = 0, double _x5 = 0, double _y5 = 0)
+        {
+            rawDataPointX.Add(_x1);
+            rawDataPointY.Add(_y1);
+        }
+        public void DrawRawData()
+        {
+            GraphMaxX = (float) rawDataPointX.Max();
+            GraphMinX = (float)rawDataPointX.Min();
+
+            GraphMaxY = (float)rawDataPointY.Max();
+            GraphMinY = (float)rawDataPointY.Min();
+
+            RedrawGrid();
+
+            queue1.Clear();
+            
+            for (int i = 0; i < rawDataPointX.Count();i++)
+            {
+                double _x1 = rawDataPointX[i];
+                double _y1 = rawDataPointY[i];
+
+                // calculate the vertical scaling
+                float yScaling = (h_data - 2 * GraphYOffset) / (GraphMaxY - GraphMinY);
+
+                // Console.WriteLine(h_data);
+                // calculate the horizontal scaling
+                float xScaling = (w_data - 2 * GraphXOffset) / (GraphMaxX - GraphMinX);
+
+                // calculate the coordinates
+                point1.Y = (float)(h_data - ((_y1 - GraphMinY) * yScaling) - GraphYOffset);
+                point1.X = (float)(GraphXOffset + ((_x1 - GraphMinX) * xScaling));
+                if (point1.X < GraphXOffset) point1.X = GraphXOffset;
+                if (point1.X > w_data - GraphXOffset) point1.X = w_data - GraphXOffset;
+
+                queue1.Enqueue(point1);
+            }
+
+            // copy the current queue to the display array for display purposes
+            if (queue1.Count > 0) displayArray1 = queue1.ToArray();
+
+            DrawGraphOnScreen();
+
+
+        }
+
 
         public void UpdateGraphData(double _x1, double _y1, double _x2 = 0, double _y2 = 0, double _x3 = 0, double _y3 = 0, double _x4 = 0, double _y4 = 0, double _x5 = 0, double _y5 = 0)
         {
@@ -266,6 +325,7 @@ namespace PhysModelGUI
             // calculate the vertical scaling
             float yScaling = (h_data - 2 * GraphYOffset) / (GraphMaxY - GraphMinY);
 
+            // Console.WriteLine(h_data);
             // calculate the horizontal scaling
             float xScaling = (w_data - 2 * GraphXOffset) / (GraphMaxX - GraphMinX);
 
@@ -377,8 +437,22 @@ namespace PhysModelGUI
                     }
                 }
             }
+            if (RealTimeDrawing)
+            {
+                DrawGraphOnScreen();
+            }
+               
+        }
+
+        public void DrawGraphOnScreen()
+        {
 
             myGraphCanvas.InvalidateVisual();
+        }
+
+        public void DrawGridOnScreen()
+        {
+            myGraphCanvasGrid.InvalidateVisual();
         }
 
         private void MyGraphCanvasGrid_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
@@ -386,6 +460,7 @@ namespace PhysModelGUI
             var canvas = e.Surface.Canvas;
             h_grid = (float)myGraphCanvasGrid.CanvasSize.Height;
             w_grid = (float)myGraphCanvasGrid.CanvasSize.Width;
+
             DrawGrid(canvas);
         }
 
@@ -394,6 +469,7 @@ namespace PhysModelGUI
             var canvas = e.Surface.Canvas;
             h_data = (float)myGraphCanvas.CanvasSize.Height;
             w_data = (float)myGraphCanvas.CanvasSize.Width;
+
             // graphics frame duration = Every 15 ms the data is updated and this data point takes 4 pixels.  So width / 4 = number of datapoints * 15 ms = duration of 1 frame
             GraphicsFrameDuration = ((w_data - 2 * GraphXOffset) / PixelPerDataPoint) * DataRefreshRate;
             DrawGraph(canvas);
@@ -411,7 +487,7 @@ namespace PhysModelGUI
 
         public void DrawGraph(SKCanvas _canvasGraph)
         {
-            if (refreshCounter >= GraphicsClearanceRate)
+            if (refreshCounter >= GraphicsClearanceRate && RealTimeDrawing)
             {
                 _canvasGraph.Clear(SKColors.Transparent);
                 refreshCounter = 0;
@@ -446,30 +522,34 @@ namespace PhysModelGUI
 
             // draw the legend
             float pos = w_grid / 6;
-            if (Graph1Enabled)
+            if (HideLegends == false)
             {
-                _canvasGrid.DrawLine(pos, 15, pos + 15f, 15, GraphPaint1);
-                _canvasGrid.DrawText(Legend1, pos + 20f, 18, LegendTextPaint);
-            }
-            if (Graph2Enabled)
-            {
-                _canvasGrid.DrawLine(pos * 2f, 15, pos * 2f + 15f, 15, GraphPaint2);
-                _canvasGrid.DrawText(Legend2, pos * 2f + 20f, 18, LegendTextPaint);
-            }
-            if (Graph3Enabled)
-            {
-                _canvasGrid.DrawLine(pos * 3f, 15, pos * 3f + 15f, 15, GraphPaint3);
-                _canvasGrid.DrawText(Legend3, pos * 3f + 20f, 18, LegendTextPaint);
-            }
-            if (Graph4Enabled)
-            {
-                _canvasGrid.DrawLine(pos * 4f, 15, pos * 4f + 15f, 15, GraphPaint4);
-                _canvasGrid.DrawText(Legend4, pos * 4f + 20f, 18, LegendTextPaint);
-            }
-            if (Graph5Enabled)
-            {
-                _canvasGrid.DrawLine(pos * 5f, 15, pos * 5f + 15f, 15, GraphPaint5);
-                _canvasGrid.DrawText(Legend5, pos * 5f + 20f, 18, LegendTextPaint);
+                if (Graph1Enabled)
+                {
+                    _canvasGrid.DrawLine(pos, 15, pos + 15f, 15, GraphPaint1);
+                    _canvasGrid.DrawText(Legend1, pos + 20f, 18, LegendTextPaint);
+                }
+                if (Graph2Enabled)
+                {
+                    _canvasGrid.DrawLine(pos * 2f, 15, pos * 2f + 15f, 15, GraphPaint2);
+                    _canvasGrid.DrawText(Legend2, pos * 2f + 20f, 18, LegendTextPaint);
+                }
+                if (Graph3Enabled)
+                {
+                    _canvasGrid.DrawLine(pos * 3f, 15, pos * 3f + 15f, 15, GraphPaint3);
+                    _canvasGrid.DrawText(Legend3, pos * 3f + 20f, 18, LegendTextPaint);
+                }
+                if (Graph4Enabled)
+                {
+                    _canvasGrid.DrawLine(pos * 4f, 15, pos * 4f + 15f, 15, GraphPaint4);
+                    _canvasGrid.DrawText(Legend4, pos * 4f + 20f, 18, LegendTextPaint);
+                }
+                if (Graph5Enabled)
+                {
+                    _canvasGrid.DrawLine(pos * 5f, 15, pos * 5f + 15f, 15, GraphPaint5);
+                    _canvasGrid.DrawText(Legend5, pos * 5f + 20f, 18, LegendTextPaint);
+                }
+
             }
 
             // draw the horizontal grid lines
@@ -479,7 +559,7 @@ namespace PhysModelGUI
             for (float yLine = GraphYOffset; yLine <= h_grid - GraphYOffset + 1; yLine += yStepSize)
             {
                 _canvasGrid.DrawLine(GraphXOffset, h_grid - yLine, w_grid - GraphXOffset, h_grid - yLine, GridLinePaint);
-                _canvasGrid.DrawText(yLabel.ToString(), GraphXOffset - 8, h_grid - yLine + 5, GridAxisLabelsPaint);
+                _canvasGrid.DrawText(Math.Round(yLabel,1).ToString(), GraphXOffset - 8, h_grid - yLine + 5, GridAxisLabelsPaint);
                 yLabel += GridYAxisStep;
             }
 
@@ -522,7 +602,7 @@ namespace PhysModelGUI
                 for (float xLine = GraphXOffset; xLine <= w_grid - GraphXOffset + 1; xLine += xStepSize)
                 {
                     _canvasGrid.DrawLine(xLine, h_grid - GraphYOffset, xLine, 0 + GraphYOffset, GridLinePaint);
-                    _canvasGrid.DrawText(xLabel.ToString(), xLine + 8, h_grid - GraphYOffset + 18, GridAxisLabelsPaint);
+                    _canvasGrid.DrawText(Math.Round(xLabel,1).ToString(), xLine + 8, h_grid - GraphYOffset + 18, GridAxisLabelsPaint);
                     xLabel += GridXAxisStep;
                 }
             }
