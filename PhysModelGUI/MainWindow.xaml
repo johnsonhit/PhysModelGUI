@@ -90,13 +90,7 @@
                         <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
                         </Expander>
-                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-
-
-
-
+                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
 
 
                     </StackPanel>
@@ -104,22 +98,15 @@
 
                 <Expander IsExpanded="False" Header="GLOBAL MODEL SETTINGS" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-                        <Expander Header=" lung and chestwall" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-                        <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-
+                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
+                        <Expander Header=" lung and chestwall" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
+                        <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                     </StackPanel>
                 </Expander>
                 <Expander IsExpanded="True" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander IsExpanded="True" Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-                            <Grid Margin="28,0,10,0" Background="DarkSlateGray">
+                            <Grid Margin="20,0,10,0" Background="DarkSlateGray">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>

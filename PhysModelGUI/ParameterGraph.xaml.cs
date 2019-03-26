@@ -68,7 +68,7 @@ namespace PhysModelGUI
         SKPoint point3;
         Queue<SKPoint> queue3;
         SKPoint[] displayArray3;
-        public SKPointMode PointMode3 { get; set; } = SKPointMode.Polygon;
+        public SKPointMode PointMode3 { get; set; } = SKPointMode.Points;
         public SKPaint GraphPaint3 { get; set; }
 
         public bool Graph4Enabled { get; set; } = false;
@@ -117,9 +117,17 @@ namespace PhysModelGUI
         public int GraphicsClearanceRate { get; set; } = 0;     // in ms so every 0 seconds the complete canvas is rebuild, set 0 for side scrolling graphs
         public float GraphicsFrameDuration { get; set; } = 0;     // in ms so the duration of one complete graphics frame in ms.
         int refreshCounter = 0;
+        bool ClearGraph = false;
 
-        List<double> rawDataPointX = new List<double>();
-        List<double> rawDataPointY = new List<double>();
+        List<double> rawDataPointX1 = new List<double>();
+        List<double> rawDataPointY1 = new List<double>();
+
+        List<double> rawDataPointX2 = new List<double>();
+        List<double> rawDataPointY2 = new List<double>();
+
+        List<double> rawDataPointX3 = new List<double>();
+        List<double> rawDataPointY3 = new List<double>();
+
 
         private readonly DispatcherTimer updateTimer = new DispatcherTimer();
 
@@ -265,33 +273,79 @@ namespace PhysModelGUI
         {
             myGraphCanvas.InvalidateVisual();
         }
-        public void ClearRawData()
+        public void ClearStaticData()
         {
-            rawDataPointX.Clear();
-            rawDataPointY.Clear();
-        }
-        public void UpdateRawData(double _x1, double _y1, double _x2 = 0, double _y2 = 0, double _x3 = 0, double _y3 = 0, double _x4 = 0, double _y4 = 0, double _x5 = 0, double _y5 = 0)
-        {
-            rawDataPointX.Add(_x1);
-            rawDataPointY.Add(_y1);
-        }
-        public void DrawRawData()
-        {
-            GraphMaxX = (float) rawDataPointX.Max();
-            GraphMinX = (float)rawDataPointX.Min();
+            rawDataPointX1.Clear();
+            rawDataPointY1.Clear();
 
-            GraphMaxY = (float)rawDataPointY.Max();
-            GraphMinY = (float)rawDataPointY.Min();
+            rawDataPointX2.Clear();
+            rawDataPointY2.Clear();
+        }
+        public void UpdateStaticData(double _x1, double _y1, double _x2 = 0, double _y2 = 0, double _x3 = 0, double _y3 = 0, double _x4 = 0, double _y4 = 0, double _x5 = 0, double _y5 = 0)
+        {
+            rawDataPointX1.Add(_x1);
+            rawDataPointY1.Add(_y1);
+
+            rawDataPointX2.Add(_x2);
+            rawDataPointY2.Add(_y2);
+
+        }
+
+        public void DrawStaticData()
+        {
+
+            if (rawDataPointX1.Max() > rawDataPointX2.Max())
+            {
+                GraphMaxX = (float)rawDataPointX1.Max();
+            } else
+            {
+                GraphMaxX = (float)rawDataPointX2.Max();
+            }
+
+            if (rawDataPointX1.Min() < rawDataPointX2.Min())
+            {
+                GraphMinX = (float)rawDataPointX1.Min();
+            }
+            else
+            {
+                GraphMinX = (float)rawDataPointX2.Min();
+            }
+
+            GridXAxisStep = Math.Abs(GraphMaxX - GraphMinX) / 5;
+
+            if (rawDataPointY1.Max() > rawDataPointY2.Max())
+            {
+                GraphMaxY = (float)rawDataPointY1.Max();
+            }
+            else
+            {
+                GraphMaxY = (float)rawDataPointY2.Max();
+            }
+
+            if (rawDataPointY1.Min() < rawDataPointY2.Min())
+            {
+                GraphMinY = (float)rawDataPointY1.Min();
+            }
+            else
+            {
+                GraphMinY = (float)rawDataPointY2.Min();
+            }
+
+   
+            GridYAxisStep = Math.Abs(GraphMaxY - GraphMinY) / 5;
 
             RedrawGrid();
 
             queue1.Clear();
+            queue2.Clear();
+ 
             
-            for (int i = 0; i < rawDataPointX.Count();i++)
+            for (int i = 0; i < rawDataPointX1.Count();i++)
             {
-                double _x1 = rawDataPointX[i];
-                double _y1 = rawDataPointY[i];
-
+                double _x1 = rawDataPointX1[i];
+                double _y1 = rawDataPointY1[i];
+                double _x2 = rawDataPointX2[i];
+                double _y2 = rawDataPointY2[i];
                 // calculate the vertical scaling
                 float yScaling = (h_data - 2 * GraphYOffset) / (GraphMaxY - GraphMinY);
 
@@ -306,18 +360,28 @@ namespace PhysModelGUI
                 if (point1.X > w_data - GraphXOffset) point1.X = w_data - GraphXOffset;
 
                 queue1.Enqueue(point1);
+
+                point2.Y = (float)(h_data - ((_y2 - GraphMinY) * yScaling) - GraphYOffset);
+                point2.X = (float)(GraphXOffset + ((_x2 - GraphMinX) * xScaling));
+                if (point2.X < GraphXOffset) point2.X = GraphXOffset;
+                if (point2.X > w_data - GraphXOffset) point2.X = w_data - GraphXOffset;
+
+                queue2.Enqueue(point2);
             }
+   
 
             // copy the current queue to the display array for display purposes
             if (queue1.Count > 0) displayArray1 = queue1.ToArray();
+            if (queue2.Count > 0) displayArray2 = queue2.ToArray();
 
+            ClearGraph = true;
             DrawGraphOnScreen();
 
 
         }
 
 
-        public void UpdateGraphData(double _x1, double _y1, double _x2 = 0, double _y2 = 0, double _x3 = 0, double _y3 = 0, double _x4 = 0, double _y4 = 0, double _x5 = 0, double _y5 = 0)
+        public void UpdateRealtimeGraphData(double _x1, double _y1, double _x2 = 0, double _y2 = 0, double _x3 = 0, double _y3 = 0, double _x4 = 0, double _y4 = 0, double _x5 = 0, double _y5 = 0)
         {
             // calculate the number of needed datapoints for the graph as determined by the x - axis and the pixels between datapoints
             int noDataPoints = (int)((w_data - 2 * GraphXOffset) / PixelPerDataPoint);
@@ -493,6 +557,12 @@ namespace PhysModelGUI
                 refreshCounter = 0;
             }
             refreshCounter += GraphicsUpdateRate;
+
+            if (ClearGraph)
+            {
+                _canvasGraph.Clear(SKColors.Transparent);
+                ClearGraph = false;
+            }
 
             if (Graph1Enabled && displayArray1 != null) _canvasGraph.DrawPoints(PointMode1, displayArray1, GraphPaint1);
             if (Graph2Enabled && displayArray2 != null) _canvasGraph.DrawPoints(PointMode2, displayArray2, GraphPaint2);
