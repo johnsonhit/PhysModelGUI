@@ -49,6 +49,29 @@ namespace PhysModelGUI
         string _modelName = "";
         public string ModelName { get { return _modelName; } set { _modelName = value; OnPropertyChanged(); } }
 
+        string _heartrate = "140";
+        public string Heartrate { get { return _heartrate; } set { _heartrate = value; OnPropertyChanged(); } }
+
+        string _spo2 = "99";
+        public string Spo2 { get { return _spo2; } set { _spo2 = value; OnPropertyChanged(); } }
+
+        string _abp = "99";
+        public string Abp { get { return _abp; } set { _abp = value; OnPropertyChanged(); } }
+
+        string _pap = "99";
+        public string Pap { get { return _pap; } set { _pap = value; OnPropertyChanged(); } }
+
+        string _cvp = "99";
+        public string Cvp { get { return _cvp; } set { _cvp = value; OnPropertyChanged(); } }
+
+        string _resprate = "99";
+        public string Resprate { get { return _resprate; } set { _resprate = value; OnPropertyChanged(); } }
+
+        string _temp = "99";
+        public string Temp { get { return _temp; } set { _temp = value; OnPropertyChanged(); } }
+
+        int slowUpdater = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -87,6 +110,7 @@ namespace PhysModelGUI
             PopulateLists();
         }
 
+
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             // update the graphs
@@ -97,7 +121,19 @@ namespace PhysModelGUI
 
             if (GraphPVLoopsEnabled) { }
 
-   
+            if (slowUpdater > 1000)
+            {
+                slowUpdater = 0;
+                Heartrate = PhysModelMain.modelInterface.HeartRate.ToString();
+                Spo2 = PhysModelMain.modelInterface.ArterialSO2Pre.ToString();
+                Abp = PhysModelMain.modelInterface.ArterialBloodPressure.ToString();
+                Pap = PhysModelMain.modelInterface.PulmonaryArteryPressure.ToString();
+                Cvp = PhysModelMain.modelInterface.CentralVenousPressure.ToString();
+                Resprate = PhysModelMain.modelInterface.RespiratoryRate.ToString();
+                Temp = PhysModelMain.modelInterface.PatientTemperature.ToString();
+            }
+            slowUpdater += 15;
+ 
 
             canvasDiagram.InvalidateVisual();
         }

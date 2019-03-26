@@ -199,9 +199,53 @@
 
                 </Expander>
                 <Expander IsExpanded="False" Header="VITAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
+                    <Grid Margin="10,0,10,5" Background="Black" Opacity="0.8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Grid.Column="0" Text="heartrate" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="0" Text="{Binding Heartrate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="0" Text="bpm" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
-                    </StackPanel>
+                        <TextBlock Grid.Column="1" Text="spo2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{Binding Spo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="%" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="2" Text="abp" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="{Binding Abp}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="2" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="cvp" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Cvp}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="3" Grid.Row="0" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="resp rate" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Resprate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="etco2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="-" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="2" Grid.Row="1" Text="pap" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="2" Grid.Row="1"  Text="{Binding Pap}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="2" Grid.Row="1"  Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+                   
+                        <TextBlock Grid.Column="3" Grid.Row="1" Text="temp" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Temp}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="3" Grid.Row="1" Text="dgs" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+
+                    </Grid>
                 </Expander>
                 <Expander IsExpanded="False" Header="ADDITIONAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
