@@ -376,8 +376,6 @@ namespace PhysModelGUI
 
             ClearGraph = true;
             DrawGraphOnScreen();
-
-
         }
 
 
@@ -500,10 +498,6 @@ namespace PhysModelGUI
                         x += PixelPerDataPoint * ScrollDirection;
                     }
                 }
-            }
-            if (RealTimeDrawing)
-            {
-                DrawGraphOnScreen();
             }
                
         }

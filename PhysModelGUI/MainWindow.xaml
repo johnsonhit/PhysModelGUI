@@ -103,9 +103,9 @@
                         <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="True" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander IsExpanded="True" Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander IsExpanded="False" Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Grid Margin="20,0,10,0" Background="DarkSlateGray">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -179,7 +179,7 @@
                 <Expander IsExpanded="False" Header="MODEL LOG" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,10">
                         <ScrollViewer  >
-                            <ListBox Height="100" Background="Black" Foreground="White" ></ListBox>
+                            <ListBox x:Name="lstBox" Height="100" Background="Black" Foreground="White" ></ListBox>
                         </ScrollViewer>
                         <Button Content="CLEAR" FontSize="10" Background="SlateGray" Foreground="White" Margin="50,5,50,0"></Button>
                     </StackPanel>
@@ -248,15 +248,169 @@
                     </Grid>
                 </Expander>
                 <Expander IsExpanded="False" Header="ADDITIONAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                    <StackPanel Margin="10,0,10,5" Background="Transparent" Opacity="0.8">
+                        <Expander Header=" heart" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Grid Margin="0,0,0,5" Background="Black" Opacity="1.0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
 
+                                <TextBlock Grid.Column="0" Text="LV output" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Text="{Binding Lvo}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Text="LV stroke" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Lvstroke}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Text="LV pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Lvpressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="LA pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Lapressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="RV output" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Rvo}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="RV stroke" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Rvstroke}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="RV pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1"  Text="{Binding Rvpressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1"  Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="RA pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Rapressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="LV volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Lvvolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="LA volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Lavolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="2" Text="RV volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="2"  Text="{Binding Rvvolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="2"  Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="2" Text="RA volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Ravolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+
+                            </Grid>
                         </Expander>
-                        <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander Header=" circulation" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Grid Margin="0,0,0,5" Background="Black" Opacity="1.0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
 
+                                <TextBlock Grid.Column="0" Text="IVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Text="SVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Svcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Text="Myocardial flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Myoflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="IVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="SVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Svcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="Myocardial flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Myoflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="PDA flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Pdaflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Kidneys flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Kidneysflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Liver flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Liverflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="Intestines flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Intestinesflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="Brain flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Brainflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+
+
+
+                            </Grid>
                         </Expander>
-                        <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander Header=" oxygenation" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Grid Margin="0,0,0,5" Background="Black" Opacity="1.0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
 
+                                   
+                                </Grid.RowDefinitions>
+
+                         
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Global DO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="ml O2/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="Myocardial DO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Myocardialdo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="Brain DO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Braindo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="DO2:VO2 ratio" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Pdaflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                           
+
+
+                            </Grid>
                         </Expander>
                         <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
