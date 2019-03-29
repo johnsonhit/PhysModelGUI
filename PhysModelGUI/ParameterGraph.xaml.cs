@@ -102,8 +102,8 @@ namespace PhysModelGUI
         public string XAxisTitle { get; set; } = "x - axis";
         public string YAxisTitle { get; set; } = "y - axis";
 
-        public string Legend1 { get; set; } = "Test";
-        public string Legend2 { get; set; } = "White";
+        public string Legend1 { get; set; } = "";
+        public string Legend2 { get; set; } = "";
         public string Legend3 { get; set; } = "";
         public string Legend4 { get; set; } = "";
         public string Legend5 { get; set; } = "";
@@ -137,6 +137,8 @@ namespace PhysModelGUI
         float h_grid = 0;
         float w_grid = 0;
 
+        public bool NoGrid = false;
+
         public ParameterGraph()
         {
             InitializeComponent();
@@ -147,7 +149,7 @@ namespace PhysModelGUI
             {
                 Style = SKPaintStyle.Stroke,
                 Color = SKColors.Red,
-                StrokeWidth = 4,
+                StrokeWidth = 2,
                 StrokeCap = SKStrokeCap.Round,
                 IsAntialias = true
             };
@@ -573,6 +575,16 @@ namespace PhysModelGUI
 
         public void DrawGrid(SKCanvas _canvasGrid)
         {
+            // calculate the grid stepsize
+            float dY = GraphMaxY - GraphMinY;
+            if (dY > 0) GridYAxisStep = 2;
+            if (dY > 10) GridYAxisStep = 5;
+            if (dY > 50) GridYAxisStep = 10;        
+            if (dY > 100) GridYAxisStep = 20;
+            if (dY > 200) GridYAxisStep = 50;
+
+
+
             // clear the grid graph
             _canvasGrid.Clear(BackgroundColor);
 
@@ -671,6 +683,41 @@ namespace PhysModelGUI
                 }
             }
             ClearQueues();
+
+            if (NoGrid)
+            {
+
+                // clear the grid graph
+                _canvasGrid.Clear(BackgroundColor);
+                butDecMaxY.Visibility = Visibility.Collapsed;
+                butDecMinY.Visibility = Visibility.Collapsed;
+                butIncMaxY.Visibility = Visibility.Collapsed;
+                butIncMinY.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ButIncMaxY_Click(object sender, RoutedEventArgs e)
+        {
+            GraphMaxY += 5;
+            DrawGridOnScreen();
+        }
+
+        private void ButDecMaxY_Click(object sender, RoutedEventArgs e)
+        {
+            GraphMaxY -= 5;
+            DrawGridOnScreen();
+        }
+
+        private void ButIncMinY_Click(object sender, RoutedEventArgs e)
+        {
+            GraphMinY += 5;
+            DrawGridOnScreen();
+        }
+
+        private void ButDecMinY_Click(object sender, RoutedEventArgs e)
+        {
+            GraphMinY -= 5;
+            DrawGridOnScreen();
         }
 
     }

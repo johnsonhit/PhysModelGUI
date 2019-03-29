@@ -195,8 +195,43 @@
         <TextBlock Text="MONITORING" Grid.Column="2" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
         <ScrollViewer Grid.Column="2"  Margin="0,55,5,25" VerticalScrollBarVisibility="Auto">
             <StackPanel Grid.Column="2" Margin="0,0,5,0">
-                <Expander IsExpanded="False" Header="PATIENT MONITOR" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander  Header="PATIENT MONITOR" IsExpanded="{Binding GraphPatMonitorEnabled, Mode=TwoWay}" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                    <Grid Margin="10,0,10,5" Background="Black" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="HR" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="{Binding Heartrate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                        <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="bpm" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+                        
+                        <TextBlock Grid.Column="1" Grid.Row="1" Foreground="Fuchsia" Text="SpO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Foreground="Fuchsia" Text="{Binding Spo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Foreground="Fuchsia" Text="%" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
+                        <TextBlock Grid.Column="1" Grid.Row="2" Foreground="Red" Text="ABP" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Foreground="Red" Text="{Binding Abp}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="2" Foreground="Red" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="1" Grid.Row="3" Foreground="White" Text="RESP" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Foreground="White" Text="{Binding Resprate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="3" Foreground="White" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                        <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="ETCO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="{Binding Etco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+
+                        <local:ParameterGraph x:Name="graphPatMonitor" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Height="175"/>
+
+                    </Grid>
                 </Expander>
                 <Expander IsExpanded="False" Header="VITAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <Grid Margin="10,0,10,5" Background="Black" Opacity="0.8">
@@ -412,9 +447,113 @@
 
                             </Grid>
                         </Expander>
-                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander Header=" lung" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Grid Margin="0,0,0,5" Background="Black" Opacity="1.0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
 
+                                </Grid.RowDefinitions>
+
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Resp rate" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Resprate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="Alv volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Alveolarvolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="Tidal volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Tidalvolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="Minute volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Minutevolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Applied pressure" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Appliedpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="Airway pressure" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Airwaypressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="Alv left pressure" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Alvleftpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+
+
+
+
+                            </Grid>
                         </Expander>
+                        <Expander Header=" gasses" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Grid Margin="0,0,0,5" Background="Black" Opacity="1.0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition Height="50"/>
+
+                                </Grid.RowDefinitions>
+
+
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="pH" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ph}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="paO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Pao2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="paCO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Paco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="HCO3-" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Hco3}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="BE" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Be}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="PAO2 (l/r)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Po2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="PACO2 (l/r)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Pco2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+
+
+
+
+                            </Grid>
+                        </Expander>
+
                     </StackPanel>
                 </Expander>
                 <Expander IsExpanded="False" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
@@ -423,32 +562,15 @@
                             <StackPanel>
 
                                 <local:ParameterGraph x:Name="graphPressures" Height="150"></local:ParameterGraph>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <ComboBox Grid.Column="0" x:Name="cmbPressureGraphSelector" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
-                                        <ComboBoxItem Content="arterial blood pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="central venous pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="pulmonary artery pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="right atrial pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="left atrial pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="right ventricular pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="left ventricular pressure "  ></ComboBoxItem>
-                                    </ComboBox>
-                                    <Button Content="1" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="1" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="2" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="2" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="3" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="3" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="4" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="4" Foreground="White" FontSize="10"></Button>
-                                </Grid>
 
-
-
-
+                                <ComboBox Grid.Column="0" x:Name="cmbPressureGraphSelector" SelectionChanged="CmbPressureGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                    <ComboBoxItem Content="heart "  ></ComboBoxItem>
+                                    <ComboBoxItem Content="left heart "  ></ComboBoxItem>
+                                    <ComboBoxItem Content="right heart "  ></ComboBoxItem>
+                                    <ComboBoxItem Content="lungs "  ></ComboBoxItem>
+                                    <ComboBoxItem Content="left lung "  ></ComboBoxItem>
+                                    <ComboBoxItem Content="right lung "  ></ComboBoxItem>
+                                </ComboBox>
                             </StackPanel>
                         </Expander>
                         <Expander x:Name="expGraphFlows" IsExpanded="{Binding GraphFlowsEnabled, Mode=TwoWay}" Header=" flows" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
@@ -508,23 +630,7 @@
                         </Expander>
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="False" Header="MANIKIN" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
-                    <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander Header=" airway and breathing" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-                        <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-                        <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-                    </StackPanel>
-                </Expander>
-
+ 
             </StackPanel>
         </ScrollViewer>
 

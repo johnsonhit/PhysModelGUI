@@ -37,6 +37,10 @@ namespace PhysModelGUI
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer(DispatcherPriority.Render);
 
+        bool _graphPatMonitorEnabled = false;
+        public bool GraphPatMonitorEnabled { get { return _graphPatMonitorEnabled; } set { _graphPatMonitorEnabled = value; OnPropertyChanged(); } }
+
+
         bool _graphPressuresEnabled = false;
         public bool GraphPressureEnabled { get { return _graphPressuresEnabled; } set { _graphPressuresEnabled = value; OnPropertyChanged(); } }
 
@@ -139,9 +143,58 @@ namespace PhysModelGUI
         string _braindo2 = "-";
         public string Braindo2 { get { return _braindo2; } set { _braindo2 = value; OnPropertyChanged(); } }
 
+        string _tidalvolume = "-";
+        public string Tidalvolume { get { return _tidalvolume; } set { _tidalvolume = value; OnPropertyChanged(); } }
+
+        string _minutevolume = "-";
+        public string Minutevolume { get { return _minutevolume; } set { _minutevolume = value; OnPropertyChanged(); } }
+
+        string _alveolarvolume = "-";
+        public string Alveolarvolume { get { return _alveolarvolume; } set { _alveolarvolume = value; OnPropertyChanged(); } }
+
+        string _appliedpressure = "-";
+        public string Appliedpressure { get { return _appliedpressure; } set { _appliedpressure = value; OnPropertyChanged(); } }
+
+        string _airwaypressure = "-";
+        public string Airwaypressure { get { return _airwaypressure; } set { _airwaypressure = value; OnPropertyChanged(); } }
+
+        string _alvleftpressure = "-";
+        public string Alvleftpressure { get { return _alvleftpressure; } set { _alvleftpressure = value; OnPropertyChanged(); } }
+
+        string _alvrightpressure = "-";
+        public string Alvrightpressure { get { return _alvrightpressure; } set { _alvrightpressure = value; OnPropertyChanged(); } }
+
+        string _ph = "-";
+        public string Ph { get { return _ph; } set { _ph = value; OnPropertyChanged(); } }
+
+        string _pao2 = "-";
+        public string Pao2 { get { return _pao2; } set { _pao2 = value; OnPropertyChanged(); } }
+        string _paco2 = "-";
+        public string Paco2 { get { return _paco2; } set { _paco2 = value; OnPropertyChanged(); } }
+        string _hco3 = "-";
+        public string Hco3 { get { return _hco3; } set { _hco3 = value; OnPropertyChanged(); } }
+        string _be = "-";
+        public string Be { get { return _be; } set { _be = value; OnPropertyChanged(); } }
+        string _po2alv = "-";
+        public string Po2alv { get { return _po2alv; } set { _po2alv = value; OnPropertyChanged(); } }
+        string _pco2alv = "-";
+        public string Pco2alv { get { return _pco2alv; } set { _pco2alv = value; OnPropertyChanged(); } }
 
         int slowUpdater = 0;
         int graphicsRefreshInterval = 15;
+
+
+        Compartment selectedPres1Compartment;
+        Compartment selectedPres2Compartment;
+        Compartment selectedPres3Compartment;
+        Compartment selectedPres4Compartment;
+
+
+
+        bool initialized = false;
+
+        double pressureGraphScaleOffset = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -162,14 +215,35 @@ namespace PhysModelGUI
             graphPressures.DataRefreshRate = 15;
             graphPressures.PixelPerDataPoint = 2;
             graphPressures.Graph1Enabled = true;
-            graphPressures.Graph2Enabled = false;
-            graphPressures.Legend2 = "white";
+            graphPressures.Graph2Enabled = true;
+            graphPressures.Graph3Enabled = true;
+            graphPressures.Graph4Enabled = true;
             graphPressures.IsSideScrolling = true;
             graphPressures.GraphicsClearanceRate = graphicsRefreshInterval;
-            
-            ModelName = PhysModelMain.currentModel.Name;
 
-           
+            graphPatMonitor.GraphMaxY = 100;
+            graphPatMonitor.GraphMaxX = 20;
+            graphPatMonitor.GraphXOffset = 10;
+            graphPatMonitor.DataRefreshRate = 15;
+            graphPatMonitor.PixelPerDataPoint = 2;
+            graphPatMonitor.Graph1Enabled = true;
+            graphPatMonitor.Graph2Enabled = true;
+            graphPatMonitor.Graph3Enabled = true;
+            graphPatMonitor.Graph4Enabled = true;
+            graphPatMonitor.IsSideScrolling = true;
+            graphPatMonitor.XAxisTitle = "";
+            graphPatMonitor.HideYAxisLabels = true;
+            graphPatMonitor.HideXAxisLabels = true;
+            graphPatMonitor.NoGrid = true;
+            graphPatMonitor.GraphPaint1.Color = SKColors.LimeGreen;
+            graphPatMonitor.GraphPaint2.Color = SKColors.Fuchsia;
+            graphPatMonitor.GraphPaint3.Color = SKColors.Red;
+            graphPatMonitor.GraphPaint4.Color = SKColors.White;
+            graphPatMonitor.GraphicsClearanceRate = graphicsRefreshInterval;
+
+
+            ModelName = PhysModelMain.currentModel.Name;
+            
             graphElastance.DataRefreshRate = 15;
             graphElastance.PixelPerDataPoint = 1;
             graphElastance.Graph1Enabled = true;
@@ -179,6 +253,13 @@ namespace PhysModelGUI
 
             // populate controls
             PopulateLists();
+
+            // select defsault compartments
+            selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("AA");
+            selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
+            selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
+
+            initialized = true;
         }
 
         private void ModelInterface_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -186,14 +267,83 @@ namespace PhysModelGUI
             switch (e.PropertyName)
             {
                 case "ModelUpdated":
-                    if (GraphPressureEnabled)
-                        graphPressures.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.ABPSignal);
+                    UpdatePressureGraph();
+                    UpdateMonitorGraph();
                     break;
                 case "StatusMessage":
                     lstBox.Items.Add(PhysModelMain.modelInterface.StatusMessage);
                     break;
             }
 
+        }
+
+        void UpdatePressureGraph()
+        {
+            if (GraphPressureEnabled)
+            {
+                double param1 = 0;
+                double param2 = 0;
+                double param3 = 0;
+                double param4 = 0;
+
+                if (selectedPres1Compartment == null)
+                {
+                    graphPressures.Graph1Enabled = false;
+                } else
+                {
+                    param1 = selectedPres1Compartment.PresCurrent - pressureGraphScaleOffset;
+                    graphPressures.Graph1Enabled = true;
+                }
+
+                if (selectedPres2Compartment == null)
+                {
+                    graphPressures.Graph2Enabled = false;
+                }
+                else
+                {
+                    param2 = selectedPres2Compartment.PresCurrent - pressureGraphScaleOffset;
+                    graphPressures.Graph2Enabled = true;
+                }
+
+                if (selectedPres3Compartment == null)
+                {
+                    graphPressures.Graph3Enabled = false;
+                }
+                else
+                {
+                    param3 = selectedPres3Compartment.PresCurrent - pressureGraphScaleOffset;
+                    graphPressures.Graph3Enabled = true;
+                }
+
+                if (selectedPres4Compartment == null)
+                {
+                    graphPressures.Graph4Enabled = false;
+                }
+                else
+                {
+                    param4 = selectedPres4Compartment.PresCurrent - pressureGraphScaleOffset;
+                    graphPressures.Graph4Enabled = true;
+                }
+
+                graphPressures.UpdateRealtimeGraphData(0, param1, 0, param2, 0, param3, 0, param4);
+
+            }
+        }
+
+        void UpdateMonitorGraph()
+        {
+            if (GraphPatMonitorEnabled)
+            {
+                double param1 = PhysModelMain.modelInterface.ECGSignal / 6 + 100;
+                double param2 = (PhysModelMain.modelInterface.SPO2POSTSignal - PhysModelMain.currentModel.DA.dataCollector.PresMin) / 4 + 70;
+                double param3 = (PhysModelMain.modelInterface.ABPSignal - PhysModelMain.currentModel.AA.dataCollector.PresMin) / 4 + 45;
+                double param4 = PhysModelMain.modelInterface.RESPVolumeSignal / 4 + 15;
+                double param5 = PhysModelMain.modelInterface.ETCO2Signal;
+
+                graphPatMonitor.UpdateRealtimeGraphData(0, param1, 0, param2, 0, param3, 0, param4, 0, param5);
+
+            }
+            
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
@@ -228,15 +378,38 @@ namespace PhysModelGUI
                 Pdaflow = Math.Round(PhysModelMain.modelInterface.PDAFlow, 1).ToString();
                 Myocardialdo2 = Math.Round(PhysModelMain.modelInterface.MyoO2Delivery, 1).ToString();
                 Braindo2 = Math.Round(PhysModelMain.modelInterface.BrainO2Delivery, 1).ToString();
+                Kidneysflow = PhysModelMain.modelInterface.KidneysFlow.ToString();
+                Liverflow = PhysModelMain.modelInterface.LiverFlow.ToString();
+                Brainflow = PhysModelMain.modelInterface.BrainFlow.ToString();
+
+                Tidalvolume = PhysModelMain.modelInterface.TidalVolume.ToString();
+                Minutevolume = PhysModelMain.modelInterface.MinuteVolume.ToString();
+                Alveolarvolume = PhysModelMain.modelInterface.AlveolarVolume;
+
+                Appliedpressure = PhysModelMain.modelInterface.AppliedAirwayPressure;
+                Airwaypressure = PhysModelMain.modelInterface.AirwayPressure;
+                Alvleftpressure = PhysModelMain.modelInterface.AlveolarLeftPressure;
+                Alvrightpressure = PhysModelMain.modelInterface.AlveolarRightPressure;
+
+                Ph = PhysModelMain.modelInterface.ArterialPH.ToString();
+                Pao2 = PhysModelMain.modelInterface.ArterialPO2.ToString();
+                Paco2 = PhysModelMain.modelInterface.ArterialPCO2.ToString();
+                Hco3 = PhysModelMain.modelInterface.ArterialHCO3.ToString();
+                Be = PhysModelMain.modelInterface.ArterialBE.ToString();
+
+                Po2alv = PhysModelMain.modelInterface.AlveolarPO2;
+                Pco2alv = PhysModelMain.modelInterface.AlveolarPCO2;
 
             }
             slowUpdater += graphicsRefreshInterval;
  
 
-            //canvasDiagram.InvalidateVisual();
+            //anvasDiagram.InvalidateVisual();
 
             if (GraphPressureEnabled)
-                //graphPressures.DrawGraphOnScreen();
+                graphPressures.DrawGraphOnScreen();
+
+            graphPatMonitor.DrawGraphOnScreen();
         }
 
         void CanvasDiagram_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
@@ -308,6 +481,7 @@ namespace PhysModelGUI
             }
 
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             CalculateElastanceCurve(cmbSelectCompartmentSettings.SelectedItem.ToString());
@@ -326,5 +500,134 @@ namespace PhysModelGUI
                 cmbSelectCompartmentSettings.SelectedIndex = 0;
             }
         }
+
+        private void CmbPressureGraphSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                switch (cmbPressureGraphSelector.SelectedIndex)
+                {
+                    case 0: // heart
+                        graphPressures.GraphMaxY = 100;
+                        graphPressures.GraphMinY = 0;
+                        graphPressures.GraphMaxX = 20;
+                        graphPressures.Legend1 = "AA";
+                        graphPressures.Legend2 = "LV";
+                        graphPressures.Legend3 = "PA";
+                        graphPressures.Legend4 = "RV";
+                        graphPressures.XAxisTitle = "time";
+
+                        pressureGraphScaleOffset = 0;
+
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("AA");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("PA");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
+
+                        break;
+                    case 1: // left heart
+                        graphPressures.GraphMaxY = 100;
+                        graphPressures.GraphMinY = 0;
+                        graphPressures.GraphMaxX = 20;
+                        pressureGraphScaleOffset = 0;
+
+                        graphPressures.Legend1 = "AA";
+                        graphPressures.Legend2 = "LV";
+                        graphPressures.Legend3 = "LA";
+ 
+                        graphPressures.XAxisTitle = "time";
+
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("AA");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
+                        selectedPres4Compartment = null;
+                        break;
+                    case 2: // right heart
+                        graphPressures.GraphMaxY = 100;
+                        graphPressures.GraphMinY = 0;
+                        graphPressures.GraphMaxX = 20;
+                        pressureGraphScaleOffset = 0;
+
+                        graphPressures.Legend1 = "PA";
+                        graphPressures.Legend2 = "RV";
+                        graphPressures.Legend3 = "RA";
+
+                        graphPressures.XAxisTitle = "time";
+
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("PA");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
+                        selectedPres4Compartment = null;
+                        break;
+                    case 3: // lungs
+                        graphPressures.GraphMaxY = 40;
+                        graphPressures.GraphMinY = -20;
+                        graphPressures.GraphMaxX = 20;
+                        pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
+
+                        graphPressures.Legend1 = "OUT";
+                        graphPressures.Legend2 = "NCA";
+                        graphPressures.Legend3 = "ALL";
+                        graphPressures.Legend4 = "ALR";
+                        graphPressures.XAxisTitle = "time";
+
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("OUT");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+                        break;
+                    case 4: // left lung
+                        graphPressures.GraphMaxY = 40;
+                        graphPressures.GraphMinY = -20;
+                        graphPressures.GraphMaxX = 20;
+                        pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
+
+                        graphPressures.Legend1 = "OUT";
+                        graphPressures.Legend2 = "NCA";
+                        graphPressures.Legend3 = "ALL";
+                        graphPressures.Legend4 = "ALR";
+                        graphPressures.XAxisTitle = "time";
+
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("OUT");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+
+                        break;
+                    case 5: // right lung
+                        graphPressures.GraphMaxY = 40;
+                        graphPressures.GraphMinY = -20;
+                        graphPressures.GraphMaxX = 20;
+                        pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
+
+                        graphPressures.Legend1 = "OUT";
+                        graphPressures.Legend2 = "NCA";
+                        graphPressures.Legend3 = "ALL";
+                        graphPressures.Legend4 = "ALR";
+                        graphPressures.XAxisTitle = "time";
+
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("OUT");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+
+                        break;
+
+                }
+
+                graphPressures.DataRefreshRate = 15;
+                graphPressures.PixelPerDataPoint = 2;
+                graphPressures.IsSideScrolling = true;
+                graphPressures.GraphicsClearanceRate = graphicsRefreshInterval;
+                graphPressures.HideXAxisLabels = true;
+                graphPressures.HideLegends = false;
+                graphPressures.DrawGridOnScreen();
+
+               
+
+            }
+        }
+
+   
     }
 }
