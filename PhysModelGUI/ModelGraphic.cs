@@ -64,6 +64,9 @@ namespace PhysModelGUI
         public static AnimatedValve pulmonaryValve;
         public static AnimatedBloodCompartment pulmonaryArtery;
         public static AnimatedBloodConnector PALUNG;
+        public static AnimatedBloodCompartment ALBLOOD;
+        public static AnimatedBloodConnector ADALBLOOD;
+        public static AnimatedBloodConnector ALBLOODIVC;
 
         public static AnimatedBloodConnector AAUB;
         public static AnimatedBloodCompartment upperBody;
@@ -79,10 +82,41 @@ namespace PhysModelGUI
         public static AnimatedShuntGas OUTNCA;
         public static AnimatedBloodCompartment lungs;
         public static AnimatedGasComp alveoli;
+        public static AnimatedGasComp ecmolung;
 
         #region "BuildInterface"
         public static void BuildDiagram()
         {
+            ADALBLOOD = new AnimatedBloodConnector
+            {
+                scaleRelative = 0.035f,
+                Degrees = 0,
+                NoLoss = true,
+                RadiusYOffset = 0.75f,
+                RadiusXOffset = 1.3f,
+                StartAngle = 50,
+                EndAngle = 70,
+                Direction = 1,
+                Name = "AD->ALBLOOD"
+            };
+            ADALBLOOD.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_ALBLOOD"));
+            animatedBloodConnectors.Add(ADALBLOOD);
+
+            ALBLOODIVC = new AnimatedBloodConnector
+            {
+                scaleRelative = 0.035f,
+                Degrees = 0,
+                NoLoss = true,
+                RadiusYOffset = 0.75f,
+                RadiusXOffset = 1.3f,
+                StartAngle = 70,
+                EndAngle = 128,
+                Direction = 1,
+                Name = "ALBLOOD->IVC"
+            };
+            ALBLOODIVC.AddConnector(PhysModelMain.FindBloodConnectorByName("ALBLOOD_IVC"));
+            animatedBloodConnectors.Add(ALBLOODIVC);
+
             pulmonaryValve = new AnimatedValve
             {
                 scaleRelative = 0.035f,
@@ -182,17 +216,6 @@ namespace PhysModelGUI
             aorta.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_LIVER"));
             animatedBloodConnectors.Add(aorta);
 
-            SVC = new AnimatedBloodCompartment
-            {
-                scaleRelative = 0.035f,
-                IsVessel = true,
-                RadiusYOffset = 0.5f,
-                StartAngle = 120,
-                EndAngle = 130,
-                Degrees = 125,
-                Name = "SVC"
-            };
-
             leftVentricle = new AnimatedBloodCompartment
             {
                 scaleRelative = 0.035f,
@@ -277,6 +300,8 @@ namespace PhysModelGUI
             lungs.AddCompartment(PhysModelMain.FindBloodCompartmentByName("LR"));
             animatedBloodCompartments.Add(lungs);
 
+
+
             upperBody = new AnimatedBloodCompartment
             {
                 scaleRelative = 0.035f,
@@ -298,6 +323,17 @@ namespace PhysModelGUI
             alveoli.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALL"));
             alveoli.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALR"));
             animatedGasCompartments.Add(alveoli);
+
+            ecmolung = new AnimatedGasComp
+            {
+                scaleRelative = 0.035f,
+                Degrees = 70,
+                RadiusYOffset = 0.75f,
+                Name = "ECMO"
+            };
+            ecmolung.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALGAS"));
+            animatedGasCompartments.Add(ecmolung);
+
 
             LBIVC = new AnimatedBloodConnector
             {
@@ -511,6 +547,24 @@ namespace PhysModelGUI
             };
             OUTNCA.AddConnector(PhysModelMain.FindGasConnectorByName("OUT_NCA"));
             animatedShuntsGas.Add(OUTNCA);
+
+            ALBLOOD = new AnimatedBloodCompartment
+            {
+                scaleRelative = 0.035f,
+                IsVessel = false,
+                RadiusYOffset = 0.75f,
+                OffsetXFactor = 4f,
+                StartAngle = 80,
+                EndAngle = 100,
+                Degrees = 70,
+                Name = "ECMO"
+            };
+            ALBLOOD.AddCompartment(PhysModelMain.FindBloodCompartmentByName("ALBLOOD"));
+            animatedBloodCompartments.Add(ALBLOOD);
+
+           
+       
+
 
         }
         public static void BuildScrollingGraphs()

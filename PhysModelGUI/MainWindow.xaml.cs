@@ -1,4 +1,5 @@
 ﻿using PhysModelLibrary;
+using PhysModelLibrary.BaseClasses;
 using PhysModelLibrary.Compartments;
 using SkiaSharp;
 using System;
@@ -37,12 +38,13 @@ namespace PhysModelGUI
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer(DispatcherPriority.Render);
 
-        bool _graphPatMonitorEnabled = false;
+        bool _graphPatMonitorEnabled = true;
         public bool GraphPatMonitorEnabled { get { return _graphPatMonitorEnabled; } set { _graphPatMonitorEnabled = value; OnPropertyChanged(); } }
 
 
         bool _graphPressuresEnabled = false;
         public bool GraphPressureEnabled { get { return _graphPressuresEnabled; } set { _graphPressuresEnabled = value; OnPropertyChanged(); } }
+
 
         bool _graphFlowsEnabled = false;
         public bool GraphFlowsEnabled { get { return _graphFlowsEnabled; } set { _graphFlowsEnabled = value; OnPropertyChanged(); } }
@@ -188,6 +190,15 @@ namespace PhysModelGUI
         Compartment selectedPres2Compartment;
         Compartment selectedPres3Compartment;
         Compartment selectedPres4Compartment;
+        Compartment selectedPres5Compartment;
+
+        Connector selectedConnector1;
+        Connector selectedConnector2;
+        Connector selectedConnector3;
+        Connector selectedConnector4;
+        Connector selectedConnector5;
+
+
 
 
 
@@ -220,6 +231,17 @@ namespace PhysModelGUI
             graphPressures.Graph4Enabled = true;
             graphPressures.IsSideScrolling = true;
             graphPressures.GraphicsClearanceRate = graphicsRefreshInterval;
+
+            graphFlows.GraphMaxY = 100;
+            graphFlows.GraphMaxX = -100;
+            graphFlows.DataRefreshRate = 15;
+            graphFlows.PixelPerDataPoint = 2;
+            graphFlows.Graph1Enabled = true;
+            graphFlows.Graph2Enabled = true;
+            graphFlows.Graph3Enabled = true;
+            graphFlows.Graph4Enabled = true;
+            graphFlows.IsSideScrolling = true;
+            graphFlows.GraphicsClearanceRate = graphicsRefreshInterval;
 
             graphPatMonitor.GraphMaxY = 100;
             graphPatMonitor.GraphMaxX = 20;
@@ -259,6 +281,8 @@ namespace PhysModelGUI
             selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
             selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
 
+            selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("LALV");
+
             initialized = true;
         }
 
@@ -268,6 +292,7 @@ namespace PhysModelGUI
             {
                 case "ModelUpdated":
                     UpdatePressureGraph();
+                    UpdateFlowGraph();
                     UpdateMonitorGraph();
                     break;
                 case "StatusMessage":
@@ -275,6 +300,68 @@ namespace PhysModelGUI
                     break;
             }
 
+        }
+        void UpdateFlowGraph()
+        {
+            if (GraphFlowsEnabled)
+            {
+                double param1 = 0;
+                double param2 = 0;
+                double param3 = 0;
+                double param4 = 0;
+                double param5 = 0;
+
+                if (selectedConnector1 == null)
+                {
+                    graphFlows.Graph1Enabled = false;
+                } else
+                {
+                    param1 = selectedConnector1.CurrentFlow;
+                    graphFlows.Graph1Enabled = true;
+                }
+
+                if (selectedConnector2 == null)
+                {
+                    graphFlows.Graph2Enabled = false;
+                }
+                else
+                {
+                    param2 = selectedConnector2.CurrentFlow;
+                    graphFlows.Graph2Enabled = true;
+                }
+
+                if (selectedConnector3 == null)
+                {
+                    graphFlows.Graph3Enabled = false;
+                }
+                else
+                {
+                    param3 = selectedConnector3.CurrentFlow;
+                    graphFlows.Graph3Enabled = true;
+                }
+
+                if (selectedConnector4 == null)
+                {
+                    graphFlows.Graph4Enabled = false;
+                }
+                else
+                {
+                    param4 = selectedConnector4.CurrentFlow;
+                    graphFlows.Graph4Enabled = true;
+                }
+
+                if (selectedConnector5 == null)
+                {
+                    graphFlows.Graph5Enabled = false;
+                }
+                else
+                {
+                    param5 = selectedConnector5.CurrentFlow;
+                    graphFlows.Graph5Enabled = true;
+                }
+
+                graphFlows.UpdateRealtimeGraphData(0, param1, 0, param2, 0, param3, 0, param4, 0 , param5);
+            }
         }
 
         void UpdatePressureGraph()
@@ -285,6 +372,7 @@ namespace PhysModelGUI
                 double param2 = 0;
                 double param3 = 0;
                 double param4 = 0;
+                double param5 = 0;
 
                 if (selectedPres1Compartment == null)
                 {
@@ -325,7 +413,17 @@ namespace PhysModelGUI
                     graphPressures.Graph4Enabled = true;
                 }
 
-                graphPressures.UpdateRealtimeGraphData(0, param1, 0, param2, 0, param3, 0, param4);
+                if (selectedPres5Compartment == null)
+                {
+                    graphPressures.Graph5Enabled = false;
+                }
+                else
+                {
+                    param5 = selectedPres5Compartment.PresCurrent - pressureGraphScaleOffset;
+                    graphPressures.Graph5Enabled = true;
+                }
+
+                graphPressures.UpdateRealtimeGraphData(0, param1, 0, param2, 0, param3, 0, param4, 0, param5);
 
             }
         }
@@ -403,13 +501,13 @@ namespace PhysModelGUI
             }
             slowUpdater += graphicsRefreshInterval;
  
-
-            //anvasDiagram.InvalidateVisual();
+            canvasDiagram.InvalidateVisual();
 
             if (GraphPressureEnabled)
                 graphPressures.DrawGraphOnScreen();
 
-            graphPatMonitor.DrawGraphOnScreen();
+            if (GraphPatMonitorEnabled)
+                graphPatMonitor.DrawGraphOnScreen();
         }
 
         void CanvasDiagram_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)

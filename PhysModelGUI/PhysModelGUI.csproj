@@ -138,6 +138,7 @@
     <Compile Include="Graphics\AnimatedElementHelper.cs" />
     <Compile Include="Graphics\AnimatedGasComp.cs" />
     <Compile Include="Graphics\AnimatedGasConnector.cs" />
+    <Compile Include="Graphics\AnimatedPump.cs" />
     <Compile Include="Graphics\AnimatedShunt.cs" />
     <Compile Include="Graphics\AnimatedShuntGas.cs" />
     <Compile Include="Graphics\AnimatedValve.cs" />
