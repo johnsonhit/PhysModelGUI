@@ -224,6 +224,7 @@ namespace PhysModelGUI
             dispatcherTimer.Start();
 
             graphPressures.GraphMaxY = 100;
+            graphPressures.GraphMinY = 0;
             graphPressures.GraphMaxX = 20;
             graphPressures.DataRefreshRate = 15;
             graphPressures.PixelPerDataPoint = 2;
@@ -234,8 +235,9 @@ namespace PhysModelGUI
             graphPressures.IsSideScrolling = true;
             graphPressures.GraphicsClearanceRate = graphicsRefreshInterval;
 
-            graphFlows.GraphMaxY = 100;
-            graphFlows.GraphMaxX = -100;
+            graphFlows.GraphMaxY = 200;
+            graphFlows.GraphMinY = -50;
+            graphFlows.GraphMaxX = 20;
             graphFlows.DataRefreshRate = 15;
             graphFlows.PixelPerDataPoint = 2;
             graphFlows.Graph1Enabled = true;
@@ -244,6 +246,7 @@ namespace PhysModelGUI
             graphFlows.Graph4Enabled = true;
             graphFlows.IsSideScrolling = true;
             graphFlows.GraphicsClearanceRate = graphicsRefreshInterval;
+            graphFlows.DrawGridOnScreen();
 
             graphPatMonitor.GraphMaxY = 100;
             graphPatMonitor.GraphMaxX = 20;
@@ -284,7 +287,8 @@ namespace PhysModelGUI
             selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
             selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
 
-            selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("LALV");
+            selectedConnector1 = (Connector)PhysModelMain.FindValveByName("LA_LV");
+            selectedConnector2 = (Connector)PhysModelMain.FindValveByName("LV_AA");
 
             initialized = true;
         }
@@ -506,10 +510,13 @@ namespace PhysModelGUI
             }
             slowUpdater += graphicsRefreshInterval;
  
-            canvasDiagram.InvalidateVisual();
+            //canvasDiagram.InvalidateVisual();
 
             if (GraphPressureEnabled)
                 graphPressures.DrawGraphOnScreen();
+
+            if (GraphFlowsEnabled)
+                graphFlows.DrawGraphOnScreen();
 
             if (GraphPatMonitorEnabled)
                 graphPatMonitor.DrawGraphOnScreen();

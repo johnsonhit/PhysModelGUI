@@ -299,51 +299,51 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="LV output" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Text="{Binding Lvo}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Text="{Binding Lvo}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Text="LV stroke" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Text="{Binding Lvstroke}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Lvstroke}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Text="LV pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Text="{Binding Lvpressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Lvpressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="LA pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Lapressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Lapressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="RV output" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Rvo}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Rvo}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="RV stroke" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Rvstroke}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Rvstroke}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="RV pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="1"  Text="{Binding Rvpressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1"  Text="{Binding Rvpressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="1"  Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="RA pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Rapressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Rapressures}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="mmHg" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="LV volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Lvvolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding Lvvolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="2" Text="LA volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Lavolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Lavolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="2" Text="RV volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="2"  Text="{Binding Rvvolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="2"  Text="{Binding Rvvolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="2"  Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="2" Text="RA volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Ravolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Ravolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
@@ -363,47 +363,47 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Grid.Column="0" Text="IVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Text="SVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Text="{Binding Svcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Text="{Binding Svcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Text="Myocardial flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Text="{Binding Myoflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Text="{Binding Myoflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="IVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="SVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Svcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Svcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="Myocardial flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Myoflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Myoflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="PDA flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Pdaflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Pdaflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Kidneys flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Kidneysflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Kidneysflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="Liver flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Liverflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Liverflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="Intestines flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Intestinesflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Intestinesflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="Brain flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Brainflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Brainflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
@@ -427,19 +427,19 @@
 
                          
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Global DO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ivcflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="ml O2/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Myocardial DO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Myocardialdo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Myocardialdo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="Brain DO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Braindo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Braindo2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="DO2:VO2 ratio" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Pdaflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Pdaflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                            
@@ -463,35 +463,35 @@
 
 
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Resp rate" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Resprate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Resprate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Alv volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Alveolarvolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Alveolarvolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="Tidal volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Tidalvolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Tidalvolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="Minute volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Minutevolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Minutevolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Applied pressure" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Appliedpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Appliedpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="Airway pressure" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Airwaypressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Airwaypressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="Alv left pressure" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Alvleftpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Alvleftpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
                             </Grid>
                         </Expander>
@@ -511,35 +511,35 @@
 
 
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="pH" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ph}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Ph}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="paO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Pao2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Pao2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="0" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="paCO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Paco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="0" Text="{Binding Paco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="0" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="HCO3-" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Hco3}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="0" Text="{Binding Hco3}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="0" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="BE" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Be}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Be}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="PAO2 (l/r)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Po2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Po2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="1" Grid.Row="1" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="PACO2 (l/r)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Pco2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Pco2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="2" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
