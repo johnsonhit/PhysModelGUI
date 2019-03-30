@@ -181,6 +181,8 @@ namespace PhysModelGUI
         public string Po2alv { get { return _po2alv; } set { _po2alv = value; OnPropertyChanged(); } }
         string _pco2alv = "-";
         public string Pco2alv { get { return _pco2alv; } set { _pco2alv = value; OnPropertyChanged(); } }
+        string _endtidalco2 = "-";
+        public string Endtidalco2 { get { return _endtidalco2; } set { _endtidalco2 = value; OnPropertyChanged(); } }
 
         int slowUpdater = 0;
         int graphicsRefreshInterval = 15;
@@ -252,6 +254,7 @@ namespace PhysModelGUI
             graphPatMonitor.Graph2Enabled = true;
             graphPatMonitor.Graph3Enabled = true;
             graphPatMonitor.Graph4Enabled = true;
+            graphPatMonitor.Graph5Enabled = true;
             graphPatMonitor.IsSideScrolling = true;
             graphPatMonitor.XAxisTitle = "";
             graphPatMonitor.HideYAxisLabels = true;
@@ -436,7 +439,8 @@ namespace PhysModelGUI
                 double param2 = (PhysModelMain.modelInterface.SPO2POSTSignal - PhysModelMain.currentModel.DA.dataCollector.PresMin) / 4 + 70;
                 double param3 = (PhysModelMain.modelInterface.ABPSignal - PhysModelMain.currentModel.AA.dataCollector.PresMin) / 4 + 45;
                 double param4 = PhysModelMain.modelInterface.RESPVolumeSignal / 4 + 15;
-                double param5 = PhysModelMain.modelInterface.ETCO2Signal;
+                double param5 = PhysModelMain.modelInterface.ETCO2Signal / 4 - 10;
+           
 
                 graphPatMonitor.UpdateRealtimeGraphData(0, param1, 0, param2, 0, param3, 0, param4, 0, param5);
 
@@ -494,9 +498,10 @@ namespace PhysModelGUI
                 Paco2 = PhysModelMain.modelInterface.ArterialPCO2.ToString();
                 Hco3 = PhysModelMain.modelInterface.ArterialHCO3.ToString();
                 Be = PhysModelMain.modelInterface.ArterialBE.ToString();
-
+                
                 Po2alv = PhysModelMain.modelInterface.AlveolarPO2;
                 Pco2alv = PhysModelMain.modelInterface.AlveolarPCO2;
+                Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
             }
             slowUpdater += graphicsRefreshInterval;

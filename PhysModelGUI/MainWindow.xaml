@@ -225,7 +225,7 @@
                         <TextBlock Grid.Column="1" Grid.Row="3" Foreground="White" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                         <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="ETCO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="{Binding Etco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="{Binding Endtidalco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
@@ -268,7 +268,7 @@
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="etco2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Text="-" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Endtidalco2}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                         <TextBlock Grid.Column="2" Grid.Row="1" Text="pap" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
