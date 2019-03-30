@@ -493,11 +493,6 @@
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
-
-
-
-
-
                             </Grid>
                         </Expander>
                         <Expander Header=" gasses" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
