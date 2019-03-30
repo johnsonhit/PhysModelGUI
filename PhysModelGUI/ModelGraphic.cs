@@ -82,7 +82,14 @@ namespace PhysModelGUI
         public static AnimatedShuntGas OUTNCA;
         public static AnimatedBloodCompartment lungs;
         public static AnimatedGasComp alveoli;
-        public static AnimatedGasComp ecmolung;
+        public static AnimatedGasComp placenta;
+
+        public static AnimatedBloodCompartment lvad;
+        public static AnimatedBloodCompartment rvad;
+        public static AnimatedBloodCompartment ecmopump;
+        public static AnimatedBloodCompartment ecmolungblood;
+        public static AnimatedGasComp ecmolunggas;
+
 
         #region "BuildInterface"
         public static void BuildDiagram()
@@ -97,6 +104,7 @@ namespace PhysModelGUI
                 StartAngle = 50,
                 EndAngle = 70,
                 Direction = 1,
+                IsVisible = false,
                 Name = "AD->ALBLOOD"
             };
             ADALBLOOD.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_ALBLOOD"));
@@ -112,7 +120,7 @@ namespace PhysModelGUI
                 StartAngle = 70,
                 EndAngle = 128,
                 Direction = 1,
-                IsPump = false,
+                IsVisible = false,
                 Name = "ALBLOOD->IVC"
             };
             ALBLOODIVC.AddConnector(PhysModelMain.FindBloodConnectorByName("ALBLOOD_IVC"));
@@ -221,10 +229,22 @@ namespace PhysModelGUI
             {
                 scaleRelative = 0.035f,
                 Degrees = 0,
+               
                 Name = "LV"
             };
             leftVentricle.AddCompartment(PhysModelMain.FindBloodCompartmentByName("LV"));
             animatedBloodCompartments.Add(leftVentricle);
+
+            lvad = new AnimatedBloodCompartment
+            {
+                scaleRelative = 0.035f,
+                Degrees = 10,
+                IsVisible = false,
+                Name = "LVAD"
+            };
+
+            lvad.AddCompartment(PhysModelMain.FindBloodCompartmentByName("LVAD"));
+            animatedBloodCompartments.Add(lvad);
 
             leftAtrium = new AnimatedBloodCompartment
             {
@@ -266,6 +286,18 @@ namespace PhysModelGUI
             rightAtrium.AddCompartment(PhysModelMain.FindBloodCompartmentByName("RA"));
             animatedBloodCompartments.Add(rightAtrium);
 
+            rvad = new AnimatedBloodCompartment
+            {
+                scaleRelative = 0.035f,
+                Degrees = 200,
+                IsVisible = false,
+
+                Name = "RVAD"
+            };
+            rvad.AddCompartment(PhysModelMain.FindBloodCompartmentByName("RVAD"));
+            animatedBloodCompartments.Add(rvad);
+
+
             tricuspidValve = new AnimatedValve
             {
                 scaleRelative = 0.035f,
@@ -301,8 +333,6 @@ namespace PhysModelGUI
             lungs.AddCompartment(PhysModelMain.FindBloodCompartmentByName("LR"));
             animatedBloodCompartments.Add(lungs);
 
-
-
             upperBody = new AnimatedBloodCompartment
             {
                 scaleRelative = 0.035f,
@@ -325,15 +355,40 @@ namespace PhysModelGUI
             alveoli.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALR"));
             animatedGasCompartments.Add(alveoli);
 
-            ecmolung = new AnimatedGasComp
+            placenta = new AnimatedGasComp
             {
                 scaleRelative = 0.035f,
                 Degrees = 70,
                 RadiusYOffset = 0.75f,
-                Name = "ECMO"
+                Name = "ECMO",
+                IsVisible = false,
             };
-            ecmolung.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALGAS"));
-            animatedGasCompartments.Add(ecmolung);
+            placenta.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALGAS"));
+            animatedGasCompartments.Add(placenta);
+
+            ecmolunggas = new AnimatedGasComp
+            {
+                scaleRelative = 0.035f,
+                Degrees = 70,
+                RadiusYOffset = 0.75f,
+                Name = "ECMO",
+                IsVisible = false,
+            };
+            ecmolunggas.AddCompartment(PhysModelMain.FindGasCompartmentByName("ECLUNGGAS"));
+            animatedGasCompartments.Add(ecmolunggas);
+
+
+            ecmolungblood = new AnimatedBloodCompartment
+            {
+                scaleRelative = 0.035f,
+                Degrees = 70,
+                RadiusYOffset = 0.75f,
+                Name = "ECMO",
+                IsVisible = false,
+            };
+            ecmolungblood.AddCompartment(PhysModelMain.FindBloodCompartmentByName("ECLUNGBLOOD"));
+            animatedBloodCompartments.Add(ecmolungblood);
+
 
 
             LBIVC = new AnimatedBloodConnector
@@ -484,7 +539,7 @@ namespace PhysModelGUI
                 RadiusYOffset = 1f,
                 NoLoss = false,
                 StartAngle = 25,
-                IsVisible = true,
+                IsVisible = false,
                 EndAngle = 225,
                 Direction = 1,
                 Name = "DUCTUS ARTERIOSUS"
@@ -558,6 +613,7 @@ namespace PhysModelGUI
                 StartAngle = 80,
                 EndAngle = 100,
                 Degrees = 70,
+                IsVisible = false,
                 Name = "ECMO"
             };
             ALBLOOD.AddCompartment(PhysModelMain.FindBloodCompartmentByName("ALBLOOD"));

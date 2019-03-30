@@ -11,6 +11,7 @@ namespace PhysModelGUI
         // list of all compartmentn contained in this animated compartment
         public List<BloodCompartment> compartments = new List<BloodCompartment>();
 
+        double pumpLocation = 0;
 
         SKPaint circleOut = new SKPaint()
         {
@@ -20,6 +21,15 @@ namespace PhysModelGUI
             Color = SKColors.Orange,
             StrokeWidth = 5,
         };
+
+        SKPaint pumpColorStroke = new SKPaint()
+        {
+            Style = SKPaintStyle.Stroke,
+            IsAntialias = false,
+            Color = SKColors.White,
+            StrokeWidth = 5,
+        };
+
 
         SKPaint paint = new SKPaint()
         {
@@ -154,7 +164,28 @@ namespace PhysModelGUI
                 paint.StrokeWidth = 10;
                 canvas.DrawCircle(location, r, paint);
                 canvas.DrawText(Name, location.X - twidth / 2, location.Y + 7, textPaint);
-                
+
+                if (compartments[0].IsPump)
+                {
+                    SKPoint or = new SKPoint(0, 0);
+                    SKPoint dest = new SKPoint(0, 0);
+                    or = location;
+                    dest = location;
+                    or.X = location.X + (float)Math.Cos(pumpLocation) * 40;
+                    or.Y = location.Y + (float)Math.Sin(pumpLocation) * 40;
+                    dest.X = location.X + (float)Math.Cos(pumpLocation + Math.PI) * 40;
+                    dest.Y = location.Y + (float)Math.Sin(pumpLocation + Math.PI) * 40;
+
+                    pumpLocation += compartments[0].dataCollector.VolumeFlowOut / 10000;
+                    if (pumpLocation > 2 * Math.PI)
+                    {
+                        pumpLocation = 0;
+                    }
+
+                    canvas.DrawLine(or, dest, pumpColorStroke);
+                }
+
+
             }
 
 

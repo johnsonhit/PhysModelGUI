@@ -68,7 +68,7 @@ namespace PhysModelGUI
         SKPoint point3;
         Queue<SKPoint> queue3;
         SKPoint[] displayArray3;
-        public SKPointMode PointMode3 { get; set; } = SKPointMode.Points;
+        public SKPointMode PointMode3 { get; set; } = SKPointMode.Polygon;
         public SKPaint GraphPaint3 { get; set; }
 
         public bool Graph4Enabled { get; set; } = false;
