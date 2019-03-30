@@ -112,6 +112,7 @@ namespace PhysModelGUI
                 StartAngle = 70,
                 EndAngle = 128,
                 Direction = 1,
+                IsPump = false,
                 Name = "ALBLOOD->IVC"
             };
             ALBLOODIVC.AddConnector(PhysModelMain.FindBloodConnectorByName("ALBLOOD_IVC"));

@@ -12,6 +12,9 @@ namespace PhysModelGUI
 
         public List<BloodCompartmentConnector> connectors = new List<BloodCompartmentConnector>();
         public BloodCompartment sizeCompartment;
+        public bool IsPump { get; set; } = false;
+
+        double pumpLocation = 0;
 
         SKRect mainRect = new SKRect(0, 0, 0, 0);
 
@@ -27,6 +30,21 @@ namespace PhysModelGUI
             StrokeWidth = 5,
         };
 
+        SKPaint pumpColor = new SKPaint()
+        {
+            Style = SKPaintStyle.Fill,
+            IsAntialias = false,
+            Color = SKColors.DarkGreen,
+            StrokeWidth = 5,
+        };
+
+        SKPaint pumpColorStroke = new SKPaint()
+        {
+            Style = SKPaintStyle.Stroke,
+            IsAntialias = false,
+            Color = SKColors.White,
+            StrokeWidth = 5,
+        };
 
         SKPaint paint = new SKPaint()
         {
@@ -50,6 +68,7 @@ namespace PhysModelGUI
         public SKPoint locationOrigen= new SKPoint(0, 0);
         public SKPoint locationTarget = new SKPoint(0, 0);
         public SKPoint location1 = new SKPoint(0, 0);
+        public SKPoint locationPump = new SKPoint(0, 0);
 
         public float scaleRelative = 18;
         float scale = 1;
@@ -180,11 +199,37 @@ namespace PhysModelGUI
 
             location1 = AnimatedElementHelper.GetPosition(StartAngle + currentAngle, radius, RadiusXOffset,RadiusYOffset);
             canvas.DrawCircle(location1.X + XOffset, location1.Y + YOffset, 10, paint);
+
+            if (connectors[0].IsPump)
+            {
+                locationPump = AnimatedElementHelper.GetPosition((StartAngle + EndAngle) / 2, radius, RadiusXOffset, RadiusYOffset);
+                canvas.DrawCircle(locationPump.X + XOffset, locationPump.Y + YOffset, 40, pumpColor);
+
+                SKPoint or = new SKPoint(0, 0);
+                SKPoint dest = new SKPoint(0, 0);
+                or = locationPump;
+                dest = locationPump;
+                or.X = locationPump.X + (float) Math.Cos(pumpLocation) * 40;
+                or.Y = locationPump.Y + (float)Math.Sin(pumpLocation) * 40;
+                dest.X = locationPump.X + (float)Math.Cos(pumpLocation + Math.PI) * 40;
+                dest.Y = locationPump.Y + (float)Math.Sin(pumpLocation + Math.PI) * 40;
+
+                pumpLocation += connectors[0].PumpFlow / 1000;
+                if (pumpLocation > 2 * Math.PI)
+                {
+                    pumpLocation = 0;
+                }
+
+                canvas.DrawLine(or,dest, pumpColorStroke);
+            }
+      
+
+
         }
 
 
 
-       
+
 
 
     }
