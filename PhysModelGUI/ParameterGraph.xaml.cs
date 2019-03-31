@@ -639,6 +639,7 @@ namespace PhysModelGUI
                 yLabel += GridYAxisStep;
             }
 
+
             // draw the vertical grid lines
             if (IsSideScrolling)
             {
@@ -654,18 +655,11 @@ namespace PhysModelGUI
                 for (float xLine = GraphXOffset; xLine <= w_grid - GraphXOffset; xLine += xStepSize)
                 {
                     xLabelText = xLabel.ToString();
-                    if (true)
-                    {
-                        xLabelText = Math.Round(xLabel, 0).ToString();
-                    }
+                    xLabelText = Math.Round(xLabel, 0).ToString();
                     _canvasGrid.DrawLine(xLine, h_grid - GraphYOffset, xLine, 0 + GraphYOffset, GridLinePaint);
                     if (HideXAxisLabels == false)
                     {
                         _canvasGrid.DrawText(xLabelText.ToString(), xLine + 8, h_grid - GraphYOffset + 18, GridAxisLabelsPaint);
-                    }
-                    else
-                    {
-                        _canvasGrid.DrawText(XAxisTitle, w_grid / 2f, h_grid - GraphYOffset + 18, GridAxisLabelsPaint);
                     }
                     xLabel += GridXAxisStep;
                 }
@@ -681,7 +675,12 @@ namespace PhysModelGUI
                     _canvasGrid.DrawText(Math.Round(xLabel,1).ToString(), xLine + 8, h_grid - GraphYOffset + 18, GridAxisLabelsPaint);
                     xLabel += GridXAxisStep;
                 }
+   
             }
+            // draw the x -axis label
+
+            _canvasGrid.DrawText(XAxisTitle, w_grid / 2f + 20, h_grid - GraphYOffset + 35, GridAxisLabelsPaint);
+
             ClearQueues();
 
             if (NoGrid)

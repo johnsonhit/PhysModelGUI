@@ -38,19 +38,66 @@ namespace PhysModelGUI
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer(DispatcherPriority.Render);
 
-        bool _graphPatMonitorEnabled = true;
-        public bool GraphPatMonitorEnabled { get { return _graphPatMonitorEnabled; } set { _graphPatMonitorEnabled = value; OnPropertyChanged(); } }
+        int selectedPressureID = 0;
+        int selectedFlowID = 0;
+        int selectedPVID = 0;
 
+        bool _graphPatMonitorEnabled = false;
+        public bool GraphPatMonitorEnabled { get { return _graphPatMonitorEnabled; } set { _graphPatMonitorEnabled = value; OnPropertyChanged(); } }
 
         bool _graphPressuresEnabled = false;
         public bool GraphPressureEnabled { get { return _graphPressuresEnabled; } set { _graphPressuresEnabled = value; OnPropertyChanged(); } }
-
 
         bool _graphFlowsEnabled = false;
         public bool GraphFlowsEnabled { get { return _graphFlowsEnabled; } set { _graphFlowsEnabled = value; OnPropertyChanged(); } }
 
         bool _graphPVLoopsEnabled = false;
         public bool GraphPVLoopsEnabled { get { return _graphPVLoopsEnabled; } set { _graphPVLoopsEnabled = value; OnPropertyChanged(); } }
+
+        bool _graph1PressureDisabled = false;
+        public bool Graph1PressureDisabled { get { return _graph1PressureDisabled; } set { _graph1PressureDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph2PressureDisabled = false;
+        public bool Graph2PressureDisabled { get { return _graph2PressureDisabled; } set { _graph2PressureDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph3PressureDisabled = false;
+        public bool Graph3PressureDisabled { get { return _graph3PressureDisabled; } set { _graph3PressureDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph4PressureDisabled = false;
+        public bool Graph4PressureDisabled { get { return _graph4PressureDisabled; } set { _graph4PressureDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph5PressureDisabled = false;
+        public bool Graph5PressureDisabled { get { return _graph5PressureDisabled; } set { _graph5PressureDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph1FlowDisabled = false;
+        public bool Graph1FlowDisabled { get { return _graph1FlowDisabled; } set { _graph1FlowDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph2FlowDisabled = false;
+        public bool Graph2FlowDisabled { get { return _graph2FlowDisabled; } set { _graph2FlowDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph3FlowDisabled = false;
+        public bool Graph3FlowDisabled { get { return _graph3FlowDisabled; } set { _graph3FlowDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph4FlowDisabled = false;
+        public bool Graph4FlowDisabled { get { return _graph4FlowDisabled; } set { _graph4FlowDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph5FlowDisabled = false;
+        public bool Graph5FlowDisabled { get { return _graph5FlowDisabled; } set { _graph5FlowDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph1PVDisabled = false;
+        public bool Graph1PVDisabled { get { return _graph1PVDisabled; } set { _graph1PVDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph2PVDisabled = false;
+        public bool Graph2PVDisabled { get { return _graph2PVDisabled; } set { _graph2PVDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph3PVDisabled = false;
+        public bool Graph3PVDisabled { get { return _graph3PVDisabled; } set { _graph3PVDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph4PVDisabled = false;
+        public bool Graph4PVDisabled { get { return _graph4PVDisabled; } set { _graph4PVDisabled = value; OnPropertyChanged(); } }
+
+        bool _graph5PVDisabled = false;
+        public bool Graph5PVDisabled { get { return _graph5PVDisabled; } set { _graph5PVDisabled = value; OnPropertyChanged(); } }
 
         string _modelName = "";
         public string ModelName { get { return _modelName; } set { _modelName = value; OnPropertyChanged(); } }
@@ -194,6 +241,12 @@ namespace PhysModelGUI
         Compartment selectedPres4Compartment;
         Compartment selectedPres5Compartment;
 
+        Compartment selectedPV1Compartment;
+        Compartment selectedPV2Compartment;
+        Compartment selectedPV3Compartment;
+        Compartment selectedPV4Compartment;
+        Compartment selectedPV5Compartment;
+
         Connector selectedConnector1;
         Connector selectedConnector2;
         Connector selectedConnector3;
@@ -202,11 +255,13 @@ namespace PhysModelGUI
 
 
 
-
+        List<PVPoint> PVDataBlock1 = new List<PVPoint>();
 
         bool initialized = false;
 
         double pressureGraphScaleOffset = 0;
+        double pvGraphScaleOffset = 0;
+
 
         public MainWindow()
         {
@@ -247,6 +302,27 @@ namespace PhysModelGUI
             graphFlows.IsSideScrolling = true;
             graphFlows.GraphicsClearanceRate = graphicsRefreshInterval;
             graphFlows.DrawGridOnScreen();
+
+            graphPVLoops.GraphMaxY = 100;
+            graphPVLoops.GraphMinY = 0;
+            graphPVLoops.GraphMaxX = 20;
+            graphPVLoops.GridXAxisStep = 5;
+            graphPVLoops.GraphMinX = 0;
+            graphPVLoops.DataRefreshRate = 15;
+            graphPVLoops.PixelPerDataPoint = 2;
+            graphPVLoops.Graph1Enabled = true;
+            graphPVLoops.Graph2Enabled = false;
+            graphPVLoops.Graph3Enabled = false;
+            graphPVLoops.Graph4Enabled = false;
+            graphPVLoops.Graph5Enabled = false;
+            graphPVLoops.IsSideScrolling = false;
+            graphPVLoops.HideLegends = false;
+            graphPressures.HideXAxisLabels = false;
+            graphPVLoops.XAxisTitle = "volume";
+            graphPVLoops.PointMode1 = SKPointMode.Points;
+            graphPVLoops.GraphicsClearanceRate = 5000;
+            graphPVLoops.DrawGridOnScreen();
+
 
             graphPatMonitor.GraphMaxY = 100;
             graphPatMonitor.GraphMaxX = 20;
@@ -290,7 +366,12 @@ namespace PhysModelGUI
             selectedConnector1 = (Connector)PhysModelMain.FindValveByName("LA_LV");
             selectedConnector2 = (Connector)PhysModelMain.FindValveByName("LV_AA");
 
+            selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
+
             initialized = true;
+            cmbFlowGraphSelector.SelectedIndex = 0;
+            cmbPressureGraphSelector.SelectedIndex = 0;
+            cmbPVLoopsGraphSelector.SelectedIndex = 0;
         }
 
         private void ModelInterface_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -298,6 +379,7 @@ namespace PhysModelGUI
             switch (e.PropertyName)
             {
                 case "ModelUpdated":
+                    UpdatePVLoops();
                     UpdatePressureGraph();
                     UpdateFlowGraph();
                     UpdateMonitorGraph();
@@ -307,6 +389,52 @@ namespace PhysModelGUI
                     break;
             }
 
+        }
+
+        void UpdatePVLoops()
+        {
+        
+            if (GraphPVLoopsEnabled)
+            {
+
+                if (selectedPV1Compartment == null || Graph1PVDisabled)
+                {
+                    graphPVLoops.Graph1Enabled = false;
+                } else
+                {
+                    graphPVLoops.Graph1Enabled = true;
+                    PVDataBlock1 = selectedPV1Compartment.dataCollector.PVDataBlock;
+                }
+
+
+                int counter = 0;
+                if (pvGraphScaleOffset > 0)  // then it is a lung compartment and the pv loop is the other way around!
+                {
+                    lock (PVDataBlock1)
+                    {
+                        foreach (PVPoint p in PVDataBlock1)
+                        {
+                            graphPVLoops.UpdateRealtimeGraphData(p.pressure1 - pvGraphScaleOffset, p.volume1);
+                            counter++;
+                        }
+                    }
+                } else
+                {
+                    lock (PVDataBlock1)
+                    {
+                        foreach (PVPoint p in PVDataBlock1)
+                        {
+                            graphPVLoops.UpdateRealtimeGraphData(p.volume1, p.pressure1 - pvGraphScaleOffset);
+                            counter++;
+                        }
+                    }
+                }
+              
+
+
+
+
+            }
         }
         void UpdateFlowGraph()
         {
@@ -318,52 +446,52 @@ namespace PhysModelGUI
                 double param4 = 0;
                 double param5 = 0;
 
-                if (selectedConnector1 == null)
+                if (selectedConnector1 == null || Graph1FlowDisabled)
                 {
                     graphFlows.Graph1Enabled = false;
                 } else
                 {
-                    param1 = selectedConnector1.CurrentFlow;
+                    param1 = selectedConnector1.RealFlow;
                     graphFlows.Graph1Enabled = true;
                 }
 
-                if (selectedConnector2 == null)
+                if (selectedConnector2 == null || Graph2FlowDisabled)
                 {
                     graphFlows.Graph2Enabled = false;
                 }
                 else
                 {
-                    param2 = selectedConnector2.CurrentFlow;
+                    param2 = selectedConnector2.RealFlow;
                     graphFlows.Graph2Enabled = true;
                 }
 
-                if (selectedConnector3 == null)
+                if (selectedConnector3 == null || Graph3FlowDisabled)
                 {
                     graphFlows.Graph3Enabled = false;
                 }
                 else
                 {
-                    param3 = selectedConnector3.CurrentFlow;
+                    param3 = selectedConnector3.RealFlow;
                     graphFlows.Graph3Enabled = true;
                 }
 
-                if (selectedConnector4 == null)
+                if (selectedConnector4 == null || Graph4FlowDisabled)
                 {
                     graphFlows.Graph4Enabled = false;
                 }
                 else
                 {
-                    param4 = selectedConnector4.CurrentFlow;
+                    param4 = selectedConnector4.RealFlow;
                     graphFlows.Graph4Enabled = true;
                 }
 
-                if (selectedConnector5 == null)
+                if (selectedConnector5 == null || Graph5FlowDisabled)
                 {
                     graphFlows.Graph5Enabled = false;
                 }
                 else
                 {
-                    param5 = selectedConnector5.CurrentFlow;
+                    param5 = selectedConnector5.RealFlow;
                     graphFlows.Graph5Enabled = true;
                 }
 
@@ -381,7 +509,7 @@ namespace PhysModelGUI
                 double param4 = 0;
                 double param5 = 0;
 
-                if (selectedPres1Compartment == null)
+                if (selectedPres1Compartment == null || Graph1PressureDisabled)
                 {
                     graphPressures.Graph1Enabled = false;
                 } else
@@ -390,7 +518,7 @@ namespace PhysModelGUI
                     graphPressures.Graph1Enabled = true;
                 }
 
-                if (selectedPres2Compartment == null)
+                if (selectedPres2Compartment == null || Graph2PressureDisabled)
                 {
                     graphPressures.Graph2Enabled = false;
                 }
@@ -400,7 +528,7 @@ namespace PhysModelGUI
                     graphPressures.Graph2Enabled = true;
                 }
 
-                if (selectedPres3Compartment == null)
+                if (selectedPres3Compartment == null || Graph3PressureDisabled)
                 {
                     graphPressures.Graph3Enabled = false;
                 }
@@ -410,7 +538,7 @@ namespace PhysModelGUI
                     graphPressures.Graph3Enabled = true;
                 }
 
-                if (selectedPres4Compartment == null)
+                if (selectedPres4Compartment == null || Graph4PressureDisabled)
                 {
                     graphPressures.Graph4Enabled = false;
                 }
@@ -420,7 +548,7 @@ namespace PhysModelGUI
                     graphPressures.Graph4Enabled = true;
                 }
 
-                if (selectedPres5Compartment == null)
+                if (selectedPres5Compartment == null || Graph5PressureDisabled)
                 {
                     graphPressures.Graph5Enabled = false;
                 }
@@ -520,6 +648,9 @@ namespace PhysModelGUI
 
             if (GraphPatMonitorEnabled)
                 graphPatMonitor.DrawGraphOnScreen();
+
+            if (GraphPVLoopsEnabled)
+                graphPVLoops.DrawGraphOnScreen();
         }
 
         void CanvasDiagram_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
@@ -611,11 +742,12 @@ namespace PhysModelGUI
             }
         }
 
-        private void CmbPressureGraphSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void SelectPressureGraph(int selection)
         {
             if (initialized)
             {
-                switch (cmbPressureGraphSelector.SelectedIndex)
+                selectedPressureID = selection;
+                switch (selection)
                 {
                     case 0: // heart
                         graphPressures.GraphMaxY = 100;
@@ -634,6 +766,18 @@ namespace PhysModelGUI
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("PA");
                         selectedPres4Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
 
+                        Graph1PressureDisabled = false;
+                        Graph2PressureDisabled = false;
+                        Graph3PressureDisabled = false;
+                        Graph4PressureDisabled = false;
+                        Graph5PressureDisabled = true;
+
+                        graphPressures.Graph1Enabled = true;
+                        graphPressures.Graph2Enabled = true;
+                        graphPressures.Graph3Enabled = true;
+                        graphPressures.Graph4Enabled = true;
+                        graphPressures.Graph5Enabled = false;
+
                         break;
                     case 1: // left heart
                         graphPressures.GraphMaxY = 100;
@@ -644,13 +788,26 @@ namespace PhysModelGUI
                         graphPressures.Legend1 = "AA";
                         graphPressures.Legend2 = "LV";
                         graphPressures.Legend3 = "LA";
- 
+
                         graphPressures.XAxisTitle = "time";
 
                         selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("AA");
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
                         selectedPres4Compartment = null;
+
+                        Graph1PressureDisabled = false;
+                        Graph2PressureDisabled = false;
+                        Graph3PressureDisabled = false;
+                        Graph4PressureDisabled = true;
+                        Graph5PressureDisabled = true;
+
+                        graphPressures.Graph1Enabled = true;
+                        graphPressures.Graph2Enabled = true;
+                        graphPressures.Graph3Enabled = true;
+                        graphPressures.Graph4Enabled = false;
+                        graphPressures.Graph5Enabled = false;
+
                         break;
                     case 2: // right heart
                         graphPressures.GraphMaxY = 100;
@@ -668,27 +825,23 @@ namespace PhysModelGUI
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
                         selectedPres4Compartment = null;
+
+                        Graph1PressureDisabled = false;
+                        Graph2PressureDisabled = false;
+                        Graph3PressureDisabled = false;
+                        Graph4PressureDisabled = true;
+                        Graph5PressureDisabled = true;
+
+                        graphPressures.Graph1Enabled = true;
+                        graphPressures.Graph2Enabled = true;
+                        graphPressures.Graph3Enabled = true;
+                        graphPressures.Graph4Enabled = false;
+                        graphPressures.Graph5Enabled = false;
+
                         break;
                     case 3: // lungs
-                        graphPressures.GraphMaxY = 40;
-                        graphPressures.GraphMinY = -20;
-                        graphPressures.GraphMaxX = 20;
-                        pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
-
-                        graphPressures.Legend1 = "OUT";
-                        graphPressures.Legend2 = "NCA";
-                        graphPressures.Legend3 = "ALL";
-                        graphPressures.Legend4 = "ALR";
-                        graphPressures.XAxisTitle = "time";
-
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("OUT");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
-                        break;
-                    case 4: // left lung
-                        graphPressures.GraphMaxY = 40;
-                        graphPressures.GraphMinY = -20;
+                        graphPressures.GraphMaxY = 15;
+                        graphPressures.GraphMinY = -15;
                         graphPressures.GraphMaxX = 20;
                         pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
 
@@ -703,26 +856,19 @@ namespace PhysModelGUI
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
                         selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
 
-                        break;
-                    case 5: // right lung
-                        graphPressures.GraphMaxY = 40;
-                        graphPressures.GraphMinY = -20;
-                        graphPressures.GraphMaxX = 20;
-                        pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
+                        Graph1PressureDisabled = false;
+                        Graph2PressureDisabled = false;
+                        Graph3PressureDisabled = false;
+                        Graph4PressureDisabled = false;
+                        Graph5PressureDisabled = true;
 
-                        graphPressures.Legend1 = "OUT";
-                        graphPressures.Legend2 = "NCA";
-                        graphPressures.Legend3 = "ALL";
-                        graphPressures.Legend4 = "ALR";
-                        graphPressures.XAxisTitle = "time";
-
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("OUT");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+                        graphPressures.Graph1Enabled = true;
+                        graphPressures.Graph2Enabled = true;
+                        graphPressures.Graph3Enabled = true;
+                        graphPressures.Graph4Enabled = true;
+                        graphPressures.Graph5Enabled = false;
 
                         break;
-
                 }
 
                 graphPressures.DataRefreshRate = 15;
@@ -732,12 +878,418 @@ namespace PhysModelGUI
                 graphPressures.HideXAxisLabels = true;
                 graphPressures.HideLegends = false;
                 graphPressures.DrawGridOnScreen();
-
-               
-
+            }
+        
+        }
+        private void CmbPressureGraphSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                SelectPressureGraph(cmbPressureGraphSelector.SelectedIndex);
             }
         }
 
-   
+        void SelectFlowGraph(int selection)
+        {
+            if (initialized)
+            {
+                selectedFlowID = selection;
+                switch (selection)
+                {
+                    case 0: // left heart
+                        graphFlows.GraphMaxY = 200;
+                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxX = 20;
+
+                        graphFlows.Legend1 = "mv";
+                        graphFlows.Legend2 = "av";
+                        graphFlows.Legend3 = "";
+                        graphFlows.Legend4 = "";
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindValveByName("LA_LV");
+                        selectedConnector2 = (Connector)PhysModelMain.FindValveByName("LV_AA");
+                        selectedConnector3 = null;
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = false;
+                        Graph3FlowDisabled = true;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = true;
+                        graphFlows.Graph3Enabled = false;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+
+
+                        break;
+                    case 1: // right heart
+                        graphFlows.GraphMaxY = 200;
+                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "tv";
+                        graphFlows.Legend2 = "pv";
+                        graphFlows.Legend3 = "";
+                        graphFlows.Legend4 = "";
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindValveByName("RA_RV");
+                        selectedConnector2 = (Connector)PhysModelMain.FindValveByName("RV_PA");
+                        selectedConnector3 = null;
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = false;
+                        Graph3FlowDisabled = true;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = true;
+                        graphFlows.Graph3Enabled = false;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+                        break;
+                    case 2: // pulmonary artery
+                        graphFlows.GraphMaxY = 51;
+                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "lung l";
+                        graphFlows.Legend2 = "lung r";
+                        graphFlows.Legend3 = "lung shunt";
+                        graphFlows.Legend4 = "";
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("PA_LL");
+                        selectedConnector2 = (Connector)PhysModelMain.FindBloodConnectorByName("PA_LR");
+                        selectedConnector3 = (Connector)PhysModelMain.FindBloodConnectorByName("PA_PV");
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = false;
+                        Graph3FlowDisabled = false;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = true;
+                        graphFlows.Graph3Enabled = true;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+                        break;
+                    case 3: // aorta
+                        graphFlows.GraphMaxY = 10;
+                        graphFlows.GraphMinY = -10;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "brain";
+                        graphFlows.Legend2 = "ub";
+                        graphFlows.Legend3 = "lb";
+                        graphFlows.Legend4 = "kidneys";
+                        graphFlows.Legend5 = "liver";
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = false;
+                        Graph3FlowDisabled = false;
+                        Graph4FlowDisabled = false;
+                        Graph5FlowDisabled = false;
+
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = true;
+                        graphFlows.Graph3Enabled = true;
+                        graphFlows.Graph4Enabled = true;
+                        graphFlows.Graph5Enabled = true;
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("AA_BRAIN");
+                        selectedConnector2 = (Connector)PhysModelMain.FindBloodConnectorByName("AA_UB");
+                        selectedConnector3 = (Connector)PhysModelMain.FindBloodConnectorByName("AD_LB");
+                        selectedConnector4 = (Connector)PhysModelMain.FindBloodConnectorByName("AD_KIDNEYS");
+                        selectedConnector5 = (Connector)PhysModelMain.FindBloodConnectorByName("AD_LIVER");
+                        break;
+                    case 4: //  foramen ovale
+                        graphFlows.GraphMaxY = 50;
+                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "asd";
+                        graphFlows.Legend2 = "";
+                        graphFlows.Legend3 = "";
+                        graphFlows.Legend4 = "";
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("LA_RA");
+                        selectedConnector2 = null;
+                        selectedConnector3 = null;
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = true;
+                        Graph3FlowDisabled = true;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = false;
+                        graphFlows.Graph3Enabled = false;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+                        break;
+                    case 5: // vsd
+                        graphFlows.GraphMaxY = 50;
+                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "vsd";
+                        graphFlows.Legend2 = "";
+                        graphFlows.Legend3 = "";
+                        graphFlows.Legend4 = "";
+
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("LV_RV");
+                        selectedConnector2 = null;
+                        selectedConnector3 = null;
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = true;
+                        Graph3FlowDisabled = true;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = false;
+                        graphFlows.Graph3Enabled = false;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+                        break;
+                    case 6: // ductus
+                        graphFlows.GraphMaxY = 50;
+                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "ductus";
+                        graphFlows.Legend2 = "";
+                        graphFlows.Legend3 = "";
+                        graphFlows.Legend4 = "";
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindBloodConnectorByName("DA_PA");
+                        selectedConnector2 = null;
+                        selectedConnector3 = null;
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = true;
+                        Graph3FlowDisabled = true;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = false;
+                        graphFlows.Graph3Enabled = false;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+                        break;
+                    case 7: // lungs
+                        graphFlows.GraphMaxY = 100;
+                        graphFlows.GraphMinY = -100;
+                        graphFlows.GraphMaxX = 20;
+                        graphFlows.Legend1 = "nca";
+                        graphFlows.Legend2 = "all";
+                        graphFlows.Legend3 = "alr";
+                        graphFlows.Legend4 = "";
+
+                        selectedConnector1 = (Connector)PhysModelMain.FindGasConnectorByName("OUT_NCA");
+                        selectedConnector2 = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALL");
+                        selectedConnector3 = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALR");
+                        selectedConnector4 = null;
+                        selectedConnector5 = null;
+
+                        Graph1FlowDisabled = false;
+                        Graph2FlowDisabled = false;
+                        Graph3FlowDisabled = false;
+                        Graph4FlowDisabled = true;
+                        Graph5FlowDisabled = true;
+                        graphFlows.Graph1Enabled = true;
+                        graphFlows.Graph2Enabled = true;
+                        graphFlows.Graph3Enabled = true;
+                        graphFlows.Graph4Enabled = false;
+                        graphFlows.Graph5Enabled = false;
+                        break;
+
+                }
+
+                graphFlows.DataRefreshRate = 15;
+                graphFlows.PixelPerDataPoint = 2;
+                graphFlows.IsSideScrolling = true;
+                graphFlows.GraphicsClearanceRate = graphicsRefreshInterval;
+                graphFlows.HideLegends = false;
+                graphFlows.XAxisTitle = "time";
+
+                graphFlows.DrawGridOnScreen();
+            }
+  
+        }
+        private void CmbFlowGraphSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                SelectFlowGraph(cmbFlowGraphSelector.SelectedIndex);
+            }
+        }
+
+        void SelectPVLoop(int selection)
+        {
+            if (initialized)
+            {
+                selectedPVID = selection;
+                switch (selection)
+                {
+                    case 0: // lv
+                        graphPVLoops.GraphMaxY = 100;
+                        graphPVLoops.GraphMinY = 0;
+                        graphPVLoops.GraphMaxX = 20;
+                        graphPVLoops.GridXAxisStep = 5;
+                        graphPVLoops.GraphMinX = 0;
+                        graphPVLoops.Graph1Enabled = true;
+                        graphPVLoops.Graph2Enabled = false;
+                        graphPVLoops.Graph3Enabled = false;
+                        graphPVLoops.Graph4Enabled = false;
+                        graphPVLoops.Graph5Enabled = false;
+                        graphPVLoops.XAxisTitle = "volume";
+                        pvGraphScaleOffset = 0;
+                        graphPVLoops.Legend1 = "left ventricle";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
+
+                        break;
+                    case 1: // la
+                        graphPVLoops.GraphMaxY = 100;
+                        graphPVLoops.GraphMinY = 0;
+                        graphPVLoops.GraphMaxX = 20;
+                        graphPVLoops.GridXAxisStep = 5;
+                        graphPVLoops.GraphMinX = 0;
+                        graphPVLoops.Graph1Enabled = true;
+                        graphPVLoops.Graph2Enabled = false;
+                        graphPVLoops.Graph3Enabled = false;
+                        graphPVLoops.Graph4Enabled = false;
+                        graphPVLoops.Graph5Enabled = false;
+                        graphPVLoops.XAxisTitle = "volume";
+                        pvGraphScaleOffset = 0;
+                        graphPVLoops.Legend1 = "left atrium";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
+
+                        break;
+                    case 2: // rv
+                        graphPVLoops.GraphMaxY = 100;
+                        graphPVLoops.GraphMinY = 0;
+                        graphPVLoops.GraphMaxX = 20;
+                        graphPVLoops.GridXAxisStep = 5;
+                        graphPVLoops.GraphMinX = 0;
+                        Graph1PVDisabled = false;
+                        Graph2PVDisabled = true;
+                        Graph3PVDisabled = true;
+                        Graph4PVDisabled = true;
+                        Graph5PVDisabled = true;
+                        graphPVLoops.Graph1Enabled = true;
+                        graphPVLoops.Graph2Enabled = false;
+                        graphPVLoops.Graph3Enabled = false;
+                        graphPVLoops.Graph4Enabled = false;
+                        graphPVLoops.Graph5Enabled = false;
+                        graphPVLoops.XAxisTitle = "volume";
+                        pvGraphScaleOffset = 0;
+                        graphPVLoops.Legend1 = "right ventricle";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
+
+                        break;
+                    case 3: // ra
+                        graphPVLoops.GraphMaxY = 100;
+                        graphPVLoops.GraphMinY = 0;
+                        graphPVLoops.GraphMaxX = 20;
+                        graphPVLoops.GridXAxisStep = 5;
+                        graphPVLoops.GraphMinX = 0;
+                        Graph1PVDisabled = false;
+                        Graph2PVDisabled = true;
+                        Graph3PVDisabled = true;
+                        Graph4PVDisabled = true;
+                        Graph5PVDisabled = true;
+                        graphPVLoops.Graph1Enabled = true;
+                        graphPVLoops.Graph2Enabled = false;
+                        graphPVLoops.Graph3Enabled = false;
+                        graphPVLoops.Graph4Enabled = false;
+                        graphPVLoops.Graph5Enabled = false;
+                        graphPVLoops.XAxisTitle = "volume";
+                        pvGraphScaleOffset = 0;
+                        graphPVLoops.Legend1 = "right atrium";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
+
+                        break;
+                    case 4: // left lung
+                        graphPVLoops.GraphMaxY = 60;
+                        graphPVLoops.GraphMinY = 25;
+                        graphPVLoops.GraphMaxX = 20;
+                        graphPVLoops.GridXAxisStep = 5;
+                        graphPVLoops.GraphMinX = -10;
+                        Graph1PVDisabled = false;
+                        Graph2PVDisabled = true;
+                        Graph3PVDisabled = true;
+                        Graph4PVDisabled = true;
+                        Graph5PVDisabled = true;
+                        graphPVLoops.Graph1Enabled = true;
+                        graphPVLoops.Graph2Enabled = false;
+                        graphPVLoops.Graph3Enabled = false;
+                        graphPVLoops.Graph4Enabled = false;
+                        graphPVLoops.Graph5Enabled = false;
+                        graphPVLoops.XAxisTitle = "pressure";
+                        pvGraphScaleOffset = PhysModelMain.currentModel.Patm;
+                        graphPVLoops.Legend1 = "left lung";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+
+                        break;
+                    case 5: // right lung
+                        graphPVLoops.GraphMaxY = 60;
+                        graphPVLoops.GraphMinY = 25;
+                        graphPVLoops.GraphMaxX = 20;
+                        graphPVLoops.GraphMinX = 0;
+                        graphPVLoops.GridXAxisStep = 5;
+                        graphPVLoops.GraphMinX = -10;
+                        Graph1PVDisabled = false;
+                        Graph2PVDisabled = true;
+                        Graph3PVDisabled = true;
+                        Graph4PVDisabled = true;
+                        Graph5PVDisabled = true;
+                        graphPVLoops.Graph1Enabled = true;
+                        graphPVLoops.Graph2Enabled = false;
+                        graphPVLoops.Graph3Enabled = false;
+                        graphPVLoops.Graph4Enabled = false;
+                        graphPVLoops.Graph5Enabled = false;
+                        graphPVLoops.XAxisTitle = "pressure";
+                        pvGraphScaleOffset = PhysModelMain.currentModel.Patm;
+                        graphPVLoops.Legend1 = "right lung";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+
+                        break;
+
+                }
+
+                graphPVLoops.DataRefreshRate = 15;
+                graphPVLoops.PixelPerDataPoint = 2;
+
+                graphPVLoops.IsSideScrolling = false;
+                graphPVLoops.HideLegends = false;
+                graphPressures.HideXAxisLabels = false;
+
+                graphPVLoops.PointMode1 = SKPointMode.Points;
+                graphPVLoops.GraphicsClearanceRate = 5000;
+                graphPVLoops.DrawGridOnScreen();
+            }
+     
+
+        }
+        private void CmbPVLoopsGraphSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (initialized)
+            {
+                SelectPVLoop(cmbPVLoopsGraphSelector.SelectedIndex);
+            }
+        }
     }
 }

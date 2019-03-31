@@ -541,86 +541,109 @@
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
-
-
-
-
-
                             </Grid>
                         </Expander>
 
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="False" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="True" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander x:Name="expGraphPressures" IsExpanded="{Binding GraphPressureEnabled, Mode=TwoWay}"  Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <StackPanel>
-
                                 <local:ParameterGraph x:Name="graphPressures" Height="150"></local:ParameterGraph>
+                                <TextBlock Text="  select pressure probe location" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
+                                <Grid Background="Black">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
 
-                                <ComboBox Grid.Column="0" x:Name="cmbPressureGraphSelector" SelectionChanged="CmbPressureGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
-                                    <ComboBoxItem Content="heart "  ></ComboBoxItem>
-                                    <ComboBoxItem Content="left heart "  ></ComboBoxItem>
-                                    <ComboBoxItem Content="right heart "  ></ComboBoxItem>
-                                    <ComboBoxItem Content="lungs "  ></ComboBoxItem>
-                                    <ComboBoxItem Content="left lung "  ></ComboBoxItem>
-                                    <ComboBoxItem Content="right lung "  ></ComboBoxItem>
-                                </ComboBox>
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox Grid.Column="0" x:Name="cmbPressureGraphSelector" SelectionChanged="CmbPressureGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                        <ComboBoxItem Content="heart "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="left heart "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="right heart "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="lungs "  ></ComboBoxItem>
+                                    </ComboBox>
+                                    <ToggleButton IsChecked="{Binding Graph1PressureDisabled}" Background="Black" Grid.Column="1" Content="1" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph2PressureDisabled}" Background="Black" Grid.Column="2" Content="2" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph3PressureDisabled}" Background="Black" Grid.Column="3" Content="3" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph4PressureDisabled}" Background="Black" Grid.Column="4" Content="4" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph5PressureDisabled}" Background="Black" Grid.Column="5" Content="5" Foreground="White" FontSize="10"></ToggleButton>
+                                </Grid>
+                          
                             </StackPanel>
                         </Expander>
                         <Expander x:Name="expGraphFlows" IsExpanded="{Binding GraphFlowsEnabled, Mode=TwoWay}" Header=" flows" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <StackPanel>
 
                                 <local:ParameterGraph x:Name="graphFlows" Height="150"></local:ParameterGraph>
-                                <Grid>
+                                <TextBlock Text="  select flow probe location" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
+                                <Grid Background="Black">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+
                                     </Grid.ColumnDefinitions>
-                                    <ComboBox Grid.Column="0" x:Name="cmbFlowGraphSelector" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
-                                        <ComboBoxItem Content="arterial blood pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="central venous pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="pulmonary artery pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="right atrial pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="left atrial pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="right ventricular pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="left ventricular pressure "  ></ComboBoxItem>
+                                    <ComboBox Grid.Column="0" x:Name="cmbFlowGraphSelector" SelectionChanged="CmbFlowGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                        <ComboBoxItem Content="left heart "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="right heart "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="pulmonary artery "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="aorta "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="foramen ovale "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="ventricular septal defect "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="ductus arteriousus "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="lungs "  ></ComboBoxItem>
                                     </ComboBox>
-                                    <Button Content="1" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="1" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="2" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="2" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="3" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="3" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="4" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="4" Foreground="White" FontSize="10"></Button>
+                                    <ToggleButton IsChecked="{Binding Graph1FlowDisabled}" Background="Black" Grid.Column="1" Content="1" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph2FlowDisabled}" Background="Black" Grid.Column="2" Content="2" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph3FlowDisabled}" Background="Black" Grid.Column="3" Content="3" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph4FlowDisabled}" Background="Black" Grid.Column="4" Content="4" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph5FlowDisabled}" Background="Black" Grid.Column="5" Content="5" Foreground="White" FontSize="10"></ToggleButton>
                                 </Grid>
+                         
+   
                             </StackPanel>
                         </Expander>
                         <Expander x:Name="expGraphPVLoops" IsExpanded="{Binding GraphPVLoopsEnabled, Mode=TwoWay}" Header=" pressure-volume loops" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <StackPanel>
                                 <local:ParameterGraph x:Name="graphPVLoops"  Height="150"></local:ParameterGraph>
-                                <Grid>
+                                <TextBlock Text="  select pv loop" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
+                                <Grid Background="Black">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="7*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+
                                     </Grid.ColumnDefinitions>
-                                    <ComboBox Grid.Column="0" x:Name="cmbPVLoopsGraphSelector" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
-                                        <ComboBoxItem Content="arterial blood pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="central venous pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="pulmonary artery pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="right atrial pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="left atrial pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="right ventricular pressure "  ></ComboBoxItem>
-                                        <ComboBoxItem Content="left ventricular pressure "  ></ComboBoxItem>
+                                    <ComboBox Grid.Column="0" x:Name="cmbPVLoopsGraphSelector" SelectionChanged="CmbPVLoopsGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                        <ComboBoxItem Content="left ventricle "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="left atrium "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="right ventricle "  ></ComboBoxItem>
+
+                                        <ComboBoxItem Content="right atrium "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="left lung "  ></ComboBoxItem>
+                                        <ComboBoxItem Content="right lung "  ></ComboBoxItem>
+
                                     </ComboBox>
-                                    <Button Content="1" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="1" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="2" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="2" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="3" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="3" Foreground="White" FontSize="10"></Button>
-                                    <Button Content="4" Background="Black" BorderBrush="Black" BorderThickness="0" Grid.Column="4" Foreground="White" FontSize="10"></Button>
+                                    <ToggleButton IsChecked="{Binding Graph1PVDisabled}" Background="Black" Grid.Column="1" Content="1" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph2PVDisabled}" Background="Black" Grid.Column="2" Content="2" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph3PVDisabled}" Background="Black" Grid.Column="3" Content="3" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph4PVDisabled}" Background="Black" Grid.Column="4" Content="4" Foreground="White" FontSize="10"></ToggleButton>
+                                    <ToggleButton IsChecked="{Binding Graph5PVDisabled}" Background="Black" Grid.Column="5" Content="5" Foreground="White" FontSize="10"></ToggleButton>
                                 </Grid>
+                            
+     
                             </StackPanel>
                         </Expander>
                     </StackPanel>
