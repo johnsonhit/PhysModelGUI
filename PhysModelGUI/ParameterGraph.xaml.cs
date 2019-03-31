@@ -89,7 +89,6 @@ namespace PhysModelGUI
         public SKPaint GridLineAxisPaint;
         public SKPaint GridLinePaint;
         public SKPaint GridAxisLabelsPaint;
-        public SKPaint GridTitlePaint;
         public SKPaint LegendTextPaint;
 
         public float GridYAxisStep { get; set; } = 10;

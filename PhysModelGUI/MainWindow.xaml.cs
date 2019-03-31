@@ -345,6 +345,31 @@ namespace PhysModelGUI
             graphPatMonitor.GraphPaint4.Color = SKColors.White;
             graphPatMonitor.GraphicsClearanceRate = graphicsRefreshInterval;
 
+            graphTrendMonitor.GraphMaxY = 150;
+            graphTrendMonitor.GraphMaxX = 20;
+            graphTrendMonitor.DataRefreshRate = 15;
+            graphTrendMonitor.PixelPerDataPoint = 2;
+            graphTrendMonitor.Graph1Enabled = true;
+            graphTrendMonitor.Graph2Enabled = true;
+            graphTrendMonitor.Graph3Enabled = true;
+            graphTrendMonitor.Graph4Enabled = true;
+            graphTrendMonitor.Graph5Enabled = true;
+            graphTrendMonitor.IsSideScrolling = true;
+            graphTrendMonitor.XAxisTitle = "time";
+            graphTrendMonitor.HideYAxisLabels = false;
+            graphTrendMonitor.HideXAxisLabels = false;
+            graphTrendMonitor.NoGrid = false;
+            graphTrendMonitor.GraphPaint1.Color = SKColors.DarkGreen;
+            graphTrendMonitor.GraphPaint2.Color = SKColors.Fuchsia;
+            graphTrendMonitor.GraphPaint3.Color = SKColors.DarkRed;
+            graphTrendMonitor.GraphPaint4.Color = SKColors.DarkRed;
+            graphTrendMonitor.GraphPaint5.Color = SKColors.Black;
+            graphTrendMonitor.GraphicsClearanceRate = 5000;
+            graphTrendMonitor.BackgroundColor = SKColors.White;
+            graphTrendMonitor.GridLineAxisPaint.Color = SKColors.Black;
+            graphTrendMonitor.GridLinePaint.Color = SKColors.Black;
+            graphTrendMonitor.LegendTextPaint.Color = SKColors.Black;
+            graphTrendMonitor.GridAxisLabelsPaint.Color = SKColors.Black;
 
             ModelName = PhysModelMain.currentModel.Name;
             
@@ -369,6 +394,7 @@ namespace PhysModelGUI
             selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
 
             initialized = true;
+
             cmbFlowGraphSelector.SelectedIndex = 0;
             cmbPressureGraphSelector.SelectedIndex = 0;
             cmbPVLoopsGraphSelector.SelectedIndex = 0;
@@ -383,12 +409,18 @@ namespace PhysModelGUI
                     UpdatePressureGraph();
                     UpdateFlowGraph();
                     UpdateMonitorGraph();
+                 
                     break;
                 case "StatusMessage":
                     lstBox.Items.Add(PhysModelMain.modelInterface.StatusMessage);
                     break;
             }
 
+        }
+
+        void UpdateTrendGraph()
+        {
+            graphTrendMonitor.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate,0, PhysModelMain.modelInterface.ArterialSO2Pre, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure,0,PhysModelMain.modelInterface.RespiratoryRate);
         }
 
         void UpdatePVLoops()
@@ -436,6 +468,7 @@ namespace PhysModelGUI
 
             }
         }
+
         void UpdateFlowGraph()
         {
             if (GraphFlowsEnabled)
@@ -635,10 +668,15 @@ namespace PhysModelGUI
                 Pco2alv = PhysModelMain.modelInterface.AlveolarPCO2;
                 Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
+                UpdateTrendGraph();
+                graphTrendMonitor.DrawGraphOnScreen();
+
             }
             slowUpdater += graphicsRefreshInterval;
  
-            //canvasDiagram.InvalidateVisual();
+            canvasDiagram.InvalidateVisual();
+
+         
 
             if (GraphPressureEnabled)
                 graphPressures.DrawGraphOnScreen();
@@ -1290,6 +1328,11 @@ namespace PhysModelGUI
             {
                 SelectPVLoop(cmbPVLoopsGraphSelector.SelectedIndex);
             }
+        }
+
+        private void CanvasTrendMonitor_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
+        {
+
         }
     }
 }

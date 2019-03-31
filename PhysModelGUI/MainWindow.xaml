@@ -60,7 +60,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.75*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top" Height="25" Grid.ColumnSpan="3">
@@ -76,7 +76,7 @@
 
         </StatusBar>
 
-        <TextBlock Margin="0,25,0,0" Text="PARAMETERS" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" ></TextBlock>
+        <TextBlock Margin="0,25,0,0" Text="MODEL PARAMETERS" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" ></TextBlock>
         <ScrollViewer Grid.Column="0"  Margin="0,55,0,25" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,5,0">
                 <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
@@ -546,7 +546,7 @@
 
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="True" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander x:Name="expGraphPressures" IsExpanded="{Binding GraphPressureEnabled, Mode=TwoWay}"  Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <StackPanel>
@@ -652,13 +652,9 @@
             </StackPanel>
         </ScrollViewer>
 
-        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="20,60,20,150" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
-        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="20,60,20,150" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
-        <Button Content="Button" Grid.Column="1" HorizontalAlignment="Left" Margin="52.889,646,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="10,60,20,200" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
+        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="10,60,20,200" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
 
-
-
-
-
+        <local:ParameterGraph x:Name="graphTrendMonitor" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
