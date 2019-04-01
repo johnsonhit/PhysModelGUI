@@ -64,7 +64,34 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Menu VerticalAlignment="Top" Height="25" Grid.ColumnSpan="3">
-            <MenuItem ></MenuItem>
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" />
+                <MenuItem Header="_Open" />
+                <MenuItem Header="_Save" />
+                <Separator />
+                <MenuItem Header="_Exit" />
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Components">
+                    <MenuItem x:Name="menuMYO" Header="_Myocardium" IsCheckable="False" IsChecked="{Binding ViewMYOEnabled}" Click="MenuMYO_Click" />
+                    <MenuItem x:Name="menuPLACENTA" Header="_Placenta"></MenuItem>
+                </MenuItem>
+                <MenuItem Header="_Shunts">
+                    
+                    <MenuItem x:Name="menuPDA" Header="_Ductus arteriosus" IsCheckable="False" IsChecked="{Binding ViewPDAEnabled}" Click="MenuPDA_Click"  />
+                    <MenuItem x:Name="menuOFO" Header="_Foramen ovale" IsCheckable="False" IsChecked="{Binding ViewOFOEnabled}" Click="MenuOFO_Click"/>
+                    <MenuItem x:Name="menuVSD" Header="_Ventricular septal defect" IsCheckable="False" IsChecked="{Binding ViewVSDEnabled}" Click="MenuVSD_Click" />
+                    <MenuItem x:Name="menuLUNGSHUNT" Header="_Lung shunt" IsCheckable="False" IsChecked="{Binding ViewSHUNTEnabled}" Click="MenuLUNGSHUNT_Click" />
+                </MenuItem>
+                <MenuItem Header="_Devices">
+                    <MenuItem x:Name="menuALUNG" Header="_Artifical lung"></MenuItem>
+                    <MenuItem x:Name="menuVAECMO" Header="_Veno-arterial ECMO"></MenuItem>
+                    <MenuItem x:Name="menuVVECMO" Header="_Veno-venous ECMO"></MenuItem>
+                    <MenuItem x:Name="menuLVAD" Header="_Left ventricular assist device"></MenuItem>
+                    <MenuItem x:Name="menuRVAD" Header="_Right ventricular assist device"></MenuItem>
+                </MenuItem>
+     
+            </MenuItem>
         </Menu>
         <StatusBar VerticalAlignment="Bottom" Height="25" Grid.ColumnSpan="3">
             <StatusBarItem>
@@ -79,7 +106,7 @@
         <TextBlock Margin="0,25,0,0" Text="MODEL PARAMETERS" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" ></TextBlock>
         <ScrollViewer Grid.Column="0"  Margin="0,55,0,25" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,5,0">
-                <Expander IsExpanded="False" Header="CONDITIONS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Conditions" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
@@ -96,14 +123,14 @@
                     </StackPanel>
                 </Expander>
 
-                <Expander IsExpanded="False" Header="GLOBAL MODEL SETTINGS" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Global model settings" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                         <Expander Header=" lung and chestwall" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                         <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="False" Header="SPECIFIC MODEL SETTINGS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Specific model settings" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander IsExpanded="False" Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Grid Margin="20,0,10,0" Background="DarkSlateGray">
@@ -176,10 +203,10 @@
                     </StackPanel>
                 </Expander>
 
-                <Expander IsExpanded="False" Header="MODEL LOG" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="True" Header="Model log" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,10">
                         <ScrollViewer  >
-                            <ListBox x:Name="lstBox" Height="100" Background="Black" Foreground="White" ></ListBox>
+                            <ListBox x:Name="lstBox" Height="100" Background="Black" FontSize="10" Foreground="White" ></ListBox>
                         </ScrollViewer>
                         <Button Content="CLEAR" FontSize="10" Background="SlateGray" Foreground="White" Margin="50,5,50,0"></Button>
                     </StackPanel>
@@ -195,7 +222,7 @@
         <TextBlock Text="MONITORING" Grid.Column="2" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="18" Margin="0,25,0,0"></TextBlock>
         <ScrollViewer Grid.Column="2"  Margin="0,55,5,25" VerticalScrollBarVisibility="Auto">
             <StackPanel Grid.Column="2" Margin="0,0,5,0">
-                <Expander  Header="PATIENT MONITOR" IsExpanded="{Binding GraphPatMonitorEnabled, Mode=TwoWay}" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander  Header="Patient monitor" IsExpanded="{Binding GraphPatMonitorEnabled, Mode=TwoWay}" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <Grid Margin="10,0,10,5" Background="Black" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*"/>
@@ -233,7 +260,7 @@
 
                     </Grid>
                 </Expander>
-                <Expander IsExpanded="False" Header="VITAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Vital parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <Grid Margin="10,0,10,5" Background="Black" Opacity="0.8">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -282,7 +309,7 @@
 
                     </Grid>
                 </Expander>
-                <Expander IsExpanded="False" Header="ADDITIONAL PARAMETERS" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Additional parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="Transparent" Opacity="0.8">
                         <Expander Header=" heart" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Grid Margin="0,0,0,5" Background="Black" Opacity="1.0">
@@ -546,7 +573,7 @@
 
                     </StackPanel>
                 </Expander>
-                <Expander IsExpanded="False" Header="GRAPHS AND CURVES" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Graphs and curves" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
                         <Expander x:Name="expGraphPressures" IsExpanded="{Binding GraphPressureEnabled, Mode=TwoWay}"  Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <StackPanel>
@@ -655,6 +682,8 @@
         <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="10,60,20,200" Opacity="0.3"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
         <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="10,60,20,200" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
 
-        <local:ParameterGraph x:Name="graphTrendMonitor" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
+        <local:ParameterGraph x:Name="graphTrendMonitor1" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
+        <local:ParameterGraph x:Name="graphTrendMonitor2" Visibility="Collapsed" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
+        <local:ParameterGraph x:Name="graphTrendMonitor3" Visibility="Collapsed" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

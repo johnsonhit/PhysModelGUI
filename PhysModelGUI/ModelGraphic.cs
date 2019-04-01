@@ -31,10 +31,6 @@ namespace PhysModelGUI
             StrokeWidth = 25,
         };
             
-        public static SkiaGraph pressureGraphExp;
-        public static SkiaGraph flowGraphExp;
-        public static SkiaGraph trendVitalsExp;
-        public static SkiaGraph pvLoopGraphExp;
 
         public static List<AnimatedBloodCompartment> animatedBloodCompartments = new List<AnimatedBloodCompartment>();
         public static List<AnimatedGasComp> animatedGasCompartments = new List<AnimatedGasComp>();
@@ -44,6 +40,9 @@ namespace PhysModelGUI
         public static List<AnimatedShunt> animatedShunts = new List<AnimatedShunt>();
         public static List<AnimatedShuntGas> animatedShuntsGas = new List<AnimatedShuntGas>();
 
+        public static AnimatedBloodCompartment myocardium;
+        public static AnimatedBloodConnector AAMYO;
+        public static AnimatedBloodConnector MYORA;
         public static AnimatedBloodConnector LUNGPV;
         public static AnimatedBloodCompartment pulmonaryVeins;
         public static AnimatedBloodConnector PVLA;
@@ -74,10 +73,10 @@ namespace PhysModelGUI
         public static AnimatedBloodCompartment SVC;
         public static AnimatedBloodConnector SVCRA;
 
-        public static AnimatedShunt AADA;
-        public static AnimatedShunt LVRV;
-        public static AnimatedShunt LARA;
-        public static AnimatedShunt LUNG;
+        public static AnimatedShunt PDA;
+        public static AnimatedShunt VSD;
+        public static AnimatedShunt OFO;
+        public static AnimatedShunt LUNGSHUNT;
 
         public static AnimatedShuntGas OUTNCA;
         public static AnimatedBloodCompartment lungs;
@@ -108,7 +107,6 @@ namespace PhysModelGUI
                 Name = "AD->ALBLOOD"
             };
             ADALBLOOD.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_ALBLOOD"));
-            animatedBloodConnectors.Add(ADALBLOOD);
 
             ALBLOODIVC = new AnimatedBloodConnector
             {
@@ -124,7 +122,6 @@ namespace PhysModelGUI
                 Name = "ALBLOOD->IVC"
             };
             ALBLOODIVC.AddConnector(PhysModelMain.FindBloodConnectorByName("ALBLOOD_IVC"));
-            animatedBloodConnectors.Add(ALBLOODIVC);
 
             pulmonaryValve = new AnimatedValve
             {
@@ -225,6 +222,15 @@ namespace PhysModelGUI
             aorta.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_LIVER"));
             animatedBloodConnectors.Add(aorta);
 
+            myocardium = new AnimatedBloodCompartment
+            {
+                scaleRelative = 0.035f,
+                Degrees = 90,
+                RadiusYOffset = 0.725f,
+                Name = "MYO"
+            };
+            myocardium.AddCompartment(PhysModelMain.FindBloodCompartmentByName("MYO"));
+
             leftVentricle = new AnimatedBloodCompartment
             {
                 scaleRelative = 0.035f,
@@ -239,12 +245,9 @@ namespace PhysModelGUI
             {
                 scaleRelative = 0.035f,
                 Degrees = 10,
-                IsVisible = false,
                 Name = "LVAD"
             };
-
             lvad.AddCompartment(PhysModelMain.FindBloodCompartmentByName("LVAD"));
-            animatedBloodCompartments.Add(lvad);
 
             leftAtrium = new AnimatedBloodCompartment
             {
@@ -295,8 +298,6 @@ namespace PhysModelGUI
                 Name = "RVAD"
             };
             rvad.AddCompartment(PhysModelMain.FindBloodCompartmentByName("RVAD"));
-            animatedBloodCompartments.Add(rvad);
-
 
             tricuspidValve = new AnimatedValve
             {
@@ -310,7 +311,6 @@ namespace PhysModelGUI
             };
             tricuspidValve.AddConnector(PhysModelMain.FindValveByName("RA_RV"));
             animatedValves.Add(tricuspidValve);
-
 
             lowerBody = new AnimatedBloodCompartment
             {
@@ -364,7 +364,6 @@ namespace PhysModelGUI
                 IsVisible = false,
             };
             placenta.AddCompartment(PhysModelMain.FindGasCompartmentByName("ALGAS"));
-            animatedGasCompartments.Add(placenta);
 
             ecmolunggas = new AnimatedGasComp
             {
@@ -375,8 +374,6 @@ namespace PhysModelGUI
                 IsVisible = false,
             };
             ecmolunggas.AddCompartment(PhysModelMain.FindGasCompartmentByName("ECLUNGGAS"));
-            animatedGasCompartments.Add(ecmolunggas);
-
 
             ecmolungblood = new AnimatedBloodCompartment
             {
@@ -387,9 +384,6 @@ namespace PhysModelGUI
                 IsVisible = false,
             };
             ecmolungblood.AddCompartment(PhysModelMain.FindBloodCompartmentByName("ECLUNGBLOOD"));
-            animatedBloodCompartments.Add(ecmolungblood);
-
-
 
             LBIVC = new AnimatedBloodConnector
             {
@@ -533,62 +527,58 @@ namespace PhysModelGUI
             animatedBloodConnectors.Add(AAUB);
 
 
-            AADA = new AnimatedShunt
+            PDA = new AnimatedShunt
             {
                 scaleRelative = 0.035f,
                 RadiusYOffset = 1f,
                 NoLoss = false,
                 StartAngle = 25,
-                IsVisible = false,
                 EndAngle = 225,
                 Direction = 1,
                 Name = "DUCTUS ARTERIOSUS"
             };
-            AADA.AddConnector(PhysModelMain.FindBloodConnectorByName("DA_PA"));
-            AADA.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_DA"));
-            animatedShunts.Add(AADA);
+            PDA.AddConnector(PhysModelMain.FindBloodConnectorByName("DA_PA"));
+            PDA.AddConnector(PhysModelMain.FindBloodConnectorByName("AD_DA"));
+       
 
-            LVRV = new AnimatedShunt
+            VSD = new AnimatedShunt
             {
                 scaleRelative = 0.035f,
                 RadiusYOffset = 1f,
                 NoLoss = true,
-                IsVisible = false,
                 StartAngle = 0,
                 EndAngle = 190,
                 Direction = 1,
                 Name = "VSD"
             };
-            LVRV.AddConnector(PhysModelMain.FindBloodConnectorByName("LV_RV"));
-            animatedShunts.Add(LVRV);
+            VSD.AddConnector(PhysModelMain.FindBloodConnectorByName("LV_RV"));
+ 
 
-            LARA = new AnimatedShunt
+            OFO = new AnimatedShunt
             {
                 scaleRelative = 0.035f,
                 RadiusYOffset = 1f,
                 NoLoss = true,
-                IsVisible = false,
                 StartAngle = 340,
                 EndAngle = 170,
                 Direction = 1,
                 Name = "FORAMEN OVALE"
             };
-            LARA.AddConnector(PhysModelMain.FindBloodConnectorByName("LA_RA"));
-            animatedShunts.Add(LARA);
+            OFO.AddConnector(PhysModelMain.FindBloodConnectorByName("LA_RA"));
+     
 
-            LUNG = new AnimatedShunt
+            LUNGSHUNT = new AnimatedShunt
             {
                 scaleRelative = 0.035f,
                 RadiusYOffset = 1f,
                 NoLoss = true,
-                IsVisible = false,
                 StartAngle = 315,
                 EndAngle = 225,
                 Direction = 1,
                 Name = "LUNG SHUNT"
             };
-            LUNG.AddConnector(PhysModelMain.FindBloodConnectorByName("PA_PV"));
-            animatedShunts.Add(LUNG);
+            LUNGSHUNT.AddConnector(PhysModelMain.FindBloodConnectorByName("PA_PV"));
+
 
             OUTNCA = new AnimatedShuntGas
             {
@@ -604,6 +594,32 @@ namespace PhysModelGUI
             OUTNCA.AddConnector(PhysModelMain.FindGasConnectorByName("OUT_NCA"));
             animatedShuntsGas.Add(OUTNCA);
 
+            AAMYO = new AnimatedBloodConnector
+            {
+                scaleRelative = 0.035f,
+                Degrees = 0,
+                NoLoss = true,
+                RadiusYOffset = 0.725f,
+                StartAngle = 20,
+                EndAngle = 90,
+                Direction = 1,
+                Name = "AA->MYO"
+            };
+            AAMYO.AddConnector(PhysModelMain.FindBloodConnectorByName("AA_MYO"));
+
+            MYORA = new AnimatedBloodConnector
+            {
+                scaleRelative = 0.035f,
+                Degrees = 0,
+                NoLoss = true,
+                RadiusYOffset = 0.725f,
+                StartAngle = 90,
+                EndAngle = 170,
+                Direction = 1,
+                Name = "MYO->RA"
+            };
+            MYORA.AddConnector(PhysModelMain.FindBloodConnectorByName("MYO_RA"));
+
             ALBLOOD = new AnimatedBloodCompartment
             {
                 scaleRelative = 0.035f,
@@ -617,59 +633,8 @@ namespace PhysModelGUI
                 Name = "ECMO"
             };
             ALBLOOD.AddCompartment(PhysModelMain.FindBloodCompartmentByName("ALBLOOD"));
-            animatedBloodCompartments.Add(ALBLOOD);
-
-           
-       
-
-
         }
-        public static void BuildScrollingGraphs()
-        {
-            pressureGraphExp = new SkiaGraph();
-            flowGraphExp = new SkiaGraph();
-            trendVitalsExp = new SkiaGraph()
-            {
-                MaxY = 220,
-                MinY = 0,
-                IsSideScrolling = true,
-                HideXAxisLabels = false,
-                Stepsize = 1,
-                SourceDataResolution = 1f, // datapoints per second
-                GridYAxisStep = 20,
-                GridXAxisStep = 60,
-                TimeBasedInMinutes = true,
-                Legend1 = "HR",
-                Legend2 = "SAT",
-                Legend3 = "SYST",
-                Legend4 = "DIAST",
-                Legend5 = "RESP",
-                Graph1Enabled = true,
-                Graph2Enabled = true,
-                Graph3Enabled = true,
-                Graph4Enabled = true,
-                Graph5Enabled = true
-            };
-            pvLoopGraphExp = new SkiaGraph()
-            {
-                Stepsize = 1,
-                MaxY = 90,
-                MinY = 60,
-                MinX = 0,
-                MaxX = 20,
-                GridYAxisStep = 5,
-                GridXAxisStep = 5,
-                HideXAxisLabels = false,
-                IsSideScrolling = false,
-                SourceDataResolution = 1f / 0.015f,
-                RefreshRate = 100,
-                PointMode1 = SKPointMode.Points
-            };
 
-
-           
-
-        }
         public static void DrawMainDiagram(SKCanvas _canvas, float _width, float _height)
         {
             _canvas.Clear(SKColors.Transparent);
@@ -732,123 +697,76 @@ namespace PhysModelGUI
 
             _canvas.DrawCircle(location, radius, paint);
 
+        }
 
+        public static void PDAView(bool state)
+        {
+            if (state)
+            {
+                if (!animatedShunts.Contains(PDA))
+                    animatedShunts.Add(PDA);
+            }
+            else
+            {
+                if (animatedShunts.Contains(PDA))
+                    animatedShunts.Remove(PDA);
+            }
+        }
+        public static void VSDView(bool state)
+        {
+            if (state)
+            {
+                if (!animatedShunts.Contains(VSD))
+                    animatedShunts.Add(VSD);
+            }
+            else
+            {
+                if (animatedShunts.Contains(VSD))
+                    animatedShunts.Remove(VSD);
+            }
+        }
+        public static void OFOView(bool state)
+        {
+            if (state)
+            {
+                if (!animatedShunts.Contains(OFO))
+                    animatedShunts.Add(OFO);
+            }
+            else
+            {
+                if (animatedShunts.Contains(OFO))
+                    animatedShunts.Remove(OFO);
+            }
+        }
+        public static void LUNGSHUNTView(bool state)
+        {
+            if (state)
+            {
+                if (!animatedShunts.Contains(LUNGSHUNT))
+                    animatedShunts.Add(LUNGSHUNT);
+            } else
+            {
+                if (animatedShunts.Contains(LUNGSHUNT))
+                animatedShunts.Remove(LUNGSHUNT);
+            }
+        }
 
-        }
-        public static void DrawPVLoopGraphGrid(SKCanvas _canvas, float _width, float _height)
+        public static void MYOView(bool state)
         {
-            if (pvLoopGraphExp != null)
+            if (state)
             {
-
-                pvLoopGraphExp.DrawGrid(_canvas, (int)_width, (int)_height);
+                if (!animatedBloodCompartments.Contains(myocardium))
+                    animatedBloodCompartments.Add(myocardium);
+                if (!animatedBloodConnectors.Contains(MYORA))
+                    animatedBloodConnectors.Insert(0, MYORA);
+                if (!animatedBloodConnectors.Contains(AAMYO))
+                    animatedBloodConnectors.Insert(1,AAMYO);
             }
-        }
-        public static void DrawTrendGraphVitals(SKCanvas _canvas, float _width, float _height)
-        {
-            if (trendVitalsExp != null)
+            else
             {
-                trendVitalsExp.DrawGraph(_canvas, (int)_width, (int)_height);
-            }
-        }
-        public static void DrawTrendGraphVitalsGrid(SKCanvas _canvas, float _width, float _height)
-        {
-            if (trendVitalsExp != null)
-            {
-                trendVitalsExp.DrawGrid(_canvas, (int)_width, (int)_height);
-            }
-        }
-        public static void DrawPressureCurve(SKCanvas _canvas, float _width, float _height)
-        {
-            if (pressureGraphExp != null)
-            {
-                pressureGraphExp.DrawGraph(_canvas, _width, _height);
-            }
-        }
-        public static void DrawPressureCurveGrid(SKCanvas _canvas, float _width, float _height)
-        {
-
-            if (pressureGraphExp != null)
-            {
-                pressureGraphExp.DrawGrid(_canvas, _width, _height);
-
-            }
-        }
-        public static void DrawFlowCurve(SKCanvas _canvas, float _width, float _height)
-        {
-            if (flowGraphExp != null)
-            {
-                flowGraphExp.DrawGraph(_canvas, (int)_width, (int)_height);
-            }
-        }
-        public static void DrawFlowCurveGrid(SKCanvas _canvas, float _width, float _height)
-        {
-            if (flowGraphExp != null)
-            {
-                flowGraphExp.DrawGrid(_canvas, (int)_width, (int)_height);
-            }
-        }
-        public static void DrawPVLoop(SKCanvas _canvas, float _width, float _height)
-        {
-            if (pvLoopGraphExp != null)
-            {
-
-                pvLoopGraphExp.DrawGraph(_canvas, (int)_width, (int)_height);
-            }
-        }
-        public static void PDAToggle()
-        {
-            if (AADA != null)
-            {
-                if (AADA.IsVisible)
-                {
-                    AADA.IsVisible = false;
-                }
-                else
-                {
-                    AADA.IsVisible = true;
-                }
-            }
-        }
-        public static void VSDToggle()
-        {
-            if (LVRV != null)
-            {
-                if (LVRV.IsVisible)
-                {
-                    LVRV.IsVisible = false;
-                }
-                else
-                {
-                    LVRV.IsVisible = true;
-                }
-            }
-        }
-        public static void OFOToggle()
-        {
-            if (LARA != null)
-            {
-                if (LARA.IsVisible)
-                {
-                    LARA.IsVisible = false;
-                }
-                else
-                {
-                    LARA.IsVisible = true;
-                }
-            }
-        }
-        public static void LUNGSHUNTToggle()
-        {
-            if (LUNG != null)
-            {
-                if (LUNG.IsVisible)
-                {
-                    LUNG.IsVisible = false;
-                }
-                else
-                {
-                    LUNG.IsVisible = true;
-                }
+                animatedBloodCompartments.Remove(myocardium);
+                animatedBloodConnectors.Remove(AAMYO);
+                animatedBloodConnectors.Remove(MYORA);
             }
         }
 

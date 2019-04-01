@@ -41,6 +41,22 @@ namespace PhysModelGUI
         int selectedPressureID = 0;
         int selectedFlowID = 0;
         int selectedPVID = 0;
+        int trendGraphSelection = 1;
+
+        bool _viewOFOEnabled = false;
+        public bool ViewOFOEnabled { get { return _viewOFOEnabled; } set { _viewOFOEnabled = value; OnPropertyChanged(); } }
+
+        bool _viewVSDEnabled = false;
+        public bool ViewVSDEnabled { get { return _viewVSDEnabled; } set { _viewVSDEnabled = value; OnPropertyChanged(); } }
+
+        bool _viewPDAEnabled = false;
+        public bool ViewPDAEnabled { get { return _viewPDAEnabled; } set { _viewPDAEnabled = value; OnPropertyChanged(); } }
+
+        bool _viewSHUNTEnabled = false;
+        public bool ViewSHUNTEnabled { get { return _viewSHUNTEnabled; } set { _viewSHUNTEnabled = value; OnPropertyChanged(); } }
+
+        bool _viewMYOEnabled = false;
+        public bool ViewMYOEnabled { get { return _viewMYOEnabled; } set { _viewMYOEnabled = value; OnPropertyChanged(); } }
 
         bool _graphPatMonitorEnabled = false;
         public bool GraphPatMonitorEnabled { get { return _graphPatMonitorEnabled; } set { _graphPatMonitorEnabled = value; OnPropertyChanged(); } }
@@ -345,31 +361,10 @@ namespace PhysModelGUI
             graphPatMonitor.GraphPaint4.Color = SKColors.White;
             graphPatMonitor.GraphicsClearanceRate = graphicsRefreshInterval;
 
-            graphTrendMonitor.GraphMaxY = 150;
-            graphTrendMonitor.GraphMaxX = 20;
-            graphTrendMonitor.DataRefreshRate = 15;
-            graphTrendMonitor.PixelPerDataPoint = 2;
-            graphTrendMonitor.Graph1Enabled = true;
-            graphTrendMonitor.Graph2Enabled = true;
-            graphTrendMonitor.Graph3Enabled = true;
-            graphTrendMonitor.Graph4Enabled = true;
-            graphTrendMonitor.Graph5Enabled = true;
-            graphTrendMonitor.IsSideScrolling = true;
-            graphTrendMonitor.XAxisTitle = "time";
-            graphTrendMonitor.HideYAxisLabels = false;
-            graphTrendMonitor.HideXAxisLabels = false;
-            graphTrendMonitor.NoGrid = false;
-            graphTrendMonitor.GraphPaint1.Color = SKColors.DarkGreen;
-            graphTrendMonitor.GraphPaint2.Color = SKColors.Fuchsia;
-            graphTrendMonitor.GraphPaint3.Color = SKColors.DarkRed;
-            graphTrendMonitor.GraphPaint4.Color = SKColors.DarkRed;
-            graphTrendMonitor.GraphPaint5.Color = SKColors.Black;
-            graphTrendMonitor.GraphicsClearanceRate = 5000;
-            graphTrendMonitor.BackgroundColor = SKColors.White;
-            graphTrendMonitor.GridLineAxisPaint.Color = SKColors.Black;
-            graphTrendMonitor.GridLinePaint.Color = SKColors.Black;
-            graphTrendMonitor.LegendTextPaint.Color = SKColors.Black;
-            graphTrendMonitor.GridAxisLabelsPaint.Color = SKColors.Black;
+
+            ConfigureTrendGraph1();
+            ConfigureTrendGraph2();
+            ConfigureTrendGraph3();
 
             ModelName = PhysModelMain.currentModel.Name;
             
@@ -398,9 +393,142 @@ namespace PhysModelGUI
             cmbFlowGraphSelector.SelectedIndex = 0;
             cmbPressureGraphSelector.SelectedIndex = 0;
             cmbPVLoopsGraphSelector.SelectedIndex = 0;
+
+            SelectTrendGraph(1);
+
         }
 
-        private void ModelInterface_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        public void SelectTrendGraph(int id)
+        {
+            trendGraphSelection = id;
+            switch (id)
+            {
+                case 1:
+                    graphTrendMonitor1.Visibility = Visibility.Visible;
+                    graphTrendMonitor2.Visibility = Visibility.Collapsed;
+                    graphTrendMonitor3.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    graphTrendMonitor1.Visibility = Visibility.Collapsed;
+                    graphTrendMonitor2.Visibility = Visibility.Visible;
+                    graphTrendMonitor3.Visibility = Visibility.Collapsed;
+                    break;
+                case 3:
+                    graphTrendMonitor1.Visibility = Visibility.Collapsed;
+                    graphTrendMonitor2.Visibility = Visibility.Collapsed;
+                    graphTrendMonitor3.Visibility = Visibility.Visible;
+                    break;
+
+            }
+        }
+
+        void ConfigureTrendGraph1()
+        {
+            graphTrendMonitor1.GraphMaxY = 150;
+            graphTrendMonitor1.GraphMaxX = 20;
+            graphTrendMonitor1.DataRefreshRate = 15;
+            graphTrendMonitor1.PixelPerDataPoint = 2;
+            graphTrendMonitor1.Graph1Enabled = true;
+            graphTrendMonitor1.Graph2Enabled = true;
+            graphTrendMonitor1.Graph3Enabled = true;
+            graphTrendMonitor1.Graph4Enabled = true;
+            graphTrendMonitor1.Graph5Enabled = true;
+            graphTrendMonitor1.IsSideScrolling = true;
+            graphTrendMonitor1.XAxisTitle = "time";
+            graphTrendMonitor1.HideYAxisLabels = false;
+            graphTrendMonitor1.HideXAxisLabels = false;
+            graphTrendMonitor1.NoGrid = false;
+            graphTrendMonitor1.Legend1 = "heartrate";
+            graphTrendMonitor1.Legend2 = "spo2";
+            graphTrendMonitor1.Legend3 = "systole";
+            graphTrendMonitor1.Legend4 = "diastole";
+            graphTrendMonitor1.Legend5 = "resp rate";
+            graphTrendMonitor1.HideLegends = false;
+            graphTrendMonitor1.GraphPaint1.Color = SKColors.DarkGreen;
+            graphTrendMonitor1.GraphPaint2.Color = SKColors.Fuchsia;
+            graphTrendMonitor1.GraphPaint3.Color = SKColors.DarkRed;
+            graphTrendMonitor1.GraphPaint4.Color = SKColors.DarkRed;
+            graphTrendMonitor1.GraphPaint5.Color = SKColors.Black;
+            graphTrendMonitor1.GraphicsClearanceRate = 5000;
+            graphTrendMonitor1.BackgroundColor = SKColors.White;
+            graphTrendMonitor1.GridLineAxisPaint.Color = SKColors.Black;
+            graphTrendMonitor1.GridLinePaint.Color = SKColors.Black;
+            graphTrendMonitor1.LegendTextPaint.Color = SKColors.Black;
+            graphTrendMonitor1.GridAxisLabelsPaint.Color = SKColors.Black;
+        }
+
+        void ConfigureTrendGraph2()
+        {
+            graphTrendMonitor2.GraphMaxY = 150;
+            graphTrendMonitor2.GraphMaxX = 20;
+            graphTrendMonitor2.DataRefreshRate = 15;
+            graphTrendMonitor2.PixelPerDataPoint = 2;
+            graphTrendMonitor2.Graph1Enabled = true;
+            graphTrendMonitor2.Graph2Enabled = true;
+            graphTrendMonitor2.Graph3Enabled = true;
+            graphTrendMonitor2.Graph4Enabled = true;
+            graphTrendMonitor2.Graph5Enabled = true;
+            graphTrendMonitor2.IsSideScrolling = true;
+            graphTrendMonitor2.XAxisTitle = "trend graph 2";
+            graphTrendMonitor2.HideYAxisLabels = false;
+            graphTrendMonitor2.HideXAxisLabels = false;
+            graphTrendMonitor2.NoGrid = false;
+            graphTrendMonitor2.Legend1 = "heartrate";
+            graphTrendMonitor2.Legend2 = "spo2";
+            graphTrendMonitor2.Legend3 = "systole";
+            graphTrendMonitor2.Legend4 = "diastole";
+            graphTrendMonitor2.Legend5 = "resp rate";
+            graphTrendMonitor2.HideLegends = false;
+            graphTrendMonitor2.GraphPaint1.Color = SKColors.DarkGreen;
+            graphTrendMonitor2.GraphPaint2.Color = SKColors.Fuchsia;
+            graphTrendMonitor2.GraphPaint3.Color = SKColors.DarkRed;
+            graphTrendMonitor2.GraphPaint4.Color = SKColors.DarkRed;
+            graphTrendMonitor2.GraphPaint5.Color = SKColors.Black;
+            graphTrendMonitor2.GraphicsClearanceRate = 5000;
+            graphTrendMonitor2.BackgroundColor = SKColors.White;
+            graphTrendMonitor2.GridLineAxisPaint.Color = SKColors.Black;
+            graphTrendMonitor2.GridLinePaint.Color = SKColors.Black;
+            graphTrendMonitor2.LegendTextPaint.Color = SKColors.Black;
+            graphTrendMonitor2.GridAxisLabelsPaint.Color = SKColors.Black;
+        }
+
+        void ConfigureTrendGraph3()
+        {
+            graphTrendMonitor3.GraphMaxY = 25;
+            graphTrendMonitor3.GraphMinY = -15;
+            graphTrendMonitor3.GraphMaxX = 20;
+            graphTrendMonitor3.DataRefreshRate = 15;
+            graphTrendMonitor3.PixelPerDataPoint = 2;
+            graphTrendMonitor3.Graph1Enabled = true;
+            graphTrendMonitor3.Graph2Enabled = true;
+            graphTrendMonitor3.Graph3Enabled = true;
+            graphTrendMonitor3.Graph4Enabled = true;
+            graphTrendMonitor3.Graph5Enabled = true;
+            graphTrendMonitor3.IsSideScrolling = true;
+            graphTrendMonitor3.XAxisTitle = "time";
+            graphTrendMonitor3.HideYAxisLabels = false;
+            graphTrendMonitor3.HideXAxisLabels = false;
+            graphTrendMonitor3.NoGrid = false;
+            graphTrendMonitor3.Legend1 = "pH";
+            graphTrendMonitor3.Legend2 = "po2";
+            graphTrendMonitor3.Legend3 = "pco2";
+            graphTrendMonitor3.Legend4 = "hco3";
+            graphTrendMonitor3.Legend5 = "be";
+            graphTrendMonitor3.HideLegends = false;
+            graphTrendMonitor3.GraphPaint1.Color = SKColors.DarkGreen;
+            graphTrendMonitor3.GraphPaint2.Color = SKColors.Fuchsia;
+            graphTrendMonitor3.GraphPaint3.Color = SKColors.DarkRed;
+            graphTrendMonitor3.GraphPaint4.Color = SKColors.DarkRed;
+            graphTrendMonitor3.GraphPaint5.Color = SKColors.Black;
+            graphTrendMonitor3.GraphicsClearanceRate = 5000;
+            graphTrendMonitor3.BackgroundColor = SKColors.White;
+            graphTrendMonitor3.GridLineAxisPaint.Color = SKColors.Black;
+            graphTrendMonitor3.GridLinePaint.Color = SKColors.Black;
+            graphTrendMonitor3.LegendTextPaint.Color = SKColors.Black;
+            graphTrendMonitor3.GridAxisLabelsPaint.Color = SKColors.Black;
+        }
+
+        void ModelInterface_PropertyChanged(object sender, PropertyChangedEventArgs e)
         { 
             switch (e.PropertyName)
             {
@@ -418,9 +546,20 @@ namespace PhysModelGUI
 
         }
 
-        void UpdateTrendGraph()
+        void UpdateTrendGraph1()
         {
-            graphTrendMonitor.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate,0, PhysModelMain.modelInterface.ArterialSO2Pre, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure,0,PhysModelMain.modelInterface.RespiratoryRate);
+            graphTrendMonitor1.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.ArterialSO2Pre, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
+       
+        }
+
+        void UpdateTrendGraph2()
+        {
+            //graphTrendMonitor2.UpdateRealtimeGraphData(0, 20, 0, 30, 0, 40, 0, 50, 0, 60);
+        }
+
+        void UpdateTrendGraph3()
+        {
+            //graphTrendMonitor3.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.ArterialPH, 0, PhysModelMain.modelInterface.ArterialPO2, 0, PhysModelMain.modelInterface.ArterialPCO2, 0, PhysModelMain.modelInterface.ArterialHCO3, 0, PhysModelMain.modelInterface.ArterialBE);
         }
 
         void UpdatePVLoops()
@@ -613,7 +752,7 @@ namespace PhysModelGUI
             
         }
 
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             // update the graph
 
@@ -668,9 +807,22 @@ namespace PhysModelGUI
                 Pco2alv = PhysModelMain.modelInterface.AlveolarPCO2;
                 Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
-                UpdateTrendGraph();
-                graphTrendMonitor.DrawGraphOnScreen();
+                UpdateTrendGraph1();
+                UpdateTrendGraph2();
+                UpdateTrendGraph3();
 
+                switch (trendGraphSelection)
+                {
+                    case 1:
+                        graphTrendMonitor1.DrawGraphOnScreen();
+                        break;
+                    case 2:
+                        graphTrendMonitor2.DrawGraphOnScreen();
+                        break;
+                    case 3:
+                        graphTrendMonitor3.DrawGraphOnScreen();
+                        break;
+                }
             }
             slowUpdater += graphicsRefreshInterval;
  
@@ -1330,9 +1482,34 @@ namespace PhysModelGUI
             }
         }
 
-        private void CanvasTrendMonitor_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintSurfaceEventArgs e)
+        private void MenuPDA_Click(object sender, RoutedEventArgs e)
         {
+            ViewPDAEnabled = !ViewPDAEnabled;
+            ModelGraphic.PDAView(ViewPDAEnabled);
+        }
 
+        private void MenuOFO_Click(object sender, RoutedEventArgs e)
+        {
+            ViewOFOEnabled = !ViewOFOEnabled;
+            ModelGraphic.OFOView(ViewOFOEnabled);
+        }
+
+        private void MenuVSD_Click(object sender, RoutedEventArgs e)
+        {
+            ViewVSDEnabled = !ViewVSDEnabled;
+            ModelGraphic.VSDView(ViewVSDEnabled);
+        }
+
+        private void MenuLUNGSHUNT_Click(object sender, RoutedEventArgs e)
+        {
+            ViewSHUNTEnabled = !ViewSHUNTEnabled;
+            ModelGraphic.LUNGSHUNTView(ViewSHUNTEnabled);
+        }
+
+        private void MenuMYO_Click(object sender, RoutedEventArgs e)
+        {
+            ViewMYOEnabled = !ViewMYOEnabled;
+            ModelGraphic.MYOView(ViewMYOEnabled);
         }
     }
 }

@@ -148,7 +148,7 @@ namespace PhysModelGUI
             {
                 Style = SKPaintStyle.Stroke,
                 Color = SKColors.Red,
-                StrokeWidth = 2,
+                StrokeWidth = 3,
                 StrokeCap = SKStrokeCap.Round,
                 IsAntialias = true
             };
@@ -159,7 +159,7 @@ namespace PhysModelGUI
             {
                 Style = SKPaintStyle.Stroke,
                 Color = SKColors.White,
-                StrokeWidth = 2,
+                StrokeWidth = 3,
                 StrokeCap = SKStrokeCap.Round,
                 IsAntialias = true
             };
@@ -170,7 +170,7 @@ namespace PhysModelGUI
             {
                 Style = SKPaintStyle.Stroke,
                 Color = SKColors.LimeGreen,
-                StrokeWidth = 2,
+                StrokeWidth = 3,
                 StrokeCap = SKStrokeCap.Round,
                 IsAntialias = true
             };
@@ -185,7 +185,7 @@ namespace PhysModelGUI
 
                 Color = SKColors.Orange,
 
-                StrokeWidth = 2,
+                StrokeWidth = 3,
 
                 StrokeCap = SKStrokeCap.Round,
 
@@ -203,7 +203,7 @@ namespace PhysModelGUI
 
                 Color = SKColors.DarkOrange,
 
-                StrokeWidth = 2,
+                StrokeWidth = 3,
 
                 StrokeCap = SKStrokeCap.Round,
 
@@ -244,7 +244,7 @@ namespace PhysModelGUI
             LegendTextPaint = new SKPaint
             {
                 Typeface = SKTypeface.FromFamilyName("Arial Bold"),
-                FakeBoldText = false,
+                FakeBoldText = true,
                 Style = SKPaintStyle.Fill,
                 IsAntialias = true,
                 TextAlign = SKTextAlign.Left,
@@ -564,6 +564,8 @@ namespace PhysModelGUI
             if (Graph3Enabled && displayArray3 != null) _canvasGraph.DrawPoints(PointMode3, displayArray3, GraphPaint3);
             if (Graph4Enabled && displayArray4 != null) _canvasGraph.DrawPoints(PointMode4, displayArray4, GraphPaint4);
             if (Graph5Enabled && displayArray5 != null) _canvasGraph.DrawPoints(PointMode5, displayArray5, GraphPaint5);
+
+            
         }
 
         public void RedrawGrid()
