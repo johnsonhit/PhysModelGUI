@@ -108,7 +108,10 @@
             <StackPanel Margin="0,0,5,0">
                 <Expander IsExpanded="False" Header="Conditions" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander Header=" heart" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+
+                        </Expander>
+                        <Expander Header=" circulation" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
                         </Expander>
                         <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
@@ -125,7 +128,113 @@
 
                 <Expander IsExpanded="False" Header="Global model settings" Background="DarkSlateGray" Margin="10,0,0,10" Padding="5,5,5,5" Opacity="0.8" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="SlateGray" Opacity="0.8">
-                        <Expander Header=" cardiovascular" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
+                        <Expander Header=" heart" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <StackPanel>
+                            <TextBlock Grid.Column="0" FontSize="10" Text="> left heart contractility change" Margin="30,0,0,5"></TextBlock>
+                            <Grid Margin="40,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Slider Grid.Column="0" Minimum="-10" Maximum="10" Value="0"></Slider>
+                                <TextBlock Grid.Column="1" FontSize="10" Text="0%" HorizontalAlignment="Center"></TextBlock>
+                            </Grid>
+                            <TextBlock Grid.Column="0" FontSize="10" Text="> right heart contractility change" Margin="30,0,0,5"></TextBlock>
+                            <Grid Margin="40,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Slider Grid.Column="0" Minimum="-10" Maximum="10" Value="0"></Slider>
+                                <TextBlock Grid.Column="1" FontSize="10" Text="0%" HorizontalAlignment="Center"></TextBlock>
+                            </Grid>
+                           </StackPanel>
+                        </Expander>
+                            <Expander Header=" circulation" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <StackPanel>
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> systemic vascular resistance change" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                               
+                                    <Slider Grid.Column="0" Minimum="-10" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="0%" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> pulmonary vascular resistance change" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Slider Grid.Column="0" Minimum="-10" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="0%" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> venous reservoir volume change" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Slider Grid.Column="0" Minimum="-10" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="0%" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                               
+                            </StackPanel>
+                        </Expander>
+                        <Expander Header=" shunts" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <StackPanel>
+                            
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> ductus arteriosus size" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                             
+                                    <Slider x:Name="sliPDASize" Grid.Column="0" Minimum="0" Maximum="10"  Value="100" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="{Binding ElementName=sliPDASize, Path=Value, StringFormat={}{0:#.00}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> foramen ovale size" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Slider Grid.Column="0" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="0 mm" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> ventricular septal defect size" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Slider Grid.Column="0" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="0 mm" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                                <TextBlock Grid.Column="0" FontSize="10" Text="> lung shunt size" Margin="30,0,0,5"></TextBlock>
+                                <Grid Margin="40,0,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Slider Grid.Column="0" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" FontSize="10" Text="0 mm" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+
+                            </StackPanel>
+                        </Expander>
                         <Expander Header=" lung and chestwall" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                         <Expander Header=" metabolic" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
                     </StackPanel>

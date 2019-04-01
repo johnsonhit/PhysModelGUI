@@ -1511,5 +1511,14 @@ namespace PhysModelGUI
             ViewMYOEnabled = !ViewMYOEnabled;
             ModelGraphic.MYOView(ViewMYOEnabled);
         }
+
+        private void SliPDASize_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (initialized)
+            {
+             
+                PhysModelMain.modelInterface.AdjustPDASize(sliPDASize.Value);
+            }
+        }
     }
 }
