@@ -43,6 +43,9 @@ namespace PhysModelGUI
         int selectedPVID = 0;
         int trendGraphSelection = 1;
 
+        bool _spontBreathingEnabled = true;
+        public bool SpontBreathingEnabled { get { return _spontBreathingEnabled; } set { _spontBreathingEnabled = value; PhysModelMain.modelInterface.SwitchSpontaneousBreathing(SpontBreathingEnabled); OnPropertyChanged(); } }
+
         bool _viewOFOEnabled = false;
         public bool ViewOFOEnabled { get { return _viewOFOEnabled; } set { _viewOFOEnabled = value; OnPropertyChanged(); } }
 
@@ -1199,8 +1202,8 @@ namespace PhysModelGUI
                         selectedConnector5 = (Connector)PhysModelMain.FindBloodConnectorByName("AD_LIVER");
                         break;
                     case 4: //  foramen ovale
-                        graphFlows.GraphMaxY = 50;
-                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxY = 10;
+                        graphFlows.GraphMinY = -10;
                         graphFlows.GraphMaxX = 20;
                         graphFlows.Legend1 = "asd";
                         graphFlows.Legend2 = "";
@@ -1226,8 +1229,8 @@ namespace PhysModelGUI
                         graphFlows.Graph5Enabled = false;
                         break;
                     case 5: // vsd
-                        graphFlows.GraphMaxY = 50;
-                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxY = 10;
+                        graphFlows.GraphMinY = -10;
                         graphFlows.GraphMaxX = 20;
                         graphFlows.Legend1 = "vsd";
                         graphFlows.Legend2 = "";
@@ -1254,8 +1257,8 @@ namespace PhysModelGUI
                         graphFlows.Graph5Enabled = false;
                         break;
                     case 6: // ductus
-                        graphFlows.GraphMaxY = 50;
-                        graphFlows.GraphMinY = -50;
+                        graphFlows.GraphMaxY = 10;
+                        graphFlows.GraphMinY = -10;
                         graphFlows.GraphMaxX = 20;
                         graphFlows.Legend1 = "ductus";
                         graphFlows.Legend2 = "";
@@ -1520,5 +1523,7 @@ namespace PhysModelGUI
                 PhysModelMain.modelInterface.AdjustPDASize(sliPDASize.Value);
             }
         }
+
+    
     }
 }
