@@ -43,6 +43,8 @@ namespace PhysModelGUI
         int selectedPVID = 0;
         int trendGraphSelection = 1;
 
+        bool mainDiagramAnimationEnabled = false;
+
         bool _spontBreathingEnabled = true;
         public bool SpontBreathingEnabled { get { return _spontBreathingEnabled; } set { _spontBreathingEnabled = value; PhysModelMain.modelInterface.SwitchSpontaneousBreathing(SpontBreathingEnabled); OnPropertyChanged(); } }
 
@@ -829,9 +831,8 @@ namespace PhysModelGUI
             }
             slowUpdater += graphicsRefreshInterval;
  
-            canvasDiagram.InvalidateVisual();
-
-         
+            if (mainDiagramAnimationEnabled)
+                canvasDiagram.InvalidateVisual();
 
             if (GraphPressureEnabled)
                 graphPressures.DrawGraphOnScreen();
