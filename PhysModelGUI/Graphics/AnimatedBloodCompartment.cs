@@ -147,7 +147,7 @@ namespace PhysModelGUI
                 mainRect.Bottom = bottom;
 
                 using (SKPath path = new SKPath())
-                {
+                {            
                     path.AddArc(mainRect, StartAngle, Math.Abs(StartAngle - EndAngle) * Direction);
                     circleOut.Color = paint.Color;
 

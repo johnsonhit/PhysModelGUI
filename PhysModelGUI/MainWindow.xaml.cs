@@ -1,4 +1,5 @@
-﻿using PhysModelLibrary;
+﻿using PhysModelGUI.ViewModels;
+using PhysModelLibrary;
 using PhysModelLibrary.BaseClasses;
 using PhysModelLibrary.Compartments;
 using SkiaSharp;
@@ -35,6 +36,27 @@ namespace PhysModelGUI
         public static List<AnimatedBloodCompartment> animatedBloodCompartments = new List<AnimatedBloodCompartment>();
         public static AnimatedBloodCompartment leftAtrium;
         public static AnimatedBloodCompartment leftVentricle;
+
+        double currentProgress = 0;
+        public double CurrentProgress
+        {
+            get { return currentProgress; }
+            set
+            {
+
+                currentProgress = value;
+                OnPropertyChanged();
+                TestMethod(value);
+            }
+        }
+
+        public void TestMethod(double v)
+        {
+   
+        }
+    
+
+
 
         DispatcherTimer dispatcherTimer = new DispatcherTimer(DispatcherPriority.Render);
 
@@ -283,10 +305,24 @@ namespace PhysModelGUI
         double pressureGraphScaleOffset = 0;
         double pvGraphScaleOffset = 0;
 
+        MainWindowViewModel viewModel;
 
+        public RelayCommand testCommand { get; set; }
+
+        public void TestAction(object text)
+        {
+            Console.WriteLine(text);
+
+        }
         public MainWindow()
         {
             InitializeComponent();
+
+            testCommand = new RelayCommand(TestAction);
+
+    
+            // declare and assign the viewmodel
+            viewModel = new MainWindowViewModel();
             this.DataContext = this;
   
             PhysModelMain.Initialize();
@@ -294,6 +330,7 @@ namespace PhysModelGUI
             PhysModelMain.Start();
 
             ModelGraphic.BuildDiagram();
+
 
             dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, graphicsRefreshInterval);
@@ -1525,6 +1562,16 @@ namespace PhysModelGUI
             }
         }
 
-    
+        private void SliPQTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
+
+      
+
+        
+
     }
+
+   
 }

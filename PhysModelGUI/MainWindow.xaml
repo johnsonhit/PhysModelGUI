@@ -55,6 +55,8 @@
             <Style.Triggers>
             </Style.Triggers>
         </Style>
+
+       
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -109,18 +111,121 @@
                 <Expander IsExpanded="False" Header="Conditions" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Opacity="1" Foreground="White" BorderThickness="0">
                     <StackPanel Margin="5,0,5,5" >
                         <Expander Header=" heart" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1Fsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2Fsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" circulation" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1CCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2CCsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" pulmonary" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1CCCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2CCCsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" hypoxia" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1DDDDDsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2DDDDDsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
-                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5"/>
+
                     </StackPanel>
                 </Expander>
 
@@ -325,7 +430,8 @@
                 </Expander>
 
                 <Expander IsExpanded="False" Header="Specific model settings" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Foreground="White" BorderThickness="0">
-                    <StackPanel Margin="5,0,5,5"  Opacity="0.8">
+                    <StackPanel Margin="5,0,5,5">
+                        
                         <Expander IsExpanded="False" Header=" compartments" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Grid Margin="20,0,10,0" Background="DarkSlateGray">
                                 <Grid.ColumnDefinitions>
@@ -360,40 +466,261 @@
 
                             </Grid>
                         </Expander>
+                        
                         <Expander Header=" connectors" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
                         </Expander>
+                        
                         <Expander Header=" containers" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
                         </Expander>
+                        
                         <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
 
                         </Expander>
+                        
                         <Expander Header=" acidbase model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1ABsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ABSize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2ABsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2ABsize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" autonomic nervous system model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1ABBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2ABBsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" atrioventricular interaction model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1ABBBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2ABBBsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" breathing model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1ACCCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2ACCCsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" ecg model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="pq time" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliPQTime" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="1000"  Value="{Binding CurrentProgress}">
+                                        
+                                    </Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliPQTime, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="qrs time" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="2" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliQRSTime" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="1000" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliQRSTime, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="qt time" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="4" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliQTTime" Grid.Column="0" Grid.Row="5" Minimum="0" Maximum="1000" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliQTTime, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                </Grid>
+                            </Border>
 
                         </Expander>
+                        
                         <Expander Header=" heart model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1AHsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2AHsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" oxygenation model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1AOsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2AOsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                         <Expander Header=" ventilator model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sli1AVsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
+                                    <Slider x:Name="sli2AVsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                </Grid>
+                            </Border>
                         </Expander>
+                        
                     </StackPanel>
                 </Expander>
 
@@ -405,6 +732,7 @@
                         </StackPanel>
                     </Border>
                 </Expander>
+                <Button Content="TEST" Command ="{Binding testCommand}" CommandParameter="tim is gek" ></Button>
 
             </StackPanel>
         </ScrollViewer>
