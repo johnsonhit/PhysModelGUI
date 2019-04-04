@@ -39,7 +39,6 @@ namespace PhysModelGUI.ViewModels
         int _selectedIndexPVLoop = 0;
         public int SelectedIndexPVLoop { get { return _selectedIndexPVLoop; } set { _selectedIndexPVLoop = value; SelectPVloopGraph(value); OnPropertyChanged(); } }
 
-
         SKElement MainDiagram { get; set; }
         SKElement MainDiagramSkeleton { get; set; }
 
@@ -61,7 +60,6 @@ namespace PhysModelGUI.ViewModels
 
         bool _pvLoopGraphEnabled = false;
         public bool PVLoopGraphEnabled { get { return _pvLoopGraphEnabled; } set { _pvLoopGraphEnabled = value; OnPropertyChanged(); } }
-
 
         double pressureGraphScaleOffset = 0;
         double pvGraphScaleOffset = 0;
@@ -98,6 +96,7 @@ namespace PhysModelGUI.ViewModels
         Compartment selectedPV3Compartment;
         Compartment selectedPV4Compartment;
         Compartment selectedPV5Compartment;
+        List<PVPoint> PVDataBlock1 = new List<PVPoint>();
 
         bool _graph1PVDisabled = false;
         public bool Graph1PVDisabled { get { return _graph1PVDisabled; } set { _graph1PVDisabled = value; OnPropertyChanged(); } }
@@ -135,6 +134,9 @@ namespace PhysModelGUI.ViewModels
         bool _graph5FlowDisabled = false;
         public bool Graph5FlowDisabled { get { return _graph5FlowDisabled; } set { _graph5FlowDisabled = value; OnPropertyChanged(); } }
 
+
+
+        #region "Model dependent variables"
         string _modelName = "";
         public string ModelName { get { return _modelName; } set { _modelName = value; OnPropertyChanged(); } }
 
@@ -266,7 +268,7 @@ namespace PhysModelGUI.ViewModels
         public string Pco2alv { get { return _pco2alv; } set { _pco2alv = value; OnPropertyChanged(); } }
         string _endtidalco2 = "-";
         public string Endtidalco2 { get { return _endtidalco2; } set { _endtidalco2 = value; OnPropertyChanged(); } }
-
+        #endregion
 
         // commands
         public RelayCommand NewModelCommand { get; set; }
@@ -278,20 +280,37 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ShowVSDCommand { get; set; }
         public RelayCommand ShowLUNGSHUNTCommand { get; set; }
         public RelayCommand ShowMYOCommand { get; set; }
+        public RelayCommand ClearLogCommand { get; set; }
 
-        void NewModel(object p) { }
-        void LoadModel(object p) { }
-        void SaveModel(object p) { }
-        void Exit(object p) { }
-        void ShowPDA(object p) { }
-        void ShowOFO(object p) { }
-        void ShowVSD(object p) { }
-        void ShowLUNGSHUNT(object p) { }
-        void ShowMYO(object p) { }
+        // command functions
+        void NewModel(object p)         { }
+        void LoadModel(object p)        { }
+        void SaveModel(object p)        { }
+        void Exit(object p)             { }
+        void ShowPDA(object p)          { ModelGraphic.PDAView((bool)p); }
+        void ShowOFO(object p)          { ModelGraphic.OFOView((bool)p); }
+        void ShowVSD(object p)          { ModelGraphic.VSDView((bool)p); }
+        void ShowLUNGSHUNT(object p)    { ModelGraphic.LUNGSHUNTView((bool)p); }
+        void ShowMYO(object p)          { ModelGraphic.MYOView((bool)p); }
+        void ClearLog(object p)         { ModelLog.Clear(); }
 
-        List<PVPoint> PVDataBlock1 = new List<PVPoint>();
+        private void SetCommands()
+        {
+            NewModelCommand = new RelayCommand(NewModel);
+            LoadModelCommand = new RelayCommand(LoadModel);
+            SaveModelCommand = new RelayCommand(SaveModel);
+            ExitCommand = new RelayCommand(Exit);
 
-       
+            ShowPDACommand = new RelayCommand(ShowPDA);
+            ShowOFOCommand = new RelayCommand(ShowOFO);
+            ShowVSDCommand = new RelayCommand(ShowVSD);
+            ShowLUNGSHUNTCommand = new RelayCommand(ShowLUNGSHUNT);
+            ShowMYOCommand = new RelayCommand(ShowMYO);
+            ClearLogCommand = new RelayCommand(ClearLog);
+        }
+
+   
+
         public MainWindowViewModel()
         {
             // 
@@ -375,16 +394,16 @@ namespace PhysModelGUI.ViewModels
             if (mainDiagramAnimationEnabled && MainDiagram != null)
                 MainDiagram.InvalidateVisual();
 
-            if (PressureGraphEnabled)
+            if (PressureGraphEnabled && PressureGraph != null)
                 PressureGraph.DrawGraphOnScreen();
 
-            if (FlowGraphEnabled)
+            if (FlowGraphEnabled && FlowGraph != null)
                 FlowGraph.DrawGraphOnScreen();
 
-            if (PatMonitorGraphEnabled)
+            if (PatMonitorGraphEnabled && PatMonitorGraph != null)
                 PatMonitorGraph.DrawGraphOnScreen();
 
-            if (PVLoopGraphEnabled)
+            if (PVLoopGraphEnabled && PVLoopGraph != null)
                 PVLoopGraph.DrawGraphOnScreen();
         }
 
@@ -520,6 +539,7 @@ namespace PhysModelGUI.ViewModels
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("PA");
                         selectedPres4Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
+                        selectedPres5Compartment = null;
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
@@ -550,6 +570,7 @@ namespace PhysModelGUI.ViewModels
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
                         selectedPres4Compartment = null;
+                        selectedPres5Compartment = null;
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
@@ -580,6 +601,7 @@ namespace PhysModelGUI.ViewModels
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
                         selectedPres4Compartment = null;
+                        selectedPres5Compartment = null;
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
@@ -610,6 +632,7 @@ namespace PhysModelGUI.ViewModels
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
                         selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+                        selectedPres5Compartment = null;
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
@@ -895,19 +918,7 @@ namespace PhysModelGUI.ViewModels
 
         }
 
-        private void SetCommands()
-        {
-            NewModelCommand = new RelayCommand(NewModel);
-            LoadModelCommand = new RelayCommand(LoadModel);
-            SaveModelCommand = new RelayCommand(SaveModel);
-            ExitCommand = new RelayCommand(Exit);
-
-            ShowPDACommand = new RelayCommand(ShowPDA);
-            ShowOFOCommand = new RelayCommand(ShowOFO);
-            ShowVSDCommand = new RelayCommand(ShowVSD);
-            ShowLUNGSHUNTCommand = new RelayCommand(ShowLUNGSHUNT);
-            ShowMYOCommand = new RelayCommand(ShowMYO);
-        }
+ 
 
         private void ModelInterface_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -925,11 +936,6 @@ namespace PhysModelGUI.ViewModels
                     ModelLog.Add(PhysModelMain.modelInterface.StatusMessage);
                     break;
             }
-        }
-
-        public void ClearModelLog()
-        {
-            ModelLog.Clear();
         }
 
         void CalculateElastanceCurve(string _compartmentName)
