@@ -86,7 +86,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>MedicalLaptop.ico</ApplicationIcon>
+    <ApplicationIcon>Graphics\MedicalLaptop.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MathNet.Numerics, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -171,19 +171,18 @@
     <Compile Include="Graphics\AnimatedShunt.cs" />
     <Compile Include="Graphics\AnimatedShuntGas.cs" />
     <Compile Include="Graphics\AnimatedValve.cs" />
-    <Compile Include="Graphics\SkiaGraph.cs" />
-    <Compile Include="ModelGraphic.cs" />
+    <Compile Include="Graphics\ModelGraphic.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ParameterGraph.xaml">
+    <Page Include="Graphics\ParameterGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ParameterGraph.xaml.cs">
+    <Compile Include="Graphics\ParameterGraph.xaml.cs">
       <DependentUpon>ParameterGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -229,7 +228,7 @@
     <Content Include="libSkiaSharp.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="MedicalLaptop.ico" />
+    <Resource Include="Graphics\MedicalLaptop.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
