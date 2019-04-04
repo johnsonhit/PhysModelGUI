@@ -74,15 +74,15 @@
             </MenuItem>
             <MenuItem Header="_View">
                 <MenuItem Header="_Components">
-                    <MenuItem x:Name="menuMYO" Header="_Myocardium" IsCheckable="False" IsChecked="{Binding ViewMYOEnabled}" Click="MenuMYO_Click" />
+                    <MenuItem x:Name="menuMYO" Header="_Myocardium" IsCheckable="False" IsChecked="{Binding ViewMYOEnabled}"  />
                     <MenuItem x:Name="menuPLACENTA" Header="_Placenta"></MenuItem>
                 </MenuItem>
                 <MenuItem Header="_Shunts">
-                    
-                    <MenuItem x:Name="menuPDA" Header="_Ductus arteriosus" IsCheckable="False" IsChecked="{Binding ViewPDAEnabled}" Click="MenuPDA_Click"  />
-                    <MenuItem x:Name="menuOFO" Header="_Foramen ovale" IsCheckable="False" IsChecked="{Binding ViewOFOEnabled}" Click="MenuOFO_Click"/>
-                    <MenuItem x:Name="menuVSD" Header="_Ventricular septal defect" IsCheckable="False" IsChecked="{Binding ViewVSDEnabled}" Click="MenuVSD_Click" />
-                    <MenuItem x:Name="menuLUNGSHUNT" Header="_Lung shunt" IsCheckable="False" IsChecked="{Binding ViewSHUNTEnabled}" Click="MenuLUNGSHUNT_Click" />
+
+                    <MenuItem x:Name="menuPDA" Header="_Ductus arteriosus" IsCheckable="True" Command="{Binding PDAVisibiltyCommand}" CommandParameter="{Binding ElementName=menuPDA, Path=IsChecked}"/>
+                    <MenuItem x:Name="menuOFO" Header="_Foramen ovale" IsCheckable="False" IsChecked="{Binding ViewOFOEnabled}"/>
+                    <MenuItem x:Name="menuVSD" Header="_Ventricular septal defect" IsCheckable="False" IsChecked="{Binding ViewVSDEnabled}"  />
+                    <MenuItem x:Name="menuLUNGSHUNT" Header="_Lung shunt" IsCheckable="False" IsChecked="{Binding ViewSHUNTEnabled}"  />
                 </MenuItem>
                 <MenuItem Header="_Devices">
                     <MenuItem x:Name="menuALUNG" Header="_Artifical lung"></MenuItem>
@@ -129,7 +129,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Fsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1Fsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -158,7 +158,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1CCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1CCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -187,7 +187,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1CCCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1CCCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -216,7 +216,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1DDDDDsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1DDDDDsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -251,7 +251,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Asize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1Asize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -280,7 +280,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="systemic vascular resistance" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Size" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1Size" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1Size, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="pulmonary vascular resistance" Margin="0,5,0,5"></TextBlock>
@@ -317,7 +317,7 @@
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="ductus arteriosus size" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="size(mm)" FontSize="10" HorizontalAlignment="Center"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="0" Text="closed" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliPDASize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sliPDASize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliPDASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
                                     <CheckBox Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center"></CheckBox>
 
@@ -359,7 +359,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Bsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1Bsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -388,7 +388,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Csize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1Csize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -417,7 +417,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Dsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1Dsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -498,7 +498,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1ABsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1ABsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ABSize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -527,7 +527,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1ABBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1ABBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -556,7 +556,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1ABBBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1ABBBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -585,7 +585,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1ACCCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1ACCCsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -653,7 +653,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1AHsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1AHsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -682,7 +682,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1AOsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1AOsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -711,7 +711,7 @@
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1AVsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ValueChanged="SliPDASize_ValueChanged"></Slider>
+                                    <Slider x:Name="sli1AVsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
@@ -732,7 +732,6 @@
                         </StackPanel>
                     </Border>
                 </Expander>
-                <Button Content="TEST" Command ="{Binding testCommand}" CommandParameter="tim is gek" ></Button>
 
             </StackPanel>
         </ScrollViewer>
@@ -743,8 +742,8 @@
         <TextBlock Text="MONITORING" Grid.Column="2" TextAlignment="Center" Foreground="Black" FontWeight="DemiBold" FontSize="14" Margin="0,25,0,0"></TextBlock>
         <ScrollViewer Grid.Column="2"  Margin="0,50,5,25" VerticalScrollBarVisibility="Auto">
             <StackPanel Grid.Column="2" Margin="0,0,5,0">
-                
-                <Expander  Header="Patient monitor" IsExpanded="{Binding GraphPatMonitorEnabled, Mode=TwoWay}" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10"  Foreground="White" BorderThickness="0">
+
+                <Expander  Header="Patient monitor" IsExpanded="{Binding PatMonitorGraphEnabled, Mode=TwoWay}" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10"  Foreground="White" BorderThickness="0">
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" Margin="10,0,10,10">
                         <Grid Margin="5,5,5,5" Background="Black" >
                             <Grid.ColumnDefinitions>
@@ -1117,7 +1116,9 @@
                         <Expander x:Name="expGraphPressures" IsExpanded="{Binding GraphPressureEnabled, Mode=TwoWay}"  Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
                                 <StackPanel Margin="5,5,5,5">
-                                    <local:ParameterGraph x:Name="graphPressures" Height="150"></local:ParameterGraph>
+                                    <local:ParameterGraph x:Name="graphPressures" Height="150">
+                                        
+                                    </local:ParameterGraph>
                                     <TextBlock Text="  select pressure probe location" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
                                     <Grid Background="Black">
                                         <Grid.ColumnDefinitions>
@@ -1129,7 +1130,7 @@
                                             <ColumnDefinition Width="*"/>
 
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox Grid.Column="0" x:Name="cmbPressureGraphSelector" SelectionChanged="CmbPressureGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                        <ComboBox Grid.Column="0" SelectedIndex="{Binding SelectedIndexPressure}" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
                                             <ComboBoxItem Content="heart "  ></ComboBoxItem>
                                             <ComboBoxItem Content="left heart "  ></ComboBoxItem>
                                             <ComboBoxItem Content="right heart "  ></ComboBoxItem>
@@ -1161,7 +1162,7 @@
                                             <ColumnDefinition Width="*"/>
 
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox Grid.Column="0" x:Name="cmbFlowGraphSelector" SelectionChanged="CmbFlowGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                        <ComboBox Grid.Column="0" x:Name="cmbFlowGraphSelector" SelectedIndex="{Binding SelectedIndexFlow}"  Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
                                             <ComboBoxItem Content="left heart "  ></ComboBoxItem>
                                             <ComboBoxItem Content="right heart "  ></ComboBoxItem>
                                             <ComboBoxItem Content="pulmonary artery "  ></ComboBoxItem>
@@ -1197,7 +1198,7 @@
                                             <ColumnDefinition Width="*"/>
 
                                         </Grid.ColumnDefinitions>
-                                        <ComboBox Grid.Column="0" x:Name="cmbPVLoopsGraphSelector" SelectionChanged="CmbPVLoopsGraphSelector_SelectionChanged" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
+                                        <ComboBox Grid.Column="0" x:Name="cmbPVLoopsGraphSelector" SelectedIndex="{Binding SelectedIndexPVLoop}" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}">
                                             <ComboBoxItem Content="left ventricle "  ></ComboBoxItem>
                                             <ComboBoxItem Content="left atrium "  ></ComboBoxItem>
                                             <ComboBoxItem Content="right ventricle "  ></ComboBoxItem>
@@ -1224,11 +1225,9 @@
             </StackPanel>
         </ScrollViewer>
 
-        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="0,50,0,180" Opacity="1" IsEnabled="False"  PaintSurface="CanvasDiagramSkeleton_PaintSurface"></skia:SKElement>
-        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="0,50,0,180" PaintSurface="CanvasDiagram_PaintSurface"></skia:SKElement>
+        <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="0,50,0,180" Opacity="1" IsEnabled="False" ></skia:SKElement>
+        <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="0,50,0,180"></skia:SKElement>
     
         <local:ParameterGraph x:Name="graphTrendMonitor1" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
-        <local:ParameterGraph x:Name="graphTrendMonitor2" Visibility="Collapsed" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
-        <local:ParameterGraph x:Name="graphTrendMonitor3" Visibility="Collapsed" BorderThickness="0" Grid.Column="1" Height="150" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
