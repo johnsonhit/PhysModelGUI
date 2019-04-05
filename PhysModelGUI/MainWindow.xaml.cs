@@ -37,11 +37,13 @@ namespace PhysModelGUI
 
             // declare and assign the viewmodel
             viewModel = new MainWindowViewModel();
-            this.DataContext = viewModel;
+            DataContext = viewModel;
 
             // send the graphs to the viewmodel
             viewModel.InitDiagram(canvasDiagram, canvasDiagramSkeleton);
             viewModel.InitPressureGraph(graphPressures);
+            viewModel.InitFlowGraph(graphFlows);
+            viewModel.InitPVLoopGraph(graphPVLoops);
             viewModel.InitPatMonitor(graphPatMonitor);
             viewModel.InitTrendsGraph(graphTrendMonitor1);
 
