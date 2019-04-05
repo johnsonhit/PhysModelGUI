@@ -134,7 +134,447 @@ namespace PhysModelGUI.ViewModels
         bool _graph5FlowDisabled = false;
         public bool Graph5FlowDisabled { get { return _graph5FlowDisabled; } set { _graph5FlowDisabled = value; OnPropertyChanged(); } }
 
-        #region "Model dependent variables"
+        #region "independent model parameters setters"
+        // Breathing model
+        public bool SpontaneousBreathing
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.SpontBreathingEnabled : true;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.SpontBreathingEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double VERef
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.VERef : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.VERef = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double VEMax
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.VEMax : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.VEMax = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double VtRrRatio
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.VtRrRatio : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.VtRrRatio = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double BreathDuration
+        { get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.BreathDuration : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.BreathDuration = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double BreathDurationRand
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.BreathDurationRand : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.BreathDurationRand = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double BreathDepthRand
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.BreathDepthRand : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.BreathDepthRand = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ApnoeOccurence
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ApnoeOccurence : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ApnoeOccurence = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ApnoeDuration
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ApnoeDuration : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ApnoeDuration = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ApnoeDurationRand
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ApnoeDurationRand : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ApnoeDurationRand = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        // ecg model
+        public double PQTime
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.PQTime : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.PQTime = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double QRSTime
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.QRSTime : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.QRSTime = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double QTTime
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.QTTime : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.QTTime = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double VentEscapeRate
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.VentEscapeRate : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.VentEscapeRate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double WandPacemakerRate
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.WandPacemakerRate : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.WandPacemakerRate = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double PWaveAmp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.PWaveAmp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.PWaveAmp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TWaveAmp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TWaveAmp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TWaveAmp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public int NoiseLevel
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NoiseLevel : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.NoiseLevel = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public int RhythmType
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.RhythmType : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.RhythmType = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        // mechanical ventilator 
+        public bool VirtualVentilatorEnabled
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.VirtualVentilatorEnabled : true;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.VirtualVentilatorEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool Vent_VolumeControlled
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_VolumeControlled : true;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_VolumeControlled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_PIP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_PIP : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_PIP = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_PEEP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_PEEP : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_PEEP = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_InspFlow
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_InspFlow : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_InspFlow = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_ExpFlow
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_ExpFlow : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_ExpFlow = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_TargetTidalVolume
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_TargetTidalVolume : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_TargetTidalVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_TIn
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_TIn : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_TIn = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_TOut
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_TOut : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_TOut = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Vent_TriggerVolume
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vent_TriggerVolume : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vent_TriggerVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        #endregion
+
+        #region "dependent model variable getters"
         string _modelName = "";
         public string ModelName { get { return _modelName; } set { _modelName = value; OnPropertyChanged(); } }
 
@@ -280,6 +720,7 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ShowMYOCommand { get; set; }
         public RelayCommand ClearLogCommand { get; set; }
 
+
         // command functions
         void NewModel(object p) { }
         void LoadModel(object p) { }
@@ -305,6 +746,8 @@ namespace PhysModelGUI.ViewModels
             ShowLUNGSHUNTCommand = new RelayCommand(ShowLUNGSHUNT);
             ShowMYOCommand = new RelayCommand(ShowMYO);
             ClearLogCommand = new RelayCommand(ClearLog);
+
+           
         }
 
         public MainWindowViewModel()
@@ -1363,7 +1806,10 @@ namespace PhysModelGUI.ViewModels
         }
 
  
+        void UpdateBreathingModel()
+        {
 
+        }
 
 
     }

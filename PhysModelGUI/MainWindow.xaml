@@ -598,57 +598,47 @@
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="spontaneous breathing" Margin="0,0,0,5"></TextBlock>
-                                    <CheckBox Grid.Column="1" Grid.Row="0" FontSize="10" HorizontalAlignment="Center"/>
+                                    <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding SpontaneousBreathing, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center"/>
                                     
                                     <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="reference exhaled minute volume" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="2" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVERef" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="2000"  Value="620" ></Slider>
+                                    <Slider x:Name="sliVERef" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="2000"  Value="{Binding VERef,Mode=TwoWay}" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="2" FontSize="10" Text="{Binding ElementName=sliVERef, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="maximal exhaled minute volume" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="4" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVEMax" Grid.Column="0" Grid.Row="4" Minimum="0" Maximum="5000"  Value="2000" ></Slider>
+                                    <Slider x:Name="sliVEMax" Grid.Column="0" Grid.Row="4" Minimum="0" Maximum="5000"  Value="{Binding VEMax, Mode=TwoWay}" ></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="4" FontSize="10" Text="{Binding ElementName=sliVEMax, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
                         
                                     <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="tidal volume / resp rate ratio" Margin="0,5,0,5"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="6" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVTRRRatio" Grid.Column="0" Grid.Row="6" Minimum="0.1" Maximum="1" Value="0.5"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="6" FontSize="10" Text="{Binding ElementName=sliVTRRRatio, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliVTRRRatio" Grid.Column="0" Grid.Row="6" Minimum="0.1" Maximum="1" Value="{Binding VtRrRatio,Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="6" FontSize="10" Text="{Binding ElementName=sliVTRRRatio, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="breath duration" Margin="0,5,0,5"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="8" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliBreathDuration" Grid.Column="0" Grid.Row="8" Minimum="100" Maximum="5000" Value="1000"></Slider>
+                                    <Slider x:Name="sliBreathDuration" Grid.Column="0" Grid.Row="8" Minimum="100" Maximum="5000" Value="{Binding BreathDuration, Mode=TwoWay}"></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="8" FontSize="10" Text="{Binding ElementName=sliBreathDuration, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="breath duration randomness" Margin="0,5,0,5"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="10" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliBreathDurationRand" Grid.Column="0" Grid.Row="10" Minimum="0" Maximum="500" Value="0"></Slider>
+                                    <Slider x:Name="sliBreathDurationRand" Grid.Column="0" Grid.Row="10" Minimum="0" Maximum="500" Value="{Binding BreathDurationRand, Mode=TwoWay}"></Slider>
                                     <TextBlock Grid.Column="1" Grid.Row="10" FontSize="10" Text="{Binding ElementName=sliBreathDurationRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="11" FontSize="10" Text="breath depth randomness" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="12" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliBreathDepthRand" Grid.Column="0" Grid.Row="12" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="12" FontSize="10" Text="{Binding ElementName=sliBreathDepthRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="11" FontSize="10" Text="apnoe occurence" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="12" Text="/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliApnoeOccurence" Grid.Column="0" Grid.Row="12" Minimum="0" Maximum="10" Value="{Binding ApnoeOccurence, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="12" FontSize="10" Text="{Binding ElementName=sliApnoeOccurence, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="13" FontSize="10" Text="apnoe occurence" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="14" Text="/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeOccurence" Grid.Column="0" Grid.Row="14" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding ElementName=sliApnoeOccurence, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="13" FontSize="10" Text="apnoe duration" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="14" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliApnoeDuration" Grid.Column="0" Grid.Row="14" Minimum="5000" Maximum="200000" Value="{Binding ApnoeDuration, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding ElementName=sliApnoeDuration, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="15" FontSize="10" Text="apnoe occurence randomness" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="16" Text="/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeOccurenceRand" Grid.Column="0" Grid.Row="16" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="16" FontSize="10" Text="{Binding ElementName=sliApnoeOccurenceRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
-                                    
-                                    <TextBlock Grid.Column="0" Grid.Row="17" FontSize="10" Text="apnoe duration" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="18" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeDuration" Grid.Column="0" Grid.Row="18" Minimum="5000" Maximum="200000" Value="20000"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="18" FontSize="10" Text="{Binding ElementName=sliApnoeDuration, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
-
-                                    <TextBlock Grid.Column="0" Grid.Row="19" FontSize="10" Text="apnoe duration randomness" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="20" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeDurationRand" Grid.Column="0" Grid.Row="20" Minimum="2000" Maximum="10000" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="20" FontSize="10" Text="{Binding ElementName=sliApnoeDurationRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="15" FontSize="10" Text="apnoe duration randomness" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="16" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliApnoeDurationRand" Grid.Column="0" Grid.Row="16" Minimum="2000" Maximum="10000" Value="{Binding ApnoeDurationRand, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="16" FontSize="10" Text="{Binding ElementName=sliApnoeDurationRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
                                 </Grid>
                             </Border>
@@ -660,6 +650,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
@@ -670,24 +661,67 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="pq time" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliPQTime" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="1000"  Value="{Binding CurrentProgress}">
-                                        
-                                    </Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliPQTime, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="rhythm type" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <ComboBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}"/>
+                                
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="pq time" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliPQTime" Grid.Column="0" Grid.Row="3" Minimum="0.01" Maximum="1"  Value="{Binding PQTime, Mode=TwoWay}"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliPQTime, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="qrs time" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="2" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliQRSTime" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="1000" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliQRSTime, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="qrs time" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliQRSTime" Grid.Column="0" Grid.Row="5" Minimum="0.01" Maximum="1" Value="{Binding QRSTime, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliQRSTime, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="qt time" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="4" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliQTTime" Grid.Column="0" Grid.Row="5" Minimum="0" Maximum="1000" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliQTTime, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="qt time" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliQTTime" Grid.Column="0" Grid.Row="7" Minimum="0.01" Maximum="1" Value="{Binding QTTime, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliQTTime, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="ventricular escape rate" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="9" Text="bp," FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliVentEscapeRate" Grid.Column="0" Grid.Row="9" Minimum="0" Maximum="200" Value="{Binding VentEscapeRate, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliVentEscapeRate, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="wandering pacemaker rate" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="11" Text="bpm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliWandPaceRate" Grid.Column="0" Grid.Row="11" Minimum="0" Maximum="200" Value="{Binding WandPacemakerRate, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliWandPaceRate, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text="p wave amplification" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="13" Text="mm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliPAmp" Grid.Column="0" Grid.Row="13" Minimum="0" Maximum="50" Value="{Binding PWaveAmp, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="13" FontSize="10" Text="{Binding ElementName=sliPAmp, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="14" FontSize="10" Text="t wave amplification" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="15" Text="mm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliTAmp" Grid.Column="0" Grid.Row="15" Minimum="0" Maximum="50" Value="{Binding TWaveAmp, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="15" FontSize="10" Text="{Binding ElementName=sliTAmp, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="16" FontSize="10" Text="ecg noise level" Margin="0,5,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="17" Text="mm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliEcgNoise" Grid.Column="0" Grid.Row="17" Minimum="0" Maximum="10" Value="{Binding NoiseLevel, Mode=TwoWay}"></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="17" FontSize="10" Text="{Binding ElementName=sliEcgNoise, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    
                                 </Grid>
                             </Border>
 
@@ -757,6 +791,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"/>
@@ -767,15 +802,65 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1AVsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="mechanical ventilator enabled" Margin="0,0,0,5"></TextBlock>
+                                    <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding VirtualVentilatorEnabled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2AVsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="target tidal volume (volume control)" Margin="0,0,0,5"></TextBlock>
+                                    <CheckBox Grid.Column="1" Grid.Row="1"  IsChecked="{Binding Vent_VolumeControlled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="ml" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliTV" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="50"  Value="{Binding Vent_TargetTidalVolume, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="2" FontSize="10" Text="{Binding ElementName=sliTV, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="maximal inspiratory pressure (PIP)" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="cmH2O" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliVentPIP" Grid.Column="0" Grid.Row="4" Minimum="0" Maximum="40"  Value="{Binding Vent_PIP, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="4" FontSize="10" Text="{Binding ElementName=sliVentPIP, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="positive end expiratory pressure (PEEP)" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="cmH2O" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliVentPEEP" Grid.Column="0" Grid.Row="6" Minimum="0" Maximum="20"  Value="{Binding Vent_PEEP, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="6" FontSize="10" Text="{Binding ElementName=sliVentPEEP, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="inspiration time" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliTI" Grid.Column="0" Grid.Row="8" Minimum="0" Maximum="20"  Value="{Binding Vent_TIn, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="8" FontSize="10" Text="{Binding ElementName=sliTI, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="expiration time" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="10" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliTOUT" Grid.Column="0" Grid.Row="10" Minimum="0" Maximum="20"  Value="{Binding Vent_TOut, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="10" FontSize="10" Text="{Binding ElementName=sliTOUT, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="11" FontSize="10" Text="inspiratory flow" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="12" Text="l/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliInspFlow" Grid.Column="0" Grid.Row="12" Minimum="0" Maximum="20"  Value="{Binding VentInspFlow, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="12" FontSize="10" Text="{Binding ElementName=sliInspFlow, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="13" FontSize="10" Text="expiratory flow" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="14" Text="l/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliExpFlow" Grid.Column="0" Grid.Row="14" Minimum="0" Maximum="20"  Value="{Binding Vent_ExpFlow, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding ElementName=sliExpFlow, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="15" FontSize="10" Text="trigger volume" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="16" Text="ml" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliTrigger" Grid.Column="0" Grid.Row="16" Minimum="0" Maximum="20"  Value="{Binding Vent_TriggerVolume, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="16" FontSize="10" Text="{Binding ElementName=sliTrigger, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+
                                 </Grid>
                             </Border>
                         </Expander>
@@ -817,7 +902,7 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="HR" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                            <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="{Binding Heartrate}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                            <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="{Binding Heartrate, Mode=OneWay}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                             <TextBlock Grid.Column="1" Foreground="LimeGreen" Text="bpm" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
                             <TextBlock Grid.Column="1" Grid.Row="1" Foreground="Fuchsia" Text="SpO2" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
