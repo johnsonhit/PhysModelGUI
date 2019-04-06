@@ -201,7 +201,7 @@ namespace PhysModelGUI
 
                 Style = SKPaintStyle.Stroke,
 
-                Color = SKColors.DarkOrange,
+                Color = SKColors.Fuchsia,
 
                 StrokeWidth = 3,
 

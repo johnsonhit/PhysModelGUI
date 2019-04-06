@@ -1074,34 +1074,35 @@ namespace PhysModelGUI.ViewModels
 
                         break;
                     case 3: // lungs
-                        PressureGraph.GraphMaxY = 15;
-                        PressureGraph.GraphMinY = -15;
+                        PressureGraph.GraphMaxY = 50;
+                        PressureGraph.GraphMinY = -5;
                         PressureGraph.GraphMaxX = 20;
                         pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
 
-                        PressureGraph.Legend1 = "OUT";
-                        PressureGraph.Legend2 = "NCA";
-                        PressureGraph.Legend3 = "ALL";
-                        PressureGraph.Legend4 = "ALR";
+                        PressureGraph.Legend1 = "VENTIN";
+                        PressureGraph.Legend2 = "VENTOUT";
+                        PressureGraph.Legend3 = "TUBINGIN";
+                        PressureGraph.Legend4 = "TESTLUNG";
+                        PressureGraph.Legend5 = "TUBINGOUT";
                         PressureGraph.XAxisTitle = "time";
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("OUT");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
-                        selectedPres5Compartment = null;
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("VENTIN");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("VENTOUT");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGIN");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TESTLUNG");
+                        selectedPres5Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGOUT");
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
                         Graph3PressureDisabled = false;
                         Graph4PressureDisabled = false;
-                        Graph5PressureDisabled = true;
+                        Graph5PressureDisabled = false;
 
                         PressureGraph.Graph1Enabled = true;
                         PressureGraph.Graph2Enabled = true;
                         PressureGraph.Graph3Enabled = true;
                         PressureGraph.Graph4Enabled = true;
-                        PressureGraph.Graph5Enabled = false;
+                        PressureGraph.Graph5Enabled = true;
 
                         break;
                 }
@@ -1403,26 +1404,26 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.GraphMaxY = 100;
                         FlowGraph.GraphMinY = -100;
                         FlowGraph.GraphMaxX = 20;
-                        FlowGraph.Legend1 = "nca";
-                        FlowGraph.Legend2 = "all";
-                        FlowGraph.Legend3 = "alr";
-                        FlowGraph.Legend4 = "";
+                        FlowGraph.Legend1 = "vin-tin";
+                        FlowGraph.Legend2 = "tin-test";
+                        FlowGraph.Legend3 = "test-tout";
+                        FlowGraph.Legend4 = "tout-vout";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindGasConnectorByName("OUT_NCA");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALL");
-                        selectedFlow3Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALR");
-                        selectedFlow4Connector = null;
+                        selectedFlow1Connector = (Connector)PhysModelMain.FindGasConnectorByName("VENTIN_TUBINGIN");
+                        selectedFlow2Connector = (Connector)PhysModelMain.FindGasConnectorByName("TUBINGIN_TESTLUNG");
+                        selectedFlow3Connector = (Connector)PhysModelMain.FindGasConnectorByName("TESTLUNG_TUBINGOUT");
+                        selectedFlow4Connector = (Connector)PhysModelMain.FindGasConnectorByName("TUBINGOUT_VENTOUT"); ;
                         selectedFlow5Connector = null;
 
                         Graph1FlowDisabled = false;
                         Graph2FlowDisabled = false;
                         Graph3FlowDisabled = false;
-                        Graph4FlowDisabled = true;
+                        Graph4FlowDisabled = false;
                         Graph5FlowDisabled = true;
                         FlowGraph.Graph1Enabled = true;
                         FlowGraph.Graph2Enabled = true;
                         FlowGraph.Graph3Enabled = true;
-                        FlowGraph.Graph4Enabled = false;
+                        FlowGraph.Graph4Enabled = true;
                         FlowGraph.Graph5Enabled = false;
                         break;
 
