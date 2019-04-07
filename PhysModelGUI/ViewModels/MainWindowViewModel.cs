@@ -1154,7 +1154,7 @@ namespace PhysModelGUI.ViewModels
                 }
                 else
                 {
-                    param1 = selectedFlow1Connector.RealFlow;
+                    param1 = selectedFlow1Connector.RealFlow * 60 / 1000;
                     FlowGraph.Graph1Enabled = true;
                 }
 
@@ -1164,7 +1164,7 @@ namespace PhysModelGUI.ViewModels
                 }
                 else
                 {
-                    param2 = selectedFlow2Connector.RealFlow;
+                    param2 = selectedFlow2Connector.RealFlow * 60 / 1000;
                     FlowGraph.Graph2Enabled = true;
                 }
 
@@ -1174,7 +1174,7 @@ namespace PhysModelGUI.ViewModels
                 }
                 else
                 {
-                    param3 = selectedFlow3Connector.RealFlow;
+                    param3 = selectedFlow3Connector.RealFlow * 60 / 1000;
                     FlowGraph.Graph3Enabled = true;
                 }
 
@@ -1184,7 +1184,7 @@ namespace PhysModelGUI.ViewModels
                 }
                 else
                 {
-                    param4 = selectedFlow4Connector.RealFlow;
+                    param4 = selectedFlow4Connector.RealFlow * 60 / 1000;
                     FlowGraph.Graph4Enabled = true;
                 }
 
@@ -1194,7 +1194,7 @@ namespace PhysModelGUI.ViewModels
                 }
                 else
                 {
-                    param5 = selectedFlow5Connector.RealFlow;
+                    param5 = selectedFlow5Connector.RealFlow * 60 / 1000;
                     FlowGraph.Graph5Enabled = true;
                 }
 
@@ -1374,6 +1374,7 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Graph4Enabled = false;
                         FlowGraph.Graph5Enabled = false;
                         break;
+
                     case 6: // ductus
                         FlowGraph.GraphMaxY = 10;
                         FlowGraph.GraphMinY = -10;
@@ -1401,8 +1402,8 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Graph5Enabled = false;
                         break;
                     case 7: // lungs
-                        FlowGraph.GraphMaxY = 100;
-                        FlowGraph.GraphMinY = -100;
+                        FlowGraph.GraphMaxY = 20;
+                        FlowGraph.GraphMinY = 0;
                         FlowGraph.GraphMaxX = 20;
                         FlowGraph.Legend1 = "vin-tin";
                         FlowGraph.Legend2 = "tin-test";
