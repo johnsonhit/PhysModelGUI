@@ -592,7 +592,7 @@ namespace PhysModelGUI
                 Name = "AIRWAY"
             };
             OUTNCA.AddConnector(PhysModelMain.FindGasConnectorByName("OUT_NCA"));
-            animatedShuntsGas.Add(OUTNCA);
+            //animatedShuntsGas.Add(OUTNCA);
 
             AAMYO = new AnimatedBloodConnector
             {

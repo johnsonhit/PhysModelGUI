@@ -782,8 +782,7 @@ namespace PhysModelGUI.ViewModels
                 Pap = PhysModelMain.modelInterface.PulmonaryArteryPressure.ToString();
                 Cvp = PhysModelMain.modelInterface.CentralVenousPressure.ToString();
                 Resprate = PhysModelMain.modelInterface.RespiratoryRate.ToString();
-                //Temp = PhysModelMain.modelInterface.PatientTemperature.ToString();
-                Temp = PhysModelMain.currentModel.VENTIN.PresCurrent.ToString();
+                Temp = PhysModelMain.modelInterface.PatientTemperature.ToString();
                 Lvo = PhysModelMain.modelInterface.LeftVentricularOutput.ToString();
                 Rvo = PhysModelMain.modelInterface.RightVentricularOutput.ToString();
                 Ivcflow = PhysModelMain.modelInterface.InferiorVenaCavaFlow.ToString();
@@ -1084,14 +1083,14 @@ namespace PhysModelGUI.ViewModels
                         PressureGraph.Legend1 = "VENTIN";
                         PressureGraph.Legend2 = "VENTOUT";
                         PressureGraph.Legend3 = "TUBINGIN";
-                        PressureGraph.Legend4 = "NCA2";
+                        PressureGraph.Legend4 = "NCA";
                         PressureGraph.Legend5 = "TUBINGOUT";
                         PressureGraph.XAxisTitle = "time";
 
                         selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("VENTIN");
                         selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("VENTOUT");
                         selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGIN");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA2");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
                         selectedPres5Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGOUT");
 
                         Graph1PressureDisabled = false;
@@ -1407,14 +1406,14 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.GraphMaxY = 20;
                         FlowGraph.GraphMinY = -20;
                         FlowGraph.GraphMaxX = 20;
-                        FlowGraph.Legend1 = "vin-tin";
-                        FlowGraph.Legend2 = "tin-test";
+                        FlowGraph.Legend1 = "NCA-ALL";
+                        FlowGraph.Legend2 = "NCA-ALR";
                         FlowGraph.Legend3 = "test-tout";
                         FlowGraph.Legend4 = "tout-vout";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindGasConnectorByName("VENTIN_TUBINGIN");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindGasConnectorByName("TUBINGIN_TESTLUNG");
-                        selectedFlow3Connector = (Connector)PhysModelMain.FindGasConnectorByName("TESTLUNG_TUBINGOUT");
+                        selectedFlow1Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALL");
+                        selectedFlow2Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALR");
+                        selectedFlow3Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_TUBINGOUT");
                         selectedFlow4Connector = (Connector)PhysModelMain.FindGasConnectorByName("TUBINGOUT_VENTOUT"); ;
                         selectedFlow5Connector = null;
 
