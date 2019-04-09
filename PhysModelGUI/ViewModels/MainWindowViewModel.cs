@@ -572,6 +572,100 @@ namespace PhysModelGUI.ViewModels
                 }
             }
         }
+
+        public double Resp_UAR_Insp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TUBINGIN_NCA.resistance.RForwardBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TUBINGIN_NCA.resistance.RForwardBaseline = value;
+              
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Resp_UAR_Exp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NCA_TUBINGOUT.resistance.RForwardBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.NCA_TUBINGOUT.resistance.RForwardBaseline = value;
+    
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Resp_LARR_Insp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NCA_ALR.resistance.RForwardBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.NCA_ALL.resistance.RForwardBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Resp_LARR_Exp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NCA_ALR.resistance.RBackwardBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.NCA_ALL.resistance.RBackwardBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Resp_LARL_Insp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NCA_ALL.resistance.RForwardBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.NCA_ALL.resistance.RForwardBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Resp_LARL_Exp
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NCA_ALL.resistance.RBackwardBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.NCA_ALL.resistance.RBackwardBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         #endregion
 
         #region "dependent model variable getters"
@@ -1080,30 +1174,30 @@ namespace PhysModelGUI.ViewModels
                         PressureGraph.GraphMaxX = 20;
                         pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
 
-                        PressureGraph.Legend1 = "VENTIN";
-                        PressureGraph.Legend2 = "VENTOUT";
-                        PressureGraph.Legend3 = "TUBINGIN";
-                        PressureGraph.Legend4 = "NCA";
-                        PressureGraph.Legend5 = "TUBINGOUT";
+                        PressureGraph.Legend1 = "NCA";
+                        PressureGraph.Legend2 = "ALL";
+                        PressureGraph.Legend3 = "ALR";
+                        PressureGraph.Legend4 = "";
+                        PressureGraph.Legend5 = "";
                         PressureGraph.XAxisTitle = "time";
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("VENTIN");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("VENTOUT");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGIN");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
-                        selectedPres5Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGOUT");
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+                        selectedPres4Compartment = null;
+                        selectedPres5Compartment = null;
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
                         Graph3PressureDisabled = false;
-                        Graph4PressureDisabled = false;
-                        Graph5PressureDisabled = false;
+                        Graph4PressureDisabled = true;
+                        Graph5PressureDisabled = true;
 
                         PressureGraph.Graph1Enabled = true;
                         PressureGraph.Graph2Enabled = true;
                         PressureGraph.Graph3Enabled = true;
-                        PressureGraph.Graph4Enabled = true;
-                        PressureGraph.Graph5Enabled = true;
+                        PressureGraph.Graph4Enabled = false;
+                        PressureGraph.Graph5Enabled = false;
 
                         break;
                 }
@@ -1403,29 +1497,31 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Graph5Enabled = false;
                         break;
                     case 7: // lungs
-                        FlowGraph.GraphMaxY = 20;
-                        FlowGraph.GraphMinY = -20;
+                        FlowGraph.GraphMaxY = 10;
+                        FlowGraph.GraphMinY = -10;
                         FlowGraph.GraphMaxX = 20;
                         FlowGraph.Legend1 = "NCA-ALL";
                         FlowGraph.Legend2 = "NCA-ALR";
-                        FlowGraph.Legend3 = "test-tout";
-                        FlowGraph.Legend4 = "tout-vout";
+                        FlowGraph.Legend3 = "";
+                        FlowGraph.Legend4 = "";
+                        FlowGraph.Legend5 = "";
 
                         selectedFlow1Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALL");
                         selectedFlow2Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALR");
-                        selectedFlow3Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_TUBINGOUT");
-                        selectedFlow4Connector = (Connector)PhysModelMain.FindGasConnectorByName("TUBINGOUT_VENTOUT"); ;
+                        selectedFlow3Connector = null;
+                        selectedFlow4Connector = null ;
                         selectedFlow5Connector = null;
 
                         Graph1FlowDisabled = false;
                         Graph2FlowDisabled = false;
-                        Graph3FlowDisabled = false;
-                        Graph4FlowDisabled = false;
+                        Graph3FlowDisabled = true;
+                        Graph4FlowDisabled = true;
                         Graph5FlowDisabled = true;
+
                         FlowGraph.Graph1Enabled = true;
                         FlowGraph.Graph2Enabled = true;
-                        FlowGraph.Graph3Enabled = true;
-                        FlowGraph.Graph4Enabled = true;
+                        FlowGraph.Graph3Enabled = false;
+                        FlowGraph.Graph4Enabled = false;
                         FlowGraph.Graph5Enabled = false;
                         break;
 
@@ -1593,7 +1689,28 @@ namespace PhysModelGUI.ViewModels
                         selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
 
                         break;
-                    case 4: // left lung
+                    case 4: // NCA
+                        PVLoopGraph.GraphMaxY = 60;
+                        PVLoopGraph.GraphMinY = 25;
+                        PVLoopGraph.GraphMaxX = 20;
+                        PVLoopGraph.GridXAxisStep = 5;
+                        PVLoopGraph.GraphMinX = -10;
+                        Graph1PVDisabled = false;
+                        Graph2PVDisabled = true;
+                        Graph3PVDisabled = true;
+                        Graph4PVDisabled = true;
+                        Graph5PVDisabled = true;
+                        PVLoopGraph.Graph1Enabled = true;
+                        PVLoopGraph.Graph2Enabled = false;
+                        PVLoopGraph.Graph3Enabled = false;
+                        PVLoopGraph.Graph4Enabled = false;
+                        PVLoopGraph.Graph5Enabled = false;
+                        PVLoopGraph.XAxisTitle = "pressure";
+                        pvGraphScaleOffset = PhysModelMain.currentModel.Patm;
+                        PVLoopGraph.Legend1 = "airways";
+                        selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
+                        break;
+                    case 5: // left lung
                         PVLoopGraph.GraphMaxY = 60;
                         PVLoopGraph.GraphMinY = 25;
                         PVLoopGraph.GraphMaxX = 20;
@@ -1615,7 +1732,7 @@ namespace PhysModelGUI.ViewModels
                         selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
 
                         break;
-                    case 5: // right lung
+                    case 6: // right lung
                         PVLoopGraph.GraphMaxY = 60;
                         PVLoopGraph.GraphMinY = 25;
                         PVLoopGraph.GraphMaxX = 20;

@@ -536,11 +536,12 @@
                             </Border>
                         </Expander>
                         
-                        <Expander Header=" atrioventricular interaction model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander Header=" lung and chestwall model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -552,15 +553,45 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1ABBBsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2ABBBsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="upper airway resistance inspiration" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliUARInsp" Grid.Column="0" Grid.Row="1" Minimum="0.010" Maximum="1.5"  Value="{Binding Resp_UAR_Insp, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliUARInsp, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="upper airway resistance expiration" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliUARExp" Grid.Column="0" Grid.Row="3" Minimum="0.010" Maximum="1.5"  Value="{Binding Resp_UAR_Exp, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliUARExp, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="lower left airway resistance inspiration" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliLARLInsp" Grid.Column="0" Grid.Row="5" Minimum="0.010" Maximum="1.5"  Value="{Binding Resp_LARL_Insp}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliLARLInsp, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="lower left airway resistance expiration" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliLARLExp" Grid.Column="0" Grid.Row="7" Minimum="0.010" Maximum="1.5"  Value="{Binding Resp_LARL_Exp, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliLARLExp, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="lower right airway resistance inspiration" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="9" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliLARRInsp" Grid.Column="0" Grid.Row="9" Minimum="0.010" Maximum="5"  Value="{Binding Resp_LARR_Insp, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliLARRInsp, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="lower right airway resistance expiration" Margin="0,0,0,5"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="11" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
+                                    <Slider x:Name="sliLARRExp" Grid.Column="0" Grid.Row="11" Minimum="0.010" Maximum="1.5"  Value="{Binding Resp_LARR_Exp, Mode=TwoWay}" ></Slider>
+                                    <TextBlock Grid.Column="1" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliLARRExp, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+
+
                                 </Grid>
                             </Border>
                         </Expander>
@@ -1348,6 +1379,7 @@
                                             <ComboBoxItem Content="right ventricle "  ></ComboBoxItem>
 
                                             <ComboBoxItem Content="right atrium "  ></ComboBoxItem>
+                                            <ComboBoxItem Content="resp system "  ></ComboBoxItem>
                                             <ComboBoxItem Content="left lung "  ></ComboBoxItem>
                                             <ComboBoxItem Content="right lung "  ></ComboBoxItem>
 
