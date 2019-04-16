@@ -577,13 +577,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TUBINGIN_NCA.resistance.RForwardBaseline : 0;
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.YPIECE_NCA.resistance.RForwardBaseline : 0;
             }
             set
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.TUBINGIN_NCA.resistance.RForwardBaseline = value;
+                    PhysModelMain.currentModel.YPIECE_NCA.resistance.RForwardBaseline = value;
               
                     OnPropertyChanged();
                 }
@@ -593,13 +593,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.NCA_TUBINGOUT.resistance.RForwardBaseline : 0;
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.YPIECE_NCA.resistance.RBackwardBaseline : 0;
             }
             set
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.NCA_TUBINGOUT.resistance.RForwardBaseline = value;
+                    PhysModelMain.currentModel.YPIECE_NCA.resistance.RBackwardBaseline = value;
     
                     OnPropertyChanged();
                 }
@@ -826,7 +826,6 @@ namespace PhysModelGUI.ViewModels
         void ShowLUNGSHUNT(object p) { ModelGraphic.LUNGSHUNTView((bool)p); }
         void ShowMYO(object p) { ModelGraphic.MYOView((bool)p); }
         void ClearLog(object p) { ModelLog.Clear(); }
-
         private void SetCommands()
         {
             NewModelCommand = new RelayCommand(NewModel);
@@ -1174,30 +1173,30 @@ namespace PhysModelGUI.ViewModels
                         PressureGraph.GraphMaxX = 20;
                         pressureGraphScaleOffset = PhysModelMain.currentModel.Patm;
 
-                        PressureGraph.Legend1 = "NCA";
-                        PressureGraph.Legend2 = "ALL";
-                        PressureGraph.Legend3 = "ALR";
-                        PressureGraph.Legend4 = "";
-                        PressureGraph.Legend5 = "";
+                        PressureGraph.Legend1 = "TUBINGIN";
+                        PressureGraph.Legend2 = "TUBINGOUT";
+                        PressureGraph.Legend3 = "YPIECE";
+                        PressureGraph.Legend4 = "ALL";
+                        PressureGraph.Legend5 = "ALR";
                         PressureGraph.XAxisTitle = "time";
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
-                        selectedPres4Compartment = null;
-                        selectedPres5Compartment = null;
+                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGIN");
+                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("YPIECE");
+                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGOUT");
+                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+                        selectedPres5Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
                         Graph3PressureDisabled = false;
-                        Graph4PressureDisabled = true;
-                        Graph5PressureDisabled = true;
+                        Graph4PressureDisabled = false;
+                        Graph5PressureDisabled = false;
 
                         PressureGraph.Graph1Enabled = true;
                         PressureGraph.Graph2Enabled = true;
                         PressureGraph.Graph3Enabled = true;
-                        PressureGraph.Graph4Enabled = false;
-                        PressureGraph.Graph5Enabled = false;
+                        PressureGraph.Graph4Enabled = true;
+                        PressureGraph.Graph5Enabled = true;
 
                         break;
                 }
@@ -1541,8 +1540,8 @@ namespace PhysModelGUI.ViewModels
         {
             PVLoopGraph = p;
 
-            PVLoopGraph.GraphMaxY = 100;
-            PVLoopGraph.GraphMinY = 0;
+            PVLoopGraph.GraphMaxY = 20;
+            PVLoopGraph.GraphMinY = -20;
             PVLoopGraph.GraphMaxX = 20;
             PVLoopGraph.GridXAxisStep = 5;
             PVLoopGraph.GraphMinX = 0;
@@ -1582,6 +1581,7 @@ namespace PhysModelGUI.ViewModels
                 int counter = 0;
                 if (pvGraphScaleOffset > 0)  // then it is a lung compartment and the pv loop is the other way around!
                 {
+                    PVDataBlock1 = PhysModelMain.ventilator.PVDataBlock;
                     lock (PVDataBlock1)
                     {
                         foreach (PVPoint p in PVDataBlock1)
@@ -1690,11 +1690,12 @@ namespace PhysModelGUI.ViewModels
 
                         break;
                     case 4: // NCA
-                        PVLoopGraph.GraphMaxY = 60;
-                        PVLoopGraph.GraphMinY = 25;
+                        PVLoopGraph.GraphMaxY = 20;
+                        PVLoopGraph.GraphMinY = -20;
                         PVLoopGraph.GraphMaxX = 20;
                         PVLoopGraph.GridXAxisStep = 5;
                         PVLoopGraph.GraphMinX = -10;
+                        PVLoopGraph.PointMode1 = SKPointMode.Lines;
                         Graph1PVDisabled = false;
                         Graph2PVDisabled = true;
                         Graph3PVDisabled = true;

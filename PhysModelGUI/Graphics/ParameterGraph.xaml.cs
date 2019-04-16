@@ -424,10 +424,10 @@ namespace PhysModelGUI
                 queue1.Enqueue(point1);
 
                 // if the queue count exceeds the number of datapoint than remove the first point from the queue
-                if (queue1.Count >= noDataPoints) queue1.Dequeue();
+                if (queue1.Any() &&  queue1.Count >= noDataPoints) queue1.Dequeue();
 
                 // copy the current queue to the display array for display purposes
-                if (queue1.Count > 0) displayArray1 = queue1.ToArray();
+                if (queue1.Any() && queue1.Count > 0) displayArray1 = queue1.ToArray();
             }
 
             lock (queue2)
@@ -436,10 +436,10 @@ namespace PhysModelGUI
                 queue2.Enqueue(point2);
 
                 // if the queue count exceeds the number of datapoint than remove the first point from the queue
-                if (queue2.Count >= noDataPoints) queue2.Dequeue();
+                if (queue2.Any() && queue2.Count >= noDataPoints) queue2.Dequeue();
 
                 // copy the current queue to the display array for display purposes
-                if (queue2.Count > 0) displayArray2 = queue2.ToArray();
+                if (queue2.Any() && queue2.Count > 0) displayArray2 = queue2.ToArray();
             }
 
             lock (queue3)
@@ -448,10 +448,10 @@ namespace PhysModelGUI
                 queue3.Enqueue(point3);
 
                 // if the queue count exceeds the number of datapoint than remove the first point from the queue
-                if (queue3.Count >= noDataPoints) queue3.Dequeue();
+                if (queue3.Any() && queue3.Count >= noDataPoints) queue3.Dequeue();
 
                 // copy the current queue to the display array for display purposes
-                if (queue3.Count > 0) displayArray3 = queue3.ToArray();
+                if (queue3.Any() && queue3.Count > 0) displayArray3 = queue3.ToArray();
             }
 
             lock (queue4)
@@ -460,10 +460,10 @@ namespace PhysModelGUI
                 queue4.Enqueue(point4);
 
                 // if the queue count exceeds the number of datapoint than remove the first point from the queue
-                if (queue4.Count >= noDataPoints) queue4.Dequeue();
+                if (queue4.Any() && queue4.Count >= noDataPoints) queue4.Dequeue();
 
                 // copy the current queue to the display array for display purposes
-                if (queue4.Count > 0) displayArray4 = queue4.ToArray();
+                if (queue4.Any() && queue4.Count > 0) displayArray4 = queue4.ToArray();
             }
 
             lock (queue5)
@@ -472,10 +472,10 @@ namespace PhysModelGUI
                 queue5.Enqueue(point5);
 
                 // if the queue count exceeds the number of datapoint than remove the first point from the queue
-                if (queue5.Count >= noDataPoints) queue5.Dequeue();
+                if (queue5.Any() && queue5.Count >= noDataPoints) queue5.Dequeue();
 
                 // copy the current queue to the display array for display purposes
-                if (queue5.Count > 0) displayArray5 = queue5.ToArray();
+                if (queue5.Any() && queue5.Count > 0) displayArray5 = queue5.ToArray();
             }
 
             // if the graph is a scrolling graph we have to determine the x value
