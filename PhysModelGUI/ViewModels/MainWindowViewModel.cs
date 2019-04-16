@@ -92,10 +92,7 @@ namespace PhysModelGUI.ViewModels
         public bool Graph5PressureDisabled { get { return _graph5PressureDisabled; } set { _graph5PressureDisabled = value; OnPropertyChanged(); } }
 
         Compartment selectedPV1Compartment;
-        Compartment selectedPV2Compartment;
-        Compartment selectedPV3Compartment;
-        Compartment selectedPV4Compartment;
-        Compartment selectedPV5Compartment;
+
         List<PVPoint> PVDataBlock1 = new List<PVPoint>();
 
         bool _graph1PVDisabled = false;
@@ -433,6 +430,7 @@ namespace PhysModelGUI.ViewModels
                 if (PhysModelMain.currentModel != null)
                 {
                     PhysModelMain.currentModel.VirtualVentilatorEnabled = value;
+                    PhysModelMain.modelInterface.SwitchVirtualVentilator(value);
                     OnPropertyChanged();
                 }
             }
@@ -813,7 +811,7 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ShowLUNGSHUNTCommand { get; set; }
         public RelayCommand ShowMYOCommand { get; set; }
         public RelayCommand ClearLogCommand { get; set; }
-
+        public RelayCommand SwitchVirtualVentilatorCommand { get; set; }
 
         // command functions
         void NewModel(object p) { }
@@ -826,6 +824,8 @@ namespace PhysModelGUI.ViewModels
         void ShowLUNGSHUNT(object p) { ModelGraphic.LUNGSHUNTView((bool)p); }
         void ShowMYO(object p) { ModelGraphic.MYOView((bool)p); }
         void ClearLog(object p) { ModelLog.Clear(); }
+        void SwitchVirtualVentilator(object p) { PhysModelMain.modelInterface.SwitchVirtualVentilator((bool)p); }
+
         private void SetCommands()
         {
             NewModelCommand = new RelayCommand(NewModel);
@@ -839,7 +839,7 @@ namespace PhysModelGUI.ViewModels
             ShowLUNGSHUNTCommand = new RelayCommand(ShowLUNGSHUNT);
             ShowMYOCommand = new RelayCommand(ShowMYO);
             ClearLogCommand = new RelayCommand(ClearLog);
-
+            SwitchVirtualVentilatorCommand = new RelayCommand(SwitchVirtualVentilator);
            
         }
 
