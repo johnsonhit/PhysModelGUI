@@ -49,20 +49,6 @@ namespace PhysModelGUI
 
         }
 
-
-     
-
-
-
- 
-
-   
-
-
-      
-
-        
-
     }
 
    

@@ -1086,10 +1086,10 @@ namespace PhysModelGUI.ViewModels
 
                         pressureGraphScaleOffset = 0;
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("AA");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("PA");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
+                        selectedPres1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("AA", PhysModelMain.currentModel);
+                        selectedPres2Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("LV", PhysModelMain.currentModel);
+                        selectedPres3Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("PA", PhysModelMain.currentModel);
+                        selectedPres4Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("RV", PhysModelMain.currentModel);
                         selectedPres5Compartment = null;
 
                         Graph1PressureDisabled = false;
@@ -1117,9 +1117,9 @@ namespace PhysModelGUI.ViewModels
 
                         PressureGraph.XAxisTitle = "time";
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("AA");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
+                        selectedPres1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("AA", PhysModelMain.currentModel);
+                        selectedPres2Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("LV", PhysModelMain.currentModel);
+                        selectedPres3Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("LA", PhysModelMain.currentModel);
                         selectedPres4Compartment = null;
                         selectedPres5Compartment = null;
 
@@ -1148,9 +1148,9 @@ namespace PhysModelGUI.ViewModels
 
                         PressureGraph.XAxisTitle = "time";
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("PA");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
+                        selectedPres1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("PA", PhysModelMain.currentModel);
+                        selectedPres2Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("RV", PhysModelMain.currentModel);
+                        selectedPres3Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("RA", PhysModelMain.currentModel);
                         selectedPres4Compartment = null;
                         selectedPres5Compartment = null;
 
@@ -1180,11 +1180,11 @@ namespace PhysModelGUI.ViewModels
                         PressureGraph.Legend5 = "ALR";
                         PressureGraph.XAxisTitle = "time";
 
-                        selectedPres1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGIN");
-                        selectedPres2Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("YPIECE");
-                        selectedPres3Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("TUBINGOUT");
-                        selectedPres4Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
-                        selectedPres5Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+                        selectedPres1Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("TUBINGIN", PhysModelMain.currentModel);
+                        selectedPres2Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("YPIECE", PhysModelMain.currentModel);
+                        selectedPres3Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("TUBINGOUT", PhysModelMain.currentModel);
+                        selectedPres4Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("ALL", PhysModelMain.currentModel);
+                        selectedPres5Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("ALR", PhysModelMain.currentModel);
 
                         Graph1PressureDisabled = false;
                         Graph2PressureDisabled = false;
@@ -1312,8 +1312,8 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend3 = "";
                         FlowGraph.Legend4 = "";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindValveByName("LA_LV");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindValveByName("LV_AA");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindValveByName("LA_LV", PhysModelMain.currentModel);
+                        selectedFlow2Connector = (Connector)ModelConstructor.FindValveByName("LV_AA", PhysModelMain.currentModel);
                         selectedFlow3Connector = null;
                         selectedFlow4Connector = null;
                         selectedFlow5Connector = null;
@@ -1340,8 +1340,8 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend3 = "";
                         FlowGraph.Legend4 = "";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindValveByName("RA_RV");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindValveByName("RV_PA");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindValveByName("RA_RV", PhysModelMain.currentModel);
+                        selectedFlow2Connector = (Connector)ModelConstructor.FindValveByName("RV_PA", PhysModelMain.currentModel);
                         selectedFlow3Connector = null;
                         selectedFlow4Connector = null;
                         selectedFlow5Connector = null;
@@ -1367,9 +1367,9 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend3 = "lung shunt";
                         FlowGraph.Legend4 = "";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindBloodConnectorByName("PA_LL");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindBloodConnectorByName("PA_LR");
-                        selectedFlow3Connector = (Connector)PhysModelMain.FindBloodConnectorByName("PA_PV");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindBloodConnectorByName("PA_LL", PhysModelMain.currentModel);
+                        selectedFlow2Connector = (Connector)ModelConstructor.FindBloodConnectorByName("PA_LR", PhysModelMain.currentModel);
+                        selectedFlow3Connector = (Connector)ModelConstructor.FindBloodConnectorByName("PA_PV", PhysModelMain.currentModel);
                         selectedFlow4Connector = null;
                         selectedFlow5Connector = null;
 
@@ -1407,11 +1407,11 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Graph4Enabled = true;
                         FlowGraph.Graph5Enabled = true;
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindBloodConnectorByName("AA_BRAIN");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindBloodConnectorByName("AA_UB");
-                        selectedFlow3Connector = (Connector)PhysModelMain.FindBloodConnectorByName("AD_LB");
-                        selectedFlow4Connector = (Connector)PhysModelMain.FindBloodConnectorByName("AD_KIDNEYS");
-                        selectedFlow5Connector = (Connector)PhysModelMain.FindBloodConnectorByName("AD_LIVER");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindBloodConnectorByName("AA_BRAIN", PhysModelMain.currentModel);
+                        selectedFlow2Connector = (Connector)ModelConstructor.FindBloodConnectorByName("AA_UB", PhysModelMain.currentModel);
+                        selectedFlow3Connector = (Connector)ModelConstructor.FindBloodConnectorByName("AD_LB", PhysModelMain.currentModel);
+                        selectedFlow4Connector = (Connector)ModelConstructor.FindBloodConnectorByName("AD_KIDNEYS", PhysModelMain.currentModel);
+                        selectedFlow5Connector = (Connector)ModelConstructor.FindBloodConnectorByName("AD_LIVER", PhysModelMain.currentModel);
                         break;
                     case 4: // foramen ovale
                         FlowGraph.GraphMaxY = 10;
@@ -1422,7 +1422,7 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend3 = "";
                         FlowGraph.Legend4 = "";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindBloodConnectorByName("LA_RA");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindBloodConnectorByName("LA_RA", PhysModelMain.currentModel);
                         selectedFlow2Connector = null;
                         selectedFlow3Connector = null;
                         selectedFlow4Connector = null;
@@ -1450,7 +1450,7 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend4 = "";
 
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindBloodConnectorByName("LV_RV");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindBloodConnectorByName("LV_RV", PhysModelMain.currentModel);
                         selectedFlow2Connector = null;
                         selectedFlow3Connector = null;
                         selectedFlow4Connector = null;
@@ -1478,7 +1478,7 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend3 = "";
                         FlowGraph.Legend4 = "";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindBloodConnectorByName("DA_PA");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindBloodConnectorByName("DA_PA", PhysModelMain.currentModel);
                         selectedFlow2Connector = null;
                         selectedFlow3Connector = null;
                         selectedFlow4Connector = null;
@@ -1505,8 +1505,8 @@ namespace PhysModelGUI.ViewModels
                         FlowGraph.Legend4 = "";
                         FlowGraph.Legend5 = "";
 
-                        selectedFlow1Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALL");
-                        selectedFlow2Connector = (Connector)PhysModelMain.FindGasConnectorByName("NCA_ALR");
+                        selectedFlow1Connector = (Connector)ModelConstructor.FindGasConnectorByName("NCA_ALL", PhysModelMain.currentModel);
+                        selectedFlow2Connector = (Connector)ModelConstructor.FindGasConnectorByName("NCA_ALR", PhysModelMain.currentModel);
                         selectedFlow3Connector = null;
                         selectedFlow4Connector = null ;
                         selectedFlow5Connector = null;
@@ -1625,7 +1625,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "volume";
                         pvGraphScaleOffset = 0;
                         PVLoopGraph.Legend1 = "left ventricle";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LV");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("LV", PhysModelMain.currentModel);
 
                         break;
                     case 1: // la
@@ -1642,7 +1642,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "volume";
                         pvGraphScaleOffset = 0;
                         PVLoopGraph.Legend1 = "left atrium";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("LA");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("LA", PhysModelMain.currentModel);
 
                         break;
                     case 2: // rv
@@ -1664,7 +1664,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "volume";
                         pvGraphScaleOffset = 0;
                         PVLoopGraph.Legend1 = "right ventricle";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RV");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("RV", PhysModelMain.currentModel);
 
                         break;
                     case 3: // ra
@@ -1686,7 +1686,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "volume";
                         pvGraphScaleOffset = 0;
                         PVLoopGraph.Legend1 = "right atrium";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindBloodCompartmentByName("RA");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindBloodCompartmentByName("RA", PhysModelMain.currentModel);
 
                         break;
                     case 4: // NCA
@@ -1709,7 +1709,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "pressure";
                         pvGraphScaleOffset = PhysModelMain.currentModel.Patm;
                         PVLoopGraph.Legend1 = "airways";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("NCA");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("NCA", PhysModelMain.currentModel);
                         break;
                     case 5: // left lung
                         PVLoopGraph.GraphMaxY = 60;
@@ -1730,7 +1730,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "pressure";
                         pvGraphScaleOffset = PhysModelMain.currentModel.Patm;
                         PVLoopGraph.Legend1 = "left lung";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALL");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("ALL", PhysModelMain.currentModel);
 
                         break;
                     case 6: // right lung
@@ -1753,7 +1753,7 @@ namespace PhysModelGUI.ViewModels
                         PVLoopGraph.XAxisTitle = "pressure";
                         pvGraphScaleOffset = PhysModelMain.currentModel.Patm;
                         PVLoopGraph.Legend1 = "right lung";
-                        selectedPV1Compartment = (Compartment)PhysModelMain.FindGasCompartmentByName("ALR");
+                        selectedPV1Compartment = (Compartment)ModelConstructor.FindGasCompartmentByName("ALR", PhysModelMain.currentModel);
 
                         break;
 
