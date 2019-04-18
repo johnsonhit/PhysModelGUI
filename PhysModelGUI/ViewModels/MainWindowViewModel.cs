@@ -1303,8 +1303,8 @@ namespace PhysModelGUI.ViewModels
                 switch (selection)
                 {
                     case 0: // left heart
-                        FlowGraph.GraphMaxY = 200;
-                        FlowGraph.GraphMinY = -50;
+                        FlowGraph.GraphMaxY = 5;
+                        FlowGraph.GraphMinY = -3;
                         FlowGraph.GraphMaxX = 20;
 
                         FlowGraph.Legend1 = "mv";
@@ -1332,8 +1332,8 @@ namespace PhysModelGUI.ViewModels
 
                         break;
                     case 1: // right heart
-                        FlowGraph.GraphMaxY = 200;
-                        FlowGraph.GraphMinY = -50;
+                        FlowGraph.GraphMaxY = 5;
+                        FlowGraph.GraphMinY = -3;
                         FlowGraph.GraphMaxX = 20;
                         FlowGraph.Legend1 = "tv";
                         FlowGraph.Legend2 = "pv";
