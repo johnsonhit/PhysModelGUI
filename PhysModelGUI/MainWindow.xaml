@@ -67,8 +67,8 @@
         <Menu VerticalAlignment="Top" Height="25" Grid.ColumnSpan="3">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" Command="{Binding NewModelCommand}" />
-                <MenuItem Header="_Open" Command="{Binding LoadModelCommand}" />
-                <MenuItem Header="_Save" Command="{Binding SaveModelCommand}" />
+                <MenuItem Header="_Open"  Command="{Binding LoadModelCommand}" />
+                <MenuItem Header="_Save"   Command="{Binding SaveModelCommand}" />
                 <Separator />
                 <MenuItem Header="_Exit" Command="{Binding ExitCommand}" />
             </MenuItem>

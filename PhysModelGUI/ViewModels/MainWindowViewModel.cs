@@ -815,8 +815,8 @@ namespace PhysModelGUI.ViewModels
 
         // command functions
         void NewModel(object p) { }
-        void LoadModel(object p) { }
-        void SaveModel(object p) { }
+        void LoadModel(object p) { PhysModelMain.modelInterface.LoadModelState("Tim2"); }
+        void SaveModel(object p) { PhysModelMain.modelInterface.SaveModelState("Tim2"); }
         void Exit(object p) { }
         void ShowPDA(object p) { ModelGraphic.PDAView((bool)p); }
         void ShowOFO(object p) { ModelGraphic.OFOView((bool)p); }
