@@ -91,8 +91,23 @@ namespace PhysModelGUI
 
 
         #region "BuildInterface"
+
+        public static void ClearLists()
+        {
+            animatedBloodCompartments.Clear();
+            animatedGasCompartments.Clear();
+            animatedBloodConnectors.Clear();
+            animatedGasConnectors.Clear();
+            animatedValves.Clear();
+            animatedShunts.Clear();
+            animatedShuntsGas.Clear();
+
+        }
         public static void BuildDiagram()
         {
+
+            ClearLists();
+
             ADALBLOOD = new AnimatedBloodConnector
             {
                 scaleRelative = 0.035f,
@@ -106,7 +121,7 @@ namespace PhysModelGUI
                 IsVisible = false,
                 Name = "AD->ALBLOOD"
             };
-            ADALBLOOD.AddConnector(ModelConstructor.FindBloodConnectorByName("AD_ALBLOOD", PhysModelMain.currentModel));
+            ADALBLOOD.AddConnector(PhysModelMain.currentModel.AD_ALBLOOD);
 
             ALBLOODIVC = new AnimatedBloodConnector
             {
@@ -121,7 +136,7 @@ namespace PhysModelGUI
                 IsVisible = false,
                 Name = "ALBLOOD->IVC"
             };
-            ALBLOODIVC.AddConnector(ModelConstructor.FindBloodConnectorByName("ALBLOOD_IVC", PhysModelMain.currentModel));
+            ALBLOODIVC.AddConnector(PhysModelMain.currentModel.ALBLOOD_IVC);
 
             pulmonaryValve = new AnimatedValve
             {
@@ -134,7 +149,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "PV"
             };
-            pulmonaryValve.AddConnector(ModelConstructor.FindValveByName("RV_PA", PhysModelMain.currentModel));
+            pulmonaryValve.AddConnector(PhysModelMain.currentModel.RV_PA);
             animatedValves.Add(pulmonaryValve);
 
             pulmonaryArtery = new AnimatedBloodCompartment
@@ -146,7 +161,7 @@ namespace PhysModelGUI
                 Degrees = 225,
                 Name = "PA"
             };
-            pulmonaryArtery.AddCompartment(ModelConstructor.FindBloodCompartmentByName("PA", PhysModelMain.currentModel));
+            pulmonaryArtery.AddCompartment(PhysModelMain.currentModel.PA);
             animatedBloodCompartments.Add(pulmonaryArtery);
 
             PALUNG = new AnimatedBloodConnector
@@ -159,8 +174,8 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "PA_LUNG"
             };
-            PALUNG.AddConnector(ModelConstructor.FindBloodConnectorByName("PA_LL", PhysModelMain.currentModel));
-            PALUNG.AddConnector(ModelConstructor.FindBloodConnectorByName("PA_LR", PhysModelMain.currentModel));
+            PALUNG.AddConnector(PhysModelMain.currentModel.PA_LL);
+            PALUNG.AddConnector(PhysModelMain.currentModel.PA_LR);
             animatedBloodConnectors.Add(PALUNG);
 
             aorticValve = new AnimatedValve
@@ -174,7 +189,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "AV"
             };
-            aorticValve.AddConnector(ModelConstructor.FindValveByName("LV_AA", PhysModelMain.currentModel));
+            aorticValve.AddConnector(PhysModelMain.currentModel.LV_AA);
             animatedValves.Add(aorticValve);
 
             ascendingAorta = new AnimatedBloodCompartment
@@ -189,7 +204,7 @@ namespace PhysModelGUI
                 Direction = -1,
                 Name = "AA"
             };
-            ascendingAorta.AddCompartment(ModelConstructor.FindBloodCompartmentByName("AA", PhysModelMain.currentModel));
+            ascendingAorta.AddCompartment(PhysModelMain.currentModel.AA);
             animatedBloodCompartments.Add(ascendingAorta);
 
             descendingAorta = new AnimatedBloodCompartment
@@ -203,7 +218,7 @@ namespace PhysModelGUI
                 Direction = -1,
                 Name = "AD"
             };
-            descendingAorta.AddCompartment(ModelConstructor.FindBloodCompartmentByName("AD", PhysModelMain.currentModel));
+            descendingAorta.AddCompartment(PhysModelMain.currentModel.AD);
             animatedBloodCompartments.Add(descendingAorta);
 
             aorta = new AnimatedBloodConnector
@@ -217,9 +232,9 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "AD->LB"
             };
-            aorta.AddConnector(ModelConstructor.FindBloodConnectorByName("AD_KIDNEYS", PhysModelMain.currentModel));
-            aorta.AddConnector(ModelConstructor.FindBloodConnectorByName("AD_LB", PhysModelMain.currentModel));
-            aorta.AddConnector(ModelConstructor.FindBloodConnectorByName("AD_LIVER", PhysModelMain.currentModel));
+            aorta.AddConnector(PhysModelMain.currentModel.AD_KIDNEYS);
+            aorta.AddConnector(PhysModelMain.currentModel.AD_LB);
+            aorta.AddConnector(PhysModelMain.currentModel.AD_LIVER);
             animatedBloodConnectors.Add(aorta);
 
             myocardium = new AnimatedBloodCompartment
@@ -229,7 +244,7 @@ namespace PhysModelGUI
                 RadiusYOffset = 0.725f,
                 Name = "MYO"
             };
-            myocardium.AddCompartment(ModelConstructor.FindBloodCompartmentByName("MYO", PhysModelMain.currentModel));
+            myocardium.AddCompartment(PhysModelMain.currentModel.MYO);
 
             leftVentricle = new AnimatedBloodCompartment
             {
@@ -238,7 +253,7 @@ namespace PhysModelGUI
                
                 Name = "LV"
             };
-            leftVentricle.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LV", PhysModelMain.currentModel));
+            leftVentricle.AddCompartment(PhysModelMain.currentModel.LV);
             animatedBloodCompartments.Add(leftVentricle);
 
             lvad = new AnimatedBloodCompartment
@@ -247,7 +262,7 @@ namespace PhysModelGUI
                 Degrees = 10,
                 Name = "LVAD"
             };
-            lvad.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LVAD", PhysModelMain.currentModel));
+            lvad.AddCompartment(PhysModelMain.currentModel.LVAD);
 
             leftAtrium = new AnimatedBloodCompartment
             {
@@ -255,7 +270,7 @@ namespace PhysModelGUI
                 Degrees = 340,
                 Name = "LA"
             };
-            leftAtrium.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LA", PhysModelMain.currentModel));
+            leftAtrium.AddCompartment(PhysModelMain.currentModel.LA);
             animatedBloodCompartments.Add(leftAtrium);
 
             mitralValve = new AnimatedValve
@@ -268,7 +283,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "TV"
             };
-            mitralValve.AddConnector(ModelConstructor.FindValveByName("LA_LV", PhysModelMain.currentModel));
+            mitralValve.AddConnector(PhysModelMain.currentModel.LA_LV);
             animatedValves.Add(mitralValve);
 
             rightVentricle = new AnimatedBloodCompartment
@@ -277,7 +292,7 @@ namespace PhysModelGUI
                 Degrees = 190,
                 Name = "RV"
             };
-            rightVentricle.AddCompartment(ModelConstructor.FindBloodCompartmentByName("RV", PhysModelMain.currentModel));
+            rightVentricle.AddCompartment(PhysModelMain.currentModel.RV);
             animatedBloodCompartments.Add(rightVentricle);
 
             rightAtrium = new AnimatedBloodCompartment
@@ -286,7 +301,7 @@ namespace PhysModelGUI
                 Degrees = 170,
                 Name = "RA"
             };
-            rightAtrium.AddCompartment(ModelConstructor.FindBloodCompartmentByName("RA", PhysModelMain.currentModel));
+            rightAtrium.AddCompartment(PhysModelMain.currentModel.RA);
             animatedBloodCompartments.Add(rightAtrium);
 
             rvad = new AnimatedBloodCompartment
@@ -297,7 +312,7 @@ namespace PhysModelGUI
 
                 Name = "RVAD"
             };
-            rvad.AddCompartment(ModelConstructor.FindBloodCompartmentByName("RVAD", PhysModelMain.currentModel));
+            rvad.AddCompartment(PhysModelMain.currentModel.RVAD);
 
             tricuspidValve = new AnimatedValve
             {
@@ -309,7 +324,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "TV"
             };
-            tricuspidValve.AddConnector(ModelConstructor.FindValveByName("RA_RV", PhysModelMain.currentModel));
+            tricuspidValve.AddConnector(PhysModelMain.currentModel.RA_RV);
             animatedValves.Add(tricuspidValve);
 
             lowerBody = new AnimatedBloodCompartment
@@ -318,9 +333,9 @@ namespace PhysModelGUI
                 Degrees = 90,
                 Name = "LB"
             };
-            lowerBody.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LIVER", PhysModelMain.currentModel));
-            lowerBody.AddCompartment(ModelConstructor.FindBloodCompartmentByName("KIDNEYS", PhysModelMain.currentModel));
-            lowerBody.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LB", PhysModelMain.currentModel));
+            lowerBody.AddCompartment(PhysModelMain.currentModel.LIVER);
+            lowerBody.AddCompartment(PhysModelMain.currentModel.KIDNEYS);
+            lowerBody.AddCompartment(PhysModelMain.currentModel.LB);
             animatedBloodCompartments.Add(lowerBody);
 
             lungs = new AnimatedBloodCompartment
@@ -329,8 +344,8 @@ namespace PhysModelGUI
                 Degrees = 270,
                 Name = "LUNG"
             };
-            lungs.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LL", PhysModelMain.currentModel));
-            lungs.AddCompartment(ModelConstructor.FindBloodCompartmentByName("LR", PhysModelMain.currentModel));
+            lungs.AddCompartment(PhysModelMain.currentModel.LL);
+            lungs.AddCompartment(PhysModelMain.currentModel.LR);
             animatedBloodCompartments.Add(lungs);
 
             upperBody = new AnimatedBloodCompartment
@@ -340,8 +355,8 @@ namespace PhysModelGUI
                 RadiusYOffset = 0.5f,
                 Name = "UB"
             };
-            upperBody.AddCompartment(ModelConstructor.FindBloodCompartmentByName("BRAIN", PhysModelMain.currentModel));
-            upperBody.AddCompartment(ModelConstructor.FindBloodCompartmentByName("UB", PhysModelMain.currentModel));
+            upperBody.AddCompartment(PhysModelMain.currentModel.BRAIN);
+            upperBody.AddCompartment(PhysModelMain.currentModel.UB);
             animatedBloodCompartments.Add(upperBody);
 
             alveoli = new AnimatedGasComp
@@ -351,8 +366,8 @@ namespace PhysModelGUI
                 RadiusYOffset = 1f,
                 Name = "ALV"
             };
-            alveoli.AddCompartment(ModelConstructor.FindGasCompartmentByName("ALL", PhysModelMain.currentModel));
-            alveoli.AddCompartment(ModelConstructor.FindGasCompartmentByName("ALR", PhysModelMain.currentModel));
+            alveoli.AddCompartment(PhysModelMain.currentModel.ALL);
+            alveoli.AddCompartment(PhysModelMain.currentModel.ALR);
             animatedGasCompartments.Add(alveoli);
 
             placenta = new AnimatedGasComp
@@ -363,7 +378,7 @@ namespace PhysModelGUI
                 Name = "ECMO",
                 IsVisible = false,
             };
-            placenta.AddCompartment(ModelConstructor.FindGasCompartmentByName("ALGAS", PhysModelMain.currentModel));
+            placenta.AddCompartment(PhysModelMain.currentModel.ALGAS);
 
             ecmolunggas = new AnimatedGasComp
             {
@@ -373,7 +388,7 @@ namespace PhysModelGUI
                 Name = "ECMO",
                 IsVisible = false,
             };
-            ecmolunggas.AddCompartment(ModelConstructor.FindGasCompartmentByName("ECLUNGGAS", PhysModelMain.currentModel));
+            ecmolunggas.AddCompartment(PhysModelMain.currentModel.ECLUNGGAS);
 
             ecmolungblood = new AnimatedBloodCompartment
             {
@@ -383,7 +398,7 @@ namespace PhysModelGUI
                 Name = "ECMO",
                 IsVisible = false,
             };
-            ecmolungblood.AddCompartment(ModelConstructor.FindBloodCompartmentByName("ECLUNGBLOOD", PhysModelMain.currentModel));
+            ecmolungblood.AddCompartment(PhysModelMain.currentModel.ECLUNGBLOOD);
 
             LBIVC = new AnimatedBloodConnector
             {
@@ -396,9 +411,9 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "LB->IVC"
             };
-            LBIVC.AddConnector(ModelConstructor.FindBloodConnectorByName("LB_IVC", PhysModelMain.currentModel));
-            LBIVC.AddConnector(ModelConstructor.FindBloodConnectorByName("KIDNEYS_IVC", PhysModelMain.currentModel));
-            LBIVC.AddConnector(ModelConstructor.FindBloodConnectorByName("LIVER_IVC", PhysModelMain.currentModel));
+            LBIVC.AddConnector(PhysModelMain.currentModel.LB_IVC);
+            LBIVC.AddConnector(PhysModelMain.currentModel.KIDNEYS_IVC);
+            LBIVC.AddConnector(PhysModelMain.currentModel.LIVER_IVC);
             animatedBloodConnectors.Add(LBIVC);
 
             IVC = new AnimatedBloodCompartment
@@ -412,7 +427,7 @@ namespace PhysModelGUI
                 Direction = -1,
                 Name = "IVC"
             };
-            IVC.AddCompartment(ModelConstructor.FindBloodCompartmentByName("IVC", PhysModelMain.currentModel));
+            IVC.AddCompartment(PhysModelMain.currentModel.IVC);
             animatedBloodCompartments.Add(IVC);
 
             IVCRA = new AnimatedBloodConnector
@@ -425,7 +440,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "IVC->RA"
             };
-            IVCRA.AddConnector(ModelConstructor.FindBloodConnectorByName("IVC_RA", PhysModelMain.currentModel));
+            IVCRA.AddConnector(PhysModelMain.currentModel.IVC_RA);
             animatedBloodConnectors.Add(IVCRA);
 
             UBSVC = new AnimatedBloodConnector
@@ -439,8 +454,8 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "UB->SVC"
             };
-            UBSVC.AddConnector(ModelConstructor.FindBloodConnectorByName("UB_SVC", PhysModelMain.currentModel));
-            UBSVC.AddConnector(ModelConstructor.FindBloodConnectorByName("BRAIN_SVC", PhysModelMain.currentModel));
+            UBSVC.AddConnector(PhysModelMain.currentModel.UB_SVC);
+            UBSVC.AddConnector(PhysModelMain.currentModel.BRAIN_SVC);
             animatedBloodConnectors.Add(UBSVC);
 
             SVC = new AnimatedBloodCompartment
@@ -455,7 +470,7 @@ namespace PhysModelGUI
                 Degrees = 125,
                 Name = "SVC"
             };
-            SVC.AddCompartment(ModelConstructor.FindBloodCompartmentByName("SVC", PhysModelMain.currentModel));
+            SVC.AddCompartment(PhysModelMain.currentModel.SVC);
             animatedBloodCompartments.Add(SVC);
 
             SVCRA = new AnimatedBloodConnector
@@ -469,7 +484,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "SVC->RA"
             };
-            SVCRA.AddConnector(ModelConstructor.FindBloodConnectorByName("SVC_RA", PhysModelMain.currentModel));
+            SVCRA.AddConnector(PhysModelMain.currentModel.SVC_RA);
             animatedBloodConnectors.Add(SVCRA);
 
 
@@ -483,8 +498,8 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "LUNG->PV"
             };
-            LUNGPV.AddConnector(ModelConstructor.FindBloodConnectorByName("LL_PV", PhysModelMain.currentModel));
-            LUNGPV.AddConnector(ModelConstructor.FindBloodConnectorByName("LR_PV", PhysModelMain.currentModel));
+            LUNGPV.AddConnector(PhysModelMain.currentModel.LL_PV);
+            LUNGPV.AddConnector(PhysModelMain.currentModel.LR_PV);
             animatedBloodConnectors.Add(LUNGPV);
 
             pulmonaryVeins = new AnimatedBloodCompartment
@@ -496,7 +511,7 @@ namespace PhysModelGUI
                 Degrees = 315,
                 Name = "PV"
             };
-            pulmonaryVeins.AddCompartment(ModelConstructor.FindBloodCompartmentByName("PV", PhysModelMain.currentModel));
+            pulmonaryVeins.AddCompartment(PhysModelMain.currentModel.PV);
             animatedBloodCompartments.Add(pulmonaryVeins);
 
             PVLA = new AnimatedBloodConnector
@@ -508,7 +523,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "PV->LA"
             };
-            PVLA.AddConnector(ModelConstructor.FindBloodConnectorByName("PV_LA", PhysModelMain.currentModel));
+            PVLA.AddConnector(PhysModelMain.currentModel.PV_LA);
             animatedBloodConnectors.Add(PVLA);
 
             AAUB = new AnimatedBloodConnector
@@ -522,8 +537,8 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "AA->UB"
             };
-            AAUB.AddConnector(ModelConstructor.FindBloodConnectorByName("AA_UB", PhysModelMain.currentModel));
-            AAUB.AddConnector(ModelConstructor.FindBloodConnectorByName("AA_BRAIN", PhysModelMain.currentModel));
+            AAUB.AddConnector(PhysModelMain.currentModel.AA_UB);
+            AAUB.AddConnector(PhysModelMain.currentModel.AA_BRAIN);
             animatedBloodConnectors.Add(AAUB);
 
 
@@ -537,8 +552,8 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "DUCTUS ARTERIOSUS"
             };
-            PDA.AddConnector(ModelConstructor.FindBloodConnectorByName("DA_PA", PhysModelMain.currentModel));
-            PDA.AddConnector(ModelConstructor.FindBloodConnectorByName("AD_DA", PhysModelMain.currentModel));
+            PDA.AddConnector(PhysModelMain.currentModel.DA_PA);
+            PDA.AddConnector(PhysModelMain.currentModel.AD_DA);
        
 
             VSD = new AnimatedShunt
@@ -551,7 +566,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "VSD"
             };
-            VSD.AddConnector(ModelConstructor.FindBloodConnectorByName("LV_RV", PhysModelMain.currentModel));
+            VSD.AddConnector(PhysModelMain.currentModel.LV_RV);
  
 
             OFO = new AnimatedShunt
@@ -564,7 +579,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "FORAMEN OVALE"
             };
-            OFO.AddConnector(ModelConstructor.FindBloodConnectorByName("LA_RA", PhysModelMain.currentModel));
+            OFO.AddConnector(PhysModelMain.currentModel.LA_RA);
      
 
             LUNGSHUNT = new AnimatedShunt
@@ -577,7 +592,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "LUNG SHUNT"
             };
-            LUNGSHUNT.AddConnector(ModelConstructor.FindBloodConnectorByName("PA_PV", PhysModelMain.currentModel));
+            LUNGSHUNT.AddConnector(PhysModelMain.currentModel.PA_PV);
 
 
             OUTNCA = new AnimatedShuntGas
@@ -591,7 +606,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "AIRWAY"
             };
-            OUTNCA.AddConnector(ModelConstructor.FindGasConnectorByName("OUT_NCA", PhysModelMain.currentModel));
+            OUTNCA.AddConnector(PhysModelMain.currentModel.OUT_NCA);
             //animatedShuntsGas.Add(OUTNCA);
 
             AAMYO = new AnimatedBloodConnector
@@ -605,7 +620,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "AA->MYO"
             };
-            AAMYO.AddConnector(ModelConstructor.FindBloodConnectorByName("AA_MYO", PhysModelMain.currentModel));
+            AAMYO.AddConnector(PhysModelMain.currentModel.AA_MYO);
 
             MYORA = new AnimatedBloodConnector
             {
@@ -618,7 +633,7 @@ namespace PhysModelGUI
                 Direction = 1,
                 Name = "MYO->RA"
             };
-            MYORA.AddConnector(ModelConstructor.FindBloodConnectorByName("MYO_RA", PhysModelMain.currentModel));
+            MYORA.AddConnector(PhysModelMain.currentModel.MYO_RA);
 
             ALBLOOD = new AnimatedBloodCompartment
             {
@@ -632,7 +647,7 @@ namespace PhysModelGUI
                 IsVisible = false,
                 Name = "ECMO"
             };
-            ALBLOOD.AddCompartment(ModelConstructor.FindBloodCompartmentByName("ALBLOOD", PhysModelMain.currentModel));
+            ALBLOOD.AddCompartment(PhysModelMain.currentModel.ALBLOOD);
         }
 
         public static void DrawMainDiagram(SKCanvas _canvas, float _width, float _height)

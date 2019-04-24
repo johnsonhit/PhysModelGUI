@@ -370,7 +370,6 @@ namespace PhysModelGUI
                 queue2.Enqueue(point2);
             }
    
-
             // copy the current queue to the display array for display purposes
             if (queue1.Count > 0) displayArray1 = queue1.ToArray();
             if (queue2.Count > 0) displayArray2 = queue2.ToArray();
