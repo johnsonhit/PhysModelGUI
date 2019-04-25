@@ -1,4 +1,5 @@
-﻿using PhysModelLibrary;
+﻿using Microsoft.Win32;
+using PhysModelLibrary;
 using PhysModelLibrary.BaseClasses;
 using SkiaSharp;
 using SkiaSharp.Views.WPF;
@@ -814,24 +815,50 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand SwitchVirtualVentilatorCommand { get; set; }
 
         // command functions
-        void NewModel(object p) { }
+        void NewModel(object p)
+        {
+            PhysModelMain.modelInterface.NewModel();
+        }
         void LoadModel(object p)
         {
- 
-            PhysModelMain.modelInterface.LoadModelState("Tim2");
 
-            ModelGraphic.BuildDiagram();
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "XML file| *.xml";
+            openFileDialog1.Title = "Open Model";
+            openFileDialog1.ShowDialog();
 
-            SelectedIndexPressure = 0;
-            SelectedIndexFlow = 0;
-            SelectedIndexPVLoop = 0;
+            if (openFileDialog1.FileName != "")
+            {
+                PhysModelMain.modelInterface.LoadModelState(openFileDialog1.FileName);
+
+                ModelGraphic.BuildDiagram();
+
+                SelectedIndexPressure = 0;
+                SelectedIndexFlow = 0;
+                SelectedIndexPVLoop = 0;
+            }
+          
+        
 
             
 
         }
 
 
-        void SaveModel(object p) { PhysModelMain.modelInterface.SaveModelState("Tim2"); }
+        void SaveModel(object p)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "XML file|*.xml";
+            saveFileDialog1.Title = "Save Model";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName != "")
+            {
+                PhysModelMain.modelInterface.SaveModelState(saveFileDialog1.FileName);
+            }
+
+               
+        }
         void Exit(object p) { }
         void ShowPDA(object p) { ModelGraphic.PDAView((bool)p); }
         void ShowOFO(object p) { ModelGraphic.OFOView((bool)p); }
