@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
 using PhysModelLibrary;
 using PhysModelLibrary.BaseClasses;
+using PhysModelLibrary.Compartments;
+using PhysModelLibrary.Connectors;
 using SkiaSharp;
 using SkiaSharp.Views.WPF;
 using System;
@@ -133,6 +135,449 @@ namespace PhysModelGUI.ViewModels
         public bool Graph5FlowDisabled { get { return _graph5FlowDisabled; } set { _graph5FlowDisabled = value; OnPropertyChanged(); } }
 
         #region "independent model parameters setters"
+        // autonomic nervous system model
+        public double ThPO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ThPO2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ThPO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double OpPO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.OpPO2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.OpPO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double SaPO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.SaPO2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.SaPO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double ThPH
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ThPH : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ThPH = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double OpPH
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.OpPH : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.OpPH = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double SaPH
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.SaPH : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.SaPH = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double ThPCO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ThPCO2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ThPCO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double OpPCO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.OpPCO2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.OpPCO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double SaPCO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.SaPCO2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.SaPCO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double GPHVE
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GPHVe : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GPHVe = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GPHCont
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GPHCont : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GPHCont = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcPHVE
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcPHVe : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcPHVe = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcPHCont
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcPHCont : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcPHCont = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public double GPO2VE
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GPO2Ve : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GPO2Ve = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GPO2HP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GPO2Hp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GPO2Hp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcPO2VE
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcPO2Ve : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcPO2Ve = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcPO2HP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcPO2Hp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcPO2Hp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GPCO2VE
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GPCO2Ve : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GPCO2Ve = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GPCO2HP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GPCO2Hp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GPCO2Hp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcPCO2VE
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcPCO2Ve : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcPCO2Ve = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcPCO2HP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcPCO2Hp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcPCO2Hp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GMAPHP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GMAPHp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GMAPHp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcMAPHP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcMAPHp : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcMAPHp = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GMAPCont
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GMAPCont : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GMAPCont = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcMAPCont
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcMAPCont : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcMAPCont = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GMAPSVR
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GMAPRes : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GMAPRes = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcMAPSVR
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcMAPRes : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcMAPRes = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double GMAPVen
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.GMAPVen : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.GMAPVen = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double TcMAPVen
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.TcMAPVen : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.TcMAPVen = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+
         // Breathing model
         public bool SpontaneousBreathing
         {
@@ -283,6 +728,7 @@ namespace PhysModelGUI.ViewModels
                 }
             }
         }
+
         // ecg model
         public double PQTime
         {
@@ -419,6 +865,7 @@ namespace PhysModelGUI.ViewModels
                 }
             }
         }
+
         // mechanical ventilator 
         public bool VirtualVentilatorEnabled
         {
@@ -572,17 +1019,19 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
+        // lung and chestwall model
+     
         public double Resp_UAR_Insp
         {
             get
             {
-                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.YPIECE_NCA.resistance.RForwardBaseline : 0;
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.OUT_NCA.resistance.RForwardBaseline : 0;
             }
             set
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.YPIECE_NCA.resistance.RForwardBaseline = value;
+                    PhysModelMain.currentModel.OUT_NCA.resistance.RForwardBaseline = value;
               
                     OnPropertyChanged();
                 }
@@ -592,13 +1041,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.YPIECE_NCA.resistance.RBackwardBaseline : 0;
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.OUT_NCA.resistance.RBackwardBaseline : 0;
             }
             set
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.YPIECE_NCA.resistance.RBackwardBaseline = value;
+                    PhysModelMain.currentModel.OUT_NCA.resistance.RBackwardBaseline = value;
     
                     OnPropertyChanged();
                 }
@@ -614,7 +1063,7 @@ namespace PhysModelGUI.ViewModels
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.NCA_ALL.resistance.RForwardBaseline = value;
+                    PhysModelMain.currentModel.NCA_ALR.resistance.RForwardBaseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -629,7 +1078,7 @@ namespace PhysModelGUI.ViewModels
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.NCA_ALL.resistance.RBackwardBaseline = value;
+                    PhysModelMain.currentModel.NCA_ALR.resistance.RBackwardBaseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -664,6 +1113,11 @@ namespace PhysModelGUI.ViewModels
                 }
             }
         }
+
+
+        public ObservableCollection<Compartment> compartments { get; set; } = new ObservableCollection<Compartment>();
+        public ObservableCollection<Connector> connectors { get; set; } = new ObservableCollection<Connector>();
+        public ObservableCollection<ContainerCompartment> containers { get; set; } = new ObservableCollection<ContainerCompartment>();
 
         #endregion
 
@@ -813,8 +1267,321 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ShowMYOCommand { get; set; }
         public RelayCommand ClearLogCommand { get; set; }
         public RelayCommand SwitchVirtualVentilatorCommand { get; set; }
+        public RelayCommand ChangeCompartmentCommand { get; set; }
+        public RelayCommand ChangeConnectorCommand { get; set; }
+        public RelayCommand ChangeContainerCommand { get; set; }
 
+
+        // editing of blood compartment
+        Compartment selectedCompartment { get; set; }
+        public double UVol
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.VolUBaseline : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.VolUBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElBaseline
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.elastanceModel.ElBaseline : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.elastanceModel.ElBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElContractionBaseline
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.elastanceModel.ElContractionBaseline : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.elastanceModel.ElContractionBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElK1
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.elastanceModel.ElK1 : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.elastanceModel.ElK1 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElK2
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.elastanceModel.ElK2 : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.elastanceModel.ElK2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElKMinVolume
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.elastanceModel.ElKMinVolume : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.elastanceModel.ElKMinVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElKMaxVolume
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.elastanceModel.ElKMaxVolume : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.elastanceModel.ElKMaxVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double FVO2
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.FVo2 : 0;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.FVo2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsEnabled
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.IsEnabled : false;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.IsEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool HasFixedVolume
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.HasFixedVolume : false;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.HasFixedVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool HasFixedComposition
+        {
+            get
+            {
+                return selectedCompartment != null ? selectedCompartment.FixedGasComposition : false;
+            }
+            set
+            {
+                if (selectedCompartment != null)
+                {
+                    selectedCompartment.FixedGasComposition = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        // editingh of blood connector
+        Connector selectedConnector { get; set; }
+        public double ResForward
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.resistance.RForwardBaseline : 0;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.resistance.RForwardBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ResBackward
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.resistance.RBackwardBaseline : 0;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.resistance.RBackwardBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ResK1
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.resistance.RK1 : 0;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.resistance.RK1 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ResK2
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.resistance.RK2 : 0;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.resistance.RK2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsCoupledRes
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.resistance.ResCoupled : false;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.resistance.ResCoupled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool IsEnabledRes
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.IsEnabled : false;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.IsEnabled = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public bool NoBackFlowRes
+        {
+            get
+            {
+                return selectedConnector != null ? selectedConnector.NoBackFlow : false;
+            }
+            set
+            {
+                if (selectedConnector != null)
+                {
+                    selectedConnector.NoBackFlow = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        // editing of container compartment
+        ContainerCompartment selectedContainer { get; set; }
         // command functions
+        void ChangeSelectedCompartment(object p)
+        {
+            selectedCompartment = (Compartment)p;
+            UVol = selectedCompartment.VolUBaseline;
+            ElBaseline = selectedCompartment.elastanceModel.ElBaseline;
+            ElContractionBaseline = selectedCompartment.elastanceModel.ElContractionBaseline;
+            ElK1 = selectedCompartment.elastanceModel.ElK1;
+            ElK2 = selectedCompartment.elastanceModel.ElK2;
+            ElKMinVolume = selectedCompartment.elastanceModel.ElKMinVolume;
+            ElKMaxVolume = selectedCompartment.elastanceModel.ElKMaxVolume;
+            FVO2 = selectedCompartment.FVo2;
+            IsEnabled = selectedCompartment.IsEnabled;
+            HasFixedVolume = selectedCompartment.HasFixedVolume;
+            HasFixedComposition = selectedCompartment.FixedGasComposition;
+        }
+        void ChangeConnector(object p)
+        {
+            selectedConnector = (Connector)p;
+            ResForward = selectedConnector.resistance.RForwardBaseline;
+            ResBackward = selectedConnector.resistance.RBackwardBaseline;
+            ResK1 = selectedConnector.resistance.RK1;
+            ResK2 = selectedConnector.resistance.RK2;
+            IsCoupledRes = selectedConnector.resistance.ResCoupled;
+            IsEnabledRes = selectedConnector.IsEnabled;
+            NoBackFlowRes = selectedConnector.NoBackFlow;
+        }
+        void ChangeContainer(object p)
+        {
+            selectedContainer = (ContainerCompartment)p;
+        }
+
         void NewModel(object p)
         {
             PhysModelMain.modelInterface.NewModel();
@@ -837,14 +1604,8 @@ namespace PhysModelGUI.ViewModels
                 SelectedIndexFlow = 0;
                 SelectedIndexPVLoop = 0;
             }
-          
-        
-
-            
-
+         
         }
-
-
         void SaveModel(object p)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -882,7 +1643,9 @@ namespace PhysModelGUI.ViewModels
             ShowMYOCommand = new RelayCommand(ShowMYO);
             ClearLogCommand = new RelayCommand(ClearLog);
             SwitchVirtualVentilatorCommand = new RelayCommand(SwitchVirtualVentilator);
-           
+            ChangeCompartmentCommand = new RelayCommand(ChangeSelectedCompartment);
+            ChangeConnectorCommand = new RelayCommand(ChangeConnector);
+            ChangeContainerCommand = new RelayCommand(ChangeContainer);
         }
 
         public MainWindowViewModel()
@@ -904,8 +1667,38 @@ namespace PhysModelGUI.ViewModels
             ModelName = PhysModelMain.currentModel.Name;
 
             initialized = true;
+
+            ConstructComponentLists();
+
         }
 
+        private void ConstructComponentLists()
+        {
+            foreach(BloodCompartment c in PhysModelMain.currentModel.bloodCompartments)
+            {
+                compartments.Add(c);
+            }
+            foreach (GasCompartment c in PhysModelMain.currentModel.gasCompartments)
+            {
+                compartments.Add(c);
+            }
+            foreach (Connector c in PhysModelMain.currentModel.bloodCompartmentConnectors)
+            {
+                connectors.Add(c);
+            }
+            foreach (Connector c in PhysModelMain.currentModel.gasCompartmentConnectors)
+            {
+                connectors.Add(c);
+            }
+            foreach (Connector c in PhysModelMain.currentModel.valveConnectors)
+            {
+                connectors.Add(c);
+            }
+            foreach(ContainerCompartment c in PhysModelMain.currentModel.containerCompartments)
+            {
+                containers.Add(c);
+            }
+        }
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             if (slowUpdater > 1000)
@@ -985,6 +1778,7 @@ namespace PhysModelGUI.ViewModels
         {
             switch (e.PropertyName)
             {
+         
                 case "ModelUpdated":
                     UpdatePVLoops();
                     UpdatePressureGraph();
@@ -1253,7 +2047,6 @@ namespace PhysModelGUI.ViewModels
             }
 
         }
-
         public void InitFlowGraph(ParameterGraph p)
         {
             FlowGraph = p;
