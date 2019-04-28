@@ -487,7 +487,7 @@
 
                                     <TextBlock Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="> min vol elast curve K" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
                                     <ex:DoubleUpDown Grid.Column="2" Grid.Row="5" Value="{Binding ElK1, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
-                                    <TextBlock Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Text="ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Text="> max vol elast curve" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
                                     <ex:DoubleUpDown Grid.Column="2" Grid.Row="6" Value="{Binding ElKMaxVolume, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
@@ -495,7 +495,7 @@
 
                                     <TextBlock Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Text="> max vol elast curve K" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
                                     <ex:DoubleUpDown Grid.Column="2" Grid.Row="7" Value="{Binding ElK2, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
-                                    <TextBlock Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Text="ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Text="> fraction oxygen use" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
                                     <ex:DoubleUpDown Grid.Column="2" Grid.Row="8" Value="{Binding FVO2, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
@@ -514,7 +514,7 @@
                             </Border>
                         </Expander>
 
-                        <Expander Header=" connectors" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander IsExpanded="false" Header=" connectors" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
@@ -618,25 +618,52 @@
                                         </i:Interaction.Triggers>
                                     </ComboBox>
 
-         
+                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5,3,0,0" Text="contained compartments " FontSize="10" TextAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+                                    <ListBox ItemsSource="{Binding containedCompartments}"  DisplayMemberPath="Description" Margin="0,3,5,3" FontSize="10" Height="60" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="1" >
+
+                                    </ListBox>
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="> unstressed volume" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="2" Value="{Binding UVolCont, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Text="ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="> baseline elastance" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="3" Value="{Binding ElBaselineCont, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Text="mmHg/ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Text="> min vol elast curve" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="4" Value="{Binding ElKMinVolumeCont, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Text="ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="> min vol elast curve K" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="5" Value="{Binding ElK1Cont, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Text="> max vol elast curve" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="6" Value="{Binding ElKMaxVolumeCont, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Text="ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Text="> max vol elast curve K" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="7" Value="{Binding ElK2Cont, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+
+
                                 </Grid>
                             </Border>
                         </Expander>
 
-                       
-
-                        <Expander Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
-
-                        </Expander>
-
-                        <Expander Header=" acidbase model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander IsExpanded="false" Header=" gasexchange units" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
@@ -645,15 +672,43 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1ABsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ABSize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                        <RowDefinition Height="*"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2ABsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2ABsize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Margin="5,0,0,0" Text="select unit " FontSize="10" TextAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+                                    <ComboBox x:Name="cmbGexUnits" ItemsSource="{Binding gasexchangeUnits}"  DisplayMemberPath="Description" Margin="0,0,5,0" FontSize="10" Height="20" Grid.ColumnSpan="2" Grid.Column="2" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding ChangeGexUnitCommand}" CommandParameter="{Binding ElementName=cmbGexUnits, Path=SelectedItem}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="> blood compartment" FontSize="10" Margin="5,5,5,0" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding CompBloodGex}" FontSize="10" Margin="5,5,5,0" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="> gas compartment" FontSize="10" Margin="5,5,5,0" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding CompGasGex}" FontSize="10" Margin="5,5,5,5" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                                 
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Text="> diffusion O2" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="3" Value="{Binding DiffO2Gex, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Text="> diffusion CO2" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="4" Value="{Binding DiffCO2Gex, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Text="> diffusion N2" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="5" Value="{Binding DiffN2Gex, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Text="> diffusion other gasses" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="6" Value="{Binding DiffOtherGex, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+
+                                    
+                                    
                                 </Grid>
                             </Border>
                         </Expander>
@@ -664,10 +719,9 @@
                                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                         <Grid Margin="10,5,10,10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="131*"/>
-                                                <ColumnDefinition Width="25*"/>
-                                                <ColumnDefinition Width="39*"/>
-                                                <ColumnDefinition Width="39*"/>
+                                                <ColumnDefinition Width="5*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
@@ -683,76 +737,53 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
+                   
 
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="1" Text="mmHg" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliSaMAP"   Grid.Row="1" Grid.Column="0" Minimum="15" Maximum="75"  Value="{Binding SaMAP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliSaMAP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding SaMAP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="0" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="operating point"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="3" Text="mmHg" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliOpMAP"   Grid.Row="3" Grid.Column="0" Minimum="15" Maximum="75"  Value="{Binding OpMAP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliOpMAP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="operating point"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="1" Grid.Column="1"  Value="{Binding OpMAP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="1" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="threshold"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="5" Text="mmHg" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliThMAP"   Grid.Row="5" Grid.Column="0" Minimum="15" Maximum="75"  Value="{Binding ThMAP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliThMAP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="threshold"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding ThMAP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="2" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="gain on heart periode"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="7" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGMAPHP"   Grid.Row="7" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GMAPHP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliGMAPHP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="gain on heart period"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding GMAPHP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="3" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="time constant of hp effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="9" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcMAPHP"   Grid.Row="9" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcMAPHP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliTcMAPHP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="time constant of hp effect"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding TcMAPHP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="4" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                            <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="gain on contractility"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding GMAPCont,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="5" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="gain on contractility"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="11" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGMAPCont"   Grid.Row="11" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GMAPCont,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliGMAPCont, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="time constant of cont effect"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding TcMAPCont,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="6" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text="time constant of cont effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="13" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcMAPCont"   Grid.Row="13" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcMAPCont,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="13" FontSize="10" Text="{Binding ElementName=sliTcMAPCont, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="gain on SVR"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="7" Grid.Column="1" Value="{Binding GMAPSVR,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="7" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="14" FontSize="10" Text="gain on SVR"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="15" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGMAPSVR"   Grid.Row="15" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GMAPSVR,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="15" FontSize="10" Text="{Binding ElementName=sliGMAPSVR, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="time constant of SVR effect"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="8" Grid.Column="1" Value="{Binding TcMAPSVR,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="8" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="16" FontSize="10" Text="time constant of SVR effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="17" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcMAPSVR"   Grid.Row="17" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcMAPSVR,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="17" FontSize="10" Text="{Binding ElementName=sliTcMAPSVR, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="gain on venous pool"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="9" Grid.Column="1" Value="{Binding GMAPVen,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="9" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="18" FontSize="10" Text="gain on venous pooling"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="19" Text="ml" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGMAPVenPool"   Grid.Row="19" Grid.Column="0" Minimum="-100" Maximum="100"  Value="{Binding GMAPVen,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="19" FontSize="10" Text="{Binding ElementName=sliGMAPVenPool, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
-
-                                            <TextBlock Grid.Column="0" Grid.Row="20" FontSize="10" Text="time constant of pooling effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="21" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcMAPVenPool"   Grid.Row="21" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcMAPVen,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="21" FontSize="10" Text="{Binding ElementName=sliTcMAPVenPool, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
-
+                                            <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="time constant of pooling effect"   Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="10" Grid.Column="1" Value="{Binding TcMAPVen,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="10" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
                                         </Grid>
                                     </Border>
@@ -762,10 +793,9 @@
                                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                         <Grid Margin="10,5,10,10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="131*"/>
-                                                <ColumnDefinition Width="25*"/>
-                                                <ColumnDefinition Width="39*"/>
-                                                <ColumnDefinition Width="39*"/>
+                                                <ColumnDefinition Width="5*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
@@ -779,52 +809,36 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                     
+
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="1" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliSaPH"   Grid.Row="1" Grid.Column="0" Minimum="6.8" Maximum="7.70"  Value="{Binding SaPH,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliSaPH, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding SaPH,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="0" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="operating point"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="3" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliOpPH"   Grid.Row="3" Grid.Column="0" Minimum="6.8" Maximum="7.70"  Value="{Binding OpPH,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliOpPH, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="operating point"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding OpPH,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="1" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="threshold"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="5" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliThPH"   Grid.Row="5" Grid.Column="0" Minimum="6.8" Maximum="7.70"  Value="{Binding ThPH,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliThPH, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="threshold"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding ThPH,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="2" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="gain on minute volume"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="7" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGPHVE"   Grid.Row="7" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GPHVE,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliGPHVE, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="gain on minute volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding GPHVE,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="3" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="time constant of mv effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="9" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcPHVE"   Grid.Row="9" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcPHVE,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliTcPHVE, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="time constant of mv effect"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding TcPHVE,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="4" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                            <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="gain on contractility"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding GPHCont,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="5" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="gain on contractility"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="11" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGPHCont"   Grid.Row="11" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GPHCont,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliGPHCont, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
-
-                                            <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text="time constant of cont effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="13" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcPHCont"   Grid.Row="13" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcPHCont,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="13" FontSize="10" Text="{Binding ElementName=sliTcPHCont, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="time constant of cont effect"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding TcPHCont,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="6" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
                                         </Grid>
                                     </Border>
@@ -834,10 +848,9 @@
                                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                         <Grid Margin="10,5,10,10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="131*"/>
-                                                <ColumnDefinition Width="25*"/>
-                                                <ColumnDefinition Width="39*"/>
-                                                <ColumnDefinition Width="39*"/>
+                                                <ColumnDefinition Width="5*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
@@ -852,51 +865,36 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-
+                              
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="1" Text="kPa" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliSaPO2"   Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="15"  Value="{Binding SaPO2,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliSaPO2, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding SaPO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="0" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="operating point"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="3" Text="kPa" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliOpPO2"   Grid.Row="3" Grid.Column="0" Minimum="0" Maximum="15"  Value="{Binding OpPO2,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliOpPO2, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="operating point"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding OpPO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="1" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="threshold"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="5" Text="kPa" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliThPO2"   Grid.Row="5" Grid.Column="0" Minimum="0" Maximum="15"  Value="{Binding ThPO2,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliThPO2, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="threshold"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding ThPO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="2" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="gain on minute volume"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="7" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGPO2VE"   Grid.Row="7" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GPO2VE,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliGPO2VE, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="gain on minute volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding GPO2VE,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="3" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="time constant of mv effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="9" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcPO2VE"   Grid.Row="9" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcPO2VE,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliTcPO2VE, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="time constant of mv effect"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding TcPO2VE,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="4" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                            <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="gain on heart period"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding GPO2HP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="5" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="gain on heart period"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="11" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGPO2HP"   Grid.Row="11" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GPO2HP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliGPO2HP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
-
-                                            <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text="time constant of hp effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="13" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcPO2HP"   Grid.Row="13" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcPO2HP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="13" FontSize="10" Text="{Binding ElementName=sliTcPO2HP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="time constant of hp effect"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding TcPO2HP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="6" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
                                        
                                         </Grid>
@@ -907,10 +905,9 @@
                                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                         <Grid Margin="10,5,10,10">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="131*"/>
-                                                <ColumnDefinition Width="25*"/>
-                                                <ColumnDefinition Width="39*"/>
-                                                <ColumnDefinition Width="39*"/>
+                                                <ColumnDefinition Width="5*"/>
+                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"/>
@@ -925,54 +922,38 @@
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
                                                 <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
-                                                <RowDefinition Height="*"/>
+    
                                             </Grid.RowDefinitions>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="1" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliSaPCO2"   Grid.Row="1" Grid.Column="0" Minimum="0" Maximum="15"  Value="{Binding SaPCO2,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sliSaPCO2, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="saturation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding SaPCO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="0" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="operating point"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="3" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliOpPCO2"   Grid.Row="3" Grid.Column="0" Minimum="0" Maximum="15"  Value="{Binding OpPCO2,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliOpPCO2, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="operating point"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding OpPCO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="1" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="threshold"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="5" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliThPCO2"   Grid.Row="5" Grid.Column="0" Minimum="0" Maximum="15"  Value="{Binding ThPCO2,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliThPCO2, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="threshold"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding ThPCO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="2" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="gain on minute volume"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="7" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGPCO2VE"   Grid.Row="7" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GPCO2VE,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliGPCO2VE, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="gain on minute volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding GPCO2VE,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="3" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="time constant of mv effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="9" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcPCO2VE"   Grid.Row="9" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcPCO2VE,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliTcPCO2VE, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="time constant of mv effect"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding TcPCO2VE,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="4" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                            <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="gain on heart period"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding GPCO2HP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="5" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="gain on heart period"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="11" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliGPCO2HP"   Grid.Row="11" Grid.Column="0" Minimum="-1000" Maximum="1000"  Value="{Binding GPCO2HP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliGPCO2HP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                            <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="time constant of hp effect"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                            <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding TcPCO2HP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                            <TextBlock Grid.Column="2" Grid.Row="6" Text="mmHg" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                            <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text="time constant of hp effect"  Grid.ColumnSpan="2" Margin="0,0,0,5"></TextBlock>
-                                            <TextBlock Grid.Column="3" Grid.Row="13" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                            <Slider x:Name="sliTcPCO2HP"   Grid.Row="13" Grid.Column="0" Minimum="0" Maximum="60"  Value="{Binding TcPCO2HP,Mode=TwoWay}" Grid.ColumnSpan="2"  ></Slider>
-                                            <TextBlock Grid.Column="2" Grid.Row="13" FontSize="10" Text="{Binding ElementName=sliTcPCO2HP, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
-
+       
 
                                         </Grid>
                                     </Border>
@@ -986,8 +967,69 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+        
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="spontaneous breathing" Margin="0,0,0,5"></TextBlock>
+                                    <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding SpontaneousBreathing, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Left"/>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="reference exhaled minute volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding VERef,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="maximal exhaled minute volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding VEMax,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="tidal volume / resp rate ratio"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding VtRrRatio,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="breath duration"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding BreathDuration,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="breath duration randomness"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding BreathDurationRand,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="apnoe occurence"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding ApnoeOccurence,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="apnoe duration"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="7" Grid.Column="1" Value="{Binding ApnoeDuration,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="apnoe duration randomness"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="8" Grid.Column="1" Value="{Binding ApnoeDurationRand,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="ml/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                </Grid>
+                            </Border>
+                        </Expander>
+                        
+                        <Expander Header=" ventilator model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                            <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
+                                <Grid Margin="10,5,10,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -1004,58 +1046,45 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
+                        
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="spontaneous breathing" Margin="0,0,0,5"></TextBlock>
-                                    <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding SpontaneousBreathing, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center"/>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="mechanical ventilator enabled" Margin="0,0,0,5"></TextBlock>
+                                    <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding VirtualVentilatorEnabled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Left"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="reference exhaled minute volume" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVERef" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="2000"  Value="{Binding VERef,Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="2" FontSize="10" Text="{Binding ElementName=sliVERef, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="volume controlled" Margin="0,0,0,5"></TextBlock>
+                                    <CheckBox Grid.Column="1" Grid.Row="1"  IsChecked="{Binding Vent_VolumeControlled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Left"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="maximal exhaled minute volume" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="ml/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVEMax" Grid.Column="0" Grid.Row="4" Minimum="0" Maximum="5000"  Value="{Binding VEMax, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="4" FontSize="10" Text="{Binding ElementName=sliVEMax, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="targeted tidal volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Vent_TargetTidalVolume,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="ml" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="tidal volume / resp rate ratio" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVTRRRatio" Grid.Column="0" Grid.Row="6" Minimum="0.1" Maximum="1" Value="{Binding VtRrRatio,Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="6" FontSize="10" Text="{Binding ElementName=sliVTRRRatio, Path=Value, StringFormat={}{0:0.00}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="max insp pressure (PIP)"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding Vent_PIP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="cmH2O" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="breath duration" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliBreathDuration" Grid.Column="0" Grid.Row="8" Minimum="100" Maximum="5000" Value="{Binding BreathDuration, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="8" FontSize="10" Text="{Binding ElementName=sliBreathDuration, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="pos end exp pressure (PEEP)"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding Vent_PEEP,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="cmH2O" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="breath duration randomness" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="10" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliBreathDurationRand" Grid.Column="0" Grid.Row="10" Minimum="0" Maximum="500" Value="{Binding BreathDurationRand, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="10" FontSize="10" Text="{Binding ElementName=sliBreathDurationRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="inspiration time"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding Vent_TIn,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="sec" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="11" FontSize="10" Text="apnoe occurence" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="12" Text="/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeOccurence" Grid.Column="0" Grid.Row="12" Minimum="0" Maximum="10" Value="{Binding ApnoeOccurence, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="12" FontSize="10" Text="{Binding ElementName=sliApnoeOccurence, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="expiration time"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding Vent_TOut,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="sec" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="13" FontSize="10" Text="apnoe duration" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="14" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeDuration" Grid.Column="0" Grid.Row="14" Minimum="5000" Maximum="200000" Value="{Binding ApnoeDuration, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding ElementName=sliApnoeDuration, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="inspiratory flow"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="7" Grid.Column="1" Value="{Binding Vent_InspFlow,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="l/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="15" FontSize="10" Text="apnoe duration randomness" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="16" Text="ms" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliApnoeDurationRand" Grid.Column="0" Grid.Row="16" Minimum="2000" Maximum="10000" Value="{Binding ApnoeDurationRand, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="16" FontSize="10" Text="{Binding ElementName=sliApnoeDurationRand, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="expiratory flow"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="8" Grid.Column="1" Value="{Binding Vent_ExpFlow,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="l/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="trigger volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="9" Grid.Column="1" Value="{Binding Vent_TriggerVolume,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="9" Text="ml" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
                                 </Grid>
                             </Border>
@@ -1065,8 +1094,8 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -1080,64 +1109,49 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
+             
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="rhythm type" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <ComboBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Height="20" Foreground="White" FontSize="10"  Style="{StaticResource comboBoxCustom}"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="pq time" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliPQTime" Grid.Column="0" Grid.Row="3" Minimum="0.01" Maximum="1"  Value="{Binding PQTime, Mode=TwoWay}"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sliPQTime, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" Margin="0,0,0,0" Text="select rhythm " FontSize="10" TextAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+                                    <ComboBox x:Name="cmbRhythmType" ItemsSource="{Binding rhythmTypes}"  Margin="0,0,5,0" FontSize="10" Height="20" Grid.ColumnSpan="2" Grid.Column="1" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged">
+                                                <i:InvokeCommandAction Command="{Binding ChangeRhythmCommand}" CommandParameter="{Binding ElementName=cmbRhythmType, Path=SelectedIndex}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </ComboBox>
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="pq time"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding PQTime,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="s" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="qrs time" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliQRSTime" Grid.Column="0" Grid.Row="5" Minimum="0.01" Maximum="1" Value="{Binding QRSTime, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sliQRSTime, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="qrs time"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding QRSTime,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="s" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="qt time" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliQTTime" Grid.Column="0" Grid.Row="7" Minimum="0.01" Maximum="1" Value="{Binding QTTime, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="7" FontSize="10" Text="{Binding ElementName=sliQTTime, Path=Value, StringFormat={}{0:0.000}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="qt time"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding QTTime,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="s" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="ventricular escape rate" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="9" Text="bp," FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVentEscapeRate" Grid.Column="0" Grid.Row="9" Minimum="0" Maximum="200" Value="{Binding VentEscapeRate, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="9" FontSize="10" Text="{Binding ElementName=sliVentEscapeRate, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="ventricular escape rate"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding VentEscapeRate,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="wandering pacemaker rate" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="11" Text="bpm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliWandPaceRate" Grid.Column="0" Grid.Row="11" Minimum="0" Maximum="200" Value="{Binding WandPacemakerRate, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="11" FontSize="10" Text="{Binding ElementName=sliWandPaceRate, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="wandering pacemaker rate"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding WandPacemakerRate,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="/min" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text="p wave amplification" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="13" Text="mm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliPAmp" Grid.Column="0" Grid.Row="13" Minimum="0" Maximum="50" Value="{Binding PWaveAmp, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="13" FontSize="10" Text="{Binding ElementName=sliPAmp, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="p wave amplification"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding PWaveAmp,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="14" FontSize="10" Text="t wave amplification" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="15" Text="mm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliTAmp" Grid.Column="0" Grid.Row="15" Minimum="0" Maximum="50" Value="{Binding TWaveAmp, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="15" FontSize="10" Text="{Binding ElementName=sliTAmp, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="t wave amplification"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="7" Grid.Column="1" Value="{Binding TWaveAmp,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="16" FontSize="10" Text="ecg noise level" Margin="0,5,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="17" Text="mm" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliEcgNoise" Grid.Column="0" Grid.Row="17" Minimum="0" Maximum="10" Value="{Binding NoiseLevel, Mode=TwoWay}"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="17" FontSize="10" Text="{Binding ElementName=sliEcgNoise, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="ecg noise level"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="8" Grid.Column="1" Value="{Binding NoiseLevel,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
                                 </Grid>
                             </Border>
@@ -1148,7 +1162,8 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -1161,24 +1176,34 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1AOsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2AOsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="oxygen use"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding VO2,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="0" Text="ml O2/s" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="hemoglobin"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding Hemoglobin,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="2,3 DPG"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding DPG,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="temperature"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding Temp,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="deg C" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                
                                 </Grid>
                             </Border>
                         </Expander>
-
-                        <Expander Header=" ventilator model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        
+                        <Expander Header=" acidbase model" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -1193,65 +1218,55 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="mechanical ventilator enabled" Margin="0,0,0,5"></TextBlock>
-                                    <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding VirtualVentilatorEnabled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center"/>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="target tidal volume (volume control)" Margin="0,0,0,5"></TextBlock>
-                                    <CheckBox Grid.Column="1" Grid.Row="1"  IsChecked="{Binding Vent_VolumeControlled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Center"/>
-                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="ml" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliTV" Grid.Column="0" Grid.Row="2" Minimum="0" Maximum="50"  Value="{Binding Vent_TargetTidalVolume, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="2" FontSize="10" Text="{Binding ElementName=sliTV, Path=Value, StringFormat={}{0:0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="respiratory quotient"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding RespQ,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="0" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text="sodium"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding NaPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="maximal inspiratory pressure (PIP)" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="cmH2O" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVentPIP" Grid.Column="0" Grid.Row="4" Minimum="0" Maximum="40"  Value="{Binding Vent_PIP, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="4" FontSize="10" Text="{Binding ElementName=sliVentPIP, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="potassium"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding KPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="positive end expiratory pressure (PEEP)" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="cmH2O" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliVentPEEP" Grid.Column="0" Grid.Row="6" Minimum="0" Maximum="20"  Value="{Binding Vent_PEEP, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="6" FontSize="10" Text="{Binding ElementName=sliVentPEEP, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text="chloride"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding ClPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="inspiration time" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliTI" Grid.Column="0" Grid.Row="8" Minimum="0" Maximum="20"  Value="{Binding Vent_TIn, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="8" FontSize="10" Text="{Binding ElementName=sliTI, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="calcium"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding CaPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="expiration time" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="10" Text="s" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliTOUT" Grid.Column="0" Grid.Row="10" Minimum="0" Maximum="20"  Value="{Binding Vent_TOut, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="10" FontSize="10" Text="{Binding ElementName=sliTOUT, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text="magnesium"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding MgPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="11" FontSize="10" Text="inspiratory flow" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="12" Text="l/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliInspFlow" Grid.Column="0" Grid.Row="12" Minimum="0" Maximum="20"  Value="{Binding Vent_InspFlow, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="12" FontSize="10" Text="{Binding ElementName=sliInspFlow, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text="phosphates"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding PhosPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="13" FontSize="10" Text="expiratory flow" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="14" Text="l/min" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliExpFlow" Grid.Column="0" Grid.Row="14" Minimum="0" Maximum="20"  Value="{Binding Vent_ExpFlow, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="14" FontSize="10" Text="{Binding ElementName=sliExpFlow, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text="albumin"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="7" Grid.Column="1" Value="{Binding AlbPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="15" FontSize="10" Text="trigger volume" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="2" Grid.Row="16" Text="ml" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sliTrigger" Grid.Column="0" Grid.Row="16" Minimum="0" Maximum="20"  Value="{Binding Vent_TriggerVolume, Mode=TwoWay}" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="16" FontSize="10" Text="{Binding ElementName=sliTrigger, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text="unmeasured anions"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="8" Grid.Column="1" Value="{Binding UaPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text="unmeasures cations"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="9" Grid.Column="1" Value="{Binding UcPlasma,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="9" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
 
                                 </Grid>
                             </Border>
                         </Expander>
+
+
 
                     </StackPanel>
                 </Expander>

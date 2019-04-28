@@ -136,6 +136,52 @@ namespace PhysModelGUI.ViewModels
 
         #region "independent model parameters setters"
         // autonomic nervous system model
+        public double ThMAP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.ThMAP : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.ThMAP = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double OpMAP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.OpMAP : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.OpMAP = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double SaMAP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.SaMAP : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.SaMAP = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         public double ThPO2
         {
             get
@@ -1019,8 +1065,209 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
+        // oxygen
+        public double VO2
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vo2 : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Vo2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double Hemoglobin
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Hemoglobin : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Hemoglobin = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double DPG
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.DPG_blood : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.DPG_blood = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        // acid base
+        public double RespQ
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.RespQ : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.RespQ = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double NaPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Na_Plasma: 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Na_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double KPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.K_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.K_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ClPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Cl_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Cl_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double CaPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Ca_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Ca_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double MgPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Mg_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Mg_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double PhosPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Phos_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Phos_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double AlbPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Alb_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Alb_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double UaPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Ua_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Ua_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double UcPlasma
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Uc_Plasma : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.Uc_Plasma = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+    
+  
         // lung and chestwall model
-     
+
         public double Resp_UAR_Insp
         {
             get
@@ -1118,6 +1365,10 @@ namespace PhysModelGUI.ViewModels
         public ObservableCollection<Compartment> compartments { get; set; } = new ObservableCollection<Compartment>();
         public ObservableCollection<Connector> connectors { get; set; } = new ObservableCollection<Connector>();
         public ObservableCollection<ContainerCompartment> containers { get; set; } = new ObservableCollection<ContainerCompartment>();
+        public ObservableCollection<Compartment> containedCompartments { get; set; } = new ObservableCollection<Compartment>();
+
+        public ObservableCollection<GasExchangeBlock> gasexchangeUnits { get; set; } = new ObservableCollection<GasExchangeBlock>();
+        public ObservableCollection<string> rhythmTypes { get; set; } = new ObservableCollection<string>();
 
         #endregion
 
@@ -1270,6 +1521,8 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ChangeCompartmentCommand { get; set; }
         public RelayCommand ChangeConnectorCommand { get; set; }
         public RelayCommand ChangeContainerCommand { get; set; }
+        public RelayCommand ChangeGexUnitCommand { get; set; }
+        public RelayCommand ChangeRhythmCommand { get; set; }
 
 
         // editing of blood compartment
@@ -1550,6 +1803,189 @@ namespace PhysModelGUI.ViewModels
 
         // editing of container compartment
         ContainerCompartment selectedContainer { get; set; }
+        public double UVolCont
+        {
+            get
+            {
+                return selectedContainer != null ? selectedContainer.VolUBaseline : 0;
+            }
+            set
+            {
+                if (selectedContainer != null)
+                {
+                    selectedContainer.VolUBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElBaselineCont
+        {
+            get
+            {
+                return selectedContainer != null ? selectedContainer.elastanceModel.ElBaseline : 0;
+            }
+            set
+            {
+                if (selectedContainer != null)
+                {
+                    selectedContainer.elastanceModel.ElBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElK1Cont
+        {
+            get
+            {
+                return selectedContainer != null ? selectedContainer.elastanceModel.ElK1 : 0;
+            }
+            set
+            {
+                if (selectedContainer != null)
+                {
+                    selectedContainer.elastanceModel.ElK1 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElK2Cont
+        {
+            get
+            {
+                return selectedContainer != null ? selectedContainer.elastanceModel.ElK2 : 0;
+            }
+            set
+            {
+                if (selectedContainer != null)
+                {
+                    selectedContainer.elastanceModel.ElK2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElKMinVolumeCont
+        {
+            get
+            {
+                return selectedContainer != null ? selectedContainer.elastanceModel.ElKMinVolume : 0;
+            }
+            set
+            {
+                if (selectedContainer != null)
+                {
+                    selectedContainer.elastanceModel.ElKMinVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double ElKMaxVolumeCont
+        {
+            get
+            {
+                return selectedContainer != null ? selectedContainer.elastanceModel.ElKMaxVolume : 0;
+            }
+            set
+            {
+                if (selectedContainer != null)
+                {
+                    selectedContainer.elastanceModel.ElKMaxVolume = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        GasExchangeBlock selectedGexUnit { get; set; }
+        public string CompBloodGex
+        {
+            get
+            {
+                return selectedGexUnit != null ? selectedGexUnit.CompBlood.Description : "";
+            }
+            set
+            {
+                if (selectedGexUnit != null)
+                {
+                    selectedGexUnit.CompBlood.Description = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public string CompGasGex
+        {
+            get
+            {
+                return selectedGexUnit != null ? selectedGexUnit.CompGas.Description : "";
+            }
+            set
+            {
+                if (selectedGexUnit != null)
+                {
+                    selectedGexUnit.CompGas.Description = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double DiffO2Gex
+        {
+            get
+            {
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoO2 : 0;
+            }
+            set
+            {
+                if (selectedGexUnit != null)
+                {
+                    selectedGexUnit.DiffCoO2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double DiffCO2Gex
+        {
+            get
+            {
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoCo2 : 0;
+            }
+            set
+            {
+                if (selectedGexUnit != null)
+                {
+                    selectedGexUnit.DiffCoCo2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double DiffN2Gex
+        {
+            get
+            {
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoN2 : 0;
+            }
+            set
+            {
+                if (selectedGexUnit != null)
+                {
+                    selectedGexUnit.DiffCoN2 = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        public double DiffOtherGex
+        {
+            get
+            {
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoOther : 0;
+            }
+            set
+            {
+                if (selectedGexUnit != null)
+                {
+                    selectedGexUnit.DiffCoOther = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         // command functions
         void ChangeSelectedCompartment(object p)
         {
@@ -1580,8 +2016,37 @@ namespace PhysModelGUI.ViewModels
         void ChangeContainer(object p)
         {
             selectedContainer = (ContainerCompartment)p;
+            UVolCont = selectedContainer.VolUBaseline;
+            ElBaselineCont = selectedContainer.elastanceModel.ElBaseline;
+            ElK1Cont = selectedContainer.elastanceModel.ElK1;
+            ElK2Cont = selectedContainer.elastanceModel.ElK2;
+            ElKMinVolumeCont = selectedContainer.elastanceModel.ElKMinVolume;
+            ElKMaxVolumeCont = selectedContainer.elastanceModel.ElKMaxVolume;
+            containedCompartments.Clear();
+            foreach(Compartment c in selectedContainer.bloodCompartments)
+            {
+                containedCompartments.Add(c);
+            }
+            foreach (Compartment c in selectedContainer.gasCompartments)
+            {
+                containedCompartments.Add(c);
+            }
         }
-
+        void ChangeGexUnit(object p)
+        {
+            selectedGexUnit = (GasExchangeBlock)p;
+            CompBloodGex = selectedGexUnit.CompBlood.Description;
+            CompGasGex = selectedGexUnit.CompGas.Description;
+            DiffO2Gex = selectedGexUnit.DiffCoO2;
+            DiffCO2Gex = selectedGexUnit.DiffCoCo2;
+            DiffN2Gex = selectedGexUnit.DiffCoN2;
+            DiffOtherGex = selectedGexUnit.DiffCoOther;
+        }
+        void ChangeRhythm(object p)
+        {
+            int selection = (int)p;
+            PhysModelMain.ecg.ChangeRhythm(selection);
+        }
         void NewModel(object p)
         {
             PhysModelMain.modelInterface.NewModel();
@@ -1646,6 +2111,8 @@ namespace PhysModelGUI.ViewModels
             ChangeCompartmentCommand = new RelayCommand(ChangeSelectedCompartment);
             ChangeConnectorCommand = new RelayCommand(ChangeConnector);
             ChangeContainerCommand = new RelayCommand(ChangeContainer);
+            ChangeGexUnitCommand = new RelayCommand(ChangeGexUnit);
+            ChangeRhythmCommand = new RelayCommand(ChangeRhythm);
         }
 
         public MainWindowViewModel()
@@ -1698,6 +2165,24 @@ namespace PhysModelGUI.ViewModels
             {
                 containers.Add(c);
             }
+            foreach(GasExchangeBlock c in PhysModelMain.currentModel.gasExchangeBlocks)
+            {
+                gasexchangeUnits.Add(c);
+            }
+
+            rhythmTypes.Add("SINUS");
+            rhythmTypes.Add("PAC");
+            rhythmTypes.Add("PVC");
+            rhythmTypes.Add("AVBLOCK1");
+            rhythmTypes.Add("AVBLOCK2a");
+            rhythmTypes.Add("AVBLOCK2b");
+            rhythmTypes.Add("AVBLOCK Complete");
+            rhythmTypes.Add("VTOUTPUT");
+            rhythmTypes.Add("VF");
+            rhythmTypes.Add("LONGQT");
+            rhythmTypes.Add("WPW");
+            rhythmTypes.Add("SVT");
+
         }
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
