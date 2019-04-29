@@ -50,8 +50,12 @@ namespace PhysModelGUI.ViewModels
         ParameterGraph FlowGraph { get; set; }
         ParameterGraph PVLoopGraph { get; set; }
         ParameterGraph ElastanceGraph { get; set; }
+        ParameterGraph ElastanceGraphContainer { get; set; }
+        ParameterGraph ResistanceGraph { get; set; }
         ParameterGraph PatMonitorGraph { get; set; }
         ParameterGraph TrendsGraph { get; set; }
+
+      
 
         bool _patMonitorGraphEnabled = false;
         public bool PatMonitorGraphEnabled { get { return _patMonitorGraphEnabled; } set { _patMonitorGraphEnabled = value; OnPropertyChanged(); } }
@@ -1523,7 +1527,9 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ChangeContainerCommand { get; set; }
         public RelayCommand ChangeGexUnitCommand { get; set; }
         public RelayCommand ChangeRhythmCommand { get; set; }
-
+        public RelayCommand DrawElastanceGraphCommand { get; set; }
+        public RelayCommand DrawElastanceGraphContainerCommand { get; set; }
+        public RelayCommand DrawResistanceGraphCommand { get; set; }
 
         // editing of blood compartment
         Compartment selectedCompartment { get; set; }
@@ -2113,8 +2119,24 @@ namespace PhysModelGUI.ViewModels
             ChangeContainerCommand = new RelayCommand(ChangeContainer);
             ChangeGexUnitCommand = new RelayCommand(ChangeGexUnit);
             ChangeRhythmCommand = new RelayCommand(ChangeRhythm);
+
+            DrawElastanceGraphCommand = new RelayCommand(DrawElastanceGraph);
+            DrawElastanceGraphContainerCommand = new RelayCommand(DrawElastanceContainerGraph);
+            DrawResistanceGraphCommand = new RelayCommand(DrawResistanceGraph);
         }
 
+        void DrawElastanceGraph(object p)
+        {
+            CalculateElastanceCurve(selectedCompartment);
+        }
+        void DrawElastanceContainerGraph(object p)
+        {
+            CalculateElastanceContainerCurve(selectedContainer);
+        }
+        void DrawResistanceGraph(object p)
+        {
+            CalculateResistanceCurve(selectedConnector);
+        }
         public MainWindowViewModel()
         {
             // 
@@ -3188,15 +3210,147 @@ namespace PhysModelGUI.ViewModels
             ElastanceGraph.RealTimeDrawing = false;
 
         }
-
-
-
-        void CalculateElastanceCurve(string _compartmentName)
+        public void InitElastanceContainerGraph(ParameterGraph p)
         {
-            //BloodCompartment testComp = new BloodCompartment();
-            //BloodCompartment selectedCompartment = PhysModelMain.FindBloodCompartmentByName(_compartmentName);
+            ElastanceGraphContainer = p;
 
-            //if (selectedCompartment != null)
+            ElastanceGraphContainer.DataRefreshRate = 15;
+            ElastanceGraphContainer.PixelPerDataPoint = 1;
+            ElastanceGraphContainer.Graph1Enabled = true;
+            ElastanceGraphContainer.IsSideScrolling = false;
+            ElastanceGraphContainer.GraphicsClearanceRate = graphicsRefreshInterval;
+            ElastanceGraphContainer.RealTimeDrawing = false;
+
+        }
+        public void InitResistanceGraph(ParameterGraph p)
+        {
+            ResistanceGraph = p;
+
+            ResistanceGraph.DataRefreshRate = 15;
+            ResistanceGraph.PixelPerDataPoint = 1;
+            ResistanceGraph.Graph1Enabled = true;
+            ResistanceGraph.IsSideScrolling = false;
+            ResistanceGraph.GraphicsClearanceRate = graphicsRefreshInterval;
+            ResistanceGraph.RealTimeDrawing = false;
+
+        }
+
+
+
+
+        void CalculateElastanceCurve(Compartment comp)
+        {
+            Compartment testComp = new BloodCompartment();
+
+            if (comp != null)
+            {
+                testComp.VolCurrent = selectedCompartment.VolCurrent;
+                testComp.VolU = selectedCompartment.VolU;
+                testComp.VolUBaseline = selectedCompartment.VolUBaseline;
+                testComp.VolUBaselineChange = selectedCompartment.VolUBaselineChange;
+                testComp.elastanceModel.ElBaseline = selectedCompartment.elastanceModel.ElBaseline;
+                testComp.elastanceModel.ElBaselineChange = selectedCompartment.elastanceModel.ElBaselineChange;
+                testComp.elastanceModel.ElContractionBaseline = selectedCompartment.elastanceModel.ElContractionBaseline;
+                testComp.elastanceModel.ElContractionBaselineChange = selectedCompartment.elastanceModel.ElContractionBaselineChange;
+                testComp.elastanceModel.ElK1 = selectedCompartment.elastanceModel.ElK1;
+                testComp.elastanceModel.ElK2 = selectedCompartment.elastanceModel.ElK2;
+                testComp.elastanceModel.ElKMaxVolume = selectedCompartment.elastanceModel.ElKMaxVolume;
+                testComp.elastanceModel.ElKMinVolume = selectedCompartment.elastanceModel.ElKMinVolume;
+
+                if (testComp.elastanceModel.ElContractionBaseline > 0)
+                {
+                    
+                    ElastanceGraph.Graph2Enabled = true;
+                }
+                else
+                {
+                    ElastanceGraph.Graph2Enabled = false;
+                }
+
+                double testVolume = testComp.VolCurrent * 2;
+
+                if (testVolume < 10) testVolume = 10;
+
+                ElastanceGraph.ClearStaticData();
+                for (double i = 0; i <= testVolume; i += 0.1)
+                {
+                    testComp.elastanceModel.ContractionActivation = 0;
+                    testComp.VolCurrent = i;
+                    testComp.UpdateCompartment();
+                    double pres1 = testComp.PresCurrent;
+
+                    testComp.elastanceModel.ContractionActivation = 1;
+                    testComp.VolCurrent = i;
+                    testComp.UpdateCompartment();
+                    double pres2 = testComp.PresCurrent;
+
+                    ElastanceGraph.UpdateStaticData(i, pres1, i, pres2);
+
+                }
+                ElastanceGraph.DrawStaticData();
+
+            }
+
+        }
+        void CalculateElastanceContainerCurve(ContainerCompartment comp)
+        {
+            ContainerCompartment testComp = new ContainerCompartment();
+
+            if (comp != null)
+            {
+                testComp.VolCurrent = comp.VolCurrent;
+                testComp.VolU = comp.VolU;
+                testComp.VolUBaseline = comp.VolUBaseline;
+                testComp.VolUBaselineChange = comp.VolUBaselineChange;
+                testComp.elastanceModel.ElBaseline = comp.elastanceModel.ElBaseline;
+                testComp.elastanceModel.ElBaselineChange = comp.elastanceModel.ElBaselineChange;
+                testComp.elastanceModel.ElContractionBaseline = comp.elastanceModel.ElContractionBaseline;
+                testComp.elastanceModel.ElContractionBaselineChange = comp.elastanceModel.ElContractionBaselineChange;
+                testComp.elastanceModel.ElK1 = comp.elastanceModel.ElK1;
+                testComp.elastanceModel.ElK2 = comp.elastanceModel.ElK2;
+                testComp.elastanceModel.ElKMaxVolume = comp.elastanceModel.ElKMaxVolume;
+                testComp.elastanceModel.ElKMinVolume = comp.elastanceModel.ElKMinVolume;
+
+                if (testComp.elastanceModel.ElContractionBaseline > 0)
+                {
+
+                    ElastanceGraphContainer.Graph2Enabled = true;
+                }
+                else
+                {
+                    ElastanceGraphContainer.Graph2Enabled = false;
+                }
+
+                double testVolume = testComp.VolCurrent * 2;
+
+                if (testVolume < 10) testVolume = 10;
+
+                ElastanceGraphContainer.ClearStaticData();
+                for (double i = 0; i <= testVolume; i += 0.1)
+                {
+                    testComp.elastanceModel.ContractionActivation = 0;
+                    testComp.VolCurrent = i;
+                    testComp.UpdateCompartment();
+                    double pres1 = testComp.PresCurrent;
+
+                    testComp.elastanceModel.ContractionActivation = 1;
+                    testComp.VolCurrent = i;
+                    testComp.UpdateCompartment();
+                    double pres2 = testComp.PresCurrent;
+
+                    ElastanceGraphContainer.UpdateStaticData(i, pres1, i, pres2);
+
+                }
+                ElastanceGraphContainer.DrawStaticData();
+
+            }
+
+        }
+        void CalculateResistanceCurve(Connector con)
+        {
+            Connector testComp = new BloodCompartmentConnector();
+
+            //if (comp != null)
             //{
             //    testComp.VolCurrent = selectedCompartment.VolCurrent;
             //    testComp.VolU = selectedCompartment.VolU;
@@ -3213,18 +3367,19 @@ namespace PhysModelGUI.ViewModels
 
             //    if (testComp.elastanceModel.ElContractionBaseline > 0)
             //    {
-            //        graphElastance.Graph2Enabled = true;
+
+            //        ResistanceGraph.Graph2Enabled = true;
             //    }
             //    else
             //    {
-            //        graphElastance.Graph2Enabled = false;
+            //        ResistanceGraph.Graph2Enabled = false;
             //    }
 
             //    double testVolume = testComp.VolCurrent * 2;
 
             //    if (testVolume < 10) testVolume = 10;
 
-            //    graphElastance.ClearStaticData();
+            //    ElastanceGraph.ClearStaticData();
             //    for (double i = 0; i <= testVolume; i += 0.1)
             //    {
             //        testComp.elastanceModel.ContractionActivation = 0;
@@ -3237,20 +3392,16 @@ namespace PhysModelGUI.ViewModels
             //        testComp.UpdateCompartment();
             //        double pres2 = testComp.PresCurrent;
 
-            //        graphElastance.UpdateStaticData(i, pres1, i, pres2);
+            //        ResistanceGraph.UpdateStaticData(i, pres1, i, pres2);
 
             //    }
-            //    graphElastance.DrawStaticData();
+            //    ResistanceGraph.DrawStaticData();
 
             //}
 
         }
 
- 
-        void UpdateBreathingModel()
-        {
 
-        }
 
 
     }

@@ -46,6 +46,9 @@ namespace PhysModelGUI
             viewModel.InitPVLoopGraph(graphPVLoops);
             viewModel.InitPatMonitor(graphPatMonitor);
             viewModel.InitTrendsGraph(graphTrendMonitor1);
+            viewModel.InitElastanceGraph(graphElastance);
+            viewModel.InitElastanceContainerGraph(graphElastanceContainer);
+            viewModel.InitResistanceGraph(graphResistance);
 
         }
 
