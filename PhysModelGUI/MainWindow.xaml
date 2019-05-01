@@ -237,7 +237,8 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -249,15 +250,79 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Asize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2Asize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text=" whole heart contractility"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding HeartContractilityChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text=" > left heart contractility"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding HeartLeftContractilityChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text=" > right heart contractility"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding HeartRightContractilityChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text=" whole heart diastolic function"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding HeartDiastolicFunctionChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text=" > left diastolic function"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Value="{Binding HeartLeftDiastolicFunctionChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text=" > right diastolic function"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Value="{Binding HeartRightDiastolicFunctionChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text=" aortic valve stenosis"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Value="{Binding AVStenosisChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="7" FontSize="10" Text=" aortic valve regurgitation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="7" Grid.Column="1" Maximum="100" Value="{Binding AVRegurgitationChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="7" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="8" FontSize="10" Text=" pulmonary valve stenosis"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="8" Grid.Column="1" Value="{Binding PVStenosisChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="8" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="9" FontSize="10" Text=" pulmonary valve regurgitation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="9" Grid.Column="1" Maximum="100" Value="{Binding PVRegurgitationChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="9" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text=" mitral valve stenosis"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="10" Grid.Column="1" Value="{Binding MVStenosisChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="10" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="11" FontSize="10" Text=" mitral valve regurgitation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="11" Grid.Column="1" Maximum="100" Value="{Binding MVRegurgitationChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="11" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="12" FontSize="10" Text=" tricuspid valve stenosis"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="12" Grid.Column="1"  Value="{Binding TVStenosisChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="12" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="13" FontSize="10" Text=" tricuspid valve regurgitation"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="13" Grid.Column="1" Maximum="100"  Value="{Binding TVRegurgitationChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="13" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="14" FontSize="10" Text=" pericardial compliance"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="14" Grid.Column="1" Maximum="100"  Value="{Binding PericardiumComplianceChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="14" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+
+
                                 </Grid>
                             </Border>
                         </Expander>
@@ -266,7 +331,8 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -279,20 +345,34 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="systemic vascular resistance" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Size" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1Size, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="pulmonary vascular resistance" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2size" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2size, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text=" change syst vasc resistance"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding SystemicVascularResistanceChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text="venous system capacity" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli3size" Grid.Column="0" Grid.Row="5" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="10" Text="{Binding ElementName=sli3size, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="1" FontSize="10" Text=" change pulm vasc resistance"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="1" Grid.Column="1" Value="{Binding PulmonaryVascularResistanceChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="1" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text=" change venous pool volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="2" Grid.Column="1" Value="{Binding VenousPoolChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
+                                    <TextBlock Grid.Column="0" Grid.Row="3" FontSize="10" Text=" change blood volume"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="3" Grid.Column="1" Value="{Binding BloodVolumeChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="3" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="4" FontSize="10" Text=" change pda size"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="4" Grid.Column="1" Minimum="0" Maximum="10" Value="{Binding PDASize,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="4" Text="mm" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="10" Text=" change OFO size"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="5" Grid.Column="1" Minimum="0" Maximum="10" Value="{Binding OFOSize,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="5" Text="mm" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="6" FontSize="10" Text=" change VSD size"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="6" Grid.Column="1" Minimum="0" Maximum="10" Value="{Binding VSDSize,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="6" Text="mm" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
                                 </Grid>
                             </Border>
                         </Expander>
@@ -374,7 +454,8 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black">
                                 <Grid Margin="10,5,10,10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="2*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
@@ -387,14 +468,11 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
-                                    <Slider x:Name="sli1Csize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    
+                                    <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text=" change lung compliance"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="0" Grid.Column="1" Value="{Binding LungComplianceChange,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
-                                    <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
-                                    <Slider x:Name="sli2Csize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
                                 </Grid>
                             </Border>
                         </Expander>
@@ -603,7 +681,8 @@
                                     </ComboBox>
 
                                     <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Text="> forward resistance" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
-                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="1" Value="{Binding ResForward, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2"></ex:DoubleUpDown>
+                                    <ex:DoubleUpDown Grid.Column="2" Grid.Row="1" Value="{Binding ResForward, Mode=TwoWay}" FontSize="10" Margin="0,2,0,2">
+                                    </ex:DoubleUpDown>
                                     <TextBlock Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" Text="mmHg/sec/ml" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Text="> backward resistance" FontSize="10" Margin="5,0,0,0" VerticalAlignment="Center"></TextBlock>
@@ -626,9 +705,6 @@
 
                                     <TextBlock Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Text="> is enabled" FontSize="10" Margin="5,5,0,0" VerticalAlignment="Center"></TextBlock>
                                     <CheckBox Grid.Column="2" Grid.Row="7" IsChecked="{Binding IsEnabledRes}" Margin="0,5,0,0"  ></CheckBox>
-
-                                    <TextBlock Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="4" Text="Current resistance curve" FontSize="10" FontWeight="Bold" Margin="5,10,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
-                                    <local:ParameterGraph x:Name="graphResistance" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="4" Height="200"></local:ParameterGraph>
 
                                 </Grid>
                             </Border>

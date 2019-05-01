@@ -3,6 +3,7 @@ using PhysModelLibrary;
 using PhysModelLibrary.BaseClasses;
 using PhysModelLibrary.Compartments;
 using PhysModelLibrary.Connectors;
+using PhysModelLibrary.Models;
 using SkiaSharp;
 using SkiaSharp.Views.WPF;
 using System;
@@ -1093,9 +1094,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Hemoglobin = value;
+                    PhysModelMain.modelInterface.AdjustHemoglobinConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1108,9 +1109,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.DPG_blood = value;
+                    PhysModelMain.modelInterface.AdjustDPGConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1140,9 +1141,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Na_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustSodiumConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1155,9 +1156,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.K_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustPotassiumConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1170,9 +1171,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Cl_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustChlorideConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1185,9 +1186,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Ca_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustCalciumConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1200,9 +1201,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Mg_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustMagnesiumConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1215,9 +1216,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Phos_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustPhosphatesConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1230,9 +1231,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Alb_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustAlbuminConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1245,9 +1246,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Ua_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustUnmeasuredAnionsConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1260,9 +1261,9 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (PhysModelMain.currentModel != null)
+                if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.currentModel.Uc_Plasma = value;
+                    PhysModelMain.modelInterface.AdjustUnmeasuredCationsConcentration(value);
                     OnPropertyChanged();
                 }
             }
@@ -1365,6 +1366,571 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
+        double _lungComplianceChange = 0;
+        public double LungComplianceChange
+        {
+            get
+            {
+                return _lungComplianceChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+                    _lungComplianceChange = value;
+                    PhysModelMain.modelInterface.AdjustLungCompliance(value);
+                  
+                    OnPropertyChanged();
+                } else
+                {
+                    _lungComplianceChange = 0;
+                }
+            }
+        }
+        double _svrChange = 0;
+        public double SystemicVascularResistanceChange
+        {
+            get
+            {
+                return _svrChange;
+            }
+            set
+            {          
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _svrChange = value;
+                    
+                    PhysModelMain.modelInterface.AdjustSystemicVascularResistance(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _svrChange = 0;
+                }
+            }
+        }
+
+        double _pvrChange = 0;
+        public double PulmonaryVascularResistanceChange
+        {
+            get
+            {
+                return _pvrChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _pvrChange = value;
+
+                    PhysModelMain.modelInterface.AdjustPulmonaryVascularResistance(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _pvrChange = 0;
+                }
+            }
+        }
+
+        double _venPoolChange = 0;
+        public double VenousPoolChange
+        {
+            get
+            {
+                return _venPoolChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _venPoolChange = value;
+
+                    PhysModelMain.modelInterface.AdjustVenousPool(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _venPoolChange = 0;
+                }
+            }
+        }
+
+        double _heartDiastFunction = 0;
+        public double HeartDiastolicFunctionChange
+        {
+            get
+            {
+                return _heartDiastFunction;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _heartDiastFunction = value;
+
+                    PhysModelMain.modelInterface.AdjustHeartDiastolicFunction(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _heartDiastFunction = 0;
+                }
+            }
+        }
+
+        double _heartLeftDiastFunction = 0;
+        public double HeartLeftDiastolicFunctionChange
+        {
+            get
+            {
+                return _heartLeftDiastFunction;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _heartLeftDiastFunction = value;
+
+                    PhysModelMain.modelInterface.AdjustHeartLeftDiastolicFunction(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _heartLeftDiastFunction = 0;
+                }
+            }
+        }
+        double _heartRightDiastFunction = 0;
+        public double HeartRightDiastolicFunctionChange
+        {
+            get
+            {
+                return _heartRightDiastFunction;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _heartRightDiastFunction = value;
+
+                    PhysModelMain.modelInterface.AdjustHeartRightDiastolicFunction(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _heartRightDiastFunction = 0;
+                }
+            }
+        }
+
+        double _heartCont = 0;
+        public double HeartContractilityChange
+        {
+            get
+            {
+                return _heartCont;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _heartCont = value;
+
+                    PhysModelMain.modelInterface.AdjustHeartContractility(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _heartCont = 0;
+                }
+            }
+        }
+
+        double _heartLeftCont = 0;
+        public double HeartLeftContractilityChange
+        {
+            get
+            {
+                return _heartLeftCont;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _heartLeftCont = value;
+
+                    PhysModelMain.modelInterface.AdjustLeftHeartContractility(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _heartLeftCont = 0;
+                }
+            }
+        }
+        double _heartRightCont = 0;
+        public double HeartRightContractilityChange
+        {
+            get
+            {
+                return _heartRightCont;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _heartRightCont = value;
+
+                    PhysModelMain.modelInterface.AdjustRightHeartContractility(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _heartRightCont = 0;
+                }
+            }
+        }
+
+        double _avValveStenosisChange = 0;
+        public double AVStenosisChange
+        {
+            get
+            {
+                return _avValveStenosisChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _avValveStenosisChange = value;
+
+                    PhysModelMain.modelInterface.AdjustAVValveStenosis(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _avValveStenosisChange = 0;
+                }
+            }
+        }
+
+        double _avValveRegurgitationChange = 0;
+        public double AVRegurgitationChange
+        {
+            get
+            {
+                return _avValveRegurgitationChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _avValveRegurgitationChange = value;
+
+                    PhysModelMain.modelInterface.AdjustAVValveRegurgitation(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _avValveRegurgitationChange = 0;
+                }
+            }
+        }
+
+        double _pvValveStenosisChange = 0;
+        public double PVStenosisChange
+        {
+            get
+            {
+                return _pvValveStenosisChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _pvValveStenosisChange = value;
+
+                    PhysModelMain.modelInterface.AdjustPVValveStenosis(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _pvValveStenosisChange = 0;
+                }
+            }
+        }
+
+        double _pvValveRegurgitationChange = 0;
+        public double PVRegurgitationChange
+        {
+            get
+            {
+                return _pvValveRegurgitationChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _pvValveRegurgitationChange = value;
+
+                    PhysModelMain.modelInterface.AdjustPVValveRegurgitation(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _pvValveRegurgitationChange = 0;
+                }
+            }
+        }
+
+        double _mvValveStenosisChange = 0;
+        public double MVStenosisChange
+        {
+            get
+            {
+                return _mvValveStenosisChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _mvValveStenosisChange = value;
+
+                    PhysModelMain.modelInterface.AdjustMVValveStenosis(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _mvValveStenosisChange = 0;
+                }
+            }
+        }
+
+        double _mvValveRegurgitationChange = 0;
+        public double MVRegurgitationChange
+        {
+            get
+            {
+                return _mvValveRegurgitationChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _mvValveRegurgitationChange = value;
+
+                    PhysModelMain.modelInterface.AdjustMVValveRegurgitation(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _mvValveRegurgitationChange = 0;
+                }
+            }
+        }
+
+        double _tvValveStenosisChange = 0;
+        public double TVStenosisChange
+        {
+            get
+            {
+                return _tvValveStenosisChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _tvValveStenosisChange = value;
+
+                    PhysModelMain.modelInterface.AdjustTVValveStenosis(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _tvValveStenosisChange = 0;
+                }
+            }
+        }
+
+        double _tvValveRegurgitationChange = 0;
+        public double TVRegurgitationChange
+        {
+            get
+            {
+                return _tvValveRegurgitationChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _tvValveRegurgitationChange = value;
+
+                    PhysModelMain.modelInterface.AdjustTVValveRegurgitation(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _tvValveRegurgitationChange = 0;
+                }
+            }
+        }
+
+        double _pericardiumComplianceChange = 0;
+        public double PericardiumComplianceChange
+        {
+            get
+            {
+                return _pericardiumComplianceChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+                    _pericardiumComplianceChange = value;
+                    PhysModelMain.modelInterface.AdjustPericardialCompliance(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _pericardiumComplianceChange = 0;
+                }
+            }
+        }
+
+        double _bloodVolumeChange = 0;
+        public double BloodVolumeChange
+        {
+            get
+            {
+                return _bloodVolumeChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _bloodVolumeChange = value;
+
+                    PhysModelMain.modelInterface.AdjustBloodVolume(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _bloodVolumeChange = 0;
+                }
+            }
+        }
+
+        double _pdaSize = 0;
+        public double PDASize
+        {
+            get
+            {
+                return _pdaSize;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _pdaSize = value;
+
+                    PhysModelMain.modelInterface.AdjustPDASize(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _pdaSize = 0;
+                }
+            }
+        }
+
+        double _ofoSize = 0;
+        public double OFOSize
+        {
+            get
+            {
+                return _ofoSize;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _ofoSize = value;
+
+                    PhysModelMain.modelInterface.AdjustOFOSize(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _ofoSize = 0;
+                }
+            }
+        }
+        double _vsdSize = 0;
+        public double VSDSize
+        {
+            get
+            {
+                return _vsdSize;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _vsdSize = value;
+
+                    PhysModelMain.modelInterface.AdjustVSDSize(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _vsdSize = 0;
+                }
+            }
+        }
 
         public ObservableCollection<Compartment> compartments { get; set; } = new ObservableCollection<Compartment>();
         public ObservableCollection<Connector> connectors { get; set; } = new ObservableCollection<Connector>();
@@ -1529,7 +2095,7 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ChangeRhythmCommand { get; set; }
         public RelayCommand DrawElastanceGraphCommand { get; set; }
         public RelayCommand DrawElastanceGraphContainerCommand { get; set; }
-        public RelayCommand DrawResistanceGraphCommand { get; set; }
+
 
         // editing of blood compartment
         Compartment selectedCompartment { get; set; }
@@ -1709,7 +2275,7 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (selectedConnector != null)
+                if (selectedConnector != null && !double.IsNaN(value) && value != 0)
                 {
                     selectedConnector.resistance.RForwardBaseline = value;
                     OnPropertyChanged();
@@ -1724,7 +2290,7 @@ namespace PhysModelGUI.ViewModels
             }
             set
             {
-                if (selectedConnector != null)
+                if (selectedConnector != null && !double.IsNaN(value) && value != 0)
                 {
                     selectedConnector.resistance.RBackwardBaseline = value;
                     OnPropertyChanged();
@@ -2122,7 +2688,7 @@ namespace PhysModelGUI.ViewModels
 
             DrawElastanceGraphCommand = new RelayCommand(DrawElastanceGraph);
             DrawElastanceGraphContainerCommand = new RelayCommand(DrawElastanceContainerGraph);
-            DrawResistanceGraphCommand = new RelayCommand(DrawResistanceGraph);
+
         }
 
         void DrawElastanceGraph(object p)
@@ -2133,10 +2699,7 @@ namespace PhysModelGUI.ViewModels
         {
             CalculateElastanceContainerCurve(selectedContainer);
         }
-        void DrawResistanceGraph(object p)
-        {
-            CalculateResistanceCurve(selectedConnector);
-        }
+
         public MainWindowViewModel()
         {
             // 
@@ -3158,7 +3721,7 @@ namespace PhysModelGUI.ViewModels
         {
             TrendsGraph = p;
 
-            TrendsGraph.GraphMaxY = 150;
+            TrendsGraph.GraphMaxY = 210;
             TrendsGraph.GraphMaxX = 20;
             TrendsGraph.DataRefreshRate = 15;
             TrendsGraph.PixelPerDataPoint = 2;
@@ -3208,6 +3771,8 @@ namespace PhysModelGUI.ViewModels
             ElastanceGraph.IsSideScrolling = false;
             ElastanceGraph.GraphicsClearanceRate = graphicsRefreshInterval;
             ElastanceGraph.RealTimeDrawing = false;
+            ElastanceGraph.HideXAxisLabels = true;
+            ElastanceGraph.XAxisTitle = "volume";
 
         }
         public void InitElastanceContainerGraph(ParameterGraph p)
@@ -3220,23 +3785,10 @@ namespace PhysModelGUI.ViewModels
             ElastanceGraphContainer.IsSideScrolling = false;
             ElastanceGraphContainer.GraphicsClearanceRate = graphicsRefreshInterval;
             ElastanceGraphContainer.RealTimeDrawing = false;
+            ElastanceGraph.HideXAxisLabels = true;
+            ElastanceGraph.XAxisTitle = "volume";
 
         }
-        public void InitResistanceGraph(ParameterGraph p)
-        {
-            ResistanceGraph = p;
-
-            ResistanceGraph.DataRefreshRate = 15;
-            ResistanceGraph.PixelPerDataPoint = 1;
-            ResistanceGraph.Graph1Enabled = true;
-            ResistanceGraph.IsSideScrolling = false;
-            ResistanceGraph.GraphicsClearanceRate = graphicsRefreshInterval;
-            ResistanceGraph.RealTimeDrawing = false;
-
-        }
-
-
-
 
         void CalculateElastanceCurve(Compartment comp)
         {
@@ -3267,12 +3819,13 @@ namespace PhysModelGUI.ViewModels
                     ElastanceGraph.Graph2Enabled = false;
                 }
 
-                double testVolume = testComp.VolCurrent * 2;
+                double testVolumeMax = testComp.elastanceModel.ElKMaxVolume + 10;
+                double testVolumeMin = testComp.VolUBaseline;
+                if (testVolumeMin < 0) { testVolumeMin = 0; }
 
-                if (testVolume < 10) testVolume = 10;
 
                 ElastanceGraph.ClearStaticData();
-                for (double i = 0; i <= testVolume; i += 0.1)
+                for (double i = testVolumeMin; i <= testVolumeMax; i += 0.1)
                 {
                     testComp.elastanceModel.ContractionActivation = 0;
                     testComp.VolCurrent = i;
@@ -3321,12 +3874,14 @@ namespace PhysModelGUI.ViewModels
                     ElastanceGraphContainer.Graph2Enabled = false;
                 }
 
-                double testVolume = testComp.VolCurrent * 2;
+                double testVolumeMax = testComp.elastanceModel.ElKMaxVolume + 10;
+                double testVolumeMin = testComp.VolUBaseline;
+                if (testVolumeMin < 0) { testVolumeMin = 0; }
 
-                if (testVolume < 10) testVolume = 10;
+
 
                 ElastanceGraphContainer.ClearStaticData();
-                for (double i = 0; i <= testVolume; i += 0.1)
+                for (double i = testVolumeMin; i <= testVolumeMax; i += 0.1)
                 {
                     testComp.elastanceModel.ContractionActivation = 0;
                     testComp.VolCurrent = i;
@@ -3346,60 +3901,7 @@ namespace PhysModelGUI.ViewModels
             }
 
         }
-        void CalculateResistanceCurve(Connector con)
-        {
-            Connector testComp = new BloodCompartmentConnector();
-
-            //if (comp != null)
-            //{
-            //    testComp.VolCurrent = selectedCompartment.VolCurrent;
-            //    testComp.VolU = selectedCompartment.VolU;
-            //    testComp.VolUBaseline = selectedCompartment.VolUBaseline;
-            //    testComp.VolUBaselineChange = selectedCompartment.VolUBaselineChange;
-            //    testComp.elastanceModel.ElBaseline = selectedCompartment.elastanceModel.ElBaseline;
-            //    testComp.elastanceModel.ElBaselineChange = selectedCompartment.elastanceModel.ElBaselineChange;
-            //    testComp.elastanceModel.ElContractionBaseline = selectedCompartment.elastanceModel.ElContractionBaseline;
-            //    testComp.elastanceModel.ElContractionBaselineChange = selectedCompartment.elastanceModel.ElContractionBaselineChange;
-            //    testComp.elastanceModel.ElK1 = selectedCompartment.elastanceModel.ElK1;
-            //    testComp.elastanceModel.ElK2 = selectedCompartment.elastanceModel.ElK2;
-            //    testComp.elastanceModel.ElKMaxVolume = selectedCompartment.elastanceModel.ElKMaxVolume;
-            //    testComp.elastanceModel.ElKMinVolume = selectedCompartment.elastanceModel.ElKMinVolume;
-
-            //    if (testComp.elastanceModel.ElContractionBaseline > 0)
-            //    {
-
-            //        ResistanceGraph.Graph2Enabled = true;
-            //    }
-            //    else
-            //    {
-            //        ResistanceGraph.Graph2Enabled = false;
-            //    }
-
-            //    double testVolume = testComp.VolCurrent * 2;
-
-            //    if (testVolume < 10) testVolume = 10;
-
-            //    ElastanceGraph.ClearStaticData();
-            //    for (double i = 0; i <= testVolume; i += 0.1)
-            //    {
-            //        testComp.elastanceModel.ContractionActivation = 0;
-            //        testComp.VolCurrent = i;
-            //        testComp.UpdateCompartment();
-            //        double pres1 = testComp.PresCurrent;
-
-            //        testComp.elastanceModel.ContractionActivation = 1;
-            //        testComp.VolCurrent = i;
-            //        testComp.UpdateCompartment();
-            //        double pres2 = testComp.PresCurrent;
-
-            //        ResistanceGraph.UpdateStaticData(i, pres1, i, pres2);
-
-            //    }
-            //    ResistanceGraph.DrawStaticData();
-
-            //}
-
-        }
+  
 
 
 
