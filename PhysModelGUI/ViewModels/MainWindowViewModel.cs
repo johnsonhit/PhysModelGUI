@@ -1387,6 +1387,75 @@ namespace PhysModelGUI.ViewModels
                 }
             }
         }
+
+        double _airwayComplianceChange = 0;
+        public double AirwayComplianceChange
+        {
+            get
+            {
+                return _airwayComplianceChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+                    _airwayComplianceChange = value;
+                    PhysModelMain.modelInterface.AdjustAirwayCompliance(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _airwayComplianceChange = 0;
+                }
+            }
+        }
+        double _chestwallComplianceChange = 0;
+        public double ChestwallComplianceChange
+        {
+            get
+            {
+                return _chestwallComplianceChange;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+                    _chestwallComplianceChange = value;
+                    PhysModelMain.modelInterface.AdjustChestwallCompliance(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _chestwallComplianceChange = 0;
+                }
+            }
+        }
+
+        double _lungDiffCapacity = 0;
+        public double LungDiffusionCapacity
+        {
+            get
+            {
+                return _lungDiffCapacity;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+                    _lungDiffCapacity = value;
+                    PhysModelMain.modelInterface.AdjustLungDiffusionCapacity(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _lungDiffCapacity = 0;
+                }
+            }
+        }
+
         double _svrChange = 0;
         public double SystemicVascularResistanceChange
         {
@@ -1932,6 +2001,31 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
+        double _lungShuntSize = 0;
+        public double LUNGShuntSize
+        {
+            get
+            {
+                return _lungShuntSize;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null && !double.IsNaN(value))
+                {
+
+                    _lungShuntSize = value;
+
+                    PhysModelMain.modelInterface.AdjustLungShuntSize(value);
+
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    _lungShuntSize = 0;
+                }
+            }
+        }
+
         public ObservableCollection<Compartment> compartments { get; set; } = new ObservableCollection<Compartment>();
         public ObservableCollection<Connector> connectors { get; set; } = new ObservableCollection<Connector>();
         public ObservableCollection<ContainerCompartment> containers { get; set; } = new ObservableCollection<ContainerCompartment>();
@@ -2282,7 +2376,7 @@ namespace PhysModelGUI.ViewModels
                 }
             }
         }
-        public double ResBackward
+        public double ResBackward 
         {
             get
             {
@@ -2501,13 +2595,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return selectedGexUnit != null ? selectedGexUnit.DiffCoO2 : 0;
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoO2Baseline : 0;
             }
             set
             {
                 if (selectedGexUnit != null)
                 {
-                    selectedGexUnit.DiffCoO2 = value;
+                    selectedGexUnit.DiffCoO2Baseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -2516,13 +2610,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return selectedGexUnit != null ? selectedGexUnit.DiffCoCo2 : 0;
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoCo2Baseline : 0;
             }
             set
             {
                 if (selectedGexUnit != null)
                 {
-                    selectedGexUnit.DiffCoCo2 = value;
+                    selectedGexUnit.DiffCoCo2Baseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -2531,13 +2625,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return selectedGexUnit != null ? selectedGexUnit.DiffCoN2 : 0;
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoN2Baseline : 0;
             }
             set
             {
                 if (selectedGexUnit != null)
                 {
-                    selectedGexUnit.DiffCoN2 = value;
+                    selectedGexUnit.DiffCoN2Baseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -2546,13 +2640,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return selectedGexUnit != null ? selectedGexUnit.DiffCoOther : 0;
+                return selectedGexUnit != null ? selectedGexUnit.DiffCoOtherBaseline : 0;
             }
             set
             {
                 if (selectedGexUnit != null)
                 {
-                    selectedGexUnit.DiffCoOther = value;
+                    selectedGexUnit.DiffCoOtherBaseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -2609,10 +2703,10 @@ namespace PhysModelGUI.ViewModels
             selectedGexUnit = (GasExchangeBlock)p;
             CompBloodGex = selectedGexUnit.CompBlood.Description;
             CompGasGex = selectedGexUnit.CompGas.Description;
-            DiffO2Gex = selectedGexUnit.DiffCoO2;
-            DiffCO2Gex = selectedGexUnit.DiffCoCo2;
-            DiffN2Gex = selectedGexUnit.DiffCoN2;
-            DiffOtherGex = selectedGexUnit.DiffCoOther;
+            DiffO2Gex = selectedGexUnit.DiffCoO2Baseline;
+            DiffCO2Gex = selectedGexUnit.DiffCoCo2Baseline;
+            DiffN2Gex = selectedGexUnit.DiffCoN2Baseline;
+            DiffOtherGex = selectedGexUnit.DiffCoOtherBaseline;
         }
         void ChangeRhythm(object p)
         {
