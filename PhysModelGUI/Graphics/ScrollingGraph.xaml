@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="PhysModelGUI.Graphics.ScrollingGraph"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:PhysModelGUI.Graphics"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400" BorderThickness="0">
+    <Grid>
+        <telerik:RadCartesianChart >
+            <telerik:RadCartesianChart.HorizontalAxis>
+                <telerik:DateTimeContinuousAxis MaximumTicks="0" ShowLabels="{Binding ShowXLabels}" LabelFormat="HH:mm:ss" 
+                                                TickOrigin="{Binding MinDate}"
+                                                MajorStepUnit="Second"
+                                                MajorStep="{Binding GridStep}"
+                                                Minimum="{Binding MinDate}"
+                                                Maximum="{Binding MaxDate}"/>
+            </telerik:RadCartesianChart.HorizontalAxis>
+            
+            <telerik:RadCartesianChart.VerticalAxis>
+                <telerik:LinearAxis Minimum="{Binding MinY}" Maximum="{Binding MaxY}" MajorStep="50" ></telerik:LinearAxis>
+            </telerik:RadCartesianChart.VerticalAxis>
+
+
+            <telerik:RadCartesianChart.Series>
+                <telerik:LineSeries x:Name="dataSeries1" CategoryBinding="TimeValue" ValueBinding="YValue"/>
+
+
+            </telerik:RadCartesianChart.Series>
+        </telerik:RadCartesianChart>
+    </Grid>
+</UserControl>

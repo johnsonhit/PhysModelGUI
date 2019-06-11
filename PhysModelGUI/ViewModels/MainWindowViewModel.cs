@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using PhysModelGUI.Graphics;
 using PhysModelLibrary;
 using PhysModelLibrary.BaseClasses;
 using PhysModelLibrary.Compartments;
@@ -7,6 +8,7 @@ using PhysModelLibrary.Models;
 using SkiaSharp;
 using SkiaSharp.Views.WPF;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -26,13 +28,18 @@ namespace PhysModelGUI.ViewModels
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
         bool initialized = false;
         bool mainDiagramAnimationEnabled = true;
 
+
         DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Render);
         int slowUpdater = 0;
+        
 
         ObservableCollection<string> _modelLog = new ObservableCollection<string>();
+
         public ObservableCollection<string> ModelLog { get { return _modelLog; } set { _modelLog = value; OnPropertyChanged(); } }
 
         int _selectedIndexPressure = 0;
@@ -47,16 +54,16 @@ namespace PhysModelGUI.ViewModels
         SKElement MainDiagram { get; set; }
         SKElement MainDiagramSkeleton { get; set; }
 
-        ParameterGraph PressureGraph { get; set; }
-        ParameterGraph FlowGraph { get; set; }
-        ParameterGraph PVLoopGraph { get; set; }
-        ParameterGraph ElastanceGraph { get; set; }
-        ParameterGraph ElastanceGraphContainer { get; set; }
-        ParameterGraph ResistanceGraph { get; set; }
-        ParameterGraph PatMonitorGraph { get; set; }
-        ParameterGraph TrendsGraph { get; set; }
+        ParameterGraph2 PressureGraph { get; set; }
+        ParameterGraph2 FlowGraph { get; set; }
+        ParameterGraph2 PVLoopGraph { get; set; }
+        ParameterGraph2 ElastanceGraph { get; set; }
+        ParameterGraph2 ElastanceGraphContainer { get; set; }
+        ParameterGraph2 ResistanceGraph { get; set; }
+        ParameterGraph2 PatMonitorGraph { get; set; }
+        ParameterGraph2 TrendsGraph { get; set; }
 
-      
+        ScrollingGraph GraphScroller { get; set; }
 
         bool _patMonitorGraphEnabled = false;
         public bool PatMonitorGraphEnabled { get { return _patMonitorGraphEnabled; } set { _patMonitorGraphEnabled = value; OnPropertyChanged(); } }
@@ -1075,13 +1082,13 @@ namespace PhysModelGUI.ViewModels
         {
             get
             {
-                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vo2 : 0;
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.Vo2Baseline : 0;
             }
             set
             {
                 if (PhysModelMain.currentModel != null)
                 {
-                    PhysModelMain.currentModel.Vo2 = value;
+                    PhysModelMain.currentModel.Vo2Baseline = value;
                     OnPropertyChanged();
                 }
             }
@@ -2863,13 +2870,15 @@ namespace PhysModelGUI.ViewModels
             rhythmTypes.Add("SVT");
 
         }
+
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
             if (slowUpdater > 1000)
             {
+
                 slowUpdater = 0;
                 Heartrate = PhysModelMain.modelInterface.HeartRate.ToString();
-                Spo2 = PhysModelMain.modelInterface.ArterialSO2Pre.ToString();
+                Spo2 = PhysModelMain.modelInterface.PulseOximeterOutput.ToString();
                 Abp = PhysModelMain.modelInterface.ArterialBloodPressure;
                 Pap = PhysModelMain.modelInterface.PulmonaryArteryPressure.ToString();
                 Cvp = PhysModelMain.modelInterface.CentralVenousPressure.ToString();
@@ -2920,6 +2929,8 @@ namespace PhysModelGUI.ViewModels
                 if (TrendsGraph != null)
                     TrendsGraph.DrawGraphOnScreen();
             }
+
+
             slowUpdater += graphicsRefreshInterval;
 
             if (mainDiagramAnimationEnabled && MainDiagram != null)
@@ -2936,6 +2947,10 @@ namespace PhysModelGUI.ViewModels
 
             if (PVLoopGraphEnabled && PVLoopGraph != null)
                 PVLoopGraph.DrawGraphOnScreen();
+
+            if (GraphScroller != null)
+                GraphScroller.UpdateData(PhysModelMain.modelInterface.LVPSignal, PhysModelMain.modelInterface.RVPSignal);
+
         }
 
         private void ModelInterface_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -2983,7 +2998,7 @@ namespace PhysModelGUI.ViewModels
             ModelGraphic.DrawMainDiagram(canvas, e.Info.Width, e.Info.Height);
         }
 
-        public void InitPressureGraph(ParameterGraph p)
+        public void InitPressureGraph(ParameterGraph2 p)
         {
             PressureGraph = p;
 
@@ -3211,7 +3226,7 @@ namespace PhysModelGUI.ViewModels
             }
 
         }
-        public void InitFlowGraph(ParameterGraph p)
+        public void InitFlowGraph(ParameterGraph2 p)
         {
             FlowGraph = p;
 
@@ -3535,7 +3550,7 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
-        public void InitPVLoopGraph(ParameterGraph p)
+        public void InitPVLoopGraph(ParameterGraph2 p)
         {
             PVLoopGraph = p;
 
@@ -3769,7 +3784,14 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
-        public void InitPatMonitor(ParameterGraph p)
+        public void InitScrollingGraph(ScrollingGraph p)
+        {
+            GraphScroller = p;
+
+        }
+
+
+        public void InitPatMonitor(ParameterGraph2 p)
         {
             PatMonitorGraph = p;
 
@@ -3811,7 +3833,7 @@ namespace PhysModelGUI.ViewModels
 
         }
 
-        public void InitTrendsGraph(ParameterGraph p)
+        public void InitTrendsGraph(ParameterGraph2 p)
         {
             TrendsGraph = p;
 
@@ -3851,11 +3873,11 @@ namespace PhysModelGUI.ViewModels
         void UpdateTrendGraph1()
         {
             if (TrendsGraph != null)
-                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.ArterialSO2Pre, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
+                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.PulseOximeterOutput, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
 
         }
 
-        public void InitElastanceGraph(ParameterGraph p)
+        public void InitElastanceGraph(ParameterGraph2 p)
         {
             ElastanceGraph = p;
 
@@ -3869,7 +3891,7 @@ namespace PhysModelGUI.ViewModels
             ElastanceGraph.XAxisTitle = "volume";
 
         }
-        public void InitElastanceContainerGraph(ParameterGraph p)
+        public void InitElastanceContainerGraph(ParameterGraph2 p)
         {
             ElastanceGraphContainer = p;
 
@@ -3995,10 +4017,12 @@ namespace PhysModelGUI.ViewModels
             }
 
         }
-  
-
-
-
-
     }
+
+    public class ChartDataClass
+    {
+        public DateTime XValue { get; set; }
+        public double YValue { get; set; }
+    }
+
 }

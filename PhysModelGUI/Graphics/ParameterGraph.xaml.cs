@@ -24,7 +24,7 @@ namespace PhysModelGUI
     /// <summary>
     /// Interaction logic for ParameterGraph.xaml
     /// </summary>
-    public partial class ParameterGraph : UserControl, INotifyPropertyChanged
+    public partial class ParameterGraph2 : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -138,7 +138,7 @@ namespace PhysModelGUI
 
         public bool NoGrid = false;
 
-        public ParameterGraph()
+        public ParameterGraph2()
         {
             InitializeComponent();
 
@@ -558,12 +558,13 @@ namespace PhysModelGUI
                 ClearGraph = false;
             }
 
-            if (Graph1Enabled && displayArray1 != null) _canvasGraph.DrawPoints(PointMode1, displayArray1, GraphPaint1);
+            if (Graph1Enabled && displayArray1 != null) _canvasGraph.DrawPoints(PointMode1, displayArray1, GraphPaint1);        
             if (Graph2Enabled && displayArray2 != null) _canvasGraph.DrawPoints(PointMode2, displayArray2, GraphPaint2);
             if (Graph3Enabled && displayArray3 != null) _canvasGraph.DrawPoints(PointMode3, displayArray3, GraphPaint3);
             if (Graph4Enabled && displayArray4 != null) _canvasGraph.DrawPoints(PointMode4, displayArray4, GraphPaint4);
             if (Graph5Enabled && displayArray5 != null) _canvasGraph.DrawPoints(PointMode5, displayArray5, GraphPaint5);
 
+           
             
         }
 

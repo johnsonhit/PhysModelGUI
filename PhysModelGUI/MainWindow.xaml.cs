@@ -1,4 +1,5 @@
 ﻿using PhysModelGUI.ViewModels;
+using PhysModelGUI.Graphics;
 using PhysModelLibrary;
 using PhysModelLibrary.BaseClasses;
 using PhysModelLibrary.Compartments;

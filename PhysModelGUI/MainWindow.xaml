@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:PhysModelGUI"
+        xmlns:local2="clr-namespace:PhysModelGUI.Graphics"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:ex="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
        
         Title="Neonatal physiological model" Height="720" Width="1280" Background="White" WindowStartupLocation="CenterScreen" WindowState="Maximized">
@@ -646,7 +648,7 @@
                                     <CheckBox Grid.Column="2" Grid.Row="11" IsChecked="{Binding HasFixedVolume}" Margin="0,5,0,0" ></CheckBox>
 
                                     <TextBlock Grid.Column="0" Grid.Row="12" Grid.ColumnSpan="4" Text="Current elastance curve" FontSize="10" FontWeight="Bold" Margin="5,10,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
-                                    <local:ParameterGraph x:Name="graphElastance" Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="4" Height="200"></local:ParameterGraph>
+                                    <local:ParameterGraph2 x:Name="graphElastance" Grid.Column="0" Grid.Row="13" Grid.ColumnSpan="4" Height="200"></local:ParameterGraph2>
                                 </Grid>
                               
                             </Border>
@@ -822,7 +824,7 @@
                                     <TextBlock Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2" Text="" FontSize="10" Margin="5,0,5,0" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="4" Text="Current elastance curve" FontSize="10" FontWeight="Bold" Margin="5,10,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Center"></TextBlock>
-                                    <local:ParameterGraph x:Name="graphElastanceContainer" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="4" Height="200"></local:ParameterGraph>
+                                    <local:ParameterGraph2 x:Name="graphElastanceContainer" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="4" Height="200"></local:ParameterGraph2>
 
                                 </Grid>
                             </Border>
@@ -1455,6 +1457,7 @@
                     </Border>
                 </Expander>
 
+
             </StackPanel>
         </ScrollViewer>
 
@@ -1500,7 +1503,7 @@
                             <TextBlock Grid.Column="1" Grid.Row="4" Foreground="DarkOrange" Text="kPa" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
-                            <local:ParameterGraph x:Name="graphPatMonitor" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Height="175"/>
+                            <local:ParameterGraph2 x:Name="graphPatMonitor" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Height="175"/>
 
                         </Grid>
                     </Border>
@@ -1838,9 +1841,9 @@
                         <Expander x:Name="expGraphPressures" IsExpanded="{Binding PressureGraphEnabled, Mode=TwoWay}"  Header=" pressures" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
                                 <StackPanel Margin="5,5,5,5">
-                                    <local:ParameterGraph x:Name="graphPressures" Height="150">
+                                    <local:ParameterGraph2 x:Name="graphPressures" Height="150">
 
-                                    </local:ParameterGraph>
+                                    </local:ParameterGraph2>
                                     <TextBlock Text="  select pressure probe location" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
                                     <Grid Background="Black">
                                         <Grid.ColumnDefinitions>
@@ -1872,7 +1875,7 @@
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
                                 <StackPanel Margin="5,5,5,5">
 
-                                    <local:ParameterGraph x:Name="graphFlows" Height="150"></local:ParameterGraph>
+                                    <local:ParameterGraph2 x:Name="graphFlows" Height="150"></local:ParameterGraph2>
                                     <TextBlock Text="  select flow probe location" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
                                     <Grid Background="Black">
                                         <Grid.ColumnDefinitions>
@@ -1908,7 +1911,7 @@
                         <Expander x:Name="expGraphPVLoops" IsExpanded="{Binding PVLoopGraphEnabled, Mode=TwoWay}" Header=" pressure-volume loops" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
                                 <StackPanel Margin="5,5,5,5">
-                                    <local:ParameterGraph x:Name="graphPVLoops"  Height="150"></local:ParameterGraph>
+                                    <local:ParameterGraph2 x:Name="graphPVLoops"  Height="150"></local:ParameterGraph2>
                                     <TextBlock Text="  select pv loop" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
                                     <Grid Background="Black">
                                         <Grid.ColumnDefinitions>
@@ -1951,6 +1954,6 @@
         <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="0,50,0,210" Opacity="1" IsEnabled="False" ></skia:SKElement>
         <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="0,50,0,210"></skia:SKElement>
 
-        <local:ParameterGraph x:Name="graphTrendMonitor1" BorderThickness="0" Grid.Column="1" Height="180" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
+        <local:ParameterGraph2 x:Name="graphTrendMonitor1" BorderThickness="0" Grid.Column="1" Height="180" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
     </Grid>
 </Window>
