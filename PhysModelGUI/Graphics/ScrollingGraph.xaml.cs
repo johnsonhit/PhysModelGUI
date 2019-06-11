@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using Telerik.Windows.Controls.Legend;
 
 namespace PhysModelGUI.Graphics
 {
@@ -19,6 +20,7 @@ namespace PhysModelGUI.Graphics
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+  
         public ObservableCollection<ChartDataClass> AsyncData1 { get; set; } = new ObservableCollection<ChartDataClass>();
         public ObservableCollection<ChartDataClass> AsyncData2 { get; set; } = new ObservableCollection<ChartDataClass>();
         public ObservableCollection<ChartDataClass> AsyncData3 { get; set; } = new ObservableCollection<ChartDataClass>();

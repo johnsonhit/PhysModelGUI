@@ -6,28 +6,36 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:PhysModelGUI.Graphics"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400" BorderThickness="0">
-    <Grid>
-        <telerik:RadCartesianChart >
-            <telerik:RadCartesianChart.HorizontalAxis>
-                <telerik:DateTimeContinuousAxis MaximumTicks="0" ShowLabels="{Binding ShowXLabels}" LabelFormat="HH:mm:ss" 
+             d:DesignHeight="350" d:DesignWidth="400" BorderThickness="0">
+    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
+        <Grid Background="Black" Margin="5,5,5,5">
+            <telerik:RadCartesianChart x:Name="chart" Background="Black" >
+                <telerik:RadCartesianChart.HorizontalAxis>
+                    <telerik:DateTimeContinuousAxis ElementBrush="White" MaximumTicks="0" ShowLabels="{Binding ShowXLabels}" LabelFormat="t" 
                                                 TickOrigin="{Binding MinDate}"
                                                 MajorStepUnit="Second"
                                                 MajorStep="{Binding GridStep}"
                                                 Minimum="{Binding MinDate}"
-                                                Maximum="{Binding MaxDate}"/>
-            </telerik:RadCartesianChart.HorizontalAxis>
-            
-            <telerik:RadCartesianChart.VerticalAxis>
-                <telerik:LinearAxis Minimum="{Binding MinY}" Maximum="{Binding MaxY}" MajorStep="50" ></telerik:LinearAxis>
-            </telerik:RadCartesianChart.VerticalAxis>
+                                                Maximum="{Binding MaxDate}"
+                                             />
+                </telerik:RadCartesianChart.HorizontalAxis>
+
+                <telerik:RadCartesianChart.VerticalAxis>
+                    <telerik:LinearAxis ElementBrush="White" Minimum="{Binding MinY}" Maximum="{Binding MaxY}" MajorStep="50" ></telerik:LinearAxis>
+                </telerik:RadCartesianChart.VerticalAxis>
 
 
-            <telerik:RadCartesianChart.Series>
-                <telerik:LineSeries x:Name="dataSeries1" CategoryBinding="TimeValue" ValueBinding="YValue"/>
-
-
-            </telerik:RadCartesianChart.Series>
-        </telerik:RadCartesianChart>
-    </Grid>
+                <telerik:RadCartesianChart.Series>
+                    <telerik:LineSeries x:Name="dataSeries1" Stroke="Red" StrokeThickness="1"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                    </telerik:LineSeries>
+                 
+                </telerik:RadCartesianChart.Series>
+            </telerik:RadCartesianChart>
+            <telerik:RadLegend Items="{Binding LegendItems, ElementName=chart}"  
+                           BorderBrush="White"  
+                           BorderThickness="1" 
+                           HorizontalAlignment="Right"  
+                           VerticalAlignment="Top" />
+        </Grid>
+    </Border>
 </UserControl>

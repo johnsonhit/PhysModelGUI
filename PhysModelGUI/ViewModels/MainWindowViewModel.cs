@@ -2113,6 +2113,9 @@ namespace PhysModelGUI.ViewModels
         string _myoflow = "99";
         public string Myoflow { get { return _myoflow; } set { _myoflow = value; OnPropertyChanged(); } }
 
+        string _myoO2Index = "-";
+        public string MyoO2Index { get { return _myoO2Index; } set { _myoO2Index = value; OnPropertyChanged(); } }
+
         string _pdaflow = "99";
         public string Pdaflow { get { return _pdaflow; } set { _pdaflow = value; OnPropertyChanged(); } }
 
@@ -2900,7 +2903,8 @@ namespace PhysModelGUI.ViewModels
                 Rvvolumes = PhysModelMain.modelInterface.RightVentricularVolumes;
                 Lvvolumes = PhysModelMain.modelInterface.LeftVentricularVolumes;
                 Pdaflow = Math.Round(PhysModelMain.modelInterface.PDAFlow, 1).ToString();
-                Myocardialdo2 = Math.Round(PhysModelMain.modelInterface.MyoO2Delivery, 1).ToString();
+                MyoO2Index = Math.Round(PhysModelMain.modelInterface.Mii, 3).ToString();
+                Myocardialdo2 = PhysModelMain.modelInterface.MyoO2Delivery.ToString();
                 Braindo2 = Math.Round(PhysModelMain.modelInterface.BrainO2Delivery, 1).ToString();
                 Kidneysflow = PhysModelMain.modelInterface.KidneysFlow.ToString();
                 Liverflow = PhysModelMain.modelInterface.LiverFlow.ToString();

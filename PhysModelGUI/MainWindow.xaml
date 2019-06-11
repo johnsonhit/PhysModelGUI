@@ -11,7 +11,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
        
-        Title="Neonatal physiological model" Height="720" Width="1280" Background="White" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Neonatal physiological model" Height="720" Width="1280" Background="White" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         
         <Style x:Key="comboBoxCustom" TargetType="{x:Type ComboBox}">
@@ -133,11 +133,11 @@
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="contractility" Margin="0,0,0,5"></TextBlock>
                                     <TextBlock Grid.Column="1" Grid.Row="0" Text="%" FontSize="10" HorizontalAlignment="Center"></TextBlock>
                                     <Slider x:Name="sli1Fsize" Grid.Column="0" Grid.Row="1" Minimum="0" Maximum="5"  Value="0" ></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10" Text="{Binding ElementName=sli1ASize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="1" FontSize="10"  HorizontalAlignment="Center"></TextBlock>
 
                                     <TextBlock Grid.Column="0" Grid.Row="2" FontSize="10" Text="diastolic function" Margin="0,5,0,5"></TextBlock>
                                     <Slider x:Name="sli2Fsize" Grid.Column="0" Grid.Row="3" Minimum="0" Maximum="10" Value="0"></Slider>
-                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10" Text="{Binding ElementName=sli2Asize, Path=Value, StringFormat={}{0:0.0}}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="3" FontSize="10"  HorizontalAlignment="Center"></TextBlock>
                                 </Grid>
                             </Border>
                         </Expander>
@@ -1456,7 +1456,7 @@
                         </StackPanel>
                     </Border>
                 </Expander>
-
+                <local2:ScrollingGraph x:Name="graphScrolling" Height="200" Margin="10,0,0,0"></local2:ScrollingGraph>
 
             </StackPanel>
         </ScrollViewer>
@@ -1576,6 +1576,7 @@
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="50"/>
+                                        <RowDefinition Height="50"/>
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Grid.Column="0" Text="LV output" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
@@ -1625,6 +1626,10 @@
                                     <TextBlock Grid.Column="3" Grid.Row="2" Text="RA volumes" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
                                     <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding Ravolumes}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                     <TextBlock Grid.Column="3" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="MyoO2 Index" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="{Binding MyoO2Index}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="3" Text="" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
                                 </Grid>
