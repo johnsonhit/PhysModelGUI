@@ -2110,6 +2110,9 @@ namespace PhysModelGUI.ViewModels
         string _lvvolumes = "99";
         public string Lvvolumes { get { return _lvvolumes; } set { _lvvolumes = value; OnPropertyChanged(); } }
 
+        string _totalVolume = "99";
+        public string TotalVolume { get { return _totalVolume; } set { _totalVolume = value; OnPropertyChanged(); } }
+
         string _myoflow = "99";
         public string Myoflow { get { return _myoflow; } set { _myoflow = value; OnPropertyChanged(); } }
 
@@ -2199,7 +2202,7 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ChangeRhythmCommand { get; set; }
         public RelayCommand DrawElastanceGraphCommand { get; set; }
         public RelayCommand DrawElastanceGraphContainerCommand { get; set; }
-
+        public RelayCommand SwitchToPaulCommand { get; set; }
 
         // editing of blood compartment
         Compartment selectedCompartment { get; set; }
@@ -2789,12 +2792,16 @@ namespace PhysModelGUI.ViewModels
             ChangeContainerCommand = new RelayCommand(ChangeContainer);
             ChangeGexUnitCommand = new RelayCommand(ChangeGexUnit);
             ChangeRhythmCommand = new RelayCommand(ChangeRhythm);
-
+            SwitchToPaulCommand = new RelayCommand(SwitchToPaul);
             DrawElastanceGraphCommand = new RelayCommand(DrawElastanceGraph);
             DrawElastanceGraphContainerCommand = new RelayCommand(DrawElastanceContainerGraph);
 
         }
 
+        void SwitchToPaul(object p)
+        {
+            PhysModelMain.modelInterface.SwitchToPaul();
+        }
         void DrawElastanceGraph(object p)
         {
             CalculateElastanceCurve(selectedCompartment);
@@ -2913,6 +2920,7 @@ namespace PhysModelGUI.ViewModels
                 Tidalvolume = PhysModelMain.modelInterface.TidalVolume.ToString();
                 Minutevolume = PhysModelMain.modelInterface.MinuteVolume.ToString();
                 Alveolarvolume = PhysModelMain.modelInterface.AlveolarVolume;
+                //TotalVolume = PhysModelMain.modelInterface.TotalBloodVolume().ToString();
 
                 Appliedpressure = PhysModelMain.modelInterface.AppliedAirwayPressure;
                 Airwaypressure = PhysModelMain.modelInterface.AirwayPressure;

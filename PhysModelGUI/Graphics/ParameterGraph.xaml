@@ -14,11 +14,11 @@
 
         <skia:SKElement x:Name="myGraphCanvasGrid" PaintSurface="MyGraphCanvasGrid_PaintSurface" ></skia:SKElement>
         <skia:SKElement x:Name="myGraphCanvas" PaintSurface="MyGraphCanvas_PaintSurface"></skia:SKElement>
-        <Button x:Name="butIncMaxY" Content="+" Click="ButIncMaxY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,25,10,0" VerticalAlignment="Top" ></Button>
-        <Button x:Name="butDecMaxY" Content="-" Click="ButDecMaxY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,45,10,0" VerticalAlignment="Top" ></Button>
+        <Button x:Name="butIncMaxY" Content="+" Click="ButIncMaxY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,20,5,0" VerticalAlignment="Top" ></Button>
+        <Button x:Name="butDecMaxY" Content="-" Click="ButDecMaxY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,40,5,0" VerticalAlignment="Top" ></Button>
 
-        <Button x:Name="butIncMinY" Content="+" Click="ButIncMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,10,45" VerticalAlignment="Bottom" ></Button>
-        <Button x:Name="butDecMinY" Content="-" Click="ButDecMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,10,25" VerticalAlignment="Bottom" ></Button>
+        <Button x:Name="butIncMinY" Content="+" Click="ButIncMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,5,40" VerticalAlignment="Bottom" ></Button>
+        <Button x:Name="butDecMinY" Content="-" Click="ButDecMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,5,20" VerticalAlignment="Bottom" ></Button>
 
 
         

@@ -94,7 +94,9 @@
                     <MenuItem x:Name="menuLVAD" Header="_Left ventricular assist device"></MenuItem>
                     <MenuItem x:Name="menuRVAD" Header="_Right ventricular assist device"></MenuItem>
                 </MenuItem>
-
+                <MenuItem Header="_Presets">
+                    <MenuItem x:Name="menuPaul" Header="_Switch to Paul" IsCheckable="True" Command="{Binding SwitchToPaulCommand}"/>
+                  </MenuItem>
             </MenuItem>
         </Menu>
         <StatusBar VerticalAlignment="Bottom" Height="25" Grid.ColumnSpan="3">
@@ -1456,7 +1458,7 @@
                         </StackPanel>
                     </Border>
                 </Expander>
-                <local2:ScrollingGraph x:Name="graphScrolling" Height="200" Margin="10,0,0,0"></local2:ScrollingGraph>
+         
 
             </StackPanel>
         </ScrollViewer>
@@ -1647,6 +1649,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="50"/>
+                                        <RowDefinition Height="50"/>
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Grid.Column="0" Text="IVC flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
@@ -1692,6 +1695,10 @@
                                     <TextBlock Grid.Column="3" Grid.Row="1" Text="Brain flow" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
                                     <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Brainflow}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                     <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Total volume" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding TotalVolume}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
 
 

@@ -33,7 +33,7 @@ namespace PhysModelGUI.Graphics
         public ChartDataClass currentData4 = new ChartDataClass();
         public ChartDataClass currentData5 = new ChartDataClass();
 
-        public int Interval { get; set; } = 10;
+       
         public int MaxItemsCount { get; set; } = 250;
 
         private double _maxY = 100;
@@ -73,7 +73,8 @@ namespace PhysModelGUI.Graphics
         }
 
         DateTime startDate = DateTime.Now;
-        DateTime bufferDate = DateTime.Now;
+        public int GraphDuration { get; set; } = 10;            // how many seconds are displayed in seconds
+        public int BufferSize { get; set; } = 20;           // determine the buffer size in seconds
 
         private bool _showXLabels = true;
         public bool ShowXLabels
@@ -83,7 +84,7 @@ namespace PhysModelGUI.Graphics
         }
 
         private bool firstRunFlag = true;
-        private bool bufferFlag = true;
+        private double runDuration = 0;
 
         public ScrollingGraph()
         {
@@ -91,25 +92,57 @@ namespace PhysModelGUI.Graphics
 
             DataContext = this;
 
-            MinDate = DateTime.Now;
-            MaxDate = MinDate.AddSeconds(Interval);
+            InitGraph(5, 10);
+            
+        }
+
+        public void InitGraph(int duration, int buffer)
+        {
+            GraphDuration = duration;
+            BufferSize = buffer;
+
             startDate = DateTime.Now;
-            bufferDate = DateTime.Now;
+            MinDate = DateTime.Now;
+            MaxDate = MinDate.AddSeconds(GraphDuration);
+        
+            runDuration = 0;
             firstRunFlag = true;
-            bufferFlag = true;
+
+            // reset the datasources
+            AsyncData1 = new ObservableCollection<ChartDataClass>();
+            
+            // attach to the graph
             dataSeries1.ItemsSource = AsyncData1;
+
+            // reset the datasources
+            AsyncData2 = new ObservableCollection<ChartDataClass>();
+
+            // attach to the graph
+            dataSeries2.ItemsSource = AsyncData2;
+
+            // reset the datasources
+            AsyncData3 = new ObservableCollection<ChartDataClass>();
+
+            // attach to the graph
+            dataSeries3.ItemsSource = AsyncData3;
+
         }
 
         public void UpdateData(double data1, double data2, double data3 = 0, double data4 = 0, double data5 = 0)
         {
+            // when the graph starts we need to set the start conditions
             if (firstRunFlag)
             {
                 firstRunFlag = false;
-                MinDate = DateTime.Now;
-                MaxDate = MinDate.AddSeconds(Interval);
+                runDuration = 0;
                 startDate = DateTime.Now;
+                MinDate = DateTime.Now;
+                MaxDate = MinDate.AddSeconds(GraphDuration);
+                
             }
 
+            // calculatet the duration of the graph run
+            runDuration = (DateTime.Now- startDate).TotalSeconds;
 
             // update the data
             if (currentData1.Enabled)
@@ -123,27 +156,54 @@ namespace PhysModelGUI.Graphics
                
             }
 
-            if ((DateTime.Now - startDate).TotalSeconds > Interval)
+            // update the data
+            if (currentData2.Enabled)
+            {
+                currentData2.TimeValue = DateTime.Now;
+                currentData2.YValue = data2;
+                lock (((ICollection)AsyncData2).SyncRoot)
+                {
+                    AsyncData2.Add(currentData2);
+                }
+
+            }
+
+            // update the data
+            if (currentData3.Enabled)
+            {
+                currentData3.TimeValue = DateTime.Now;
+                currentData3.YValue = data3;
+                lock (((ICollection)AsyncData3).SyncRoot)
+                {
+                    AsyncData3.Add(currentData3);
+                }
+
+            }
+
+
+
+            // if the graph duration is longer than the interval we need to shift the range which is displayed
+            if (runDuration > GraphDuration)
             {
                 MaxDate = DateTime.Now;
-                MinDate = MaxDate.AddSeconds(-Interval);
+                MinDate = MaxDate.AddSeconds(-GraphDuration);
 
             }
 
-            if ((DateTime.Now - bufferDate).TotalSeconds > Interval * 2)
+            // if the buffer is exceed start removing entries so safe memory
+            if (runDuration > BufferSize)
             {
-                bufferFlag = false;
+                if (AsyncData1.Count > 0) AsyncData1.RemoveAt(0);
+                if (AsyncData2.Count > 0) AsyncData2.RemoveAt(0);
+                if (AsyncData3.Count > 0) AsyncData3.RemoveAt(0);
             }
 
-            if (!bufferFlag)
-            {
-               AsyncData1.RemoveAt(0);
-            }
         }
 
         public class ChartDataClass
         {
             public DateTime TimeValue { get; set; }
+            public double XValue { get; set; }
             public double YValue { get; set; }
             public bool Enabled { get; set; } = true;
         }
