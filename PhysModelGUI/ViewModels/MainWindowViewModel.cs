@@ -2143,11 +2143,23 @@ namespace PhysModelGUI.ViewModels
         string _braindo2 = "-";
         public string Braindo2 { get { return _braindo2; } set { _braindo2 = value; OnPropertyChanged(); } }
 
+        string _vtmax = "-";
+        public string VTMax { get { return _vtmax; } set { _vtmax = value; OnPropertyChanged(); } }
+
+        string _vtref = "-";
+        public string VTRef { get { return _vtref; } set { _vtref = value; OnPropertyChanged(); } }
+
         string _tidalvolume = "-";
         public string Tidalvolume { get { return _tidalvolume; } set { _tidalvolume = value; OnPropertyChanged(); } }
 
+        string _tidalvolumeTarget = "-";
+        public string TidalvolumeTarget { get { return _tidalvolumeTarget; } set { _tidalvolumeTarget = value; OnPropertyChanged(); } }
+
         string _minutevolume = "-";
         public string Minutevolume { get { return _minutevolume; } set { _minutevolume = value; OnPropertyChanged(); } }
+
+        string _minutevolumeTarget = "-";
+        public string MinutevolumeTarget { get { return _minutevolumeTarget; } set { _minutevolumeTarget = value; OnPropertyChanged(); } }
 
         string _alveolarvolume = "-";
         public string Alveolarvolume { get { return _alveolarvolume; } set { _alveolarvolume = value; OnPropertyChanged(); } }
@@ -2917,8 +2929,12 @@ namespace PhysModelGUI.ViewModels
                 Liverflow = PhysModelMain.modelInterface.LiverFlow.ToString();
                 Brainflow = PhysModelMain.modelInterface.BrainFlow.ToString();
 
+                VTRef = Math.Round(PhysModelMain.currentModel.VERef,0).ToString();
+                VTMax = Math.Round(PhysModelMain.currentModel.VEMax,0).ToString();
                 Tidalvolume = PhysModelMain.modelInterface.TidalVolume.ToString();
+                TidalvolumeTarget = PhysModelMain.modelInterface.TidalVolumeTarget.ToString();
                 Minutevolume = PhysModelMain.modelInterface.MinuteVolume.ToString();
+                MinutevolumeTarget = PhysModelMain.modelInterface.MinuteVolumeTarget.ToString();
                 Alveolarvolume = PhysModelMain.modelInterface.AlveolarVolume;
                 //TotalVolume = PhysModelMain.modelInterface.TotalBloodVolume().ToString();
 
