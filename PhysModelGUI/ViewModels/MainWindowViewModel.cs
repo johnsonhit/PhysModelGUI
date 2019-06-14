@@ -3913,8 +3913,13 @@ namespace PhysModelGUI.ViewModels
         }
         void UpdateTrendGraph1()
         {
+            double o2_sat = 0;
+            if (PhysModelMain.modelInterface.PulseOximeterOutput != "-")
+            {
+                o2_sat = Convert.ToDouble(PhysModelMain.modelInterface.PulseOximeterOutput);
+            }
             if (TrendsGraph != null)
-                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.PulseOximeterOutput, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
+                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, o2_sat, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
 
         }
 
