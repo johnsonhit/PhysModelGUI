@@ -49,7 +49,6 @@ namespace PhysModelGUI
             viewModel.InitTrendsGraph(graphTrendMonitor1);
             viewModel.InitElastanceGraph(graphElastance);
             viewModel.InitElastanceContainerGraph(graphElastanceContainer);
-            //viewModel.InitScrollingGraph(graphScrolling);
         }
 
     }

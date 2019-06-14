@@ -2216,6 +2216,10 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand DrawElastanceGraphContainerCommand { get; set; }
         public RelayCommand SwitchToPaulCommand { get; set; }
 
+        public RelayCommand ToggleArrestCommand { get; set; }
+        public RelayCommand ToggleAutoPulseCommand { get; set; }
+
+
         // editing of blood compartment
         Compartment selectedCompartment { get; set; }
         public double UVol
@@ -2807,9 +2811,17 @@ namespace PhysModelGUI.ViewModels
             SwitchToPaulCommand = new RelayCommand(SwitchToPaul);
             DrawElastanceGraphCommand = new RelayCommand(DrawElastanceGraph);
             DrawElastanceGraphContainerCommand = new RelayCommand(DrawElastanceContainerGraph);
-
+            ToggleArrestCommand = new RelayCommand(ToggleArrest);
+            ToggleAutoPulseCommand = new RelayCommand(ToggleAutoPulse);
         }
-
+        void ToggleArrest(object p)
+        {
+                PhysModelMain.modelInterface.CardiacArrest((bool)p);
+        }
+        void ToggleAutoPulse(object p)
+        {
+            PhysModelMain.modelInterface.AutoPulse((bool)p);
+        }
         void SwitchToPaul(object p)
         {
             PhysModelMain.modelInterface.SwitchToPaul();
@@ -3842,6 +3854,7 @@ namespace PhysModelGUI.ViewModels
             PatMonitorGraph.GraphPaint2.Color = SKColors.Fuchsia;
             PatMonitorGraph.GraphPaint3.Color = SKColors.Red;
             PatMonitorGraph.GraphPaint4.Color = SKColors.White;
+            PatMonitorGraph.GraphPaint5.Color = SKColors.DarkOrange;
             PatMonitorGraph.GraphicsClearanceRate = graphicsRefreshInterval;
 
 
