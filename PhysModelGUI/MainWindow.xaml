@@ -11,7 +11,7 @@
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         mc:Ignorable="d"
        
-        Title="Neonatal physiological model" Height="720" Width="1280" Background="White" WindowStartupLocation="CenterScreen">
+        Title="Neonatal physiological model" Height="1080" Width="1440" Background="White" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         
         <Style x:Key="comboBoxCustom" TargetType="{x:Type ComboBox}">
@@ -1465,7 +1465,11 @@
                         </StackPanel>
                     </Border>
                 </Expander>
-         
+
+                <Button Content="{Binding ApneaTestStatus}" Margin="10,0,0,0" Height="25" Command="{Binding ApneaTestCommand}"> </Button>
+                <Label Content="Apnea test result" FontWeight="Bold" Margin="10,0,0,0"></Label>
+                <Label Content="{Binding ApneaReport}" Margin="10,0,0,10"></Label>
+
 
             </StackPanel>
         </ScrollViewer>
@@ -1518,7 +1522,7 @@
                     </Border>
                 </Expander>
 
-                <Expander IsExpanded="False" Header="Vital parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="True" Header="Vital parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Foreground="White" BorderThickness="0">
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" Margin="10,0,10,10">
                         <Grid Margin="5,5,5,5" Background="Black" >
                             <Grid.ColumnDefinitions>

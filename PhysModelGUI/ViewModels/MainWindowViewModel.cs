@@ -33,6 +33,28 @@ namespace PhysModelGUI.ViewModels
         bool initialized = false;
         bool mainDiagramAnimationEnabled = true;
 
+        bool apneaTestRunning = false;
+        double apneaTestTime = 0;
+        double apneaRecoveryTime = 0;
+        bool restartedBreathing = false;
+        bool messaged = false;
+        double lowestAAO2Sat = 101;
+        double lowestPOO2Sat = 101;
+        double lowestHR = 300;
+        private string apneaTestStatus = "Apnea Test (60s)";
+        public string ApneaTestStatus
+        {
+            get { return apneaTestStatus; }
+            set { apneaTestStatus = value; OnPropertyChanged(); }
+        }
+
+        private string apneaReport = "";
+        public string ApneaReport
+        {
+            get { return apneaReport; }
+            set { apneaReport = value; OnPropertyChanged(); }
+        }
+
 
         DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Render);
         int slowUpdater = 0;
@@ -2219,6 +2241,11 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ToggleArrestCommand { get; set; }
         public RelayCommand ToggleAutoPulseCommand { get; set; }
 
+        public RelayCommand ApneaTestCommand { get; set; }
+
+ 
+
+
 
         // editing of blood compartment
         Compartment selectedCompartment { get; set; }
@@ -2813,6 +2840,92 @@ namespace PhysModelGUI.ViewModels
             DrawElastanceGraphContainerCommand = new RelayCommand(DrawElastanceContainerGraph);
             ToggleArrestCommand = new RelayCommand(ToggleArrest);
             ToggleAutoPulseCommand = new RelayCommand(ToggleAutoPulse);
+            ApneaTestCommand = new RelayCommand(ApneaTest);
+        }
+
+        void ApneaTest(object p)
+        {
+            apneaTestRunning = true;
+            ApneaReport = "";
+            restartedBreathing = false;
+            apneaTestTime = 0;
+            apneaRecoveryTime = 0;
+            messaged = false;
+            lowestAAO2Sat = 101;
+            lowestPOO2Sat = 101;
+            lowestHR = 300;
+            PhysModelMain.modelInterface.SwitchSpontaneousBreathing(false);
+ 
+
+        }
+        void ApneaTestRoutine(double apneaDuration, double satLimit)
+        {
+            if (apneaTestRunning)
+            {
+                apneaTestTime += 1;
+                apneaRecoveryTime += 1;
+
+                
+
+                double satAAO2 = PhysModelMain.currentModel.AA.SO2 * 100;
+                double satPOO2 = PhysModelMain.modelInterface.PulseOximeterOutput;
+                
+                if (satAAO2 < lowestAAO2Sat)
+                {
+                    lowestAAO2Sat = satAAO2;
+                }
+
+                if (satPOO2 < lowestPOO2Sat)
+                {
+                    lowestPOO2Sat = satPOO2;
+                }
+
+                if (PhysModelMain.modelInterface.HeartRate < lowestHR)
+                {
+                    lowestHR = PhysModelMain.modelInterface.HeartRate;
+                }
+
+                if (apneaTestTime > apneaDuration)
+                {
+                    if (restartedBreathing == false)
+                    {
+                        PhysModelMain.modelInterface.SwitchSpontaneousBreathing(true);
+                        apneaRecoveryTime = 0;
+                        restartedBreathing = true;
+                        messaged = false;
+                        ApneaTestStatus = "Breathing restarted. Waiting for recovery.";
+                    }
+                    
+                } else
+                {
+                    ApneaTestStatus = "Apnea test of " + apneaDuration + "s. running now at : " + apneaTestTime + "s.";
+                }
+
+                if (satAAO2 > satLimit && restartedBreathing && messaged == false)
+                {
+                    messaged = true;
+                    ApneaReport += "Aorta SO2 >" + satLimit + "% in : " + apneaRecoveryTime + " seconds" + System.Environment.NewLine;
+                    ApneaReport += "Aorta lowest SO2 : " + Math.Round(lowestAAO2Sat, 0) + "%" + System.Environment.NewLine;
+                    ApneaReport += "----------------------------------------------------" + System.Environment.NewLine;
+        
+                }
+
+                if (satPOO2 > satLimit && restartedBreathing)
+                {
+                    apneaTestRunning = false;
+                    ApneaReport += "Pulse oximeter (left hand) SO2 >" + satLimit + "% in : " + apneaRecoveryTime + " s." + System.Environment.NewLine;
+                    ApneaReport += "Pulse oximeter (left hand) lowest SO2 : " + Math.Round(lowestPOO2Sat, 0) + "%" + System.Environment.NewLine;
+                    ApneaReport += "----------------------------------------------------" + System.Environment.NewLine;
+                    ApneaReport += "Lowest heartrate : " + Math.Round(lowestHR, 0) + " bpm" + System.Environment.NewLine;
+                    ApneaReport += "----------------------------------------------------" + System.Environment.NewLine;
+                    ApneaReport += "Apnea test ended."; 
+                    ApneaTestStatus = "Apnea Test (60s.)";
+          
+                }
+
+               
+            }
+        
         }
         void ToggleArrest(object p)
         {
@@ -2909,6 +3022,9 @@ namespace PhysModelGUI.ViewModels
         {
             if (slowUpdater > 1000)
             {
+                ApneaTestRoutine(60, 92);
+
+                //Console.WriteLine(PhysModelMain.currentModel.LEFTARM.dataCollector.PresMax);
 
                 slowUpdater = 0;
                 Heartrate = PhysModelMain.modelInterface.HeartRate.ToString();
@@ -3913,13 +4029,8 @@ namespace PhysModelGUI.ViewModels
         }
         void UpdateTrendGraph1()
         {
-            double o2_sat = 0;
-            if (PhysModelMain.modelInterface.PulseOximeterOutput != "-")
-            {
-                o2_sat = Convert.ToDouble(PhysModelMain.modelInterface.PulseOximeterOutput);
-            }
             if (TrendsGraph != null)
-                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, o2_sat, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
+                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.PulseOximeterOutput, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.currentModel.AA.SO2 * 100);
 
         }
 
