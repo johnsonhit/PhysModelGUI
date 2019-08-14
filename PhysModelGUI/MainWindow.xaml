@@ -1232,7 +1232,7 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
-                        
+                  
                                     </Grid.RowDefinitions>
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="mechanical ventilator enabled" Margin="0,0,0,5"></TextBlock>
                                     <CheckBox Grid.Column="1" Grid.Row="0"  IsChecked="{Binding VirtualVentilatorEnabled, Mode=TwoWay}" FontSize="10" HorizontalAlignment="Left"/>
@@ -1404,6 +1404,8 @@
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Grid.Column="0" Grid.Row="0" FontSize="10" Text="respiratory quotient"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
@@ -1448,6 +1450,10 @@
                                     <TextBlock Grid.Column="2" Grid.Row="9" Text="mmol/l" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
 
 
+                                    <TextBlock Grid.Column="0" Grid.Row="10" FontSize="10" Text="lactate clearance rate"  Margin="0,5,0,5" VerticalAlignment="Center"></TextBlock>
+                                    <ex:DoubleUpDown Grid.Row="10" Grid.Column="1" Value="{Binding LactateClearanceRate,Mode=TwoWay}" FontSize="10" Margin="0,2,5,2" ></ex:DoubleUpDown>
+                                    <TextBlock Grid.Column="2" Grid.Row="10" Text="mmol/s" FontSize="10" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,5,0,5"></TextBlock>
+                                    
                                 </Grid>
                             </Border>
                         </Expander>
@@ -1584,7 +1590,7 @@
                     </Border>
                 </Expander>
 
-                <Expander IsExpanded="False" Header="Additional parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10"  Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="True" Header="Additional parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10"  Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="Transparent" >
                         <Expander Header=" heart" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
@@ -1833,7 +1839,7 @@
                                 </Grid>
                             </Border>
                         </Expander>
-                        <Expander Header=" gasses" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
+                        <Expander Header=" gasses" IsExpanded="True" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
                                 <Grid Margin="5,5,5,5" Background="Black" Opacity="1.0">
                                     <Grid.ColumnDefinitions>
@@ -1843,6 +1849,7 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
                                         <RowDefinition Height="50"/>
                                         <RowDefinition Height="50"/>
 
@@ -1877,9 +1884,27 @@
                                     <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding Pco2alv}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
                                     <TextBlock Grid.Column="2" Grid.Row="1" Text="ml" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
 
-                                    <TextBlock Grid.Column="3" Grid.Row="1" Text="Alv right pressures" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
-                                    <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Alvrightpressure}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
-                                    <TextBlock Grid.Column="3" Grid.Row="1" Text="ml/min" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="1" Text="Lactate (AA)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding LactateAA}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="1" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Lactate (LB)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding LactateLB}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="0" Grid.Row="2" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                    <TextBlock Grid.Column="1" Grid.Row="2" Text="Lactate (LIVER)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding LactateLIVER}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="2" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="Lactate (UB)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="{Binding LactateUB}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="2" Grid.Row="2" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+
+                                    <TextBlock Grid.Column="3" Grid.Row="2" Text="Lactate (BRAIN)" TextAlignment="Left" VerticalAlignment="Top" FontSize="8" Margin="5,0,0,0"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="2" Text="{Binding LactateBRAIN}" TextAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                                    <TextBlock Grid.Column="3" Grid.Row="2" Text="mmol/l" TextAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,5,2" FontSize="8"></TextBlock>
+                                    
+                                    
                                 </Grid>
                             </Border>
                         </Expander>

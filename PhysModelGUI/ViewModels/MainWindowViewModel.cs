@@ -61,7 +61,7 @@ namespace PhysModelGUI.ViewModels
         bool restartedCirc = false;
 
 
-        private string circArrestTestStatus = "CircArrest Test (60s)";
+        private string circArrestTestStatus = "CircArrest Test (120s)";
         public string CircArrestTestStatus
         {
             get { return circArrestTestStatus; }
@@ -1318,8 +1318,23 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
-    
-  
+        public double LactateClearanceRate
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.LactateClearanceRate / PhysModelMain.currentModel.ModelingStepsize : 0;
+            }
+            set
+            {
+                if (PhysModelMain.modelInterface != null)
+                {
+                    PhysModelMain.modelInterface.AdjustLactateConcentration(value);
+                }
+            }
+        }
+
+
+
         // lung and chestwall model
 
         public double Resp_UAR_Insp
@@ -2233,6 +2248,45 @@ namespace PhysModelGUI.ViewModels
         public string Po2alv { get { return _po2alv; } set { _po2alv = value; OnPropertyChanged(); } }
         string _pco2alv = "-";
         public string Pco2alv { get { return _pco2alv; } set { _pco2alv = value; OnPropertyChanged(); } }
+
+        private string lactateAA;
+
+        public string LactateAA
+        {
+            get { return lactateAA; }
+            set { lactateAA = value; OnPropertyChanged(); }
+        }
+
+        private string lactateLB;
+
+        public string LactateLB
+        {
+            get { return lactateLB; }
+            set { lactateLB = value; OnPropertyChanged(); }
+        }
+        private string lactateUB;
+
+        public string LactateUB
+        {
+            get { return lactateUB; }
+            set { lactateUB = value; OnPropertyChanged(); }
+        }
+        private string lactateBRAIN;
+
+        public string LactateBRAIN
+        {
+            get { return lactateBRAIN; }
+            set { lactateBRAIN = value; OnPropertyChanged(); }
+        }
+        private string lactateLIVER;
+
+        public string LactateLIVER
+        {
+            get { return lactateLIVER; }
+            set { lactateLIVER = value; OnPropertyChanged(); }
+        }
+
+
         string _endtidalco2 = "-";
         public string Endtidalco2 { get { return _endtidalco2; } set { _endtidalco2 = value; OnPropertyChanged(); } }
         #endregion
@@ -3136,6 +3190,12 @@ namespace PhysModelGUI.ViewModels
 
                 Po2alv = PhysModelMain.modelInterface.AlveolarPO2;
                 Pco2alv = PhysModelMain.modelInterface.AlveolarPCO2;
+                LactateAA = Math.Round(PhysModelMain.currentModel.AA.Lact, 1).ToString();
+                LactateUB = Math.Round(PhysModelMain.currentModel.UB.Lact, 1).ToString();
+                LactateLB = Math.Round(PhysModelMain.currentModel.LB.Lact, 1).ToString();
+                LactateBRAIN = Math.Round(PhysModelMain.currentModel.BRAIN.Lact, 1).ToString();
+                LactateLIVER = Math.Round(PhysModelMain.currentModel.LIVER.Lact, 1).ToString();
+
                 Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
                 UpdateTrendGraph1();
