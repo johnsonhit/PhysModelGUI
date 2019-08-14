@@ -47,12 +47,32 @@ namespace PhysModelGUI.ViewModels
             get { return apneaTestStatus; }
             set { apneaTestStatus = value; OnPropertyChanged(); }
         }
-
-        private string apneaReport = "";
+        private string apneaReport = "no results";
         public string ApneaReport
         {
             get { return apneaReport; }
             set { apneaReport = value; OnPropertyChanged(); }
+        }
+
+
+        bool circArrestTestRunning = false;
+        double circArrestTestTime = 0;
+        double circArrestRecoveryTime = 0;
+        bool restartedCirc = false;
+
+
+        private string circArrestTestStatus = "CircArrest Test (60s)";
+        public string CircArrestTestStatus
+        {
+            get { return circArrestTestStatus; }
+            set { circArrestTestStatus = value; OnPropertyChanged(); }
+        }
+
+        private string circArrestReport = "no results";
+        public string CircArrestReport
+        {
+            get { return circArrestReport; }
+            set { circArrestReport = value; OnPropertyChanged(); }
         }
 
 
@@ -2242,8 +2262,8 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ToggleAutoPulseCommand { get; set; }
 
         public RelayCommand ApneaTestCommand { get; set; }
+        public RelayCommand CircArrestTestCommand { get; set; }
 
- 
 
 
 
@@ -2841,12 +2861,47 @@ namespace PhysModelGUI.ViewModels
             ToggleArrestCommand = new RelayCommand(ToggleArrest);
             ToggleAutoPulseCommand = new RelayCommand(ToggleAutoPulse);
             ApneaTestCommand = new RelayCommand(ApneaTest);
+            CircArrestTestCommand = new RelayCommand(CircArrestTest);
         }
 
+        void CircArrestTest(object p)
+        {
+            circArrestTestRunning = true;
+            CircArrestReport = "waiting for results." + System.Environment.NewLine;
+            circArrestTestTime = 0;
+            circArrestRecoveryTime = 0;
+            restartedCirc = false;
+            PhysModelMain.modelInterface.StopHeartOutput();
+            
+        }
+
+        void CircArrestTestRoutine(double circArrestDuration, double hrRecovered)
+        {
+            if (circArrestTestRunning)
+            {
+                circArrestTestTime += 1;
+                circArrestRecoveryTime += 1;
+
+                if (circArrestTestTime > circArrestDuration)
+                {
+                    if (restartedCirc == false)
+                    {
+                        CircArrestTestStatus = "Circulation restarted. Waiting for recovery.";
+                        PhysModelMain.modelInterface.RestartHeartOutput();
+                        circArrestRecoveryTime = 0;
+                        restartedCirc = true;
+                    }
+                   
+                } else
+                {
+                    CircArrestTestStatus = "Circulation arrest test of " + circArrestDuration + "s. running now at : " + circArrestTestTime + "s.";
+                }
+            }
+        }
         void ApneaTest(object p)
         {
             apneaTestRunning = true;
-            ApneaReport = "";
+            ApneaReport = "waiting for results." + System.Environment.NewLine;
             restartedBreathing = false;
             apneaTestTime = 0;
             apneaRecoveryTime = 0;
@@ -2904,6 +2959,7 @@ namespace PhysModelGUI.ViewModels
                 if (satAAO2 > satLimit && restartedBreathing && messaged == false)
                 {
                     messaged = true;
+                    ApneaReport = "";
                     ApneaReport += "Aorta SO2 >" + satLimit + "% in : " + apneaRecoveryTime + " seconds" + System.Environment.NewLine;
                     ApneaReport += "Aorta lowest SO2 : " + Math.Round(lowestAAO2Sat, 0) + "%" + System.Environment.NewLine;
                     ApneaReport += "----------------------------------------------------" + System.Environment.NewLine;
@@ -3023,6 +3079,7 @@ namespace PhysModelGUI.ViewModels
             if (slowUpdater > 1000)
             {
                 ApneaTestRoutine(60, 92);
+                CircArrestTestRoutine(120, 120);
 
                 //Console.WriteLine(PhysModelMain.currentModel.LEFTARM.dataCollector.PresMax);
 
@@ -4030,7 +4087,7 @@ namespace PhysModelGUI.ViewModels
         void UpdateTrendGraph1()
         {
             if (TrendsGraph != null)
-                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.PulseOximeterOutput, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.currentModel.AA.SO2 * 100);
+                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.PulseOximeterOutput, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
 
         }
 

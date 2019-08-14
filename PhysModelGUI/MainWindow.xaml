@@ -1465,10 +1465,20 @@
                         </StackPanel>
                     </Border>
                 </Expander>
+                <Expander IsExpanded="True" Header="Model standard tests" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Foreground="White" BorderThickness="0">
+                    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" Margin="10,0,10,10">
+                        <StackPanel Margin="10,5,10,10">
+                            <Button Content="{Binding ApneaTestStatus}" FontSize="10" Background="SlateGray" Foreground="White" Margin="10,10,10,0" Height="25" Command="{Binding ApneaTestCommand}"></Button>
+                            <Label Content="{Binding ApneaReport}" Foreground="White" FontStyle="Italic" Margin="10,0,10,10"></Label>
 
-                <Button Content="{Binding ApneaTestStatus}" Margin="10,0,0,0" Height="25" Command="{Binding ApneaTestCommand}"> </Button>
-                <Label Content="Apnea test result" FontWeight="Bold" Margin="10,0,0,0"></Label>
-                <Label Content="{Binding ApneaReport}" Margin="10,0,0,10"></Label>
+                            <Button Content="{Binding CircArrestTestStatus}" FontSize="10" Background="SlateGray" Foreground="White" Margin="10,10,10,0" Height="25" Command="{Binding CircArrestTestCommand}"></Button>
+                            <Label Content="{Binding CircArrestReport}" Foreground="White" FontStyle="Italic" Margin="10,0,10,10"></Label>
+                        </StackPanel>
+                    </Border>
+                </Expander>
+                
+
+                
 
 
             </StackPanel>
