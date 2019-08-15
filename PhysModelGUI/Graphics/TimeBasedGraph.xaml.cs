@@ -15,7 +15,7 @@ namespace PhysModelGUI.Graphics
     /// <summary>
     /// Interaction logic for ScrollingGraph.xaml
     /// </summary>
-    public partial class ScrollingGraph : UserControl, INotifyPropertyChanged
+    public partial class TimeBasedGraph : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -23,7 +23,6 @@ namespace PhysModelGUI.Graphics
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-  
         public ObservableCollection<ChartDataClass> AsyncData1 { get; set; } = new ObservableCollection<ChartDataClass>();
         public ObservableCollection<ChartDataClass> AsyncData2 { get; set; } = new ObservableCollection<ChartDataClass>();
         public ObservableCollection<ChartDataClass> AsyncData3 { get; set; } = new ObservableCollection<ChartDataClass>();
@@ -36,10 +35,42 @@ namespace PhysModelGUI.Graphics
         public ChartDataClass currentData4 = new ChartDataClass();
         public ChartDataClass currentData5 = new ChartDataClass();
 
+        private SolidColorBrush series1Color = new SolidColorBrush(Colors.DarkGreen);
+        public SolidColorBrush Series1Color
+        {
+            get { return series1Color; }
+            set { series1Color = value; OnPropertyChanged(); }
+        }
 
+        private SolidColorBrush series2Color = new SolidColorBrush(Colors.Fuchsia);
+        public SolidColorBrush Series2Color
+        {
+            get { return series2Color; }
+            set { series2Color = value; OnPropertyChanged(); }
+        }
+
+        private SolidColorBrush series3Color = new SolidColorBrush(Colors.Red);
+        public SolidColorBrush Series3Color
+        {
+            get { return series3Color; }
+            set { series3Color = value; OnPropertyChanged(); }
+        }
+
+        private SolidColorBrush series4Color = new SolidColorBrush(Colors.Red);
+        public SolidColorBrush Series4Color
+        {
+            get { return series4Color; }
+            set { series4Color = value; OnPropertyChanged(); }
+        }
+
+        private SolidColorBrush series5Color = new SolidColorBrush(Colors.Black);
+        public SolidColorBrush Series5Color
+        {
+            get { return series5Color; }
+            set { series5Color = value; OnPropertyChanged(); }
+        }
 
         private string series1Legend = "heartrate";
-
         public string Series1Legend
         {
             get { return series1Legend; }
@@ -47,7 +78,6 @@ namespace PhysModelGUI.Graphics
         }
 
         private string series2Legend = "o2 sat";
-
         public string Series2Legend
         {
             get { return series2Legend; }
@@ -55,7 +85,6 @@ namespace PhysModelGUI.Graphics
         }
 
         private string series3Legend = "systole";
-
         public string Series3Legend
         {
             get { return series3Legend; }
@@ -63,7 +92,6 @@ namespace PhysModelGUI.Graphics
         }
 
         private string series4Legend = "diastole";
-
         public string Series4Legend
         {
             get { return series4Legend; }
@@ -71,16 +99,46 @@ namespace PhysModelGUI.Graphics
         }
 
         private string series5Legend = "resp rate";
-
         public string Series5Legend
         {
             get { return series5Legend; }
             set { series5Legend = value; OnPropertyChanged(); }
         }
 
+        private int series1StrokeThickness = 1;
+        public int Series1StrokeThickness
+        {
+            get { return series1StrokeThickness; }
+            set { series1StrokeThickness = value; OnPropertyChanged(); }
+        }
 
+        private int series2StrokeThickness = 1;
+        public int Series2StrokeThickness
+        {
+            get { return series2StrokeThickness; }
+            set { series2StrokeThickness = value; OnPropertyChanged(); }
+        }
 
-        public int MaxItemsCount { get; set; } = 250;
+        private int series3StrokeThickness = 1;
+        public int Series3StrokeThickness
+        {
+            get { return series3StrokeThickness; }
+            set { series3StrokeThickness = value; OnPropertyChanged(); }
+        }
+
+        private int series4StrokeThickness = 1;
+        public int Series4StrokeThickness
+        {
+            get { return series4StrokeThickness; }
+            set { series4StrokeThickness = value; OnPropertyChanged(); }
+        }
+
+        private int series5StrokeThickness = 1;
+        public int Series5StrokeThickness
+        {
+            get { return series5StrokeThickness; }
+            set { series5StrokeThickness = value; OnPropertyChanged(); }
+        }
 
         private double _maxY = 250;
         public double MaxY
@@ -96,13 +154,18 @@ namespace PhysModelGUI.Graphics
             set { _minY = value; OnPropertyChanged(); }
         }
 
-        private double _gridStep = 10;
-        public double GridStep
+        private double _gridXStep = 10;
+        public double GridXStep
         {
-            get => _gridStep;
-            set { _gridStep = value; OnPropertyChanged(); }
+            get => _gridXStep;
+            set { _gridXStep = value; OnPropertyChanged(); }
         }
-
+        private double _gridYStep = 10;
+        public double GridYStep
+        {
+            get => _gridYStep;
+            set { _gridYStep = value; OnPropertyChanged(); }
+        }
 
         private DateTime _minDate = DateTime.Now;
         public DateTime MinDate
@@ -129,17 +192,24 @@ namespace PhysModelGUI.Graphics
             set { _showXLabels = value; OnPropertyChanged();}
         }
 
+        private bool _showYLabels = true;
+        public bool ShowYLabels
+        {
+            get => _showYLabels;
+            set { _showYLabels = value; OnPropertyChanged(); }
+        }
+
         private bool firstRunFlag = true;
         private double runDuration = 0;
 
-        public ScrollingGraph()
+        public TimeBasedGraph()
         {
             InitializeComponent();
 
             DataContext = this;
 
-            InitGraph(5, 10);
-            
+            InitGraph(120, 180);
+             
         }
 
         public void InitGraph(int duration, int buffer)
@@ -183,8 +253,6 @@ namespace PhysModelGUI.Graphics
 
             // attach to the graph
             dataSeries5.ItemsSource = AsyncData5;
-
-
         }
 
         public void UpdateData(double data1, double data2, double data3 = 0, double data4 = 0, double data5 = 0)
@@ -196,11 +264,10 @@ namespace PhysModelGUI.Graphics
                 runDuration = 0;
                 startDate = DateTime.Now;
                 MinDate = DateTime.Now;
-                MaxDate = MinDate.AddSeconds(GraphDuration);
-                
+                MaxDate = MinDate.AddSeconds(GraphDuration);           
             }
 
-            // calculatet the duration of the graph run
+            // calculate the duration of the graph run
             runDuration = (DateTime.Now- startDate).TotalSeconds;
 
             // update the data
@@ -263,7 +330,6 @@ namespace PhysModelGUI.Graphics
 
             }
 
-
             // if the graph duration is longer than the interval we need to shift the range which is displayed
             if (runDuration > GraphDuration)
             {
@@ -284,6 +350,7 @@ namespace PhysModelGUI.Graphics
 
         }
 
+
         public class ChartDataClass
         {
             public DateTime TimeValue { get; set; }
@@ -291,6 +358,8 @@ namespace PhysModelGUI.Graphics
             public double YValue { get; set; }
             public bool Enabled { get; set; } = true;
         }
+
+      
 
     }
 }

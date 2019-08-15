@@ -47,6 +47,7 @@ namespace PhysModelGUI
             viewModel.InitPVLoopGraph(graphPVLoops);
             viewModel.InitPatMonitor(graphPatMonitor);
             viewModel.InitTestGraph(testGraph);
+            viewModel.InitCommomGraph(commonGraph);
         }
 
     }

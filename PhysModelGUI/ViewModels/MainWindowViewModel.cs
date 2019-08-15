@@ -29,6 +29,7 @@ namespace PhysModelGUI.ViewModels
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public ObservableCollection<ChartDataClass> AsyncData1 { get; set; } = new ObservableCollection<ChartDataClass>();
 
         bool initialized = false;
         bool mainDiagramAnimationEnabled = true;
@@ -105,9 +106,11 @@ namespace PhysModelGUI.ViewModels
         ParameterGraph2 PatMonitorGraph { get; set; }
 
 
-        ScrollingGraph TestGraph { get; set; }
+        TimeBasedGraph TestGraph { get; set; }
 
-        ScrollingGraph GraphScroller { get; set; }
+        CommonGraph TestCommonGraph { get; set; }
+
+        TimeBasedGraph GraphScroller { get; set; }
 
         bool _patMonitorGraphEnabled = false;
         public bool PatMonitorGraphEnabled { get { return _patMonitorGraphEnabled; } set { _patMonitorGraphEnabled = value; OnPropertyChanged(); } }
@@ -3139,6 +3142,8 @@ namespace PhysModelGUI.ViewModels
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            UpdateTestCommonGraph();
+
             if (slowUpdater > 1000)
             {
                 ApneaTestRoutine(60, 92);
@@ -3208,6 +3213,7 @@ namespace PhysModelGUI.ViewModels
                 Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
                 UpdateTestGraph();
+                //TestCommonGraph.RefreshGraph();
 
             }
 
@@ -3280,17 +3286,34 @@ namespace PhysModelGUI.ViewModels
             ModelGraphic.DrawMainDiagram(canvas, e.Info.Width, e.Info.Height);
         }
 
-        public void InitTestGraph(ScrollingGraph p)
+        public void InitCommomGraph(CommonGraph p)
+        {
+            TestCommonGraph = p;
+
+            TestCommonGraph.InitGraph(250, 10);
+            TestCommonGraph.MaxY = 200;
+        }
+        public void InitTestGraph(TimeBasedGraph p)
         {
             TestGraph = p;
 
             TestGraph.InitGraph(300, 400);
-            TestGraph.GridStep = 60;
+            TestGraph.GridXStep = 60;
+            TestGraph.GridYStep = 25;
             TestGraph.MaxY = 200;
             TestGraph.ShowXLabels = true;
+            TestGraph.ShowYLabels = true;
 
         }
 
+        void UpdateTestCommonGraph()
+        {
+            if (TestCommonGraph != null)
+            {
+                TestCommonGraph.UpdateData(PhysModelMain.currentModel.NCA.PresCurrent - 750, PhysModelMain.currentModel.ALL.VolCurrent);
+       
+            }
+        }
         void UpdateTestGraph()
         {
             if (TestGraph != null)
@@ -4086,7 +4109,7 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
-        public void InitScrollingGraph(ScrollingGraph p)
+        public void InitScrollingGraph(TimeBasedGraph p)
         {
             GraphScroller = p;
 
