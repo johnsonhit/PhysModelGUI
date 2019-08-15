@@ -99,11 +99,13 @@ namespace PhysModelGUI.ViewModels
         ParameterGraph2 PressureGraph { get; set; }
         ParameterGraph2 FlowGraph { get; set; }
         ParameterGraph2 PVLoopGraph { get; set; }
-        ParameterGraph2 ElastanceGraph { get; set; }
+
         ParameterGraph2 ElastanceGraphContainer { get; set; }
         ParameterGraph2 ResistanceGraph { get; set; }
         ParameterGraph2 PatMonitorGraph { get; set; }
-        ParameterGraph2 TrendsGraph { get; set; }
+
+
+        ScrollingGraph TestGraph { get; set; }
 
         ScrollingGraph GraphScroller { get; set; }
 
@@ -1119,6 +1121,22 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
+        public double VATP
+        {
+            get
+            {
+                return PhysModelMain.currentModel != null ? PhysModelMain.currentModel.VATPBaseline : 0;
+            }
+            set
+            {
+                if (PhysModelMain.currentModel != null)
+                {
+                    PhysModelMain.currentModel.VATPBaseline = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         // oxygen
         public double VO2
         {
@@ -1328,7 +1346,8 @@ namespace PhysModelGUI.ViewModels
             {
                 if (PhysModelMain.modelInterface != null)
                 {
-                    PhysModelMain.modelInterface.AdjustLactateConcentration(value);
+                    PhysModelMain.currentModel.LactateClearanceRate = value * PhysModelMain.currentModel.ModelingStepsize;
+                    OnPropertyChanged();
                 }
             }
         }
@@ -2308,8 +2327,7 @@ namespace PhysModelGUI.ViewModels
         public RelayCommand ChangeContainerCommand { get; set; }
         public RelayCommand ChangeGexUnitCommand { get; set; }
         public RelayCommand ChangeRhythmCommand { get; set; }
-        public RelayCommand DrawElastanceGraphCommand { get; set; }
-        public RelayCommand DrawElastanceGraphContainerCommand { get; set; }
+
         public RelayCommand SwitchToPaulCommand { get; set; }
 
         public RelayCommand ToggleArrestCommand { get; set; }
@@ -2910,8 +2928,6 @@ namespace PhysModelGUI.ViewModels
             ChangeGexUnitCommand = new RelayCommand(ChangeGexUnit);
             ChangeRhythmCommand = new RelayCommand(ChangeRhythm);
             SwitchToPaulCommand = new RelayCommand(SwitchToPaul);
-            DrawElastanceGraphCommand = new RelayCommand(DrawElastanceGraph);
-            DrawElastanceGraphContainerCommand = new RelayCommand(DrawElastanceContainerGraph);
             ToggleArrestCommand = new RelayCommand(ToggleArrest);
             ToggleAutoPulseCommand = new RelayCommand(ToggleAutoPulse);
             ApneaTestCommand = new RelayCommand(ApneaTest);
@@ -3049,14 +3065,7 @@ namespace PhysModelGUI.ViewModels
         {
             PhysModelMain.modelInterface.SwitchToPaul();
         }
-        void DrawElastanceGraph(object p)
-        {
-            CalculateElastanceCurve(selectedCompartment);
-        }
-        void DrawElastanceContainerGraph(object p)
-        {
-            CalculateElastanceContainerCurve(selectedContainer);
-        }
+
 
         public MainWindowViewModel()
         {
@@ -3198,9 +3207,8 @@ namespace PhysModelGUI.ViewModels
 
                 Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
-                UpdateTrendGraph1();
-                if (TrendsGraph != null)
-                    TrendsGraph.DrawGraphOnScreen();
+                UpdateTestGraph();
+
             }
 
 
@@ -3236,6 +3244,7 @@ namespace PhysModelGUI.ViewModels
                     UpdatePressureGraph();
                     UpdateFlowGraph();
                     UpdateMonitorGraph();
+                   
 
                     break;
                 case "StatusMessage":
@@ -3271,6 +3280,26 @@ namespace PhysModelGUI.ViewModels
             ModelGraphic.DrawMainDiagram(canvas, e.Info.Width, e.Info.Height);
         }
 
+        public void InitTestGraph(ScrollingGraph p)
+        {
+            TestGraph = p;
+
+            TestGraph.InitGraph(300, 400);
+            TestGraph.GridStep = 60;
+            TestGraph.MaxY = 200;
+            TestGraph.ShowXLabels = true;
+
+        }
+
+        void UpdateTestGraph()
+        {
+            if (TestGraph != null)
+            {
+
+                TestGraph.UpdateData(PhysModelMain.modelInterface.HeartRate,PhysModelMain.modelInterface.PulseOximeterOutput, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, PhysModelMain.modelInterface.RespiratoryRate);
+
+            }
+        }
         public void InitPressureGraph(ParameterGraph2 p)
         {
             PressureGraph = p;
@@ -4107,190 +4136,10 @@ namespace PhysModelGUI.ViewModels
 
         }
 
-        public void InitTrendsGraph(ParameterGraph2 p)
-        {
-            TrendsGraph = p;
-
-            TrendsGraph.GraphMaxY = 210;
-            TrendsGraph.GraphMaxX = 20;
-            TrendsGraph.DataRefreshRate = 15;
-            TrendsGraph.PixelPerDataPoint = 2;
-            TrendsGraph.Graph1Enabled = true;
-            TrendsGraph.Graph2Enabled = true;
-            TrendsGraph.Graph3Enabled = true;
-            TrendsGraph.Graph4Enabled = true;
-            TrendsGraph.Graph5Enabled = true;
-            TrendsGraph.IsSideScrolling = true;
-            TrendsGraph.XAxisTitle = "time";
-            TrendsGraph.HideYAxisLabels = false;
-            TrendsGraph.HideXAxisLabels = false;
-            TrendsGraph.NoGrid = false;
-            TrendsGraph.Legend1 = "heartrate";
-            TrendsGraph.Legend2 = "spo2";
-            TrendsGraph.Legend3 = "systole";
-            TrendsGraph.Legend4 = "diastole";
-            TrendsGraph.Legend5 = "resp rate";
-            TrendsGraph.HideLegends = false;
-            TrendsGraph.GraphPaint1.Color = SKColors.DarkGreen;
-            TrendsGraph.GraphPaint2.Color = SKColors.Fuchsia;
-            TrendsGraph.GraphPaint3.Color = SKColors.DarkRed;
-            TrendsGraph.GraphPaint4.Color = SKColors.DarkRed;
-            TrendsGraph.GraphPaint5.Color = SKColors.Black;
-            TrendsGraph.GraphicsClearanceRate = 5000;
-            TrendsGraph.BackgroundColor = SKColors.White;
-            TrendsGraph.GridLineAxisPaint.Color = SKColors.Black;
-            TrendsGraph.GridLinePaint.Color = SKColors.Black;
-            TrendsGraph.LegendTextPaint.Color = SKColors.Black;
-            TrendsGraph.GridAxisLabelsPaint.Color = SKColors.Black;
-
-        }
-        void UpdateTrendGraph1()
-        {
-            if (TrendsGraph != null)
-                TrendsGraph.UpdateRealtimeGraphData(0, PhysModelMain.modelInterface.HeartRate, 0, PhysModelMain.modelInterface.PulseOximeterOutput, 0, PhysModelMain.modelInterface.SystolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.DiastolicSystemicArterialPressure, 0, PhysModelMain.modelInterface.RespiratoryRate);
-
-        }
-
-        public void InitElastanceGraph(ParameterGraph2 p)
-        {
-            ElastanceGraph = p;
-
-            ElastanceGraph.DataRefreshRate = 15;
-            ElastanceGraph.PixelPerDataPoint = 1;
-            ElastanceGraph.Graph1Enabled = true;
-            ElastanceGraph.IsSideScrolling = false;
-            ElastanceGraph.GraphicsClearanceRate = graphicsRefreshInterval;
-            ElastanceGraph.RealTimeDrawing = false;
-            ElastanceGraph.HideXAxisLabels = true;
-            ElastanceGraph.XAxisTitle = "volume";
-
-        }
-        public void InitElastanceContainerGraph(ParameterGraph2 p)
-        {
-            ElastanceGraphContainer = p;
-
-            ElastanceGraphContainer.DataRefreshRate = 15;
-            ElastanceGraphContainer.PixelPerDataPoint = 1;
-            ElastanceGraphContainer.Graph1Enabled = true;
-            ElastanceGraphContainer.IsSideScrolling = false;
-            ElastanceGraphContainer.GraphicsClearanceRate = graphicsRefreshInterval;
-            ElastanceGraphContainer.RealTimeDrawing = false;
-            ElastanceGraph.HideXAxisLabels = true;
-            ElastanceGraph.XAxisTitle = "volume";
-
-        }
-
-        void CalculateElastanceCurve(Compartment comp)
-        {
-            Compartment testComp = new BloodCompartment();
-
-            if (comp != null)
-            {
-                testComp.VolCurrent = selectedCompartment.VolCurrent;
-                testComp.VolU = selectedCompartment.VolU;
-                testComp.VolUBaseline = selectedCompartment.VolUBaseline;
-                testComp.VolUBaselineChange = selectedCompartment.VolUBaselineChange;
-                testComp.elastanceModel.ElBaseline = selectedCompartment.elastanceModel.ElBaseline;
-                testComp.elastanceModel.ElBaselineChange = selectedCompartment.elastanceModel.ElBaselineChange;
-                testComp.elastanceModel.ElContractionBaseline = selectedCompartment.elastanceModel.ElContractionBaseline;
-                testComp.elastanceModel.ElContractionBaselineChange = selectedCompartment.elastanceModel.ElContractionBaselineChange;
-                testComp.elastanceModel.ElK1 = selectedCompartment.elastanceModel.ElK1;
-                testComp.elastanceModel.ElK2 = selectedCompartment.elastanceModel.ElK2;
-                testComp.elastanceModel.ElKMaxVolume = selectedCompartment.elastanceModel.ElKMaxVolume;
-                testComp.elastanceModel.ElKMinVolume = selectedCompartment.elastanceModel.ElKMinVolume;
-
-                if (testComp.elastanceModel.ElContractionBaseline > 0)
-                {
-                    
-                    ElastanceGraph.Graph2Enabled = true;
-                }
-                else
-                {
-                    ElastanceGraph.Graph2Enabled = false;
-                }
-
-                double testVolumeMax = testComp.elastanceModel.ElKMaxVolume + 10;
-                double testVolumeMin = testComp.VolUBaseline;
-                if (testVolumeMin < 0) { testVolumeMin = 0; }
-
-
-                ElastanceGraph.ClearStaticData();
-                for (double i = testVolumeMin; i <= testVolumeMax; i += 0.1)
-                {
-                    testComp.elastanceModel.ContractionActivation = 0;
-                    testComp.VolCurrent = i;
-                    testComp.UpdateCompartment();
-                    double pres1 = testComp.PresCurrent;
-
-                    testComp.elastanceModel.ContractionActivation = 1;
-                    testComp.VolCurrent = i;
-                    testComp.UpdateCompartment();
-                    double pres2 = testComp.PresCurrent;
-
-                    ElastanceGraph.UpdateStaticData(i, pres1, i, pres2);
-
-                }
-                ElastanceGraph.DrawStaticData();
-
-            }
-
-        }
-        void CalculateElastanceContainerCurve(ContainerCompartment comp)
-        {
-            ContainerCompartment testComp = new ContainerCompartment();
-
-            if (comp != null)
-            {
-                testComp.VolCurrent = comp.VolCurrent;
-                testComp.VolU = comp.VolU;
-                testComp.VolUBaseline = comp.VolUBaseline;
-                testComp.VolUBaselineChange = comp.VolUBaselineChange;
-                testComp.elastanceModel.ElBaseline = comp.elastanceModel.ElBaseline;
-                testComp.elastanceModel.ElBaselineChange = comp.elastanceModel.ElBaselineChange;
-                testComp.elastanceModel.ElContractionBaseline = comp.elastanceModel.ElContractionBaseline;
-                testComp.elastanceModel.ElContractionBaselineChange = comp.elastanceModel.ElContractionBaselineChange;
-                testComp.elastanceModel.ElK1 = comp.elastanceModel.ElK1;
-                testComp.elastanceModel.ElK2 = comp.elastanceModel.ElK2;
-                testComp.elastanceModel.ElKMaxVolume = comp.elastanceModel.ElKMaxVolume;
-                testComp.elastanceModel.ElKMinVolume = comp.elastanceModel.ElKMinVolume;
-
-                if (testComp.elastanceModel.ElContractionBaseline > 0)
-                {
-
-                    ElastanceGraphContainer.Graph2Enabled = true;
-                }
-                else
-                {
-                    ElastanceGraphContainer.Graph2Enabled = false;
-                }
-
-                double testVolumeMax = testComp.elastanceModel.ElKMaxVolume + 10;
-                double testVolumeMin = testComp.VolUBaseline;
-                if (testVolumeMin < 0) { testVolumeMin = 0; }
 
 
 
-                ElastanceGraphContainer.ClearStaticData();
-                for (double i = testVolumeMin; i <= testVolumeMax; i += 0.1)
-                {
-                    testComp.elastanceModel.ContractionActivation = 0;
-                    testComp.VolCurrent = i;
-                    testComp.UpdateCompartment();
-                    double pres1 = testComp.PresCurrent;
 
-                    testComp.elastanceModel.ContractionActivation = 1;
-                    testComp.VolCurrent = i;
-                    testComp.UpdateCompartment();
-                    double pres2 = testComp.PresCurrent;
-
-                    ElastanceGraphContainer.UpdateStaticData(i, pres1, i, pres2);
-
-                }
-                ElastanceGraphContainer.DrawStaticData();
-
-            }
-
-        }
     }
 
     public class ChartDataClass

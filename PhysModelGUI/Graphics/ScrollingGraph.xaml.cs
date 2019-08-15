@@ -1,10 +1,13 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows.Ink;
+using System.Windows.Media;
 using Telerik.Windows.Controls.Legend;
 
 namespace PhysModelGUI.Graphics
@@ -33,10 +36,53 @@ namespace PhysModelGUI.Graphics
         public ChartDataClass currentData4 = new ChartDataClass();
         public ChartDataClass currentData5 = new ChartDataClass();
 
-       
+
+
+        private string series1Legend = "heartrate";
+
+        public string Series1Legend
+        {
+            get { return series1Legend; }
+            set { series1Legend = value; OnPropertyChanged(); }
+        }
+
+        private string series2Legend = "o2 sat";
+
+        public string Series2Legend
+        {
+            get { return series2Legend; }
+            set { series2Legend = value; OnPropertyChanged(); }
+        }
+
+        private string series3Legend = "systole";
+
+        public string Series3Legend
+        {
+            get { return series3Legend; }
+            set { series3Legend = value; OnPropertyChanged(); }
+        }
+
+        private string series4Legend = "diastole";
+
+        public string Series4Legend
+        {
+            get { return series4Legend; }
+            set { series4Legend = value; OnPropertyChanged(); }
+        }
+
+        private string series5Legend = "resp rate";
+
+        public string Series5Legend
+        {
+            get { return series5Legend; }
+            set { series5Legend = value; OnPropertyChanged(); }
+        }
+
+
+
         public int MaxItemsCount { get; set; } = 250;
 
-        private double _maxY = 100;
+        private double _maxY = 250;
         public double MaxY
         {
             get => _maxY;
@@ -50,7 +96,7 @@ namespace PhysModelGUI.Graphics
             set { _minY = value; OnPropertyChanged(); }
         }
 
-        private double _gridStep = 2;
+        private double _gridStep = 10;
         public double GridStep
         {
             get => _gridStep;
@@ -76,7 +122,7 @@ namespace PhysModelGUI.Graphics
         public int GraphDuration { get; set; } = 10;            // how many seconds are displayed in seconds
         public int BufferSize { get; set; } = 20;           // determine the buffer size in seconds
 
-        private bool _showXLabels = true;
+        private bool _showXLabels = false;
         public bool ShowXLabels
         {
             get => _showXLabels;
@@ -125,6 +171,19 @@ namespace PhysModelGUI.Graphics
 
             // attach to the graph
             dataSeries3.ItemsSource = AsyncData3;
+
+            // reset the datasources
+            AsyncData4 = new ObservableCollection<ChartDataClass>();
+
+            // attach to the graph
+            dataSeries4.ItemsSource = AsyncData4;
+
+            // reset the datasources
+            AsyncData5 = new ObservableCollection<ChartDataClass>();
+
+            // attach to the graph
+            dataSeries5.ItemsSource = AsyncData5;
+
 
         }
 
@@ -180,6 +239,29 @@ namespace PhysModelGUI.Graphics
 
             }
 
+            // update the data
+            if (currentData4.Enabled)
+            {
+                currentData4.TimeValue = DateTime.Now;
+                currentData4.YValue = data4;
+                lock (((ICollection)AsyncData4).SyncRoot)
+                {
+                    AsyncData4.Add(currentData4);
+                }
+
+            }
+
+            // update the data
+            if (currentData5.Enabled)
+            {
+                currentData5.TimeValue = DateTime.Now;
+                currentData5.YValue = data5;
+                lock (((ICollection)AsyncData5).SyncRoot)
+                {
+                    AsyncData5.Add(currentData5);
+                }
+
+            }
 
 
             // if the graph duration is longer than the interval we need to shift the range which is displayed
@@ -190,12 +272,14 @@ namespace PhysModelGUI.Graphics
 
             }
 
-            // if the buffer is exceed start removing entries so safe memory
+            // if the buffer is exceed start removing entries so save memory
             if (runDuration > BufferSize)
             {
                 if (AsyncData1.Count > 0) AsyncData1.RemoveAt(0);
                 if (AsyncData2.Count > 0) AsyncData2.RemoveAt(0);
                 if (AsyncData3.Count > 0) AsyncData3.RemoveAt(0);
+                if (AsyncData4.Count > 0) AsyncData4.RemoveAt(0);
+                if (AsyncData5.Count > 0) AsyncData5.RemoveAt(0);
             }
 
         }

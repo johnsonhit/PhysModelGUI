@@ -41,14 +41,12 @@ namespace PhysModelGUI
             DataContext = viewModel;
 
             // send the graphs to the viewmodel
-            viewModel.InitDiagram(canvasDiagram, canvasDiagramSkeleton);
+            //viewModel.InitDiagram(canvasDiagram, canvasDiagramSkeleton);
             viewModel.InitPressureGraph(graphPressures);
             viewModel.InitFlowGraph(graphFlows);
             viewModel.InitPVLoopGraph(graphPVLoops);
             viewModel.InitPatMonitor(graphPatMonitor);
-            viewModel.InitTrendsGraph(graphTrendMonitor1);
-            viewModel.InitElastanceGraph(graphElastance);
-            viewModel.InitElastanceContainerGraph(graphElastanceContainer);
+            viewModel.InitTestGraph(testGraph);
         }
 
     }

@@ -8,18 +8,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400" BorderThickness="0">
     
-    <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
-        <Grid Background="Black" Margin="5,5,5,5">
-            <telerik:RadCartesianChart x:Name="chart" Background="Black" >
+    <Border BorderBrush="White" BorderThickness="0" CornerRadius="5" Background="White" >
+        <Grid Background="White" Margin="5,5,5,5">
+            <telerik:RadCartesianChart x:Name="chart" Palette="Material" >
+                <telerik:RadCartesianChart.Behaviors>
+                    <telerik:ChartTrackBallBehavior />
+                    <telerik:ChartPanAndZoomBehavior ZoomMode="Horizontal" />
+                </telerik:RadCartesianChart.Behaviors>
+               
+
                 <telerik:RadCartesianChart.HorizontalAxis>
-                    <telerik:DateTimeContinuousAxis ElementBrush="White" 
+                    <telerik:DateTimeContinuousAxis  
+                                                    FontSize="10"
                                                     ShowLabels="{Binding ShowXLabels}" 
-                                                    LabelFormat="mm:ss" 
+                                                    LabelFitMode="MultiLine"
+                                                    LabelFormat="hh:mm:ss" 
                                                     TickOrigin="{Binding MinDate}"
                                                     MajorStepUnit="Second"
                                                     MajorStep="{Binding GridStep}"
                                                     Minimum="{Binding MinDate}"
                                                     Maximum="{Binding MaxDate}"
+                                                    
                                                     >
                         
                     </telerik:DateTimeContinuousAxis>
@@ -27,27 +36,95 @@
                 </telerik:RadCartesianChart.HorizontalAxis>
 
                 <telerik:RadCartesianChart.VerticalAxis>
-                    <telerik:LinearAxis ElementBrush="White" Minimum="{Binding MinY}" Maximum="{Binding MaxY}" MajorStep="50" ></telerik:LinearAxis>
+                    <telerik:LinearAxis
+                                        FontSize="10"
+                                        Minimum="{Binding MinY}" 
+                                        Maximum="{Binding MaxY}" 
+                                        MajorStep="50" 
+                                        SelectiveScrollingGrid.SelectiveScrollingOrientation="Horizontal">
+                        
+                                        
+                    </telerik:LinearAxis>
+                   
                 </telerik:RadCartesianChart.VerticalAxis>
 
 
                 <telerik:RadCartesianChart.Series>
-                    <telerik:LineSeries x:Name="dataSeries1" Stroke="Red" StrokeThickness="1"  CategoryBinding="TimeValue" ValueBinding="YValue">
+
+                    <telerik:LineSeries x:Name="dataSeries1"  StrokeThickness="2" Stroke="DarkGreen"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                        <telerik:LineSeries.RenderOptions>
+                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
+                        </telerik:LineSeries.RenderOptions>
+                        
+                        <telerik:LineSeries.LegendSettings>
+                            <telerik:SeriesLegendSettings Title="{Binding Series1Legend}"  />
+                        </telerik:LineSeries.LegendSettings>
+                    
                     </telerik:LineSeries>
 
-                    <telerik:LineSeries x:Name="dataSeries2" Stroke="LightBlue" StrokeThickness="1"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                    <telerik:LineSeries x:Name="dataSeries2"  StrokeThickness="2" Stroke="Fuchsia"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                        <telerik:LineSeries.RenderOptions>
+                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
+                        </telerik:LineSeries.RenderOptions>
+                        <telerik:LineSeries.LegendSettings>
+                            <telerik:SeriesLegendSettings Title="{Binding Series2Legend}"  />
+                        </telerik:LineSeries.LegendSettings>
                     </telerik:LineSeries>
 
-                    <telerik:LineSeries x:Name="dataSeries3" Stroke="White" StrokeThickness="1"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                    <telerik:LineSeries x:Name="dataSeries3"  StrokeThickness="2" Stroke="Red"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                        <telerik:LineSeries.RenderOptions>
+                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
+                        </telerik:LineSeries.RenderOptions>
+                        <telerik:LineSeries.LegendSettings>
+                            <telerik:SeriesLegendSettings Title="{Binding Series3Legend}"  />
+                        </telerik:LineSeries.LegendSettings>
                     </telerik:LineSeries>
+
+                    <telerik:LineSeries x:Name="dataSeries4"  StrokeThickness="2" Stroke="Red"  CategoryBinding="TimeValue" ValueBinding="YValue">
+                        <telerik:LineSeries.RenderOptions>
+                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
+                        </telerik:LineSeries.RenderOptions>
+                        <telerik:LineSeries.LegendSettings>
+                            <telerik:SeriesLegendSettings Title="{Binding Series4Legend}"  />
+                        </telerik:LineSeries.LegendSettings>
+                    </telerik:LineSeries>
+
+                    <telerik:LineSeries x:Name="dataSeries5"  StrokeThickness="2" Stroke="Black" CategoryBinding="TimeValue" ValueBinding="YValue">
+                        <telerik:LineSeries.RenderOptions>
+                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
+                        </telerik:LineSeries.RenderOptions>
+                        <telerik:LineSeries.LegendSettings>
+                            <telerik:SeriesLegendSettings Title="{Binding Series5Legend}"  />
+                        </telerik:LineSeries.LegendSettings>
+                    </telerik:LineSeries>
+                    
 
                 </telerik:RadCartesianChart.Series>
+                
+                <telerik:RadCartesianChart.Grid>
+                    <telerik:CartesianChartGrid MajorLinesVisibility="XY" />
+                </telerik:RadCartesianChart.Grid>
+                
+                
             </telerik:RadCartesianChart>
-            <telerik:RadLegend Items="{Binding LegendItems, ElementName=chart}"  
-                           BorderBrush="White"  
-                           BorderThickness="1" 
-                           HorizontalAlignment="Right"  
-                           VerticalAlignment="Top" />
+
+            <telerik:RadLegend Background="White"  
+                       BorderBrush="Black"  
+                       BorderThickness="0" 
+                       FontSize="10"
+                       Items="{Binding LegendItems, ElementName=chart}"  
+                       HorizontalAlignment="Center"
+                       
+                       VerticalAlignment="Top">
+                <telerik:RadLegend.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </telerik:RadLegend.ItemsPanel>
+            </telerik:RadLegend>
+
+
+
         </Grid>
     </Border>
 </UserControl>
