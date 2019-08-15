@@ -1990,6 +1990,7 @@
         <skia:SKElement x:Name="canvasDiagramSkeleton" Grid.Column="1" Margin="0,50,0,210" Opacity="1" IsEnabled="False" ></skia:SKElement>
         <skia:SKElement x:Name="canvasDiagram" Grid.Column="1" Margin="0,50,0,210"></skia:SKElement>
 
-        <local:ParameterGraph2 x:Name="graphTrendMonitor1" BorderThickness="0" Grid.Column="1" Height="180" Margin="75,0,75,30"  VerticalAlignment="Bottom"/>
+
+        <local2:ScrollingGraph x:Name="testGraph" VerticalAlignment="Bottom" Grid.Column="1" Height="300" Margin="0,0,0,40"></local2:ScrollingGraph>
     </Grid>
 </Window>
