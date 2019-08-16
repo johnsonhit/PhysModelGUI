@@ -393,26 +393,41 @@ namespace PhysModelGUI
 
             // calculate the coordinates
             point1.Y = (float)(h_data - ((_y1 - GraphMinY) * yScaling) - GraphYOffset);
+            if (point1.Y < GraphYOffset) point1.Y = GraphYOffset;
+            if (point1.Y > h_data - GraphYOffset) point1.Y = h_data - GraphYOffset;
+           
             point1.X = (float)(GraphXOffset + ((_x1 - GraphMinX) * xScaling));
             if (point1.X < GraphXOffset) point1.X = GraphXOffset;
             if (point1.X > w_data - GraphXOffset) point1.X = w_data - GraphXOffset;
 
             point2.Y = (float)(h_data - ((_y2 - GraphMinY) * yScaling) - GraphYOffset);
+            if (point2.Y < GraphYOffset) point2.Y = GraphYOffset;
+            if (point2.Y > h_data - GraphYOffset) point2.Y = h_data - GraphYOffset;
+
             point2.X = (float)(GraphXOffset + ((_x2 - GraphMinX) * xScaling));
             if (point2.X < GraphXOffset) point2.X = GraphXOffset;
             if (point2.X > w_data - GraphXOffset) point2.X = w_data - GraphXOffset;
 
             point3.Y = (float)(h_data - ((_y3 - GraphMinY) * yScaling) - GraphYOffset);
+            if (point3.Y > h_data - GraphYOffset) point3.Y = h_data - GraphYOffset;
+            if (point3.Y > h_data - GraphYOffset) point3.Y = h_data - GraphYOffset;
+
             point3.X = (float)(GraphXOffset + ((_x3 - GraphMinX) * xScaling));
             if (point3.X < GraphXOffset) point3.X = GraphXOffset;
             if (point3.X > w_data - GraphXOffset) point3.X = w_data - GraphXOffset;
 
             point4.Y = (float)(h_data - ((_y4 - GraphMinY) * yScaling) - GraphYOffset);
+            if (point4.Y > h_data - GraphYOffset) point4.Y = h_data - GraphYOffset;
+            if (point4.Y > h_data - GraphYOffset) point4.Y = h_data - GraphYOffset;
+
             point4.X = (float)(GraphXOffset + ((_x4 - GraphMinX) * xScaling));
             if (point4.X < GraphXOffset) point4.X = GraphXOffset;
             if (point4.X > w_data - GraphXOffset) point4.X = w_data - GraphXOffset;
 
             point5.Y = (float)(h_data - ((_y5 - GraphMinY) * yScaling) - GraphYOffset);
+            if (point5.Y > h_data - GraphYOffset) point5.Y = h_data - GraphYOffset;
+            if (point5.Y > h_data - GraphYOffset) point5.Y = h_data - GraphYOffset;
+
             point5.X = (float)(GraphXOffset + ((_x5 - GraphMinX) * xScaling));
             if (point5.X < GraphXOffset) point5.X = GraphXOffset;
             if (point5.X > w_data - GraphXOffset) point5.X = w_data - GraphXOffset;

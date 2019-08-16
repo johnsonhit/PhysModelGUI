@@ -20,7 +20,12 @@
         <Button x:Name="butIncMinY" Content="+" Click="ButIncMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,5,55" VerticalAlignment="Bottom" ></Button>
         <Button x:Name="butDecMinY" Content="-" Click="ButDecMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,5,35" VerticalAlignment="Bottom" ></Button>
 
+        <Button x:Name="butIncMinX" Content="+" Click="ButIncMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Left" Margin="50,0,5,1" VerticalAlignment="Bottom" ></Button>
+        <Button x:Name="butDecMinX" Content="-" Click="ButDecMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Left" Margin="30,0,5,1" VerticalAlignment="Bottom" ></Button>
 
-        
+        <Button x:Name="butIncMaxX" Content="+" Click="ButIncMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,35,1" VerticalAlignment="Bottom" ></Button>
+        <Button x:Name="butDecMaxX" Content="-" Click="ButDecMinY_Click" Foreground="White" FontSize="8" Background="DarkSlateGray" Height="15" Width="15" HorizontalAlignment="Right" Margin="0,0,55,1" VerticalAlignment="Bottom" ></Button>
+
+
     </Grid>
 </UserControl>
