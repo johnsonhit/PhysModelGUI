@@ -1498,7 +1498,7 @@
                     </Border>
                 </Expander>
 
-                <Expander IsExpanded="True" Header="Vital parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Vital parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10" Foreground="White" BorderThickness="0">
                     <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" Margin="10,0,10,10">
                         <Grid Margin="5,5,5,5" Background="Black" >
                             <Grid.ColumnDefinitions>
@@ -1550,7 +1550,7 @@
                     </Border>
                 </Expander>
 
-                <Expander IsExpanded="True" Header="Additional parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10"  Foreground="White" BorderThickness="0">
+                <Expander IsExpanded="False" Header="Additional parameters" Background="DarkSlateGray" Padding="5,5,5,5" Margin="10,0,0,10"  Foreground="White" BorderThickness="0">
                     <StackPanel Margin="10,0,10,5" Background="Transparent" >
                         <Expander Header=" heart" IsExpanded="False" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
@@ -1947,7 +1947,7 @@
                         <Expander x:Name="expGraphPVLoops" IsExpanded="{Binding PVLoopGraphEnabled, Mode=TwoWay}" Header=" pressure-volume loops" Foreground="White" Padding="2,2,2,2" Margin="0,0,0,5">
                             <Border BorderBrush="White" BorderThickness="1" CornerRadius="5" Background="Black" >
                                 <StackPanel Margin="5,5,5,5">
-                                    <local:ParameterGraph2 x:Name="graphPVLoops"  Height="150"></local:ParameterGraph2>
+                                    <local:ParameterGraph2 x:Name="graphPVLoops"  Height="250"></local:ParameterGraph2>
                                     <TextBlock Text="  select pv loop" FontSize="10" Background="Black" TextAlignment="Left"></TextBlock>
                                     <Grid Background="Black">
                                         <Grid.ColumnDefinitions>

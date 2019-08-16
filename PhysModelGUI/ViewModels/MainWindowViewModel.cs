@@ -3146,6 +3146,8 @@ namespace PhysModelGUI.ViewModels
 
             if (slowUpdater > 1000)
             {
+                TestCommonGraph.DrawGraph();
+
                 ApneaTestRoutine(60, 92);
                 CircArrestTestRoutine(120, 120);
 
@@ -3213,7 +3215,8 @@ namespace PhysModelGUI.ViewModels
                 Endtidalco2 = PhysModelMain.modelInterface.EndTidalCO2.ToString();
 
                 UpdateTestGraph();
-                //TestCommonGraph.RefreshGraph();
+      
+              
 
             }
 
@@ -3290,8 +3293,10 @@ namespace PhysModelGUI.ViewModels
         {
             TestCommonGraph = p;
 
-            TestCommonGraph.InitGraph(250, 10);
+            TestCommonGraph.InitGraph(250, 250);
             TestCommonGraph.MaxY = 200;
+            TestCommonGraph.ShowXLabels = false;
+
         }
         public void InitTestGraph(TimeBasedGraph p)
         {
@@ -3310,7 +3315,7 @@ namespace PhysModelGUI.ViewModels
         {
             if (TestCommonGraph != null)
             {
-                TestCommonGraph.UpdateData(PhysModelMain.currentModel.NCA.PresCurrent - 750, PhysModelMain.currentModel.ALL.VolCurrent);
+                TestCommonGraph.UpdateData(PhysModelMain.currentModel.LV.VolCurrent, PhysModelMain.currentModel.LV.PresCurrent);
        
             }
         }

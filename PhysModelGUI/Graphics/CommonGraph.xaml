@@ -17,53 +17,42 @@
                 </telerik:RadCartesianChart.Behaviors>
 
                 <telerik:RadCartesianChart.HorizontalAxis>
-                    <telerik:LinearAxis  
-                                                    FontSize="10"
-                                                    ShowLabels="{Binding ShowXLabels}" 
-                                                    LabelFitMode="MultiLine"
-                                                    TickOrigin="{Binding MinX}"
-                                                    MajorStep="{Binding GridXStep}"
-                                                                                                  
-                                                    >
+                    <telerik:LinearAxis
+                                        FontSize="10"
+                                        ShowLabels="{Binding ShowXLabels}"
+                                        MajorStep="{Binding GridXStep}"
+                                        >
+                      
                     </telerik:LinearAxis>
                 </telerik:RadCartesianChart.HorizontalAxis>
 
                 <telerik:RadCartesianChart.VerticalAxis>
                     <telerik:LinearAxis
                                         FontSize="10"
-                                        ShowLabels="{Binding ShowYLabels}"
-                                        LabelFitMode="MultiLine"
-                                   
-                                        MajorStep="{Binding GridYStep}" 
+                                        ShowLabels="{Binding ShowYLabels}"                                   
+                                        MajorStep="{Binding GridYStep}"                                      
                                         >
                     </telerik:LinearAxis>
                 </telerik:RadCartesianChart.VerticalAxis>
 
                 <telerik:RadCartesianChart.Series>
 
-                    <telerik:ScatterPointSeries x:Name="dataSeries1"    XValueBinding="XValue" YValueBinding="YValue">
-
-                        <telerik:ScatterPointSeries.RenderOptions>
-                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
-                        </telerik:ScatterPointSeries.RenderOptions>
-
-                        <telerik:ScatterPointSeries.LegendSettings>
-                            <telerik:SeriesLegendSettings Title="{Binding Series1Legend}"  />
-                        </telerik:ScatterPointSeries.LegendSettings>
-
+                    <telerik:ScatterPointSeries x:Name="dataSeries1"
+                                        
+                                        >
                         <telerik:ScatterPointSeries.PointTemplate>
                             <DataTemplate>
-                                <Ellipse Width="2" Height="2" Fill="HotPink"/>
+                                <Ellipse Width="5" Height="5" Fill="Black"></Ellipse>
                             </DataTemplate>
                         </telerik:ScatterPointSeries.PointTemplate>
-
-                        </telerik:ScatterPointSeries>
+                    </telerik:ScatterPointSeries>
+                    
 
                    
                 </telerik:RadCartesianChart.Series>
 
                 <telerik:RadCartesianChart.Grid>
-                    <telerik:CartesianChartGrid MajorLinesVisibility="XY" />
+                    <telerik:CartesianChartGrid MajorLinesVisibility="Y" />
                 </telerik:RadCartesianChart.Grid>
 
             </telerik:RadCartesianChart>
