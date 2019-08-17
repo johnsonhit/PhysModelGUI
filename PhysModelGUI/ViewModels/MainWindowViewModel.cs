@@ -79,6 +79,7 @@ namespace PhysModelGUI.ViewModels
 
         DispatcherTimer updateTimer = new DispatcherTimer(DispatcherPriority.Render);
         int slowUpdater = 0;
+        int slowUpdater2 = 0;
         
 
         ObservableCollection<string> _modelLog = new ObservableCollection<string>();
@@ -155,7 +156,9 @@ namespace PhysModelGUI.ViewModels
 
         Compartment selectedPV1Compartment;
 
-        List<PVPoint> PVDataBlock1 = new List<PVPoint>();
+        List<DataPoint> PVDataBlock1 = new List<DataPoint>();
+
+        List<DataPoint> PVDataBlock2 = new List<DataPoint>();
 
         bool _graph1PVDisabled = false;
         public bool Graph1PVDisabled { get { return _graph1PVDisabled; } set { _graph1PVDisabled = value; OnPropertyChanged(); } }
@@ -3144,9 +3147,16 @@ namespace PhysModelGUI.ViewModels
         {
             UpdateTestCommonGraph();
 
+            if (slowUpdater2 > 1000)
+            {
+                slowUpdater2 = 0;
+                TestCommonGraph.DrawGraph();
+            }
+            slowUpdater2 += graphicsRefreshInterval;
+
             if (slowUpdater > 1000)
             {
-                TestCommonGraph.DrawGraph();
+              
 
                 ApneaTestRoutine(60, 92);
                 CircArrestTestRoutine(120, 120);
@@ -3216,8 +3226,6 @@ namespace PhysModelGUI.ViewModels
 
                 UpdateTestGraph();
       
-              
-
             }
 
 
@@ -3293,9 +3301,8 @@ namespace PhysModelGUI.ViewModels
         {
             TestCommonGraph = p;
 
-            TestCommonGraph.InitGraph(250, 250);
-            TestCommonGraph.MaxY = 200;
-            TestCommonGraph.ShowXLabels = false;
+            TestCommonGraph.InitGraph(4000);
+            TestCommonGraph.ShowXLabels = true;
 
         }
         public void InitTestGraph(TimeBasedGraph p)
@@ -3315,7 +3322,22 @@ namespace PhysModelGUI.ViewModels
         {
             if (TestCommonGraph != null)
             {
-                TestCommonGraph.UpdateData(PhysModelMain.currentModel.LV.VolCurrent, PhysModelMain.currentModel.LV.PresCurrent);
+                PVDataBlock2 = PhysModelMain.currentModel.LV.dataCollector.PVDataBlock;
+                lock(PVDataBlock2)
+                {
+                    TestCommonGraph.UpdateDataBlock(PVDataBlock2);
+                }
+              
+                //lock (PVDataBlock2)
+                //{
+                //    foreach (PVPoint p in PVDataBlock2)
+                //    {
+                //        if (p != null) TestCommonGraph.UpdateData(p.volume1, p.pressure1);
+
+                //    }
+                //}
+
+                
        
             }
         }
@@ -3928,9 +3950,9 @@ namespace PhysModelGUI.ViewModels
                     PVDataBlock1 = PhysModelMain.ventilator.PVDataBlock;
                     lock (PVDataBlock1)
                     {
-                        foreach (PVPoint p in PVDataBlock1)
+                        foreach (DataPoint p in PVDataBlock1)
                         {
-                            PVLoopGraph.UpdateRealtimeGraphData(p.pressure1 - pvGraphScaleOffset, p.volume1);
+                            PVLoopGraph.UpdateRealtimeGraphData(p.X - pvGraphScaleOffset, p.Y);
                             counter++;
                         }
                     }
@@ -3939,9 +3961,9 @@ namespace PhysModelGUI.ViewModels
                 {
                     lock (PVDataBlock1)
                     {
-                        foreach (PVPoint p in PVDataBlock1)
+                        foreach (DataPoint p in PVDataBlock1)
                         {
-                            PVLoopGraph.UpdateRealtimeGraphData(p.volume1, p.pressure1 - pvGraphScaleOffset);
+                            PVLoopGraph.UpdateRealtimeGraphData(p.Y, p.X - pvGraphScaleOffset);
                             counter++;
                         }
                     }

@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Media;
 using Telerik.Windows.Controls.ChartView;
 using Telerik.Windows.Controls.Legend;
+using PhysModelLibrary;
+using System.Threading.Tasks;
 
 namespace PhysModelGUI.Graphics
 {
@@ -24,11 +27,11 @@ namespace PhysModelGUI.Graphics
         }
         public double[] dataSource;
 
-        public List<ChartDataClass> data = new List<ChartDataClass>();
+        public List<DataPoint> data = new List<DataPoint>();
 
-        public List<ChartDataClass> AsyncData1 { get; set; } = new List<ChartDataClass>();
+        public List<DataPoint> AsyncData1 { get; set; } = new List<DataPoint>();
 
-        private ChartDataClass currentData1 = new ChartDataClass();
+        private DataPoint currentData1 = new DataPoint();
 
 
         private SolidColorBrush series1Color = new SolidColorBrush(Colors.DarkGreen);
@@ -38,8 +41,7 @@ namespace PhysModelGUI.Graphics
             set { series1Color = value; OnPropertyChanged(); }
         }
 
-     
-
+    
         private string series1Legend = "heartrate";
         public string Series1Legend
         {
@@ -104,7 +106,7 @@ namespace PhysModelGUI.Graphics
             get => _gridXStep;
             set { _gridXStep = value; OnPropertyChanged(); }
         }
-        private bool _showXLabels = false;
+        private bool _showXLabels = true;
         public bool ShowXLabels
         {
             get => _showXLabels;
@@ -119,32 +121,46 @@ namespace PhysModelGUI.Graphics
 
             DataContext = this;
 
-            dataSeries1.XValueBinding = new PropertyNameDataPointBinding() { PropertyName = "XValue" };
-            dataSeries1.YValueBinding = new PropertyNameDataPointBinding() { PropertyName = "YValue" };
-            dataSeries1.ItemsSource = AsyncData1;
+            dataSeries1.XValueBinding = new PropertyNameDataPointBinding() { PropertyName = "Y" };
+            dataSeries1.YValueBinding = new PropertyNameDataPointBinding() { PropertyName = "X" };
 
         }
 
-        public void InitGraph(double max_x, int buffer)
+        public void InitGraph(int buffer)
         {
-            MaxX = max_x;
             BufferSize = buffer;
         }
-        public void DrawGraph()
+        public async Task DrawGraph()
         {
-            AsyncData1 = new List<ChartDataClass>(data);
+
+            AsyncData1 = new List<DataPoint>(data);
             dataSeries1.ItemsSource = AsyncData1;
 
+            AsyncData1 = null;
+
+        }
+
+        public void UpdateDataBlock(List<DataPoint> newBlock)
+        {
+            data.AddRange(newBlock);
+
+            int bufferOverflow = data.Count - BufferSize;
+            if (bufferOverflow > 0)
+            {
+                data.RemoveRange(0, bufferOverflow);
+            }
+    
         }
         public void UpdateData(double data1, double data2)
         {
-            ChartDataClass newC = new ChartDataClass()
+
+            DataPoint newDataPoint = new DataPoint()
             {
-                XValue = data1,
-                YValue = data2,
+                X = data1,
+                Y = data2,
             };
 
-            data.Add(newC);
+            data.Add(newDataPoint);
             if (data.Count > BufferSize)
             {
                 data.RemoveAt(0);
@@ -153,17 +169,8 @@ namespace PhysModelGUI.Graphics
         }
 
 
-        public class ChartDataClass
-        {
-            public DateTime TimeValue { get; set; }
-            public double XValue { get; set; }
-            public double YValue { get; set; }
-            public bool Enabled { get; set; } = true;
-        }
+        
 
-        private void LinearAxis_AccessKeyPressed(object sender, System.Windows.Input.AccessKeyPressedEventArgs e)
-        {
-
-        }
+        
     }
 }

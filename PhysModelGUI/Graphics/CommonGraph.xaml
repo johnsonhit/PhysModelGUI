@@ -40,11 +40,22 @@
                     <telerik:ScatterPointSeries x:Name="dataSeries1"
                                         
                                         >
+                        <telerik:ScatterPointSeries.RenderOptions>
+                            <telerik:Direct2DRenderOptions AntialiasMode="PerPrimitive" DefaultVisualsRenderMode="Batch"/>
+                        </telerik:ScatterPointSeries.RenderOptions>
+
                         <telerik:ScatterPointSeries.PointTemplate>
                             <DataTemplate>
-                                <Ellipse Width="5" Height="5" Fill="Black"></Ellipse>
+                                <Ellipse Width="2" 
+                                         Height="2" 
+                                         Fill="Red"
+                                         StrokeThickness="2"
+                                         Stroke="Red"/>
                             </DataTemplate>
                         </telerik:ScatterPointSeries.PointTemplate>
+
+
+
                     </telerik:ScatterPointSeries>
                     
 
@@ -52,7 +63,7 @@
                 </telerik:RadCartesianChart.Series>
 
                 <telerik:RadCartesianChart.Grid>
-                    <telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+                    <telerik:CartesianChartGrid MajorLinesVisibility="XY" />
                 </telerik:RadCartesianChart.Grid>
 
             </telerik:RadCartesianChart>

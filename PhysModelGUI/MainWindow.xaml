@@ -1993,7 +1993,7 @@
 
             <local2:TimeBasedGraph x:Name="testGraph" VerticalAlignment="Bottom" Grid.Column="1" Height="300" Margin="0,0,0,40"></local2:TimeBasedGraph>
 
-        <local2:CommonGraph x:Name="commonGraph" VerticalAlignment="Bottom" Height="250" Margin="0,0,0,50"> </local2:CommonGraph>
+        <local2:CommonGraph x:Name="commonGraph" VerticalAlignment="Bottom" Height="300" Margin="0,0,0,40"> </local2:CommonGraph>
         
     </Grid>
 </Window>
