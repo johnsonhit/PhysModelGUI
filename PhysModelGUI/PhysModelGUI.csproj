@@ -192,14 +192,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Graphics\CommonGraph.xaml.cs">
-      <DependentUpon>CommonGraph.xaml</DependentUpon>
+    <Compile Include="Graphics\LinearGraph.xaml.cs">
+      <DependentUpon>LinearGraph.xaml</DependentUpon>
     </Compile>
     <Compile Include="Graphics\TimeBasedGraph.xaml.cs">
       <DependentUpon>TimeBasedGraph.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Graphics\ScrollingGraph.xaml.cs">
+      <DependentUpon>ScrollingGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Page Include="Graphics\CommonGraph.xaml">
+    <Page Include="Graphics\LinearGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -230,6 +233,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Graphics\ParameterGraph.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Graphics\ScrollingGraph.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

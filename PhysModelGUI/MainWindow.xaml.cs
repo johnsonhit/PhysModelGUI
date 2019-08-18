@@ -48,6 +48,7 @@ namespace PhysModelGUI
             viewModel.InitPatMonitor(graphPatMonitor);
             viewModel.InitTestGraph(testGraph);
             viewModel.InitCommomGraph(commonGraph);
+            viewModel.InitScrollingGraph(scrollingGraph);
         }
 
     }

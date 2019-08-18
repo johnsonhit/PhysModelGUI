@@ -106,10 +106,12 @@ namespace PhysModelGUI.ViewModels
         ParameterGraph2 ResistanceGraph { get; set; }
         ParameterGraph2 PatMonitorGraph { get; set; }
 
+        ScrollingGraph TestScrollingGraph { get; set; }
+
 
         TimeBasedGraph TestGraph { get; set; }
 
-        CommonGraph TestCommonGraph { get; set; }
+        LinearGraph TestCommonGraph { get; set; }
 
         TimeBasedGraph GraphScroller { get; set; }
 
@@ -3145,12 +3147,14 @@ namespace PhysModelGUI.ViewModels
 
         private void UpdateTimer_Tick(object sender, EventArgs e)
         {
-            UpdateTestCommonGraph();
+
+            TestScrollingGraph.DrawGraph();
 
             if (slowUpdater2 > 1000)
             {
                 slowUpdater2 = 0;
                 TestCommonGraph.DrawGraph();
+               
             }
             slowUpdater2 += graphicsRefreshInterval;
 
@@ -3261,7 +3265,10 @@ namespace PhysModelGUI.ViewModels
                     UpdatePressureGraph();
                     UpdateFlowGraph();
                     UpdateMonitorGraph();
-                   
+
+                    UpdateTestCommonGraph();
+                    UpdateScrollingGraph();
+
 
                     break;
                 case "StatusMessage":
@@ -3296,8 +3303,24 @@ namespace PhysModelGUI.ViewModels
 
             ModelGraphic.DrawMainDiagram(canvas, e.Info.Width, e.Info.Height);
         }
+        public void InitScrollingGraph(ScrollingGraph p)
+        {
+            TestScrollingGraph = p;
+            TestScrollingGraph.InitGraph(250);
+            TestScrollingGraph.ShowXLabels = false;
+            TestScrollingGraph.Data1Enabled = true;
+            TestScrollingGraph.Data2Enabled = true;
+            TestScrollingGraph.Data3Enabled = false;
 
-        public void InitCommomGraph(CommonGraph p)
+        }
+        public void UpdateScrollingGraph()
+        {
+            if (TestScrollingGraph != null)
+            {
+                TestScrollingGraph.UpdateData(PhysModelMain.modelInterface.ECGSignal / 5, PhysModelMain.modelInterface.ABPSignal, 0, 0);
+            }
+        }
+        public void InitCommomGraph(LinearGraph p)
         {
             TestCommonGraph = p;
 
@@ -3327,15 +3350,7 @@ namespace PhysModelGUI.ViewModels
                 {
                     TestCommonGraph.UpdateDataBlock(PVDataBlock2);
                 }
-              
-                //lock (PVDataBlock2)
-                //{
-                //    foreach (PVPoint p in PVDataBlock2)
-                //    {
-                //        if (p != null) TestCommonGraph.UpdateData(p.volume1, p.pressure1);
 
-                //    }
-                //}
 
                 
        
@@ -4136,11 +4151,7 @@ namespace PhysModelGUI.ViewModels
             }
         }
 
-        public void InitScrollingGraph(TimeBasedGraph p)
-        {
-            GraphScroller = p;
-
-        }
+        
 
 
         public void InitPatMonitor(ParameterGraph2 p)

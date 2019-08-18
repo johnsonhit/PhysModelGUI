@@ -6,50 +6,37 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
-using System.Windows.Ink;
 using System.Windows.Media;
 using Telerik.Windows.Controls.ChartView;
-using Telerik.Windows.Controls.Legend;
 using PhysModelLibrary;
 using System.Threading.Tasks;
 
 namespace PhysModelGUI.Graphics
 {
-    /// <summary>
-    /// Interaction logic for CommonGraph.xaml
-    /// </summary>
-    public partial class CommonGraph : UserControl, INotifyPropertyChanged
+    public partial class LinearGraph : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
-        public double[] dataSource;
 
         public List<DataPoint> data = new List<DataPoint>();
-
         public List<DataPoint> AsyncData1 { get; set; } = new List<DataPoint>();
 
-        private DataPoint currentData1 = new DataPoint();
-
-
-        private SolidColorBrush series1Color = new SolidColorBrush(Colors.DarkGreen);
+        private SolidColorBrush series1Color = new SolidColorBrush(Colors.Red);
         public SolidColorBrush Series1Color
         {
             get { return series1Color; }
             set { series1Color = value; OnPropertyChanged(); }
         }
 
-    
-        private string series1Legend = "heartrate";
+        private string series1Legend = "left ventricle";
         public string Series1Legend
         {
             get { return series1Legend; }
             set { series1Legend = value; OnPropertyChanged(); }
         }
-
-      
 
         private int series1StrokeThickness = 1;
         public int Series1StrokeThickness
@@ -86,7 +73,6 @@ namespace PhysModelGUI.Graphics
             set { _showYLabels = value; OnPropertyChanged(); }
         }
 
-
         private double _minX = 0;
         public double MinX
         {
@@ -115,7 +101,7 @@ namespace PhysModelGUI.Graphics
 
         public int BufferSize { get; set; } = 200;           // determine the buffer size off 200 datapoints
 
-        public CommonGraph()
+        public LinearGraph()
         {
             InitializeComponent();
 
@@ -148,12 +134,11 @@ namespace PhysModelGUI.Graphics
             if (bufferOverflow > 0)
             {
                 data.RemoveRange(0, bufferOverflow);
-            }
-    
+            }   
         }
+
         public void UpdateData(double data1, double data2)
         {
-
             DataPoint newDataPoint = new DataPoint()
             {
                 X = data1,
@@ -165,12 +150,6 @@ namespace PhysModelGUI.Graphics
             {
                 data.RemoveAt(0);
             }
-
-        }
-
-
-        
-
-        
+        } 
     }
 }
